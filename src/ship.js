@@ -15,7 +15,6 @@ class Ship {
   }
 
   place(x, y) {
-    console.log(`place ship at ${x}, ${y}`);
     this.x = x;
     this.y = y;
   }

@@ -20,14 +20,15 @@ class Gameboard {
   }
 
   #wasShipHit(x, y) {
+    let wasHit = false;
     this.#ships.forEach((ship) => {
       if (y === ship.y) {
         if (x >= ship.x && x <= ship.x + (ship.length - 1)) {
-          return true;
+          wasHit = true;
         }
-        return false;
       }
     });
+    return wasHit;
   }
 }
 
