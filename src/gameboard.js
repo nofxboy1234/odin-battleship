@@ -23,12 +23,20 @@ class Gameboard {
     let hitShip;
     this.#ships.forEach((ship) => {
       if (y === ship.y) {
-        if (x >= ship.x && x <= ship.x + (ship.length - 1)) {
+        if (this.shotHitsHorizontalLength(x, ship)) {
           hitShip = ship;
         }
       }
     });
+
     return hitShip;
+  }
+
+  shotHitsHorizontalLength(x, ship) {
+    const shipBack = ship.x;
+    const shipFront = ship.x + (ship.length - 1);
+
+    return x >= shipBack && x <= shipFront;
   }
 }
 
