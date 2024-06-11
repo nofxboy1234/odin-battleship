@@ -1,7 +1,9 @@
 class Ship {
+  #orientation = 'horizontal';
+
   constructor(length = 1) {
-    this.hits = 0;
     this.length = length;
+    this.hits = 0;
   }
 
   hit() {

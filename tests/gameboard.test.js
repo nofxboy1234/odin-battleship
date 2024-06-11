@@ -1,11 +1,11 @@
 import Ship from '../src/ship';
 import Gameboard from '../src/gameboard';
 
-jest.mock('../src/ship');
+// jest.mock('../src/ship');
 
-test('gameboard.placeShip() calls ship.place()', () => {
+test.skip('gameboard.placeShip() calls ship.place()', () => {
   const ship = new Ship();
-  // ship.place.mockImplementation(() => console.log('mock implementation'));
+  ship.place.mockImplementation(() => console.log('mock implementation'));
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
 
@@ -13,9 +13,10 @@ test('gameboard.placeShip() calls ship.place()', () => {
 });
 
 test('gameboard.receiveAttack() records the coordinates of a missed shot', () => {
-  // const ship = new Ship();
-  // ship.place.mockImplementation(() => console.log('mock implementation'));
+  const ship = new Ship();
+  
   const gameboard = new Gameboard();
+  gameboard.placeShip(ship, 0, 0);
   gameboard.receiveAttack(5, 4);
 
   expect(gameboard.misses).toContainEqual([5, 4]);

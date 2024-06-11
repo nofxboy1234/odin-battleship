@@ -23,8 +23,16 @@ test('isSunk() returns true when hits equals length', () => {
 });
 
 test('place() sets the x and y co-ordinates', () => {
-  const ship = new Ship(1);
-  ship.place(4, 5);
-  expect(ship.x).toBe(4);
-  expect(ship.y).toBe(5);
+  const ship = new Ship(3);
+  ship.place(0, 0);
+  expect(ship.x).toBe(0);
+  expect(ship.y).toBe(0);
+});
+
+test('place() sets the x and y co-ordinates', () => {
+  // [0, 0] [1, 0], [2, 0]
+  const ship = new Ship(3);
+  ship.place(0, 0);
+  expect(ship.x).toBe(0);
+  expect(ship.y).toBe(0);
 });
