@@ -13,7 +13,7 @@ class Ship {
   }
 
   place(x, y) {
-    console.log('place!!!!!!!!!')
+    console.log(`place ship at ${x}, ${y}`);
   }
 }
 
