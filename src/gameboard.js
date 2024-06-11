@@ -20,7 +20,7 @@ class Gameboard {
   }
 
   allShipsSunk() {
-    return false;
+    return this.#ships.every((ship) => ship.isSunk());
   }
 
   #wasShipHit(x, y) {
