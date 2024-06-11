@@ -1,5 +1,11 @@
 class Ship {
-  hit() {}
+  constructor() {
+    this.hits = 0;
+  }
+
+  hit() {
+    this.hits += 1;
+  }
 }
 
 // const ship1 = new Ship();
