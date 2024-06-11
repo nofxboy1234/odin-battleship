@@ -6,9 +6,11 @@ import Ship from './ship';
 const human = new Player();
 const computer = new Player();
 
-console.log('hello!');
+function newGame() {
+  console.log('New game!');
+}
 
 const newGameButton = document.getElementById('new-game-btn');
 newGameButton.addEventListener('click', () => {
-  console.log('New game!');
+  newGame();
 });
