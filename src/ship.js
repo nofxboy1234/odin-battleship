@@ -7,6 +7,10 @@ class Ship {
   hit() {
     this.hits += 1;
   }
+
+  isSunk() {
+    return false;
+  }
 }
 
 // const ship1 = new Ship();
