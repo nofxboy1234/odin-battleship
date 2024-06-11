@@ -23,7 +23,10 @@ class Gameboard {
     let hitShip;
     this.#ships.forEach((ship) => {
       if (y === ship.y) {
-        if (this.#shotHitsHorizontalLength(x, ship) && this.#isNewHit()) {
+        if (
+          this.#shotHitsHorizontalLength(x, ship) &&
+          this.#isNewHit(x, ship)
+        ) {
           hitShip = ship;
         }
       }
@@ -39,8 +42,8 @@ class Gameboard {
     return x >= shipBack && x <= shipFront;
   }
 
-  #isNewHit() {
-    return true;
+  #isNewHit(x, ship) {
+    return !ship.hits.find((hit) => hit.x === x);
   }
 }
 
