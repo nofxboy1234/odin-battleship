@@ -5,13 +5,9 @@ jest.mock('../src/ship');
 
 test('gameboard.placeShip() calls ship.place()', () => {
   const ship = new Ship();
-  // const place = jest.fn(ship.place);
-  // ship.place.mockImplementation();
-
+  // ship.place.mockImplementation(() => console.log('mock implementation'));
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
-
-  // place();
 
   expect(ship.place).toHaveBeenCalled();
 });
