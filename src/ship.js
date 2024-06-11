@@ -7,7 +7,7 @@ class Ship {
   }
 
   hit(x, y) {
-    this.hits.push([x, y])
+    this.hits.push([x, y]);
   }
 
   isSunk() {
