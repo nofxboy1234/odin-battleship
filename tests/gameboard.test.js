@@ -46,3 +46,14 @@ test('gameboard.receiveAttack() calls ship.hit() when a ship is hit', () => {
 
   expect(spy).toHaveBeenCalled();
 });
+
+test.skip('gameboard.allShipsSunk() returns true when all ships are sunk', () => {
+  const ship = new Ship();
+  const spy = jest.spyOn(ship, 'hit');
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship, 0, 0);
+  gameboard.receiveAttack(0, 0);
+
+  expect(spy).toHaveBeenCalled();
+});
