@@ -2,8 +2,8 @@ import Ship from '../src/ship';
 
 test('hit() increases the number of hits', () => {
   const ship = new Ship();
-  ship.hit();
-  expect(ship.hits).toEqual(1);
+  ship.hit(0, 0);
+  expect(ship.hits.length).toEqual(1);
 });
 
 test('ships have a length property', () => {
@@ -18,7 +18,7 @@ test('isSunk() returns false when hits does not equal length', () => {
 
 test('isSunk() returns true when hits equals length', () => {
   const ship = new Ship(1);
-  ship.hit();
+  ship.hit(0, 0);
   expect(ship.isSunk()).toBe(true);
 });
 

@@ -13,7 +13,7 @@ class Gameboard {
   receiveAttack(x, y) {
     const hitShip = this.#wasShipHit(x, y);
     if (hitShip) {
-      hitShip.hit();
+      hitShip.hit(x, y);
     } else {
       this.misses.push([x, y]);
     }

@@ -3,15 +3,15 @@ class Ship {
 
   constructor(length = 1) {
     this.length = length;
-    this.hits = 0;
+    this.hits = [];
   }
 
-  hit() {
-    this.hits += 1;
+  hit(x, y) {
+    this.hits.push([x, y])
   }
 
   isSunk() {
-    return this.hits === this.length;
+    return this.hits.length === this.length;
   }
 
   place(x, y) {
