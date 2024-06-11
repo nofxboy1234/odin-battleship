@@ -11,7 +11,13 @@ test('ships have a length property', () => {
   expect(ship1).toHaveProperty('length');
 });
 
-test('isSunk() calculates whether a ship is considered sunk based on its length and the number of hits it has received', () => {
+test('isSunk() returns false when hits does not equal length', () => {
   const ship1 = new Ship();
   expect(ship1.isSunk()).toBe(false);
+});
+
+test('isSunk() returns true when hits equals length', () => {
+  const ship1 = new Ship(1);
+  ship1.hit();
+  expect(ship1.isSunk()).toBe(true);
 });
