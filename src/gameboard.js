@@ -1,6 +1,6 @@
 class Gameboard {
-  place(ship, x, y) {
-    ship.place(x, y)
+  placeShip(ship, x, y) {
+    ship.place(x, y);
   }
 }
 

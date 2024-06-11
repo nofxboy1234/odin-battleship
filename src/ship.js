@@ -12,7 +12,9 @@ class Ship {
     return this.hits === this.length;
   }
 
-  place(x, y) {}
+  place(x, y) {
+    console.log('place!!!!!!!!!')
+  }
 }
 
 export default Ship;
