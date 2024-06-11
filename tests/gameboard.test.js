@@ -3,13 +3,19 @@ import Gameboard from '../src/gameboard';
 
 // jest.mock('../src/ship');
 
-test.skip('gameboard.placeShip() calls ship.place()', () => {
+afterEach(() => {
+  // restore the spy created with spyOn
+  jest.restoreAllMocks();
+});
+
+test('gameboard.placeShip() calls ship.place()', () => {
   const ship = new Ship();
-  ship.place.mockImplementation(() => console.log('mock implementation'));
+  const spy = jest.spyOn(ship, 'place');
+
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
 
-  expect(ship.place).toHaveBeenCalled();
+  expect(spy).toHaveBeenCalled();
 });
 
 test('gameboard.receiveAttack() records the coordinates of a missed shot', () => {
@@ -22,8 +28,9 @@ test('gameboard.receiveAttack() records the coordinates of a missed shot', () =>
   expect(gameboard.misses).toContainEqual([5, 4]);
 });
 
-test('gameboard.receiveAttack() does not record the coordinates of a hit ship', () => {
+test('gameboard.receiveAttack() does not record the coordinates of a hit ship as a miss', () => {
   const ship = new Ship();
+
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
   gameboard.receiveAttack(0, 0);
@@ -31,11 +38,13 @@ test('gameboard.receiveAttack() does not record the coordinates of a hit ship', 
   expect(gameboard.misses).not.toContainEqual([0, 0]);
 });
 
-test.skip('gameboard.receiveAttack() does not record the coordinates of a hit ship', () => {
+test('gameboard.receiveAttack() calls ship.hit() when a ship is hit', () => {
   const ship = new Ship();
+  const spy = jest.spyOn(ship, 'hit');
+
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
   gameboard.receiveAttack(0, 0);
 
-  expect(ship.place).toHaveBeenCalled();
+  expect(spy).toHaveBeenCalled();
 });
