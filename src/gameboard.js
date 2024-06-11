@@ -11,24 +11,24 @@ class Gameboard {
   }
 
   receiveAttack(x, y) {
-    const wasHit = this.#wasShipHit(x, y);
-    if (wasHit) {
-      //
+    const hitShip = this.#wasShipHit(x, y);
+    if (hitShip) {
+      hitShip.hit();
     } else {
       this.misses.push([x, y]);
     }
   }
 
   #wasShipHit(x, y) {
-    let wasHit = false;
+    let hitShip;
     this.#ships.forEach((ship) => {
       if (y === ship.y) {
         if (x >= ship.x && x <= ship.x + (ship.length - 1)) {
-          wasHit = true;
+          hitShip = ship;
         }
       }
     });
-    return wasHit;
+    return hitShip;
   }
 }
 

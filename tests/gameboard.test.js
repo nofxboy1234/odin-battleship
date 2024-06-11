@@ -22,11 +22,20 @@ test('gameboard.receiveAttack() records the coordinates of a missed shot', () =>
   expect(gameboard.misses).toContainEqual([5, 4]);
 });
 
-test('gameboard.receiveAttack() determines whether or not the attack hit a ship', () => {
+test('gameboard.receiveAttack() does not record the coordinates of a hit ship', () => {
   const ship = new Ship();
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
   gameboard.receiveAttack(0, 0);
 
   expect(gameboard.misses).not.toContainEqual([0, 0]);
+});
+
+test.skip('gameboard.receiveAttack() does not record the coordinates of a hit ship', () => {
+  const ship = new Ship();
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship, 0, 0);
+  gameboard.receiveAttack(0, 0);
+
+  expect(ship.place).toHaveBeenCalled();
 });
