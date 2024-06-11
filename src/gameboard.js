@@ -19,6 +19,10 @@ class Gameboard {
     }
   }
 
+  allShipsSunk() {
+    return false;
+  }
+
   #wasShipHit(x, y) {
     let hitShip;
     this.#ships.forEach((ship) => {
