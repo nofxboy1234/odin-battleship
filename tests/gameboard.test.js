@@ -1,8 +1,6 @@
 import Ship from '../src/ship';
 import Gameboard from '../src/gameboard';
 
-// jest.mock('../src/ship');
-
 afterEach(() => {
   // restore the spy created with spyOn
   jest.restoreAllMocks();
