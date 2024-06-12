@@ -18,14 +18,16 @@
   display: grid;
   grid-template-columns: repeat(11, 30px);
   grid-template-rows: repeat(11, 30px);
-  /* gap: 32px; */
+  border-top: 1px solid black;
+  border-left: 1px solid black;
 }
 
 .cell {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
 }
 
 .cell-label {

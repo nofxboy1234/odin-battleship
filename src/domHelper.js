@@ -17,8 +17,8 @@ function renderGameboard(targetID) {
   const rows = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const gameboardDiv = document.createElement('div');
-  container.appendChild(gameboardDiv);
   gameboardDiv.classList.add('gameboard');
+  container.appendChild(gameboardDiv);
 
   for (let index = 0; index < 121; index++) {
     const div = document.createElement('div');
