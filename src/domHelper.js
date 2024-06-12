@@ -12,7 +12,7 @@ function renderShips(gameboard, targetID) {
 function renderGameboard(gameboard, targetID) {
   const container = document.getElementById(targetID);
 
-  for (let index = 0; index < 100; index++) {
+  for (let index = 0; index < 121; index++) {
     const div = document.createElement('div');
     div.classList.add('cell');
     container.appendChild(div);
