@@ -15,7 +15,18 @@ function renderGameboard(gameboard, targetID) {
   for (let index = 0; index < 121; index++) {
     const div = document.createElement('div');
     div.classList.add('cell');
-    div.textContent = index;
+
+    // div.textContent = index;
+
+    const columns = 'ABCDEFGHIJ';
+    const rows = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    if (index >= 1 && index <= 10) {
+      div.textContent = columns[index - 1];
+    } else if (index >= 11 && index % 11 === 0) {
+      div.textContent = rows.at((index % 10) - 1);
+    }
+
     container.appendChild(div);
   }
 }
