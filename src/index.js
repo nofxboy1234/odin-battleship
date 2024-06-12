@@ -24,11 +24,11 @@ function newGame(event) {
 
   const human = new Player();
   placePlayerShips(human);
-  render(human.gameboard);
+  render(human.gameboard, 'human-gameboard');
 
   const computer = new Player();
   placePlayerShips(computer);
-  render(computer.gameboard);
+  render(computer.gameboard, 'computer-gameboard');
 }
 
 const newGameButton = document.getElementById('new-game-btn');

@@ -23,6 +23,10 @@ class Gameboard {
     return this.#ships.every((ship) => ship.isSunk());
   }
 
+  getShips() {
+    return [...this.#ships];
+  }
+
   #wasShipHit(x, y) {
     let hitShip;
     this.#ships.forEach((ship) => {

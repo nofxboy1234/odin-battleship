@@ -75,3 +75,21 @@ test('gameboard.allShipsSunk() returns true when all ships are sunk', () => {
 
   expect(gameboard.allShipsSunk()).toBe(true);
 });
+
+test('gameboard.getShips() returns an empty array when gameboard is empty', () => {
+  const gameboard = new Gameboard();
+  expect(gameboard.getShips()).toEqual([]);
+});
+
+test('gameboard.getShips() returns an array of 3 ships when gameboard has 3 ships', () => {
+  const ship1 = new Ship(1);
+  const ship2 = new Ship(2);
+  const ship3 = new Ship(3);
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship1);
+  gameboard.placeShip(ship2);
+  gameboard.placeShip(ship3);
+
+  expect(gameboard.getShips()).toEqual([ship1, ship2, ship3]);
+});
