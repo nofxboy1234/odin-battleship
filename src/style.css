@@ -16,8 +16,8 @@
 
 .gameboard {
   display: grid;
-  grid-template-columns: 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px;
-  grid-template-rows: 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px 30px;
+  grid-template-columns: repeat(11, 30px);
+  grid-template-rows: repeat(11, 30px);
   /* gap: 32px; */
 }
 
