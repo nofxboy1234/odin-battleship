@@ -1,12 +1,14 @@
-function renderShips(gameboard, targetID) {
+function renderShips(ships, targetID) {
   const container = document.getElementById(targetID);
+  const columns = 'ABCDEFGHIJ';
+  const rows = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  gameboard.getShips().forEach((ship) => {
-    const div = document.createElement('div');
-    div.classList.add('cell');
-    div.textContent = [ship.x, ship.y, ship.length];
-    container.appendChild(div);
-  });
+  // ships.forEach((ship) => {
+  //   const div = document.createElement('div');
+  //   div.classList.add('cell');
+  //   div.textContent = [ship.x, ship.y, ship.length];
+  //   container.appendChild(div);
+  // });
 }
 
 function renderGameboard(targetID) {

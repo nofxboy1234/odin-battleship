@@ -25,7 +25,7 @@ function newGame(event) {
   const human = new Player();
   placePlayerShips(human);
   renderGameboard('human-gameboard');
-  // renderShips(human.gameboard, 'human-gameboard');
+  renderShips(human.gameboard.getShips(), 'human-gameboard');
 
   const computer = new Player();
   placePlayerShips(computer);
