@@ -1,7 +1,7 @@
 import './style.css';
 import Player from './player';
 import Ship from './ship';
-import render from './domHelper';
+import { renderGameboard, renderShips } from './domHelper';
 
 function placePlayerShips(player) {
   player.gameboard.placeShip(new Ship(4), 0, 0);
@@ -24,11 +24,13 @@ function newGame(event) {
 
   const human = new Player();
   placePlayerShips(human);
-  render(human.gameboard, 'human-gameboard');
+  renderGameboard(human.gameboard, 'human-gameboard');
+  // renderShips(human.gameboard, 'human-gameboard');
 
   const computer = new Player();
   placePlayerShips(computer);
-  render(computer.gameboard, 'computer-gameboard');
+
+  // renderShips(computer.gameboard, 'computer-gameboard');
 }
 
 const newGameButton = document.getElementById('new-game-btn');
