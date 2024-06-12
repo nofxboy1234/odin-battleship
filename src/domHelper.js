@@ -15,6 +15,7 @@ function renderGameboard(gameboard, targetID) {
   for (let index = 0; index < 121; index++) {
     const div = document.createElement('div');
     div.classList.add('cell');
+    div.textContent = index;
     container.appendChild(div);
   }
 }
