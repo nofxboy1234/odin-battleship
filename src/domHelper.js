@@ -26,10 +26,10 @@ function renderGameboard(targetID) {
     if (index === 0) {
       div.classList.add('cell-label');
     } else if (index >= 1 && index <= 10) {
-      div.classList.add('cell-label');
+      div.classList.add('cell-label', 'bottom-border');
       div.textContent = columns[index - 1];
     } else if (index >= 11 && index % 11 === 0) {
-      div.classList.add('cell-label');
+      div.classList.add('cell-label', 'right-border');
       div.textContent = rows.at((index % 10) - 1);
     } else {
       div.classList.add('cell');
