@@ -9,14 +9,13 @@ function renderShips(gameboard, targetID) {
   });
 }
 
-function renderGameboard(gameboard, targetID) {
+function renderGameboard(targetID) {
   const container = document.getElementById(targetID);
   const columns = 'ABCDEFGHIJ';
   const rows = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   for (let index = 0; index < 121; index++) {
     const div = document.createElement('div');
-
 
     if (index === 0) {
       div.classList.add('cell-label');
