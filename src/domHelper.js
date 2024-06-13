@@ -33,7 +33,6 @@ function renderGameboardCellNumbers(targetID) {
 function renderGameboard(targetID) {
   const container = document.getElementById(targetID);
   const columns = 'ABCDEFGHIJ';
-  const rows = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const gameboardDiv = document.createElement('div');
   gameboardDiv.classList.add('gameboard');
@@ -49,7 +48,7 @@ function renderGameboard(targetID) {
       div.textContent = columns[index - 1];
     } else if (isCellLabelLeft(index)) {
       div.classList.add('cell-label', 'right-border');
-      div.textContent = rows.at((index % 10) - 1);
+      div.textContent = index % 10 === 0 ? index / 11 : index % 10;
     } else {
       div.classList.add('cell');
     }

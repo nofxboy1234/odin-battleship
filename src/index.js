@@ -28,8 +28,8 @@ function newGame(event) {
 
   const human = new Player();
   placePlayerShips(human);
-  // renderGameboard('human-gameboard-container');
-  renderGameboardCellNumbers('human-gameboard-container');
+  renderGameboard('human-gameboard-container');
+  // renderGameboardCellNumbers('human-gameboard-container');
 
   renderShips(human.gameboard.getShips(), 'human-gameboard-container');
 }
