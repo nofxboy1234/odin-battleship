@@ -25,7 +25,7 @@ function renderGameboard(targetID) {
       div.classList.add('cell-label', 'right-border');
       div.textContent = rows.at((index % 10) - 1);
     } else {
-      div.classList.add('cell');
+      div.classList.add('cell', 'cell-filled');
     }
 
     gameboardDiv.appendChild(div);
