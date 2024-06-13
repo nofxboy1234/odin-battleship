@@ -4,12 +4,30 @@ function renderShips(ships, targetID) {
   });
 }
 
+function isCellTopLeftBlank(index) {
+  return index === 0;
+}
+
 function isCellLabelTop(index) {
   return index >= 1 && index <= 10;
 }
 
 function isCellLabelLeft(index) {
   return index >= 11 && index % 11 === 0;
+}
+
+function renderGameboardCellNumbers(targetID) {
+  const container = document.getElementById(targetID);
+  const gameboardDiv = document.createElement('div');
+  gameboardDiv.classList.add('gameboard');
+  container.appendChild(gameboardDiv);
+
+  for (let index = 0; index < 121; index++) {
+    const div = document.createElement('div');
+    div.textContent = index;
+    div.classList.add('cell');
+    gameboardDiv.appendChild(div);
+  }
 }
 
 function renderGameboard(targetID) {
@@ -24,7 +42,7 @@ function renderGameboard(targetID) {
   for (let index = 0; index < 121; index++) {
     const div = document.createElement('div');
 
-    if (index === 0) {
+    if (isCellTopLeftBlank(index)) {
       div.classList.add('cell-label');
     } else if (isCellLabelTop(index)) {
       div.classList.add('cell-label', 'bottom-border');
@@ -40,4 +58,4 @@ function renderGameboard(targetID) {
   }
 }
 
-export { renderGameboard, renderShips };
+export { renderGameboard, renderShips, renderGameboardCellNumbers };

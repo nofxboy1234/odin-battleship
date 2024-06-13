@@ -1,7 +1,11 @@
 import './style.css';
 import Player from './player';
 import Ship from './ship';
-import { renderGameboard, renderShips } from './domHelper';
+import {
+  renderGameboard,
+  renderGameboardCellNumbers,
+  renderShips,
+} from './domHelper';
 
 function placePlayerShips(player) {
   player.gameboard.placeShip(new Ship(4), 0, 0);
@@ -24,7 +28,9 @@ function newGame(event) {
 
   const human = new Player();
   placePlayerShips(human);
-  renderGameboard('human-gameboard-container');
+  // renderGameboard('human-gameboard-container');
+  renderGameboardCellNumbers('human-gameboard-container');
+
   renderShips(human.gameboard.getShips(), 'human-gameboard-container');
 }
 
