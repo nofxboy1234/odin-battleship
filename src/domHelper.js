@@ -4,6 +4,14 @@ function renderShips(ships, targetID) {
   });
 }
 
+function isCellLabelTop(index) {
+  return index >= 1 && index <= 10;
+}
+
+function isCellLabelLeft(index) {
+  return index >= 11 && index % 11 === 0;
+}
+
 function renderGameboard(targetID) {
   const container = document.getElementById(targetID);
   const columns = 'ABCDEFGHIJ';
@@ -18,14 +26,14 @@ function renderGameboard(targetID) {
 
     if (index === 0) {
       div.classList.add('cell-label');
-    } else if (index >= 1 && index <= 10) {
+    } else if (isCellLabelTop(index)) {
       div.classList.add('cell-label', 'bottom-border');
       div.textContent = columns[index - 1];
-    } else if (index >= 11 && index % 11 === 0) {
+    } else if (isCellLabelLeft(index)) {
       div.classList.add('cell-label', 'right-border');
       div.textContent = rows.at((index % 10) - 1);
     } else {
-      div.classList.add('cell', 'cell-filled');
+      div.classList.add('cell');
     }
 
     gameboardDiv.appendChild(div);
