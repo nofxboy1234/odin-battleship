@@ -25,12 +25,8 @@ function newGame(event) {
   const human = new Player();
   placePlayerShips(human);
   renderGameboard('human-gameboard-container');
-  // renderShips(human.gameboard.getShips(), 'human-gameboard');
+  renderShips(human.gameboard.getShips(), 'human-gameboard-container');
 
-  // const computer = new Player();
-  // placePlayerShips(computer);
-
-  // renderShips(computer.gameboard, 'computer-gameboard');
 }
 
 const newGameButton = document.getElementById('new-game-btn');
