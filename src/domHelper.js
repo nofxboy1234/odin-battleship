@@ -68,7 +68,8 @@ function renderGameboard(targetID) {
       div.classList.add('cell');
 
       const x = (index - 12) % 11;
-      const y = (index - 12) % 11;
+      const y = index - 12;
+      // const y = index - 12;
       div.textContent = `${x}, ${y}`;
       // div.textContent = index - 12;
 
