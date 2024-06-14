@@ -95,6 +95,10 @@ function createYArray() {
   return yArray;
 }
 
+function renderHit(div) {
+  div.classList.add('hit');
+}
+
 function createCells(xyArray, gameboardDiv, ships, gameboard) {
   for (let index = 0; index < 100; index++) {
     const div = document.createElement('div');
@@ -110,10 +114,13 @@ function createCells(xyArray, gameboardDiv, ships, gameboard) {
 
     gameboardDiv.appendChild(div);
 
-    div.addEventListener('click', (event) => {
-      console.log(event.target);
+    div.addEventListener('click', () => {
       console.log(x, y);
       gameboard.receiveAttack(x, y);
+
+      if (isHitOnCell(ships, x, y)) {
+        renderHit(div);
+      }
     });
   }
 }
@@ -124,6 +131,14 @@ function isShipOnCell(ships, x, y) {
       x >= ship.x && x < ship.x + ship.length && y === ship.y;
 
     return cellWithinShipHorizontalLengthAtY;
+  });
+}
+
+function isHitOnCell(ships, x, y) {
+  return ships.find((ship) => {
+    return ship.getHits().find((hit) => {
+      return x === hit[0] && y === hit[1];
+    });
   });
 }
 

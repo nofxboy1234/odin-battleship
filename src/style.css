@@ -70,3 +70,7 @@
 .cell-filled {
   background-color: black;
 }
+
+.hit {
+  background-color: greenyellow;
+}
