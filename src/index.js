@@ -32,6 +32,10 @@ function newGame() {
   const human = new Player();
   placePlayerShips(human);
   renderGameboard('human-gameboard-container', human.gameboard);
+
+  const computer = new Player();
+  placePlayerShips(computer);
+  renderGameboard('computer-gameboard-container', computer.gameboard);
 }
 
 const newGameButton = document.getElementById('new-game-btn');
