@@ -23,8 +23,44 @@ function placePlayerShips(player) {
   player.gameboard.placeShip(new Ship(1), 6, 6);
 }
 
+function clearGameboards() {
+  const topLabelElements = document.getElementsByClassName('cell-labels-top');
+
+  [...topLabelElements].forEach((element) => {
+    const child = element.firstChild;
+    if (child) {
+      element.removeChild(child);
+    }
+  });
+
+  const leftLabelElements = document.getElementsByClassName('cell-labels-left');
+
+  [...leftLabelElements].forEach((element) => {
+    const child = element.firstChild;
+    if (child) {
+      element.removeChild(child);
+    }
+  });
+
+  const humanGameboard = document.getElementById('human-gameboard-container');
+  const humanChild = humanGameboard.firstChild;
+  if (humanChild) {
+    humanGameboard.removeChild(humanChild);
+  }
+
+  const computerGameboard = document.getElementById(
+    'computer-gameboard-container',
+  );
+  const computerChild = computerGameboard.firstChild;
+  if (computerChild) {
+    computerGameboard.removeChild(computerChild);
+  }
+}
+
 function newGame() {
   console.log('New game!');
+
+  clearGameboards();
 
   createLabelsTop();
   createLabelsLeft();

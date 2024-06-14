@@ -7,6 +7,33 @@
   <script defer src="runtime.bundle.js"></script><script defer src="index.bundle.js"></script><script defer src="print.bundle.js"></script></head>
   <body>
     <button id="new-game-btn">New Game</button>
-    <div id="human-gameboard-container"></div>
+
+    <div class="gameboard-container">
+      <div class="gameboard-container-left">
+        <div class="cell-labels-left"></div>
+      </div>
+      <div class="gameboard-container-right">
+        <div class="gameboard-container-right-top">
+          <div class="cell-labels-top"></div>
+        </div>
+        <div class="gameboard-container-right-bottom">
+          <div id="human-gameboard-container"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gameboard-container">
+      <div class="gameboard-container-left">
+        <div class="cell-labels-left"></div>
+      </div>
+      <div class="gameboard-container-right">
+        <div class="gameboard-container-right-top">
+          <div class="cell-labels-top"></div>
+        </div>
+        <div class="gameboard-container-right-bottom">
+          <div id="computer-gameboard-container"></div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
