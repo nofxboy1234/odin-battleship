@@ -104,14 +104,7 @@ function createCells(xyArray, gameboardDiv, ships, gameboard) {
     const y = xyArray[index][1];
     div.textContent = `${x}, ${y}`;
 
-    const shipOnCell = ships.find((ship) => {
-      const cellWithinShipHorizontalLengthAtY =
-        x >= ship.x && x < ship.x + ship.length && y === ship.y;
-
-      return cellWithinShipHorizontalLengthAtY;
-    });
-
-    if (shipOnCell) {
+    if (isShipOnCell(ships, x, y)) {
       div.classList.add('cell-filled');
     }
 
@@ -123,6 +116,15 @@ function createCells(xyArray, gameboardDiv, ships, gameboard) {
       gameboard.receiveAttack(x, y);
     });
   }
+}
+
+function isShipOnCell(ships, x, y) {
+  return ships.find((ship) => {
+    const cellWithinShipHorizontalLengthAtY =
+      x >= ship.x && x < ship.x + ship.length && y === ship.y;
+
+    return cellWithinShipHorizontalLengthAtY;
+  });
 }
 
 function renderGameboard(targetID, gameboard) {
