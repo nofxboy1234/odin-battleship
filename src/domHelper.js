@@ -52,9 +52,12 @@ function createCells(xyArray, gameboardDiv) {
 
 function createLabelsTop() {
   const cellLabelsTop = document.getElementById('cell-labels-top');
-  for (let index = 0; index < 10; index++) {
+  const labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+
+  for (let index = 0; index < labels.length; index++) {
     const div = document.createElement('div');
-    div.classList.add('cell-label');
+    div.classList.add('cell-label', 'bottom-border');
+    div.textContent = labels[index];
     cellLabelsTop.appendChild(div);
   }
 }
