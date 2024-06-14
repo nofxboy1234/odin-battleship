@@ -15,6 +15,28 @@ function createGameboard(targetID) {
   return gameboardDiv;
 }
 
+function createCellLabelsTop() {
+  const containers = document.getElementsByClassName(
+    'cell-labels-top-container',
+  );
+  const cellLabelsTopDiv = document.createElement('div');
+  cellLabelsTopDiv.classList.add('cell-labels-top');
+  [...containers].forEach((container) => {
+    container.appendChild(cellLabelsTopDiv);
+  });
+}
+
+function createCellLabelsLeft() {
+  const containers = document.getElementsByClassName(
+    'cell-labels-left-container',
+  );
+  const cellLabelsLeftDiv = document.createElement('div');
+  cellLabelsLeftDiv.classList.add('cell-labels-left');
+  [...containers].forEach((container) => {
+    container.appendChild(cellLabelsLeftDiv);
+  });
+}
+
 function createXArray() {
   const xArray = [];
 
@@ -61,7 +83,7 @@ function createCells(xyArray, gameboardDiv, ships) {
   }
 }
 
-function createLabelsTop() {
+function createLabelsTopCells() {
   const cellLabelElementsTop =
     document.getElementsByClassName('cell-labels-top');
   const labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
@@ -76,7 +98,7 @@ function createLabelsTop() {
   });
 }
 
-function createLabelsLeft() {
+function createLabelsLeftCells() {
   const cellLabelElementsLeft =
     document.getElementsByClassName('cell-labels-left');
   const labels = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
@@ -108,4 +130,10 @@ function renderGameboard(targetID, gameboard) {
   createCells(xyArray, gameboardDiv, ships);
 }
 
-export { renderGameboard, createLabelsLeft, createLabelsTop };
+export {
+  renderGameboard,
+  createLabelsLeftCells,
+  createLabelsTopCells,
+  createCellLabelsTop,
+  createCellLabelsLeft,
+};

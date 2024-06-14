@@ -2,9 +2,11 @@ import './style.css';
 import Player from './player';
 import Ship from './ship';
 import {
-  createLabelsLeft,
-  createLabelsTop,
+  createLabelsLeftCells,
+  createLabelsTopCells,
   renderGameboard,
+  createCellLabelsTop,
+  createCellLabelsLeft,
 } from './domHelper';
 
 function placePlayerShips(player) {
@@ -23,38 +25,37 @@ function placePlayerShips(player) {
   player.gameboard.placeShip(new Ship(1), 6, 6);
 }
 
+function clearChild(element) {
+  const child = element.firstChild;
+  if (child) {
+    element.removeChild(child);
+  }
+}
+
 function clearGameboards() {
-  const topLabelElements = document.getElementsByClassName('cell-labels-top');
+  const topLabelElements = document.getElementsByClassName(
+    'cell-labels-top-container',
+  );
 
   [...topLabelElements].forEach((element) => {
-    const child = element.firstChild;
-    if (child) {
-      element.removeChild(child);
-    }
+    clearChild(element);
   });
 
-  const leftLabelElements = document.getElementsByClassName('cell-labels-left');
+  const leftLabelElements = document.getElementsByClassName(
+    'cell-labels-left-container',
+  );
 
   [...leftLabelElements].forEach((element) => {
-    const child = element.firstChild;
-    if (child) {
-      element.removeChild(child);
-    }
+    clearChild(element);
   });
 
   const humanGameboard = document.getElementById('human-gameboard-container');
-  const humanChild = humanGameboard.firstChild;
-  if (humanChild) {
-    humanGameboard.removeChild(humanChild);
-  }
+  clearChild(humanGameboard);
 
   const computerGameboard = document.getElementById(
     'computer-gameboard-container',
   );
-  const computerChild = computerGameboard.firstChild;
-  if (computerChild) {
-    computerGameboard.removeChild(computerChild);
-  }
+  clearChild(computerGameboard);
 }
 
 function newGame() {
@@ -62,8 +63,10 @@ function newGame() {
 
   clearGameboards();
 
-  createLabelsTop();
-  createLabelsLeft();
+  createCellLabelsTop();
+  createLabelsTopCells();
+  createCellLabelsLeft;
+  createLabelsLeftCells();
 
   const human = new Player();
   placePlayerShips(human);
