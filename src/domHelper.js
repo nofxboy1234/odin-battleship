@@ -1,6 +1,6 @@
-function zipArrays(a, b) {
-  const c = a.map(function (e, i) {
-    return [e, b[i]];
+function zipArrays(arrayA, arrayB) {
+  const c = arrayA.map(function (e, i) {
+    return [e, arrayB[i]];
   });
 
   return c;
