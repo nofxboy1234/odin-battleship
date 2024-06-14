@@ -135,11 +135,9 @@ function isShipOnCell(ships, x, y) {
 }
 
 function isHitOnCell(ships, x, y) {
-  return ships.find((ship) => {
-    return ship.getHits().find((hit) => {
-      return x === hit[0] && y === hit[1];
-    });
-  });
+  return ships.find((ship) =>
+    ship.getHits().find((hit) => x === hit[0] && y === hit[1]),
+  );
 }
 
 function renderGameboard(targetID, gameboard) {
