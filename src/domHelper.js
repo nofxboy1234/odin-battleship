@@ -11,6 +11,7 @@ function createGameboard(targetID) {
   const gameboardDiv = document.createElement('div');
   gameboardDiv.classList.add('gameboard');
   container.appendChild(gameboardDiv);
+
   return gameboardDiv;
 }
 
@@ -50,6 +51,7 @@ function createCells(xyArray, gameboardDiv) {
 }
 
 function renderGameboard(targetID) {
+  createLabelsTop();
   const gameboardDiv = createGameboard(targetID);
 
   const xArray = createXArray();
@@ -60,3 +62,11 @@ function renderGameboard(targetID) {
 }
 
 export { renderGameboard };
+function createLabelsTop() {
+  const cellLabelsTop = document.getElementById('cell-labels-top');
+  for (let index = 0; index < 10; index++) {
+    const div = document.createElement('div');
+    div.classList.add('cell-label');
+    cellLabelsTop.appendChild(div);
+  }
+}
