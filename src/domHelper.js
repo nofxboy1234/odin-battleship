@@ -46,9 +46,11 @@ function createCells(xyArray, gameboardDiv, ships) {
     const y = xyArray[index][1];
     div.textContent = `${x}, ${y}`;
 
-    // Check if there's a ship at x, y and render square black if so
     const shipOnCell = ships.find((ship) => {
-      return ship.x === x && ship.y === y;
+      const cellWithinShipHorizontalLengthAtY =
+        x >= ship.x && x < ship.x + ship.length && y === ship.y;
+
+      return cellWithinShipHorizontalLengthAtY;
     });
 
     if (shipOnCell) {
