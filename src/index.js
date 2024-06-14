@@ -65,7 +65,7 @@ function newGame() {
 
   createCellLabelsTop();
   createLabelsTopCells();
-  createCellLabelsLeft;
+  createCellLabelsLeft();
   createLabelsLeftCells();
 
   const human = new Player();
