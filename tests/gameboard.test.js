@@ -36,6 +36,17 @@ test('gameboard.receiveAttack() does not record the coordinates of a hit ship as
   expect(gameboard.misses).not.toContainEqual([0, 0]);
 });
 
+test('gameboard.receiveAttack() does not record a miss if a hit is the same as an old hit', () => {
+  const ship = new Ship();
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship, 0, 0);
+  gameboard.receiveAttack(0, 0);
+  gameboard.receiveAttack(0, 0);
+
+  expect(gameboard.misses).not.toContainEqual([0, 0]);
+});
+
 test('gameboard.receiveAttack() calls ship.hit() when a ship is hit', () => {
   const ship = new Ship();
   const spy = jest.spyOn(ship, 'hit');
