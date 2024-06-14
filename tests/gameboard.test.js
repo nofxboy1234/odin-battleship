@@ -36,7 +36,7 @@ test('gameboard.receiveAttack() does not record the coordinates of a hit ship as
   expect(gameboard.misses).not.toContainEqual([0, 0]);
 });
 
-test('gameboard.receiveAttack() does not record a miss if a hit is the same as an old hit', () => {
+test('gameboard.receiveAttack() does not record a miss if a shot is the same as an old hit', () => {
   const ship = new Ship();
 
   const gameboard = new Gameboard();

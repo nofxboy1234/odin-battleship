@@ -15,7 +15,10 @@ class Gameboard {
     if (hitShip) {
       hitShip.hit(x, y);
     } else {
-      this.misses.push([x, y]);
+      const newShot = this.#isNewShot(x, y);
+      if (newShot) {
+        this.misses.push([x, y]);
+      }
     }
   }
 
@@ -31,10 +34,7 @@ class Gameboard {
     let hitShip;
     this.#ships.forEach((ship) => {
       if (y === ship.y) {
-        if (
-          this.#shotHitsHorizontalLength(x, ship) &&
-          this.#isNewHit(x, ship)
-        ) {
+        if (this.#shotHitsHorizontalLength(x, ship)) {
           hitShip = ship;
         }
       }
@@ -50,8 +50,10 @@ class Gameboard {
     return x >= shipBack && x <= shipFront;
   }
 
-  #isNewHit(x, ship) {
-    return !ship.getHits().find((hit) => hit[0] === x);
+  #isNewShot(x, y) {
+    return !this.#ships.find(
+      (ship) => y === ship.y && ship.getHits().find((hit) => hit[0] === x),
+    );
   }
 }
 
