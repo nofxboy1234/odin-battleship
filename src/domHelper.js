@@ -125,13 +125,12 @@ function createCells(xyArray, gameboardDiv, ships, gameboard) {
   }
 }
 
-function isShipOnCell(ships, x, y) {
-  return ships.find((ship) => {
-    const cellWithinShipHorizontalLengthAtY =
-      x >= ship.x && x < ship.x + ship.length && y === ship.y;
+function cellWithinShipHorizontalLengthAtY(ship, x, y) {
+  return x >= ship.x && x < ship.x + ship.length && y === ship.y;
+}
 
-    return cellWithinShipHorizontalLengthAtY;
-  });
+function isShipOnCell(ships, x, y) {
+  return ships.find((ship) => cellWithinShipHorizontalLengthAtY(ship, x, y));
 }
 
 function isHitOnCell(ships, x, y) {
