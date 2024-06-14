@@ -3,7 +3,7 @@ import Ship from '../src/ship';
 test('hit() increases the number of hits', () => {
   const ship = new Ship();
   ship.hit(0, 0);
-  expect(ship.hits.length).toEqual(1);
+  expect(ship.getHits().length).toEqual(1);
 });
 
 test('ships have a length property', () => {
@@ -35,4 +35,15 @@ test('place() sets the x and y co-ordinates', () => {
   ship.place(0, 0);
   expect(ship.x).toBe(0);
   expect(ship.y).toBe(0);
+});
+
+test('getHits() returns an array of 2 hits when ship has 2 hits', () => {
+  const ship = new Ship(3);
+  ship.hit(0, 0);
+  ship.hit(1, 0);
+
+  expect(ship.getHits()).toEqual([
+    [0, 0],
+    [1, 0],
+  ]);
 });
