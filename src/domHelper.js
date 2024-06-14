@@ -14,9 +14,7 @@ function createGameboard(targetID) {
   return gameboardDiv;
 }
 
-function renderGameboard(targetID) {
-  const gameboardDiv = createGameboard(targetID);
-
+function createXArray() {
   const xArray = [];
 
   for (let value = 0; value < 10; value++) {
@@ -24,7 +22,10 @@ function renderGameboard(targetID) {
       xArray.push(index);
     }
   }
+  return xArray;
+}
 
+function createYArray() {
   const yArray = [];
 
   for (let value = 0; value < 10; value++) {
@@ -32,12 +33,18 @@ function renderGameboard(targetID) {
       yArray.push(value);
     }
   }
+  return yArray;
+}
 
+function renderGameboard(targetID) {
+  const gameboardDiv = createGameboard(targetID);
+
+  const xArray = createXArray();
+  const yArray = createYArray();
   const xyArray = zipArrays(xArray, yArray);
 
   for (let index = 0; index < 100; index++) {
     const div = document.createElement('div');
-
     div.classList.add('cell');
 
     const x = xyArray[index][0];
