@@ -62,8 +62,28 @@ function createLabelsTop() {
   }
 }
 
+function createLabelsLeft() {
+  const cellLabelsLeft = document.getElementById('cell-labels-left');
+  const labels = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+
+  for (let index = 0; index < labels.length; index++) {
+    const div = document.createElement('div');
+
+    if (index === 0) {
+      div.classList.add('cell-label');
+    } else {
+      div.classList.add('cell-label', 'right-border');
+    }
+
+    div.textContent = labels[index];
+    cellLabelsLeft.appendChild(div);
+  }
+}
+
 function renderGameboard(targetID) {
   createLabelsTop();
+  createLabelsLeft();
+
   const gameboardDiv = createGameboard(targetID);
 
   const xArray = createXArray();

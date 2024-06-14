@@ -18,18 +18,18 @@
   display: flex;
 }
 
-#gameboard-container-left {
-  display: flex;
-  flex-direction: column;
-}
-
 #gameboard-container-right {
   display: flex;
   flex-direction: column;
 }
 
-#gameboard-container-right-top {
+#cell-labels-top {
   display: flex;
+}
+
+#cell-labels-left {
+  display: flex;
+  flex-direction: column;
 }
 
 .gameboard {
@@ -44,10 +44,6 @@
   align-items: center;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
-}
-
-#cell-labels-top {
-  display: flex;
 }
 
 .cell-label {
