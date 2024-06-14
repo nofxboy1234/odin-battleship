@@ -6,14 +6,19 @@ function zipArrays(arrayA, arrayB) {
   return c;
 }
 
-function renderGameboard(targetID) {
+function createGameboard(targetID) {
   const container = document.getElementById(targetID);
-
   const gameboardDiv = document.createElement('div');
   gameboardDiv.classList.add('gameboard');
   container.appendChild(gameboardDiv);
+  return gameboardDiv;
+}
+
+function renderGameboard(targetID) {
+  const gameboardDiv = createGameboard(targetID);
 
   const xArray = [];
+
   for (let value = 0; value < 10; value++) {
     for (let index = 0; index < 10; index++) {
       xArray.push(index);
