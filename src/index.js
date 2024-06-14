@@ -1,7 +1,11 @@
 import './style.css';
 import Player from './player';
 import Ship from './ship';
-import { renderGameboard } from './domHelper';
+import {
+  createLabelsLeft,
+  createLabelsTop,
+  renderGameboard,
+} from './domHelper';
 
 function placePlayerShips(player) {
   player.gameboard.placeShip(new Ship(4), 0, 0);
@@ -21,6 +25,9 @@ function placePlayerShips(player) {
 
 function newGame() {
   console.log('New game!');
+
+  createLabelsTop();
+  createLabelsLeft();
 
   const human = new Player();
   placePlayerShips(human);

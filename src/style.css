@@ -14,20 +14,20 @@
   background: url('./icon.png');
 }
 
-#gameboard-container {
+.gameboard-container {
   display: flex;
 }
 
-#gameboard-container-right {
+.gameboard-container-right {
   display: flex;
   flex-direction: column;
 }
 
-#cell-labels-top {
+.cell-labels-top {
   display: flex;
 }
 
-#cell-labels-left {
+.cell-labels-left {
   display: flex;
   flex-direction: column;
 }

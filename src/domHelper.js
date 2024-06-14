@@ -62,39 +62,42 @@ function createCells(xyArray, gameboardDiv, ships) {
 }
 
 function createLabelsTop() {
-  const cellLabelsTop = document.getElementById('cell-labels-top');
+  const cellLabelElementsTop =
+    document.getElementsByClassName('cell-labels-top');
   const labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
-  for (let index = 0; index < labels.length; index++) {
-    const div = document.createElement('div');
-    div.classList.add('cell-label', 'bottom-border');
-    div.textContent = labels[index];
-    cellLabelsTop.appendChild(div);
-  }
+  [...cellLabelElementsTop].forEach((element) => {
+    for (let index = 0; index < labels.length; index++) {
+      const div = document.createElement('div');
+      div.classList.add('cell-label', 'bottom-border');
+      div.textContent = labels[index];
+      element.appendChild(div);
+    }
+  });
 }
 
 function createLabelsLeft() {
-  const cellLabelsLeft = document.getElementById('cell-labels-left');
+  const cellLabelElementsLeft =
+    document.getElementsByClassName('cell-labels-left');
   const labels = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
-  for (let index = 0; index < labels.length; index++) {
-    const div = document.createElement('div');
+  [...cellLabelElementsLeft].forEach((element) => {
+    for (let index = 0; index < labels.length; index++) {
+      const div = document.createElement('div');
 
-    if (index === 0) {
-      div.classList.add('cell-label');
-    } else {
-      div.classList.add('cell-label', 'right-border');
+      if (index === 0) {
+        div.classList.add('cell-label');
+      } else {
+        div.classList.add('cell-label', 'right-border');
+      }
+
+      div.textContent = labels[index];
+      element.appendChild(div);
     }
-
-    div.textContent = labels[index];
-    cellLabelsLeft.appendChild(div);
-  }
+  });
 }
 
 function renderGameboard(targetID, gameboard) {
-  createLabelsTop();
-  createLabelsLeft();
-
   const gameboardDiv = createGameboard(targetID);
 
   const xArray = createXArray();
@@ -105,4 +108,4 @@ function renderGameboard(targetID, gameboard) {
   createCells(xyArray, gameboardDiv, ships);
 }
 
-export { renderGameboard };
+export { renderGameboard, createLabelsLeft, createLabelsTop };
