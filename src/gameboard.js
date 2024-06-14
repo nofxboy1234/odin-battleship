@@ -51,7 +51,7 @@ class Gameboard {
   }
 
   #isNewHit(x, ship) {
-    return !ship.getHits().find((hit) => hit.x === x);
+    return !ship.getHits().find((hit) => hit[0] === x);
   }
 }
 
