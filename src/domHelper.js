@@ -1,9 +1,9 @@
 function zipArrays(arrayA, arrayB) {
-  const c = arrayA.map(function (e, i) {
+  const newArray = arrayA.map(function (e, i) {
     return [e, arrayB[i]];
   });
 
-  return c;
+  return newArray;
 }
 
 function createGameboard(targetID) {
