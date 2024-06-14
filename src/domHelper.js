@@ -36,13 +36,7 @@ function createYArray() {
   return yArray;
 }
 
-function renderGameboard(targetID) {
-  const gameboardDiv = createGameboard(targetID);
-
-  const xArray = createXArray();
-  const yArray = createYArray();
-  const xyArray = zipArrays(xArray, yArray);
-
+function createCells(xyArray, gameboardDiv) {
   for (let index = 0; index < 100; index++) {
     const div = document.createElement('div');
     div.classList.add('cell');
@@ -53,6 +47,16 @@ function renderGameboard(targetID) {
 
     gameboardDiv.appendChild(div);
   }
+}
+
+function renderGameboard(targetID) {
+  const gameboardDiv = createGameboard(targetID);
+
+  const xArray = createXArray();
+  const yArray = createYArray();
+  const xyArray = zipArrays(xArray, yArray);
+
+  createCells(xyArray, gameboardDiv);
 }
 
 export { renderGameboard };
