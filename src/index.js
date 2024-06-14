@@ -7,6 +7,8 @@ import {
   renderGameboard,
   createCellLabelsTop,
   createCellLabelsLeft,
+  clearChild,
+  clearGameboards,
 } from './domHelper';
 
 function placePlayerShips(player) {
@@ -23,39 +25,6 @@ function placePlayerShips(player) {
   player.gameboard.placeShip(new Ship(1), 2, 6);
   player.gameboard.placeShip(new Ship(1), 4, 6);
   player.gameboard.placeShip(new Ship(1), 6, 6);
-}
-
-function clearChild(element) {
-  const child = element.firstChild;
-  if (child) {
-    element.removeChild(child);
-  }
-}
-
-function clearGameboards() {
-  const topLabelElements = document.getElementsByClassName(
-    'cell-labels-top-container',
-  );
-
-  [...topLabelElements].forEach((element) => {
-    clearChild(element);
-  });
-
-  const leftLabelElements = document.getElementsByClassName(
-    'cell-labels-left-container',
-  );
-
-  [...leftLabelElements].forEach((element) => {
-    clearChild(element);
-  });
-
-  const humanGameboard = document.getElementById('human-gameboard-container');
-  clearChild(humanGameboard);
-
-  const computerGameboard = document.getElementById(
-    'computer-gameboard-container',
-  );
-  clearChild(computerGameboard);
 }
 
 function newGame() {
