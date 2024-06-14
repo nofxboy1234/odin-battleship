@@ -24,7 +24,7 @@ function newGame() {
 
   const human = new Player();
   placePlayerShips(human);
-  renderGameboard('human-gameboard-container');
+  renderGameboard('human-gameboard-container', human.gameboard);
 }
 
 const newGameButton = document.getElementById('new-game-btn');

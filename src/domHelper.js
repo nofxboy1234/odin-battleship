@@ -37,7 +37,7 @@ function createYArray() {
   return yArray;
 }
 
-function createCells(xyArray, gameboardDiv) {
+function createCells(xyArray, gameboardDiv, ships) {
   for (let index = 0; index < 100; index++) {
     const div = document.createElement('div');
     div.classList.add('cell');
@@ -45,6 +45,15 @@ function createCells(xyArray, gameboardDiv) {
     const x = xyArray[index][0];
     const y = xyArray[index][1];
     div.textContent = `${x}, ${y}`;
+
+    // Check if there's a ship at x, y and render square black if so
+    const shipOnCell = ships.find((ship) => {
+      return ship.x === x && ship.y === y;
+    });
+
+    if (shipOnCell) {
+      div.classList.add('cell-filled');
+    }
 
     gameboardDiv.appendChild(div);
   }
@@ -80,7 +89,7 @@ function createLabelsLeft() {
   }
 }
 
-function renderGameboard(targetID) {
+function renderGameboard(targetID, gameboard) {
   createLabelsTop();
   createLabelsLeft();
 
@@ -90,7 +99,8 @@ function renderGameboard(targetID) {
   const yArray = createYArray();
   const xyArray = zipArrays(xArray, yArray);
 
-  createCells(xyArray, gameboardDiv);
+  const ships = gameboard.getShips();
+  createCells(xyArray, gameboardDiv, ships);
 }
 
 export { renderGameboard };
