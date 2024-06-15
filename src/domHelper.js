@@ -95,6 +95,10 @@ function renderHit(div) {
   div.classList.add('hit');
 }
 
+function renderMiss(div) {
+  div.classList.add('miss');
+}
+
 function createCells(xyArray, gameboardDiv, gameboard) {
   for (let index = 0; index < 100; index++) {
     const div = document.createElement('div');
@@ -116,6 +120,8 @@ function createCells(xyArray, gameboardDiv, gameboard) {
 
       if (gameboard.isShipOnCell(x, y)) {
         renderHit(div);
+      } else {
+        renderMiss(div);
       }
     });
   }
