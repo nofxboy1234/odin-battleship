@@ -95,7 +95,7 @@ function renderHit(div) {
   div.classList.add('hit');
 }
 
-function createCells(xyArray, gameboardDiv, ships, gameboard) {
+function createCells(xyArray, gameboardDiv, gameboard) {
   for (let index = 0; index < 100; index++) {
     const div = document.createElement('div');
     div.classList.add('cell');
@@ -114,7 +114,7 @@ function createCells(xyArray, gameboardDiv, ships, gameboard) {
       console.log(x, y);
       gameboard.receiveAttack(x, y);
 
-      if (isHitOnCell(ships, x, y)) {
+      if (isHitOnCell(gameboard.getShips(), x, y)) {
         renderHit(div);
       }
     });
@@ -135,7 +135,7 @@ function renderGameboard(targetID, gameboard) {
   const xyArray = zipArrays(xArray, yArray);
 
   const ships = gameboard.getShips();
-  createCells(xyArray, gameboardDiv, ships, gameboard);
+  createCells(xyArray, gameboardDiv, gameboard);
 }
 
 function clearChild(element) {
