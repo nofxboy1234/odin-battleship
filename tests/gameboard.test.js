@@ -110,18 +110,25 @@ test('gameboard.getMisses() returns an empty array when gameboard is empty', () 
   expect(gameboard.getMisses()).toEqual([]);
 });
 
-// test('gameboard.getMisses() returns an array of 3 ships when gameboard has 3 ships', () => {
-//   const ship1 = new Ship(1);
-//   const ship2 = new Ship(2);
-//   const ship3 = new Ship(3);
+test('gameboard.getMisses() returns an array when a shot misses', () => {
+  const ship1 = new Ship(3);
 
-//   const gameboard = new Gameboard();
-//   gameboard.placeShip(ship1);
-//   gameboard.placeShip(ship2);
-//   gameboard.placeShip(ship3);
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship1, 0, 0);
+  gameboard.receiveAttack(0, 0);
 
-//   expect(gameboard.getShips()).toEqual([ship1, ship2, ship3]);
-// });
+  expect(gameboard.getMisses()).toEqual([]);
+});
+
+test('gameboard.getMisses() returns an array of 1 when a shot hits', () => {
+  const ship1 = new Ship(3);
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship1, 0, 0);
+  gameboard.receiveAttack(3, 0);
+
+  expect(gameboard.getMisses()).toEqual([[3, 0]]);
+});
 
 test('gameboard.isShipOnCell() returns true if a ship is covering a cell', () => {
   const ship1 = new Ship(1);
@@ -140,33 +147,3 @@ test('gameboard.isShipOnCell() returns false if a ship is not covering a cell', 
 
   expect(gameboard.isShipOnCell(0, 0)).toBe(false);
 });
-
-// test('gameboard.isHitOnCell() returns true if a hit exists at that cell', () => {
-//   const ship1 = new Ship(2);
-
-//   const gameboard = new Gameboard();
-//   gameboard.placeShip(ship1, 1, 2);
-//   gameboard.receiveAttack(2, 2);
-
-//   expect(gameboard.isHitOnCell(2, 2)).toBe(true);
-// });
-
-// test('gameboard.isHitOnCell() returns false if a hit does not exist at that cell', () => {
-//   const ship1 = new Ship(2);
-
-//   const gameboard = new Gameboard();
-//   gameboard.placeShip(ship1, 1, 2);
-//   gameboard.receiveAttack(2, 2);
-
-//   expect(gameboard.isHitOnCell(2, 3)).toBe(false);
-// });
-
-// test('gameboard.isHitOnCell() returns false if a hit does not exist at that cell', () => {
-//   const ship1 = new Ship(2);
-
-//   const gameboard = new Gameboard();
-//   gameboard.placeShip(ship1, 1, 2);
-//   gameboard.receiveAttack(2, 3);
-
-//   expect(gameboard.isHitOnCell(2, 3)).toBe(false);
-// });

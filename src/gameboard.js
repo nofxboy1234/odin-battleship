@@ -38,11 +38,6 @@ class Gameboard {
     return !!this.#getShipOnCell(x, y);
   }
 
-  // isHitOnCell(x, y) {
-  //   const ship = this.#getShipOnCell(x, y);
-  //   // return !!this.#getHitOnCell(x, y);
-  // }
-
   #getShipOnCell(x, y) {
     return this.#ships.find((ship) => {
       const shipBack = ship.x;
