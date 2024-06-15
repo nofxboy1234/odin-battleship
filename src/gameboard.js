@@ -12,6 +12,7 @@ class Gameboard {
 
   receiveAttack(x, y) {
     if (!this.#isNewShot(x, y)) {
+      console.log('You have already shot there!');
       return;
     }
 
