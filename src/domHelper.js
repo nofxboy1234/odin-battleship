@@ -114,7 +114,7 @@ function createCells(xyArray, gameboardDiv, gameboard) {
       console.log(x, y);
       gameboard.receiveAttack(x, y);
 
-      if (gameboard.isHitOnCell(x, y)) {
+      if (gameboard.isShipOnCell(x, y)) {
         renderHit(div);
       }
     });
