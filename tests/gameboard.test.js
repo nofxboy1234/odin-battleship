@@ -98,9 +98,9 @@ test('gameboard.getShips() returns an array of 3 ships when gameboard has 3 ship
   const ship3 = new Ship(3);
 
   const gameboard = new Gameboard();
-  gameboard.placeShip(ship1);
-  gameboard.placeShip(ship2);
-  gameboard.placeShip(ship3);
+  gameboard.placeShip(ship1, 0, 0);
+  gameboard.placeShip(ship2, 4, 0);
+  gameboard.placeShip(ship3, 8, 0);
 
   expect(gameboard.getShips()).toEqual([ship1, ship2, ship3]);
 });
