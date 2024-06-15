@@ -11,14 +11,15 @@ class Gameboard {
   }
 
   receiveAttack(x, y) {
+    if (!this.#isNewShot(x, y)) {
+      return;
+    }
+
     const hitShip = this.#getShipOnCell(x, y);
     if (hitShip) {
       hitShip.hit(x, y);
     } else {
-      const newShot = this.#isNewShot(x, y);
-      if (newShot) {
-        this.misses.push([x, y]);
-      }
+      this.misses.push([x, y]);
     }
   }
 
