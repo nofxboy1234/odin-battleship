@@ -31,7 +31,17 @@ class Gameboard {
   }
 
   isShipOnCell(x, y) {
-    return true;
+    return !!this.#ships.find((ship) =>
+      this.#cellWithinShipHorizontalLengthAtY(ship, x, y),
+    );
+  }
+
+  #cellWithinShipHorizontalLengthAtY(ship, x, y) {
+    const shipBack = ship.x;
+    const shipFront = ship.x + ship.length;
+    return x >= shipBack && x < shipFront && y === ship.y;
+
+    // return true;
   }
 
   #wasShipHit(x, y) {

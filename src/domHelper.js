@@ -121,14 +121,6 @@ function createCells(xyArray, gameboardDiv, ships, gameboard) {
   }
 }
 
-function cellWithinShipHorizontalLengthAtY(ship, x, y) {
-  return x >= ship.x && x < ship.x + ship.length && y === ship.y;
-}
-
-function isShipOnCell(ships, x, y) {
-  return ships.find((ship) => cellWithinShipHorizontalLengthAtY(ship, x, y));
-}
-
 function isHitOnCell(ships, x, y) {
   return ships.find((ship) =>
     ship.getHits().find((hit) => x === hit[0] && y === hit[1]),
