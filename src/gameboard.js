@@ -52,8 +52,12 @@ class Gameboard {
     return hits.find(([hitX, hitY]) => x === hitX && y === hitY);
   }
 
+  #getMissOnCell(x, y) {
+    return this.#misses.find(([missX, missY]) => x === missX && y === missY);
+  }
+
   #isNewShot(x, y) {
-    return !this.#getHitOnCell(x, y);
+    return !this.#getHitOnCell(x, y) && !this.#getMissOnCell(x, y);
   }
 }
 
