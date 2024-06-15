@@ -114,17 +114,11 @@ function createCells(xyArray, gameboardDiv, gameboard) {
       console.log(x, y);
       gameboard.receiveAttack(x, y);
 
-      if (isHitOnCell(gameboard.getShips(), x, y)) {
+      if (gameboard.isHitOnCell(x, y)) {
         renderHit(div);
       }
     });
   }
-}
-
-function isHitOnCell(ships, x, y) {
-  return ships.find((ship) =>
-    ship.getHits().find((hit) => x === hit[0] && y === hit[1]),
-  );
 }
 
 function renderGameboard(targetID, gameboard) {

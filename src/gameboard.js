@@ -36,6 +36,10 @@ class Gameboard {
     return !!this.#getShipOnCell(x, y);
   }
 
+  isHitOnCell(x, y) {
+    return !!this.#getHitOnCell(x, y);
+  }
+
   #getShipOnCell(x, y) {
     return this.#ships.find((ship) => {
       const shipBack = ship.x;
@@ -45,10 +49,18 @@ class Gameboard {
     });
   }
 
-  #isNewShot(x, y) {
-    return !this.#ships.find((ship) =>
-      ship.getHits().find(([hitX, hitY]) => x === hitX && y === hitY),
+  #getHitOnCell(x, y) {
+    let hit;
+    this.#ships.forEach(
+      (ship) =>
+        (hit = ship.getHits().find(([hitX, hitY]) => x === hitX && y === hitY)),
     );
+
+    return hit;
+  }
+
+  #isNewShot(x, y) {
+    return !this.#getHitOnCell(x, y);
   }
 }
 

@@ -122,3 +122,13 @@ test('gameboard.isShipOnCell() returns false if a ship is not covering a cell', 
 
   expect(gameboard.isShipOnCell(0, 0)).toBe(false);
 });
+
+test('gameboard.isHitOnCell() returns true if a hit exists at that cell', () => {
+  const ship1 = new Ship(2);
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship1, 1, 2);
+  gameboard.receiveAttack(2, 2);
+
+  expect(gameboard.isHitOnCell(2, 2)).toBe(true);
+});
