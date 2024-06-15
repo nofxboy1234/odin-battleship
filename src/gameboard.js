@@ -39,9 +39,8 @@ class Gameboard {
   #cellWithinShipHorizontalLengthAtY(ship, x, y) {
     const shipBack = ship.x;
     const shipFront = ship.x + ship.length;
-    return x >= shipBack && x < shipFront && y === ship.y;
 
-    // return true;
+    return x >= shipBack && x < shipFront && y === ship.y;
   }
 
   #wasShipHit(x, y) {
