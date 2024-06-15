@@ -104,3 +104,12 @@ test('gameboard.getShips() returns an array of 3 ships when gameboard has 3 ship
 
   expect(gameboard.getShips()).toEqual([ship1, ship2, ship3]);
 });
+
+test('gameboard.isShipOnCell() returns returns true if a ship is covering a cell', () => {
+  const ship1 = new Ship(1);
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship1, 1, 2);
+
+  expect(gameboard.isShipOnCell(1, 2)).toBe(true);
+});

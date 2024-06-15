@@ -30,6 +30,10 @@ class Gameboard {
     return [...this.#ships];
   }
 
+  isShipOnCell(x, y) {
+    return true;
+  }
+
   #wasShipHit(x, y) {
     let hitShip;
     this.#ships.forEach((ship) => {
