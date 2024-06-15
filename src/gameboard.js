@@ -46,7 +46,7 @@ class Gameboard {
 
   #isNewShot(x, y) {
     return !this.#ships.find(
-      (ship) => y === ship.y && ship.getHits().find((hit) => hit[0] === x),
+      (ship) => y === ship.y && ship.getHits().find((hit) => x === hit[0]),
     );
   }
 }
