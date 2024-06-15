@@ -30,6 +30,10 @@ class Gameboard {
     return [...this.#ships];
   }
 
+  isShipOnCell(x, y) {
+    return !!this.#getShipOnCell(x, y);
+  }
+
   #getShipOnCell(x, y) {
     return this.#ships.find((ship) => {
       const shipBack = ship.x;
@@ -37,10 +41,6 @@ class Gameboard {
 
       return x >= shipBack && x < shipFront && y === ship.y;
     });
-  }
-
-  isShipOnCell(x, y) {
-    return !!this.#getShipOnCell(x, y);
   }
 
   #isNewShot(x, y) {
