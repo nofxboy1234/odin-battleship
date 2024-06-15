@@ -104,7 +104,7 @@ function createCells(xyArray, gameboardDiv, ships, gameboard) {
     const y = xyArray[index][1];
     div.textContent = `${x}, ${y}`;
 
-    if (isShipOnCell(ships, x, y)) {
+    if (gameboard.isShipOnCell(x, y)) {
       div.classList.add('cell-filled');
     }
 
