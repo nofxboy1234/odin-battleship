@@ -23,7 +23,7 @@ test('gameboard.receiveAttack() records the coordinates of a missed shot', () =>
   gameboard.placeShip(ship, 0, 0);
   gameboard.receiveAttack(5, 4);
 
-  expect(gameboard.misses).toContainEqual([5, 4]);
+  expect(gameboard.getMisses()).toContainEqual([5, 4]);
 });
 
 test('gameboard.receiveAttack() does not record the coordinates of a hit ship as a miss', () => {
@@ -33,7 +33,7 @@ test('gameboard.receiveAttack() does not record the coordinates of a hit ship as
   gameboard.placeShip(ship, 0, 0);
   gameboard.receiveAttack(0, 0);
 
-  expect(gameboard.misses).not.toContainEqual([0, 0]);
+  expect(gameboard.getMisses()).not.toContainEqual([0, 0]);
 });
 
 test('gameboard.receiveAttack() does not record a miss if a shot is the same as an old hit', () => {
@@ -44,7 +44,7 @@ test('gameboard.receiveAttack() does not record a miss if a shot is the same as 
   gameboard.receiveAttack(0, 0);
   gameboard.receiveAttack(0, 0);
 
-  expect(gameboard.misses).not.toContainEqual([0, 0]);
+  expect(gameboard.getMisses()).not.toContainEqual([0, 0]);
 });
 
 test('gameboard.receiveAttack() calls ship.hit() when a ship is hit', () => {
@@ -104,6 +104,24 @@ test('gameboard.getShips() returns an array of 3 ships when gameboard has 3 ship
 
   expect(gameboard.getShips()).toEqual([ship1, ship2, ship3]);
 });
+
+test('gameboard.getMisses() returns an empty array when gameboard is empty', () => {
+  const gameboard = new Gameboard();
+  expect(gameboard.getMisses()).toEqual([]);
+});
+
+// test('gameboard.getMisses() returns an array of 3 ships when gameboard has 3 ships', () => {
+//   const ship1 = new Ship(1);
+//   const ship2 = new Ship(2);
+//   const ship3 = new Ship(3);
+
+//   const gameboard = new Gameboard();
+//   gameboard.placeShip(ship1);
+//   gameboard.placeShip(ship2);
+//   gameboard.placeShip(ship3);
+
+//   expect(gameboard.getShips()).toEqual([ship1, ship2, ship3]);
+// });
 
 test('gameboard.isShipOnCell() returns true if a ship is covering a cell', () => {
   const ship1 = new Ship(1);

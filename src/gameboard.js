@@ -1,9 +1,7 @@
 class Gameboard {
   #ships = [];
-
-  constructor() {
-    this.misses = [];
-  }
+  #misses = [];
+  constructor() {}
 
   placeShip(ship, x, y) {
     ship.place(x, y);
@@ -20,7 +18,7 @@ class Gameboard {
     if (hitShip) {
       hitShip.hit(x, y);
     } else {
-      this.misses.push([x, y]);
+      this.#misses.push([x, y]);
     }
   }
 
@@ -30,6 +28,10 @@ class Gameboard {
 
   getShips() {
     return [...this.#ships];
+  }
+
+  getMisses() {
+    return [...this.#misses];
   }
 
   isShipOnCell(x, y) {
@@ -51,13 +53,8 @@ class Gameboard {
   }
 
   #getHitOnCell(x, y) {
-    let hit;
-    this.#ships.find((ship) => {
-      const hits = ship.getHits();
-      hit = hits.find(([hitX, hitY]) => x === hitX && y === hitY);
-    });
-
-    return hit;
+    const hits = this.#ships.flatMap((ship) => ship.getHits());
+    return hits.find(([hitX, hitY]) => x === hitX && y === hitY);
   }
 
   #isNewShot(x, y) {
