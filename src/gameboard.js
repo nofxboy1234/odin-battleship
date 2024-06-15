@@ -31,16 +31,12 @@ class Gameboard {
   }
 
   isShipOnCell(x, y) {
-    return !!this.#ships.find((ship) =>
-      this.#cellWithinShipHorizontalLengthAtY(ship, x, y),
-    );
-  }
+    return !!this.#ships.find((ship) => {
+      const shipBack = ship.x;
+      const shipFront = ship.x + ship.length;
 
-  #cellWithinShipHorizontalLengthAtY(ship, x, y) {
-    const shipBack = ship.x;
-    const shipFront = ship.x + ship.length;
-
-    return x >= shipBack && x < shipFront && y === ship.y;
+      return x >= shipBack && x < shipFront && y === ship.y;
+    });
   }
 
   #wasShipHit(x, y) {
