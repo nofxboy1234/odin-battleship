@@ -48,7 +48,7 @@
   cursor: pointer;
 }
 
-.cell:hover {
+.cell-hover:hover {
   background-color: yellow;
 }
 
