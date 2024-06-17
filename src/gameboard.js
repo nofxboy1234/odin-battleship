@@ -48,6 +48,10 @@ class Gameboard {
     this.#disabled = true;
   }
 
+  enable() {
+    this.#disabled = false;
+  }
+
   isDisabled() {
     return this.#disabled;
   }

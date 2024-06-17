@@ -176,3 +176,33 @@ test('gameboard.disable() ignores hits on a ship', () => {
 
   expect(ship.getHits()).toEqual([]);
 });
+
+test('gameboard.enable() sets the board to be enabled', () => {
+  const gameboard = new Gameboard();
+  gameboard.disable();
+  gameboard.enable();
+
+  expect(gameboard.isDisabled()).toBe(false);
+});
+
+test('gameboard.enable() processes misses on the gameboard', () => {
+  const ship = new Ship(1);
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship, 0, 0);
+  gameboard.enable();
+  gameboard.receiveAttack(5, 5);
+
+  expect(gameboard.getMisses()).toEqual([[5, 5]]);
+});
+
+test('gameboard.enable() processes hits on a ship', () => {
+  const ship = new Ship(1);
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship, 0, 0);
+  gameboard.enable();
+  gameboard.receiveAttack(0, 0);
+
+  expect(ship.getHits()).toEqual([[0, 0]]);
+});
