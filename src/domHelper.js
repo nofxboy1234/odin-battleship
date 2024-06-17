@@ -99,6 +99,13 @@ function renderMiss(div) {
   div.classList.add('miss');
 }
 
+function disableEnemyBoard() {
+  // get enemy board
+  const enemyBoard = document.getElementById('computer-gameboard-container');
+  // add .disabled-board class to enemy board
+  enemyBoard.classList.add('disabled-board');
+}
+
 function createCells(xyArray, gameboardDiv, gameboard) {
   for (let index = 0; index < 100; index++) {
     const div = document.createElement('div');
@@ -115,13 +122,13 @@ function createCells(xyArray, gameboardDiv, gameboard) {
     gameboardDiv.appendChild(div);
 
     div.addEventListener('click', () => {
-      console.log(x, y);
       gameboard.receiveAttack(x, y);
 
       if (gameboard.isShipOnCell(x, y)) {
         renderHit(div);
       } else {
         renderMiss(div);
+        disableEnemyBoard();
       }
     });
   }

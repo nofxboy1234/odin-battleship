@@ -42,13 +42,6 @@ function newGame() {
   const computer = new Player();
   placePlayerShips(computer);
   renderGameboard('computer-gameboard-container', computer.gameboard);
-
-  let winner = false;
-  while (winner === false) {
-    console.log('human player turn: choose a square');
-    winner = true;
-  }
-  console.log('You won!');
 }
 
 const newGameButton = document.getElementById('new-game-btn');
