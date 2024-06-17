@@ -149,6 +149,9 @@ function renderGameboard(targetID, gameboard) {
   const xyArray = zipArrays(xArray, yArray);
 
   createCells(xyArray, gameboardDiv, gameboard);
+
+  const container = document.getElementById('gameboard-container-human');
+  renderAsDisabled(container);
 }
 
 function clearChild(element) {
