@@ -14,7 +14,8 @@
   background: url('./icon.png');
 }
 
-.gameboard-container {
+#gameboard-container-computer,
+#gameboard-container-human {
   display: flex;
 }
 

@@ -99,22 +99,15 @@ function renderMiss(div) {
   div.classList.add('miss');
 }
 
-function disableGameboard(gameboard) {
-  renderGameboardDisabledState(gameboard);
+function disableGameboard() {
+  renderGameboardDisabledState();
 }
 
-function renderGameboardDisabledState(gameboard) {
-  gameboard.classList.add('disabled-board');
-
-  const cellLabelsTop = document.getElementsByClassName('cell-labels-top');
-  [...cellLabelsTop].forEach((element) =>
-    element.classList.add('disabled-board'),
+function renderGameboardDisabledState() {
+  const gameboardContainer = document.getElementById(
+    'gameboard-container-computer',
   );
-
-  const cellLabelsLeft = document.getElementsByClassName('cell-labels-left');
-  [...cellLabelsLeft].forEach((element) =>
-    element.classList.add('disabled-board'),
-  );
+  gameboardContainer.classList.add('disabled-board');
 }
 
 function createCells(xyArray, gameboardDiv, gameboard) {
@@ -139,7 +132,7 @@ function createCells(xyArray, gameboardDiv, gameboard) {
         renderHit(div);
       } else {
         renderMiss(div);
-        disableGameboard(div.parentElement);
+        disableGameboard();
       }
     });
   }
