@@ -100,6 +100,10 @@ function renderMiss(div) {
 }
 
 function disableEnemyBoard() {
+  renderDisabledState();
+}
+
+function renderDisabledState() {
   const enemyBoard = document.getElementById('computer-gameboard-container');
   enemyBoard.classList.add('disabled-board');
 
