@@ -36,6 +36,7 @@ function newGame() {
   createLabelsLeftCells();
 
   const human = new Player();
+  human.gameboard.disable();
   placePlayerShips(human);
   renderGameboard('human-gameboard-container', human.gameboard);
 
