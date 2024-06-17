@@ -100,12 +100,14 @@ function renderMiss(div) {
 }
 
 function disableEnemyBoard() {
-  renderDisabledState();
+  const enemyGameboard = document.getElementById(
+    'computer-gameboard-container',
+  );
+  renderGameboardDisabledState(enemyGameboard);
 }
 
-function renderDisabledState() {
-  const enemyBoard = document.getElementById('computer-gameboard-container');
-  enemyBoard.classList.add('disabled-board');
+function renderGameboardDisabledState(gameboard) {
+  gameboard.classList.add('disabled-board');
 
   const cellLabelsTop = document.getElementsByClassName('cell-labels-top');
   [...cellLabelsTop].forEach((element) =>
@@ -153,7 +155,6 @@ function renderGameboard(targetID, gameboard) {
   const yArray = createYArray();
   const xyArray = zipArrays(xArray, yArray);
 
-  const ships = gameboard.getShips();
   createCells(xyArray, gameboardDiv, gameboard);
 }
 
