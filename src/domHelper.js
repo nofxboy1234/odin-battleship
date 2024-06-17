@@ -99,10 +99,6 @@ function renderMiss(div) {
   div.classList.add('miss');
 }
 
-function disableGameboard(gameboard) {
-  renderGameboardDisabledState();
-}
-
 function renderGameboardDisabledState() {
   const gameboardContainer = document.getElementById(
     'gameboard-container-computer',
@@ -131,8 +127,11 @@ function createCells(xyArray, gameboardDiv, gameboard) {
       if (gameboard.isShipOnCell(x, y)) {
         renderHit(div);
       } else {
-        renderMiss(div);
-        disableGameboard(gameboard);
+        if (!gameboard.isDisabled()) {
+          renderMiss(div);
+          gameboard.disable();
+          renderGameboardDisabledState();
+        }
       }
     });
   }
