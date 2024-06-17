@@ -99,7 +99,7 @@ function renderMiss(div) {
   div.classList.add('miss');
 }
 
-function disableGameboard() {
+function disableGameboard(gameboard) {
   renderGameboardDisabledState();
 }
 
@@ -132,7 +132,7 @@ function createCells(xyArray, gameboardDiv, gameboard) {
         renderHit(div);
       } else {
         renderMiss(div);
-        disableGameboard();
+        disableGameboard(gameboard);
       }
     });
   }

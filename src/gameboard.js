@@ -38,6 +38,14 @@ class Gameboard {
     return !!this.#getShipOnCell(x, y);
   }
 
+  disable() {
+    //
+  }
+
+  isDisabled() {
+    return true;
+  }
+
   #getShipOnCell(x, y) {
     return this.#ships.find((ship) => {
       const shipBack = ship.x;

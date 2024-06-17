@@ -147,3 +147,13 @@ test('gameboard.isShipOnCell() returns false if a ship is not covering a cell', 
 
   expect(gameboard.isShipOnCell(0, 0)).toBe(false);
 });
+
+test('gameboard.disable() ignores all input to the gameboard', () => {
+  const ship = new Ship(1);
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship, 0, 0);
+  gameboard.disable();
+
+  expect(gameboard.isDisabled()).toBe(true);
+});
