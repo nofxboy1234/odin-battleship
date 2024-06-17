@@ -7,7 +7,7 @@ afterEach(() => {
 });
 
 test('gameboard.placeShip() calls ship.place()', () => {
-  const ship = new Ship();
+  const ship = new Ship(1);
   const spy = jest.spyOn(ship, 'place');
 
   const gameboard = new Gameboard();
@@ -26,7 +26,7 @@ test('gameboard.placeShip() pushes the given ship to its .#ships property', () =
 });
 
 test('gameboard.receiveAttack() records the coordinates of a missed shot', () => {
-  const ship = new Ship();
+  const ship = new Ship(1);
 
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
@@ -36,7 +36,7 @@ test('gameboard.receiveAttack() records the coordinates of a missed shot', () =>
 });
 
 test('gameboard.receiveAttack() does not record the coordinates of a hit ship as a miss', () => {
-  const ship = new Ship();
+  const ship = new Ship(1);
 
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
@@ -45,26 +45,27 @@ test('gameboard.receiveAttack() does not record the coordinates of a hit ship as
   expect(gameboard.getMisses()).not.toContainEqual([0, 0]);
 });
 
-test('gameboard.receiveAttack() does not record a miss if a shot is the same as an old hit', () => {
-  const ship = new Ship();
+test('gameboard.receiveAttack() does not record a miss more than once if a shot is the same as an old shot', () => {
+  const ship = new Ship(1);
 
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
-  gameboard.receiveAttack(0, 0);
-  gameboard.receiveAttack(0, 0);
+  gameboard.receiveAttack(5, 5);
+  gameboard.receiveAttack(5, 5);
 
-  expect(gameboard.getMisses()).not.toContainEqual([0, 0]);
+  expect(gameboard.getMisses()).toEqual([[5, 5]]);
 });
 
-test('gameboard.receiveAttack() calls ship.hit() when a ship is hit', () => {
-  const ship = new Ship();
+test('gameboard.receiveAttack() does not record a hit more than once if a shot is the same as an old shot', () => {
+  const ship = new Ship(1);
   const spy = jest.spyOn(ship, 'hit');
 
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
   gameboard.receiveAttack(0, 0);
+  gameboard.receiveAttack(0, 0);
 
-  expect(spy).toHaveBeenCalled();
+  expect(spy).toHaveBeenCalledTimes(1);
 });
 
 test('gameboard.allShipsSunk() returns false when all ships are not sunk', () => {
