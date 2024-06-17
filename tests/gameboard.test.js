@@ -22,7 +22,7 @@ test('gameboard.placeShip() pushes the given ship to its .#ships property', () =
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
 
-  expect(gameboard.getShips()).toContainEqual(ship);
+  expect(gameboard.getShips()).toContain(ship);
 });
 
 test('gameboard.receiveAttack() records the coordinates of a missed shot', () => {
