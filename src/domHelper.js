@@ -100,10 +100,18 @@ function renderMiss(div) {
 }
 
 function disableEnemyBoard() {
-  // get enemy board
   const enemyBoard = document.getElementById('computer-gameboard-container');
-  // add .disabled-board class to enemy board
   enemyBoard.classList.add('disabled-board');
+
+  const cellLabelsTop = document.getElementsByClassName('cell-labels-top');
+  [...cellLabelsTop].forEach((element) =>
+    element.classList.add('disabled-board'),
+  );
+
+  const cellLabelsLeft = document.getElementsByClassName('cell-labels-left');
+  [...cellLabelsLeft].forEach((element) =>
+    element.classList.add('disabled-board'),
+  );
 }
 
 function createCells(xyArray, gameboardDiv, gameboard) {
