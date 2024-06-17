@@ -124,14 +124,16 @@ function createCells(xyArray, gameboardDiv, gameboard) {
     div.addEventListener('click', () => {
       gameboard.receiveAttack(x, y);
 
+      if (gameboard.isDisabled()) {
+        return;
+      }
+
       if (gameboard.isShipOnCell(x, y)) {
         renderHit(div);
       } else {
-        if (!gameboard.isDisabled()) {
-          renderMiss(div);
-          gameboard.disable();
-          renderGameboardDisabledState();
-        }
+        renderMiss(div);
+        gameboard.disable();
+        renderGameboardDisabledState();
       }
     });
   }
