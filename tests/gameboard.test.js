@@ -16,6 +16,15 @@ test('gameboard.placeShip() calls ship.place()', () => {
   expect(spy).toHaveBeenCalled();
 });
 
+test('gameboard.placeShip() pushes the given ship to its .#ships property', () => {
+  const ship = new Ship(2);
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship, 0, 0);
+
+  expect(gameboard.getShips()).toContainEqual(ship);
+});
+
 test('gameboard.receiveAttack() records the coordinates of a missed shot', () => {
   const ship = new Ship();
 
