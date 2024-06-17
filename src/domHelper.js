@@ -99,11 +99,8 @@ function renderMiss(div) {
   div.classList.add('miss');
 }
 
-function disableEnemyBoard() {
-  const enemyGameboard = document.getElementById(
-    'computer-gameboard-container',
-  );
-  renderGameboardDisabledState(enemyGameboard);
+function disableGameboard(gameboard) {
+  renderGameboardDisabledState(gameboard);
 }
 
 function renderGameboardDisabledState(gameboard) {
@@ -142,7 +139,7 @@ function createCells(xyArray, gameboardDiv, gameboard) {
         renderHit(div);
       } else {
         renderMiss(div);
-        disableEnemyBoard();
+        disableGameboard(div.parentElement);
       }
     });
   }
