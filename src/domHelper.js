@@ -120,23 +120,26 @@ function createCells(xyArray, gameboardDiv, gameboard) {
     }
 
     gameboardDiv.appendChild(div);
-
-    div.addEventListener('click', () => {
-      if (gameboard.isDisabled()) {
-        return;
-      }
-
-      gameboard.receiveAttack(x, y);
-
-      if (gameboard.isShipOnCell(x, y)) {
-        renderHit(div);
-      } else {
-        renderMiss(div);
-        gameboard.disable();
-        disableGameboard();
-      }
-    });
+    div.addEventListener('click', handleCellClick(gameboard, x, y, div));
   }
+}
+
+function handleCellClick(gameboard, x, y, div) {
+  return () => {
+    if (gameboard.isDisabled()) {
+      return;
+    }
+
+    gameboard.receiveAttack(x, y);
+
+    if (gameboard.isShipOnCell(x, y)) {
+      renderHit(div);
+    } else {
+      renderMiss(div);
+      gameboard.disable();
+      disableGameboard();
+    }
+  };
 }
 
 function renderGameboard(targetID, gameboard) {
