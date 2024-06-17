@@ -99,11 +99,8 @@ function renderMiss(div) {
   div.classList.add('miss');
 }
 
-function disableGameboard() {
-  const gameboardContainer = document.getElementById(
-    'gameboard-container-computer',
-  );
-  gameboardContainer.classList.add('disabled-board');
+function renderAsDisabled(element) {
+  element.classList.add('disabled-board');
 }
 
 function createCells(xyArray, gameboardDiv, gameboard) {
@@ -138,7 +135,9 @@ function handleCellClick(gameboard, x, y, div) {
   } else {
     renderMiss(div);
     gameboard.disable();
-    disableGameboard();
+
+    const container = document.getElementById('gameboard-container-computer');
+    renderAsDisabled(container);
   }
 }
 
