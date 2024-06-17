@@ -106,7 +106,12 @@ function renderAsDisabled(element) {
 function createCells(xyArray, gameboardDiv, gameboard) {
   for (let index = 0; index < 100; index++) {
     const div = document.createElement('div');
-    div.classList.add('cell', 'cell-hover');
+
+    div.classList.add('cell');
+
+    if (!gameboard.isDisabled()) {
+      div.classList.add('cell-hover');
+    }
 
     const x = xyArray[index][0];
     const y = xyArray[index][1];
