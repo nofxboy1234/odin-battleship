@@ -1,6 +1,8 @@
 class Gameboard {
   #ships = [];
   #misses = [];
+  #disabled = false;
+
   constructor() {}
 
   placeShip(ship, x, y) {
@@ -39,11 +41,11 @@ class Gameboard {
   }
 
   disable() {
-    //
+    this.#disabled = true;
   }
 
   isDisabled() {
-    return true;
+    return this.#disabled;
   }
 
   #getShipOnCell(x, y) {
