@@ -100,7 +100,7 @@ function renderMiss(div) {
 }
 
 function renderAsDisabled(element) {
-  element.classList.add('disabled-board');
+  element.classList.add('disabled');
 }
 
 function createCells(xyArray, gameboardDiv, gameboard) {

@@ -80,6 +80,6 @@
   background-color: rgb(255, 209, 123);
 }
 
-.disabled-board {
+.disabled {
   filter: contrast(50%);
 }
