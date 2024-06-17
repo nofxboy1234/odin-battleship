@@ -122,11 +122,11 @@ function createCells(xyArray, gameboardDiv, gameboard) {
     gameboardDiv.appendChild(div);
 
     div.addEventListener('click', () => {
-      gameboard.receiveAttack(x, y);
-
       if (gameboard.isDisabled()) {
         return;
       }
+
+      gameboard.receiveAttack(x, y);
 
       if (gameboard.isShipOnCell(x, y)) {
         renderHit(div);
