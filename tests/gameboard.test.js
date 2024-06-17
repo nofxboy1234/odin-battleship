@@ -165,3 +165,14 @@ test('gameboard.disable() ignores misses on the gameboard', () => {
 
   expect(gameboard.getMisses()).toEqual([]);
 });
+
+test('gameboard.disable() ignores hits on a ship', () => {
+  const ship = new Ship(1);
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship, 0, 0);
+  gameboard.disable();
+  gameboard.receiveAttack(0, 0);
+
+  expect(ship.getHits()).toEqual([]);
+});
