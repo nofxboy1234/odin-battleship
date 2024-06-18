@@ -1,4 +1,4 @@
-import Player from '../src/player';
+import Player from '../src/logic/player';
 
 test('player contains a gameboard', () => {
   const player = new Player();

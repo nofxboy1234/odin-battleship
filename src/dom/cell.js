@@ -3,10 +3,15 @@ class Cell {
 
   constructor(x, y, gameboard, gameboardDOM) {
     this.#element.classList.add('gameboard-1-1-cell');
+
+    this.x = x;
+    this.y = y;
     this.#element.textContent = `${x}, ${y}`;
 
     if (gameboardDOM.isDisabled()) {
       this.disableHover();
+    } else {
+      this.enableHover();
     }
 
     this.#element.addEventListener('click', () => {

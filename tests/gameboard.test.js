@@ -158,6 +158,24 @@ test('gameboard.isShipOnCell() returns false if a ship is not covering a cell', 
   expect(gameboard.isShipOnCell(0, 0)).toBe(false);
 });
 
+test('gameboard.getShipOnCell() returns the ship that is covering a cell', () => {
+  const ship = new Ship(2);
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship, 0, 0);
+
+  expect(gameboard.getShipOnCell(0, 0)).toBe(ship);
+});
+
+test('gameboard.getShipOnCell() returns the ship that is covering a cell', () => {
+  const ship = new Ship(2);
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship, 0, 0);
+
+  expect(gameboard.getShipOnCell(1, 0)).toBe(ship);
+});
+
 // test('gameboard.disable() sets the board to be disabled', () => {
 //   const gameboard = new Gameboard();
 //   gameboard.disable();

@@ -2,13 +2,12 @@ import { zipArrays, createXArray, createYArray } from '../utils/array';
 import Cell from './cell';
 
 class Gameboard {
-  #element = undefined;
+  #element = document.createElement('div');
   #disabled = false;
   #cells = [];
   #ships = [];
 
   constructor(controller) {
-    this.#element = document.createElement('div');
     this.#element.classList.add('gameboard');
 
     const xArray = createXArray();
@@ -19,7 +18,9 @@ class Gameboard {
     this.createLabelsLeftCells();
     this.createCellLabelsTop();
     this.createLabelsTopCells();
+
     this.createCells(xyArray, controller);
+    this.createShips(controller);
     this.renderShips();
   }
 
@@ -107,12 +108,18 @@ class Gameboard {
     }
   }
 
-  renderShips() {
-    // this.#cells.forEach((cell) => {
-    //   const x = xyArray[index][0];
-    //   const y = xyArray[index][1];
-    //   const cell = new Cell(x, y, controller, this);
-    //   this.#cells.push(cell);
-    // });
+  createShips(gameboard) {
+    this.#cells.forEach((cell) => {
+      const ship = gameboard.getShipOnCell(cell.x, cell.y);
+      if (ship) {
+        this.#ships.push(cell);
+      }
+    });
   }
+
+  // renderShips() {
+  //   this.#ships.forEach((shipCell) => {
+  //     shipCell.
+  //   });
+  // }
 }
