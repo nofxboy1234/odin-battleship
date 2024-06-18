@@ -17,7 +17,7 @@
   flex-direction: column;
 }
 
-.gameboard-0-cell {
+.gameboard-0-label {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,7 +35,7 @@
   display: flex;
 }
 
-.gameboard-1-0-cell {
+.gameboard-1-0-label {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,11 +59,11 @@
   cursor: pointer;
 }
 
-.gameboard-1-1-cell-hover:hover {
+.hover:hover {
   background-color: yellow;
 }
 
-.cell-filled {
+.fill {
   background-color: black;
 }
 

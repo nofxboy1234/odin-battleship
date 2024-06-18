@@ -7,7 +7,7 @@ class Gameboard {
   #cells = [];
   #ships = [];
 
-  constructor(controller, disabled) {
+  constructor(controller) {
     this.#element = document.createElement('div');
     this.#element.classList.add('gameboard');
 
@@ -15,10 +15,6 @@ class Gameboard {
     const yArray = createYArray();
     const xyArray = zipArrays(xArray, yArray);
     this.#cells = this.createCells(xyArray, controller);
-
-    if (disabled) {
-      this.renderAsDisabled();
-    }
   }
 
   render() {
@@ -102,8 +98,8 @@ class Gameboard {
     for (let index = 0; index < 100; index++) {
       const x = xyArray[index][0];
       const y = xyArray[index][1];
-      const filled = controller.isShipOnCell(x, y);
-      const cell = new Cell(controller, x, y, filled);
+      // const filled = controller.isShipOnCell(x, y);
+      const cell = new Cell(x, y, controller, this);
       this.appendChild(cell.render());
     }
   }

@@ -1,22 +1,16 @@
 class Cell {
-  #element = undefined;
+  #element = document.createElement('div');
 
-  constructor(gameboard, x, y, filled) {
-    this.#element = document.createElement('div');
-
+  constructor(x, y, gameboard, gameboardDOM) {
+    this.#element.classList.add('gameboard-1-1-cell');
     this.#element.textContent = `${x}, ${y}`;
 
-    this.#element.classList.add('cell');
-    if (!gameboard.isDisabled()) {
-      this.#element.classList.add('cell-hover');
-    }
-
-    if (filled) {
-      this.#element.classList.add('cell-filled');
+    if (gameboardDOM.isDisabled()) {
+      this.toggleHover();
     }
 
     this.#element.addEventListener('click', () => {
-      this.handleClick(gameboard, x, y, this.#element);
+      this.handleClick(x, y, gameboard, gameboardDOM);
     });
   }
 
@@ -24,29 +18,34 @@ class Cell {
     return this.#element;
   }
 
-  renderHit() {
-    this.#element.classList.add('hit');
+  toggleFilled() {
+    this.#element.classList.toggle('fill');
   }
 
-  renderMiss(div) {
-    this.#element.classList.add('miss');
+  toggleMiss() {
+    this.#element.classList.toggle('miss');
   }
 
-  handleClick(gameboard, x, y, div) {
-    if (gameboard.isDisabled()) {
+  toggleHit() {
+    this.#element.classList.toggle('hit');
+  }
+
+  toggleHover() {
+    this.#element.classList.toggle('hover');
+  }
+
+  handleClick(x, y, gameboard, gameboardDOM) {
+    if (gameboardDOM.isDisabled()) {
       return;
     }
 
     gameboard.receiveAttack(x, y);
 
     if (gameboard.isShipOnCell(x, y)) {
-      renderHit(div);
+      this.toggleHit();
     } else {
-      renderMiss(div);
-      gameboard.disable();
-
-      const container = document.getElementById('gameboard-container-computer');
-      renderAsDisabled(container);
+      this.toggleMiss();
+      gameboardDOM.disable();
     }
   }
 }
