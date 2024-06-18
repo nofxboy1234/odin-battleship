@@ -6,7 +6,7 @@ class Cell {
     this.#element.textContent = `${x}, ${y}`;
 
     if (gameboardDOM.isDisabled()) {
-      this.toggleHover();
+      this.disableHover();
     }
 
     this.#element.addEventListener('click', () => {
@@ -18,16 +18,36 @@ class Cell {
     return this.#element;
   }
 
-  toggleFilled() {
-    this.#element.classList.toggle('fill');
+  enableFill() {
+    this.#element.classList.add('fill');
   }
 
-  toggleMiss() {
-    this.#element.classList.toggle('miss');
+  disableFill() {
+    this.#element.classList.remove('fill');
   }
 
-  toggleHit() {
-    this.#element.classList.toggle('hit');
+  enableMiss() {
+    this.#element.classList.add('miss');
+  }
+
+  disableMiss() {
+    this.#element.classList.remove('miss');
+  }
+
+  enableHit() {
+    this.#element.classList.add('hit');
+  }
+
+  disableHit() {
+    this.#element.classList.remove('hit');
+  }
+
+  enableHover() {
+    this.#element.classList.add('hover');
+  }
+
+  disableHover() {
+    this.#element.classList.remove('hover');
   }
 
   toggleHover() {
@@ -42,9 +62,9 @@ class Cell {
     gameboard.receiveAttack(x, y);
 
     if (gameboard.isShipOnCell(x, y)) {
-      this.toggleHit();
+      this.enableHit();
     } else {
-      this.toggleMiss();
+      this.enableMiss();
       gameboardDOM.disable();
     }
   }
