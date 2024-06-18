@@ -19,7 +19,7 @@ class Gameboard {
     this.createLabelsLeftCells();
     this.createCellLabelsTop();
     this.createLabelsTopCells();
-    this.#cells = this.createCells(xyArray, controller);
+    this.createCells(xyArray, controller);
   }
 
   render() {
@@ -103,7 +103,7 @@ class Gameboard {
       const y = xyArray[index][1];
       // const filled = controller.isShipOnCell(x, y);
       const cell = new Cell(x, y, controller, this);
-      this.appendChild(cell.render());
+      this.#cells.push(cell);
     }
   }
 }
