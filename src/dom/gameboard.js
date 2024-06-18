@@ -14,6 +14,11 @@ class Gameboard {
     const xArray = createXArray();
     const yArray = createYArray();
     const xyArray = zipArrays(xArray, yArray);
+
+    this.createCellLabelsLeft();
+    this.createLabelsLeftCells();
+    this.createCellLabelsTop();
+    this.createLabelsTopCells();
     this.#cells = this.createCells(xyArray, controller);
   }
 
@@ -27,18 +32,16 @@ class Gameboard {
 
   disable() {
     this.#disabled = true;
+    this.#element.classList.add('disabled');
   }
 
   enable() {
     this.#disabled = false;
+    this.#element.classList.remove('disabled');
   }
 
   isDisabled() {
     return this.#disabled;
-  }
-
-  renderAsDisabled() {
-    this.#element.classList.add('disabled');
   }
 
   createCellLabelsLeft() {
