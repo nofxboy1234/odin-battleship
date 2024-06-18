@@ -21,7 +21,9 @@ class Gameboard {
 
     this.createCells(xyArray, controller);
     this.createShips(controller);
-    this.renderShips();
+
+    this.renderCells();
+    // this.renderShips();
   }
 
   render() {
@@ -112,14 +114,15 @@ class Gameboard {
     this.#cells.forEach((cell) => {
       const ship = gameboard.getShipOnCell(cell.x, cell.y);
       if (ship) {
-        this.#ships.push(cell);
+        this.#ships.push(ship);
       }
     });
   }
 
-  // renderShips() {
-  //   this.#ships.forEach((shipCell) => {
-  //     shipCell.
-  //   });
-  // }
+  renderCells() {
+    this.#cells.forEach((cell) => {
+      const container = document.getElementById('gameboard-1-1');
+      container.appendChild(cell.render());
+    });
+  }
 }
