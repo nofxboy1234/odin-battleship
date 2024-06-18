@@ -1,7 +1,6 @@
 class Gameboard {
   #ships = [];
   #misses = [];
-  #disabled = false;
 
   constructor() {}
 
@@ -11,10 +10,6 @@ class Gameboard {
   }
 
   receiveAttack(x, y) {
-    if (this.isDisabled()) {
-      return;
-    }
-
     if (!this.#isNewShot(x, y)) {
       console.log('You have already shot there!');
       return;
@@ -42,18 +37,6 @@ class Gameboard {
 
   isShipOnCell(x, y) {
     return !!this.#getShipOnCell(x, y);
-  }
-
-  disable() {
-    this.#disabled = true;
-  }
-
-  enable() {
-    this.#disabled = false;
-  }
-
-  isDisabled() {
-    return this.#disabled;
   }
 
   #getShipOnCell(x, y) {

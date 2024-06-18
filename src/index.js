@@ -1,6 +1,6 @@
 import './style.css';
-import Player from './player';
-import Ship from './ship';
+import Player from './logic/player';
+import Ship from './logic/ship';
 import {
   createLabelsLeftCells,
   createLabelsTopCells,
