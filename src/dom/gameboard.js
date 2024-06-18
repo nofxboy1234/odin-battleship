@@ -101,7 +101,6 @@ class Gameboard {
     for (let index = 0; index < 100; index++) {
       const x = xyArray[index][0];
       const y = xyArray[index][1];
-      // const filled = controller.isShipOnCell(x, y);
       const cell = new Cell(x, y, controller, this);
       this.#cells.push(cell);
     }
