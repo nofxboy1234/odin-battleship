@@ -7,21 +7,19 @@ class Gameboard {
   #disabled = false;
   #cells = [];
   #ships = [];
+  #controller = undefined;
 
   constructor(controller) {
+    this.#controller = controller;
     this.#element.classList.add('gameboard');
-
-    const xArray = createXArray();
-    const yArray = createYArray();
-    const xyArray = zipArrays(xArray, yArray);
 
     this.labelsLeftContainer = this.createLabelsLeftContainer();
     this.createLabelsLeft();
     this.labelsTopContainer = this.createLabelsTopContainer();
     this.createLabelsTop();
 
-    this.createCells(xyArray, controller);
-    this.createShips(controller);
+    this.createCells();
+    this.createShips();
 
     this.renderCells();
     this.renderShips();
@@ -85,7 +83,7 @@ class Gameboard {
   createLabelsTop() {
     const labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
-    labels.forEach((label, index) => {
+    labels.forEach((label) => {
       const element = document.createElement('div');
 
       element.classList.add('gameboard-1-0-label');
@@ -95,17 +93,19 @@ class Gameboard {
     });
   }
 
-  createCells(xyArray, controller) {
+  createCells() {
+    const xyArray = zipArrays(createXArray(), createYArray());
+
     for (let index = 0; index < 100; index++) {
       const x = xyArray[index][0];
       const y = xyArray[index][1];
-      const cellDOM = new Cell(x, y, controller, this);
+      const cellDOM = new Cell(x, y, this.#controller, this);
       this.#cells.push(cellDOM);
     }
   }
 
-  createShips(gameboard) {
-    const ships = gameboard.getShips();
+  createShips() {
+    const ships = this.#controller.getShips();
     ships.forEach((ship) => {
       const cellDOMs = this.getShipCellDOMs(ship);
       const shipDOM = new Ship(ship.x, ship.y, ship.length, cellDOMs);
