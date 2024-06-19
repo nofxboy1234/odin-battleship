@@ -9,8 +9,12 @@ class Gameboard {
   #ships = [];
   #controller = undefined;
 
-  constructor(controller) {
+  constructor(controller, disabled) {
     this.#controller = controller;
+    if (disabled) {
+      this.disable();
+    }
+
     this.#element.classList.add('gameboard');
 
     this.createLabelsLeftContainer();

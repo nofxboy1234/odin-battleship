@@ -21,15 +21,6 @@ function placeShips(gameboard) {
 }
 
 function newGame() {
-  const humanGameboard = new Gameboard();
-  placeShips(humanGameboard);
-  const human = new Player(humanGameboard);
-  const humanGameboardElement = new GameboardElement(humanGameboard);
-
-  humanGameboardElement.disable();
-  const humanContainer = document.getElementById('gameboard-container-human');
-  humanContainer.appendChild(humanGameboardElement.render());
-
   const enemyGameboard = new Gameboard();
   placeShips(enemyGameboard);
   const enemy = new Player(enemyGameboard);
@@ -37,6 +28,14 @@ function newGame() {
 
   const enemyContainer = document.getElementById('gameboard-container-enemy');
   enemyContainer.appendChild(enemyGameboardElement.render());
+
+  const humanGameboard = new Gameboard();
+  placeShips(humanGameboard);
+  const human = new Player(humanGameboard);
+  const humanGameboardElement = new GameboardElement(humanGameboard, true);
+
+  const humanContainer = document.getElementById('gameboard-container-human');
+  humanContainer.appendChild(humanGameboardElement.render());
 }
 
 const newGameButton = document.getElementById('new-game-btn');
