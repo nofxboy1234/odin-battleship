@@ -9,8 +9,8 @@ class Gameboard {
   #ships = [];
   #controller = undefined;
 
-  constructor(controller, disabled) {
-    this.#controller = controller;
+  constructor(player, disabled) {
+    this.#controller = player.gameboard;
     if (disabled) {
       this.disable();
     }
