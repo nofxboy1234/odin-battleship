@@ -80,13 +80,13 @@ class Gameboard {
     element.classList.add('gameboard-1');
     this.appendChild(element);
 
-    this.gameboard1 = element;
+    this.gameboard_1 = element;
   }
 
   createLabelsTopContainer() {
     const element = document.createElement('div');
     element.classList.add('gameboard-1-0');
-    this.gameboard1.appendChild(element);
+    this.gameboard_1.appendChild(element);
 
     this.labelsTopContainer = element;
   }
@@ -107,9 +107,9 @@ class Gameboard {
   createGrid() {
     const element = document.createElement('div');
     element.classList.add('gameboard-1-1');
-    this.gameboard1.appendChild(element);
+    this.gameboard_1.appendChild(element);
 
-    this.gameboard11 = element;
+    this.gameboard_1_1 = element;
   }
 
   createCells() {
@@ -145,7 +145,7 @@ class Gameboard {
 
   renderCells() {
     this.#cells.forEach((cellDOM) => {
-      this.gameboard11.appendChild(cellDOM.render());
+      this.gameboard_1_1.appendChild(cellDOM.render());
     });
   }
 
