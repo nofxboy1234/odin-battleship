@@ -27,8 +27,16 @@ function newGame() {
   const humanGameboardElement = new GameboardElement(humanGameboard);
 
   humanGameboardElement.disable();
-  const container = document.getElementById('gameboard-container-human');
-  container.appendChild(humanGameboardElement.render());
+  const humanContainer = document.getElementById('gameboard-container-human');
+  humanContainer.appendChild(humanGameboardElement.render());
+
+  const enemyGameboard = new Gameboard();
+  placeShips(enemyGameboard);
+  const enemy = new Player(enemyGameboard);
+  const enemyGameboardElement = new GameboardElement(enemyGameboard);
+
+  const enemyContainer = document.getElementById('gameboard-container-enemy');
+  enemyContainer.appendChild(enemyGameboardElement.render());
 }
 
 const newGameButton = document.getElementById('new-game-btn');
