@@ -1,5 +1,6 @@
 import { zipArrays, createXArray, createYArray } from '../utils/array';
 import Cell from './cell';
+import Ship from './ship';
 
 class Gameboard {
   #element = document.createElement('div');
@@ -23,7 +24,7 @@ class Gameboard {
     this.createShips(controller);
 
     this.renderCells();
-    // this.renderShips();
+    this.renderShips();
   }
 
   render() {
@@ -105,24 +106,44 @@ class Gameboard {
     for (let index = 0; index < 100; index++) {
       const x = xyArray[index][0];
       const y = xyArray[index][1];
-      const cell = new Cell(x, y, controller, this);
-      this.#cells.push(cell);
+      const cellDOM = new Cell(x, y, controller, this);
+      this.#cells.push(cellDOM);
     }
   }
 
   createShips(gameboard) {
-    this.#cells.forEach((cell) => {
-      const ship = gameboard.getShipOnCell(cell.x, cell.y);
-      if (ship) {
-        this.#ships.push(ship);
-      }
+    const ships = gameboard.getShips();
+    ships.forEach((ship) => {
+      const cellDOMs = this.getShipCellDOMs(ship);
+      const shipDOM = new Ship(ship.x, ship.y, ship.length, cellDOMs);
+      this.#ships.push(shipDOM);
+    });
+  }
+
+  getShipCellDOMs(ship) {
+    return this.#cells.filter((cellDOM) => {
+      const shipBack = ship.x;
+      const shipFront = ship.x + ship.length;
+
+      return (
+        cellDOM.x >= shipBack && cellDOM.x < shipFront && cellDOM.y === ship.y
+      );
     });
   }
 
   renderCells() {
-    this.#cells.forEach((cell) => {
+    this.#cells.forEach((cellDOM) => {
       const container = document.getElementById('gameboard-1-1');
-      container.appendChild(cell.render());
+      container.appendChild(cellDOM.render());
+    });
+  }
+
+  renderShips() {
+    this.#ships.forEach((shipDOM) => {
+      const cellDOMs = shipDOM.cells;
+      cellDOMs.forEach((cellDOM) => {
+        cellDOM.enableFill();
+      });
     });
   }
 }

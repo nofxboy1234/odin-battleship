@@ -1,8 +1,9 @@
 class Ship {
-  #element = document.createElement('div');
-
-  constructor(controller) {
-    //
+  constructor(x, y, length, cells) {
+    this.x = x;
+    this.y = y;
+    this.length = length;
+    this.cells = cells;
   }
 
   render() {}
