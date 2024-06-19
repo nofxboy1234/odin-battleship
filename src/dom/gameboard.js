@@ -13,15 +13,18 @@ class Gameboard {
     this.#controller = controller;
     this.#element.classList.add('gameboard');
 
-    this.labelsLeftContainer = this.createLabelsLeftContainer();
+    this.createLabelsLeftContainer();
     this.createLabelsLeft();
-    this.labelsTopContainer = this.createLabelsTopContainer();
+
+    this.createGameboard1();
+
+    this.createLabelsTopContainer();
     this.createLabelsTop();
 
+    this.createGrid();
     this.createCells();
-    this.createShips();
-
     this.renderCells();
+    this.createShips();
     this.renderShips();
   }
 
@@ -52,7 +55,7 @@ class Gameboard {
     element.classList.add('gameboard-0');
     this.appendChild(element);
 
-    return element;
+    this.labelsLeftContainer = element;
   }
 
   createLabelsLeft() {
@@ -72,12 +75,20 @@ class Gameboard {
     });
   }
 
+  createGameboard1() {
+    const element = document.createElement('div');
+    element.classList.add('gameboard-1');
+    this.appendChild(element);
+
+    this.gameboard1 = element;
+  }
+
   createLabelsTopContainer() {
     const element = document.createElement('div');
     element.classList.add('gameboard-1-0');
-    this.appendChild(element);
+    this.gameboard1.appendChild(element);
 
-    return element;
+    this.labelsTopContainer = element;
   }
 
   createLabelsTop() {
@@ -91,6 +102,14 @@ class Gameboard {
       element.textContent = label;
       this.labelsTopContainer.appendChild(element);
     });
+  }
+
+  createGrid() {
+    const element = document.createElement('div');
+    element.classList.add('gameboard-1-1');
+    this.gameboard1.appendChild(element);
+
+    this.gameboard11 = element;
   }
 
   createCells() {
@@ -126,8 +145,7 @@ class Gameboard {
 
   renderCells() {
     this.#cells.forEach((cellDOM) => {
-      const container = document.getElementById('gameboard-1-1');
-      container.appendChild(cellDOM.render());
+      this.gameboard11.appendChild(cellDOM.render());
     });
   }
 
