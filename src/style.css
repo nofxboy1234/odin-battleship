@@ -12,6 +12,11 @@
   flex-direction: column;
 }
 
+.gameboard-0-blank {
+  width: 30px;
+  height: 30px;
+}
+
 .gameboard-0-label {
   display: flex;
   justify-content: center;
