@@ -1,5 +1,4 @@
 import Gameboard from './gameboard';
-import GameboardElement from '../dom/gameboard';
 import Ship from './ship';
 
 class Player {
