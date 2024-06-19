@@ -25,8 +25,9 @@ function newGame() {
 }
 
 const newGameButton = document.getElementById('new-game-btn');
-newGameButton.addEventListener('click', (event) => {
-  newGame(event);
+
+newGameButton.addEventListener('click', () => {
+  newGame();
 });
 
 const enemyContainer = document.getElementById('gameboard-container-enemy');
