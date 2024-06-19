@@ -10,6 +10,7 @@ class Gameboard {
   #controller = undefined;
 
   constructor(player, disabled) {
+    this.player = player;
     this.#controller = player.gameboard;
     if (disabled) {
       this.disable();
@@ -30,6 +31,11 @@ class Gameboard {
     this.renderCells();
     this.createShips();
     this.renderShips();
+
+    this.#element.addEventListener('click', (event) => {
+      console.log('handle click in dom gameboard');
+      // this.handleClick(event);
+    });
   }
 
   render() {
@@ -130,7 +136,7 @@ class Gameboard {
     for (let index = 0; index < 100; index++) {
       const x = xyArray[index][0];
       const y = xyArray[index][1];
-      const cellDOM = new Cell(x, y, this.#controller, this);
+      const cellDOM = new Cell(x, y, this);
       this.#cells.push(cellDOM);
     }
   }
@@ -169,6 +175,21 @@ class Gameboard {
       });
     });
   }
+
+  // handleClick(event) {
+  //   if (this.isDisabled()) {
+  //     return;
+  //   }
+
+  //   this.#controller.receiveAttack(x, y);
+
+  //   if (this.#controller.isShipOnCell(x, y)) {
+  //     this.enableHit();
+  //   } else {
+  //     this.enableMiss();
+  //     this.disable();
+  //   }
+  // }
 }
 
 export default Gameboard;
