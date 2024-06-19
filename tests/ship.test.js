@@ -1,4 +1,4 @@
-import Ship from '../src/ship';
+import Ship from '../src/logic/ship';
 
 test('hit() increases the number of hits', () => {
   const ship = new Ship();

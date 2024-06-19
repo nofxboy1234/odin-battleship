@@ -3,43 +3,54 @@
   margin: 0;
 }
 
-@font-face {
-  font-family: 'MyFont';
-  src: url('./HussarBold-7mRE.otf');
-}
-
-.hello {
-  color: red;
-  font-family: 'MyFont';
-  background: url('./icon.png');
-}
-
-#gameboard-container-computer,
-#gameboard-container-human {
-  display: flex;
-}
-
-.gameboard-container-right {
-  display: flex;
-  flex-direction: column;
-}
-
-.cell-labels-top {
-  display: flex;
-}
-
-.cell-labels-left {
-  display: flex;
-  flex-direction: column;
-}
-
 .gameboard {
+  display: flex;
+}
+
+.gameboard-0 {
+  display: flex;
+  flex-direction: column;
+}
+
+.gameboard-0-blank {
+  width: 30px;
+  height: 30px;
+}
+
+.gameboard-0-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-right: 1px solid black;
+}
+
+.gameboard-1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.gameboard-1-0 {
+  display: flex;
+}
+
+.gameboard-1-0-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-bottom: 1px solid black;
+}
+
+.gameboard-1-1 {
   display: grid;
   grid-template-columns: repeat(10, 30px);
   grid-template-rows: repeat(10, 30px);
 }
 
-.cell {
+.gameboard-1-1-cell {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,27 +59,11 @@
   cursor: pointer;
 }
 
-.cell-hover:hover {
+.hover:hover {
   background-color: yellow;
 }
 
-.cell-label {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  height: 30px;
-}
-
-.bottom-border {
-  border-bottom: 1px solid black;
-}
-
-.right-border {
-  border-right: 1px solid black;
-}
-
-.cell-filled {
+.fill {
   background-color: black;
 }
 

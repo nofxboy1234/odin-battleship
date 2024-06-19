@@ -1,48 +1,34 @@
 import './style.css';
-import Player from './player';
-import Ship from './ship';
-import {
-  createLabelsLeftCells,
-  createLabelsTopCells,
-  renderGameboard,
-  createCellLabelsTop,
-  createCellLabelsLeft,
-  clearChild,
-  clearGameboards,
-} from './domHelper';
+import Player from './logic/player';
+import Ship from './logic/ship';
+import GameboardElement from './dom/gameboard';
+import Gameboard from './logic/gameboard';
 
-function placePlayerShips(player) {
-  player.gameboard.placeShip(new Ship(4), 0, 0);
+function placeShips(gameboard) {
+  gameboard.placeShip(new Ship(4), 0, 0);
 
-  player.gameboard.placeShip(new Ship(3), 0, 2);
-  player.gameboard.placeShip(new Ship(3), 4, 2);
+  gameboard.placeShip(new Ship(3), 0, 2);
+  gameboard.placeShip(new Ship(3), 4, 2);
 
-  player.gameboard.placeShip(new Ship(2), 0, 4);
-  player.gameboard.placeShip(new Ship(2), 3, 4);
-  player.gameboard.placeShip(new Ship(2), 6, 4);
+  gameboard.placeShip(new Ship(2), 0, 4);
+  gameboard.placeShip(new Ship(2), 3, 4);
+  gameboard.placeShip(new Ship(2), 6, 4);
 
-  player.gameboard.placeShip(new Ship(1), 0, 6);
-  player.gameboard.placeShip(new Ship(1), 2, 6);
-  player.gameboard.placeShip(new Ship(1), 4, 6);
-  player.gameboard.placeShip(new Ship(1), 6, 6);
+  gameboard.placeShip(new Ship(1), 0, 6);
+  gameboard.placeShip(new Ship(1), 2, 6);
+  gameboard.placeShip(new Ship(1), 4, 6);
+  gameboard.placeShip(new Ship(1), 6, 6);
 }
 
 function newGame() {
-  clearGameboards();
+  const humanGameboard = new Gameboard();
+  placeShips(humanGameboard);
+  const human = new Player(humanGameboard);
+  const humanGameboardElement = new GameboardElement(humanGameboard);
 
-  createCellLabelsTop();
-  createLabelsTopCells();
-  createCellLabelsLeft();
-  createLabelsLeftCells();
-
-  const human = new Player();
-  human.gameboard.disable();
-  placePlayerShips(human);
-  renderGameboard('human-gameboard-container', human.gameboard);
-
-  const computer = new Player();
-  placePlayerShips(computer);
-  renderGameboard('computer-gameboard-container', computer.gameboard);
+  humanGameboardElement.disable();
+  const container = document.getElementById('gameboard-container-human');
+  container.appendChild(humanGameboardElement.render());
 }
 
 const newGameButton = document.getElementById('new-game-btn');

@@ -1,5 +1,5 @@
-import Ship from '../src/ship';
-import Gameboard from '../src/gameboard';
+import Ship from '../src/logic/ship';
+import Gameboard from '../src/logic/gameboard';
 
 afterEach(() => {
   // restore the spy created with spyOn
@@ -158,61 +158,79 @@ test('gameboard.isShipOnCell() returns false if a ship is not covering a cell', 
   expect(gameboard.isShipOnCell(0, 0)).toBe(false);
 });
 
-test('gameboard.disable() sets the board to be disabled', () => {
-  const gameboard = new Gameboard();
-  gameboard.disable();
-
-  expect(gameboard.isDisabled()).toBe(true);
-});
-
-test('gameboard.disable() ignores misses on the gameboard', () => {
-  const ship = new Ship(1);
+test('gameboard.getShipOnCell() returns the ship that is covering a cell', () => {
+  const ship = new Ship(2);
 
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
-  gameboard.disable();
-  gameboard.receiveAttack(5, 5);
 
-  expect(gameboard.getMisses()).toEqual([]);
+  expect(gameboard.getShipOnCell(0, 0)).toBe(ship);
 });
 
-test('gameboard.disable() ignores hits on a ship', () => {
-  const ship = new Ship(1);
+test('gameboard.getShipOnCell() returns the ship that is covering a cell', () => {
+  const ship = new Ship(2);
 
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
-  gameboard.disable();
-  gameboard.receiveAttack(0, 0);
 
-  expect(ship.getHits()).toEqual([]);
+  expect(gameboard.getShipOnCell(1, 0)).toBe(ship);
 });
 
-test('gameboard.enable() sets the board to be enabled', () => {
-  const gameboard = new Gameboard();
-  gameboard.disable();
-  gameboard.enable();
+// test('gameboard.disable() sets the board to be disabled', () => {
+//   const gameboard = new Gameboard();
+//   gameboard.disable();
 
-  expect(gameboard.isDisabled()).toBe(false);
-});
+//   expect(gameboard.isDisabled()).toBe(true);
+// });
 
-test('gameboard.enable() processes misses on the gameboard', () => {
-  const ship = new Ship(1);
+// test('gameboard.disable() ignores misses on the gameboard', () => {
+//   const ship = new Ship(1);
 
-  const gameboard = new Gameboard();
-  gameboard.placeShip(ship, 0, 0);
-  gameboard.enable();
-  gameboard.receiveAttack(5, 5);
+//   const gameboard = new Gameboard();
+//   gameboard.placeShip(ship, 0, 0);
+//   gameboard.disable();
+//   gameboard.receiveAttack(5, 5);
 
-  expect(gameboard.getMisses()).toEqual([[5, 5]]);
-});
+//   expect(gameboard.getMisses()).toEqual([]);
+// });
 
-test('gameboard.enable() processes hits on a ship', () => {
-  const ship = new Ship(1);
+// test('gameboard.disable() ignores hits on a ship', () => {
+//   const ship = new Ship(1);
 
-  const gameboard = new Gameboard();
-  gameboard.placeShip(ship, 0, 0);
-  gameboard.enable();
-  gameboard.receiveAttack(0, 0);
+//   const gameboard = new Gameboard();
+//   gameboard.placeShip(ship, 0, 0);
+//   gameboard.disable();
+//   gameboard.receiveAttack(0, 0);
 
-  expect(ship.getHits()).toEqual([[0, 0]]);
-});
+//   expect(ship.getHits()).toEqual([]);
+// });
+
+// test('gameboard.enable() sets the board to be enabled', () => {
+//   const gameboard = new Gameboard();
+//   gameboard.disable();
+//   gameboard.enable();
+
+//   expect(gameboard.isDisabled()).toBe(false);
+// });
+
+// test('gameboard.enable() processes misses on the gameboard', () => {
+//   const ship = new Ship(1);
+
+//   const gameboard = new Gameboard();
+//   gameboard.placeShip(ship, 0, 0);
+//   gameboard.enable();
+//   gameboard.receiveAttack(5, 5);
+
+//   expect(gameboard.getMisses()).toEqual([[5, 5]]);
+// });
+
+// test('gameboard.enable() processes hits on a ship', () => {
+//   const ship = new Ship(1);
+
+//   const gameboard = new Gameboard();
+//   gameboard.placeShip(ship, 0, 0);
+//   gameboard.enable();
+//   gameboard.receiveAttack(0, 0);
+
+//   expect(ship.getHits()).toEqual([[0, 0]]);
+// });
