@@ -3,11 +3,6 @@
   margin: 0;
 }
 
-#gameboard-container-computer,
-#gameboard-container-human {
-  display: flex;
-}
-
 .gameboard {
   display: flex;
 }
