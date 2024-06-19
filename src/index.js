@@ -22,13 +22,13 @@ function placeShips(gameboard) {
 
 function newGame() {
   const humanGameboard = new Gameboard();
+  placeShips(humanGameboard);
   const human = new Player(humanGameboard);
   const humanGameboardElement = new GameboardElement(humanGameboard);
 
   humanGameboardElement.disable();
-  placeShips(humanGameboard);
   const container = document.getElementById('gameboard-container-human');
-  container.appendChild(humanGameboardElement);
+  container.appendChild(humanGameboardElement.render());
 }
 
 const newGameButton = document.getElementById('new-game-btn');
