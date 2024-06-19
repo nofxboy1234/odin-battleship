@@ -1,18 +1,23 @@
 class Cell {
   #element = document.createElement('div');
 
-  constructor(x, y, gameboardDOM) {
+  constructor(x, y, disabled) {
     this.x = x;
     this.y = y;
 
     this.#element.classList.add('gameboard-1-1-cell');
     this.#element.textContent = `${x}, ${y}`;
 
-    if (gameboardDOM.isDisabled()) {
+    if (disabled) {
       this.disableHover();
     } else {
       this.enableHover();
     }
+
+    this.#element.addEventListener('click', (event) => {
+      this.handleClick(event, x, y);
+    });
+    // this.#element.addEventListener('click', this.handleClick);
   }
 
   render() {
@@ -53,6 +58,12 @@ class Cell {
 
   toggleHover() {
     this.#element.classList.toggle('hover');
+  }
+
+  handleClick(event, x, y) {
+    event.cellX = x;
+    event.cellY = y;
+    // const event = new CustomEvent();
   }
 }
 

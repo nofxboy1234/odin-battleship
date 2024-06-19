@@ -33,8 +33,7 @@ class Gameboard {
     this.renderShips();
 
     this.#element.addEventListener('click', (event) => {
-      console.log('handle click in dom gameboard');
-      // this.handleClick(event);
+      this.handleClick(event);
     });
   }
 
@@ -136,7 +135,7 @@ class Gameboard {
     for (let index = 0; index < 100; index++) {
       const x = xyArray[index][0];
       const y = xyArray[index][1];
-      const cellDOM = new Cell(x, y, this);
+      const cellDOM = new Cell(x, y, this.isDisabled());
       this.#cells.push(cellDOM);
     }
   }
@@ -176,20 +175,20 @@ class Gameboard {
     });
   }
 
-  // handleClick(event) {
-  //   if (this.isDisabled()) {
-  //     return;
-  //   }
+  handleClick(event) {
+    if (this.isDisabled()) {
+      return;
+    }
 
-  //   this.#controller.receiveAttack(x, y);
+    this.#controller.receiveAttack(event.cellX, event.cellY);
 
-  //   if (this.#controller.isShipOnCell(x, y)) {
-  //     this.enableHit();
-  //   } else {
-  //     this.enableMiss();
-  //     this.disable();
-  //   }
-  // }
+    if (this.#controller.isShipOnCell(event.cellX, event.cellY)) {
+      this.enableHit();
+    } else {
+      this.enableMiss();
+      this.disable();
+    }
+  }
 }
 
 export default Gameboard;
