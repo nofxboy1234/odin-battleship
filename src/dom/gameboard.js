@@ -43,6 +43,14 @@ class Gameboard {
   disable() {
     this.#disabled = true;
     this.#element.classList.add('disabled');
+
+    this.disableHoverOnAllCells();
+  }
+
+  disableHoverOnAllCells() {
+    this.#cells.forEach((cellDOM) => {
+      cellDOM.disableHover();
+    });
   }
 
   enable() {
