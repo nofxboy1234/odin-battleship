@@ -15,7 +15,7 @@ class Cell {
     }
 
     this.#element.addEventListener('click', (event) => {
-      this.handleClick(event, x, y);
+      this.handleClick(event);
     });
     // this.#element.addEventListener('click', this.handleClick);
   }
@@ -60,9 +60,8 @@ class Cell {
     this.#element.classList.toggle('hover');
   }
 
-  handleClick(event, x, y) {
-    event.cellX = x;
-    event.cellY = y;
+  handleClick(event) {
+    event.cell = this;
     // const event = new CustomEvent();
   }
 }

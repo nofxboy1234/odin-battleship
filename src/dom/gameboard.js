@@ -180,12 +180,14 @@ class Gameboard {
       return;
     }
 
-    this.#controller.receiveAttack(event.cellX, event.cellY);
+    const cell = event.cell;
 
-    if (this.#controller.isShipOnCell(event.cellX, event.cellY)) {
-      this.enableHit();
+    this.#controller.receiveAttack(cell.x, cell.y);
+
+    if (this.#controller.isShipOnCell(cell.x, cell.y)) {
+      cell.enableHit();
     } else {
-      this.enableMiss();
+      cell.enableMiss();
       this.disable();
     }
   }
