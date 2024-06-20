@@ -17,7 +17,6 @@ class Cell {
     this.#element.addEventListener('click', (event) => {
       this.handleClick(event);
     });
-    // this.#element.addEventListener('click', this.handleClick);
   }
 
   render() {
@@ -62,7 +61,6 @@ class Cell {
 
   handleClick(event) {
     event.cell = this;
-    // const event = new CustomEvent();
   }
 }
 
