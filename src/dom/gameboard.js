@@ -9,10 +9,10 @@ class Gameboard {
   #ships = [];
   #controller = undefined;
 
-  constructor(player, nextTurnCallback) {
+  constructor(player, handleTurnCallback) {
     this.player = player;
     this.#controller = player.gameboard;
-    this.nextTurnCallback = nextTurnCallback;
+    this.handleTurnCallback = handleTurnCallback;
 
     this.#element.classList.add('gameboard');
 
@@ -186,15 +186,14 @@ class Gameboard {
       return;
     }
 
-    const cell = event.cell;
-    this.#controller.receiveAttack(cell.x, cell.y);
+    const clickData = {};
+    clickData.cell = event.cell;
+    clickData.gameboard = {
+      controller: this.#controller,
+      player: this.player,
+    };
 
-    if (this.#controller.isShipOnCell(cell.x, cell.y)) {
-      cell.enableHit();
-    } else {
-      cell.enableMiss();
-      this.nextTurnCallback(this);
-    }
+    this.handleTurnCallback(clickData);
   }
 }
 

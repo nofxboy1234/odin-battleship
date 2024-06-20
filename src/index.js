@@ -11,12 +11,36 @@ function removeGameboard(container) {
   }
 }
 
-function nextTurn(currentGameboardElement) {
+function isPlayerClickingOwnGameboard(clickedGameboardElement) {
+  return clickedGameboardElement.player === currentPlayer;
+}
+
+function nextTurn() {
   currentGameboardElement.disable();
   if (currentGameboardElement === enemyGameboardElement) {
+    currentGameboardElement = humanGameboardElement;
     humanGameboardElement.enable();
   } else {
+    currentGameboardElement = enemyGameboardElement;
     enemyGameboardElement.enable();
+  }
+}
+
+function handleTurn(clickData) {
+  const cell = clickData.cell;
+  const gameboardElement = clickData.gameboard;
+
+  if (isPlayerClickingOwnGameboard(gameboardElement)) {
+    return;
+  }
+
+  gameboardElement.controller.receiveAttack(cell.x, cell.y);
+
+  if (gameboardElement.controller.isShipOnCell(cell.x, cell.y)) {
+    cell.enableHit();
+  } else {
+    cell.enableMiss();
+    nextTurn();
   }
 }
 
@@ -30,10 +54,12 @@ function newGame() {
   const enemy = new Player(enemyGameboard);
   enemy.placeShips();
   const human = new Player(humanGameboard);
+  currentPlayer = human;
   human.placeShips();
 
-  enemyGameboardElement = new GameboardElement(enemy, nextTurn);
-  humanGameboardElement = new GameboardElement(human, nextTurn);
+  enemyGameboardElement = new GameboardElement(enemy, handleTurn);
+  currentGameboardElement = enemyGameboardElement;
+  humanGameboardElement = new GameboardElement(human, handleTurn);
   humanGameboardElement.disable();
 
   enemyContainer.appendChild(enemyGameboardElement.render());
@@ -48,5 +74,7 @@ newGameButton.addEventListener('click', () => {
 
 let enemyGameboardElement;
 let humanGameboardElement;
+let currentGameboardElement;
+let currentPlayer;
 const enemyContainer = document.getElementById('gameboard-container-enemy');
 const humanContainer = document.getElementById('gameboard-container-human');
