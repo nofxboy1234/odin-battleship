@@ -29,10 +29,6 @@ class Gameboard {
     this.renderCells();
     this.createShips();
     this.renderShips();
-
-    this.#element.addEventListener('click', (event) => {
-      this.handleClick(event);
-    });
   }
 
   render() {
@@ -133,6 +129,10 @@ class Gameboard {
     this.gameboard_1.appendChild(element);
 
     this.gameboard_1_1 = element;
+
+    this.gameboard_1_1.addEventListener('click', (event) => {
+      this.handleClick(event);
+    });
   }
 
   createCells() {
