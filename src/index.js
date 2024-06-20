@@ -38,6 +38,10 @@ function handleTurn(clickData) {
     return;
   }
 
+  if (gameboardElement.controller.isExistingShot(cell.x, cell.y)) {
+    return;
+  }
+
   gameboardElement.controller.receiveAttack(cell.x, cell.y);
 
   if (gameboardElement.controller.isShipOnCell(cell.x, cell.y)) {

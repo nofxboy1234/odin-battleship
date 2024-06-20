@@ -10,11 +10,6 @@ class Gameboard {
   }
 
   receiveAttack(x, y) {
-    if (!this.#isNewShot(x, y)) {
-      console.log('You have already shot there!');
-      return;
-    }
-
     const hitShip = this.getShipOnCell(x, y);
     if (hitShip) {
       hitShip.hit(x, y);
@@ -48,6 +43,10 @@ class Gameboard {
     });
   }
 
+  isExistingShot(x, y) {
+    return !!this.#getHitOnCell(x, y) || !!this.#getMissOnCell(x, y);
+  }
+
   #getHitOnCell(x, y) {
     const hits = this.#ships.flatMap((ship) => ship.getHits());
     return hits.find(([hitX, hitY]) => x === hitX && y === hitY);
@@ -55,10 +54,6 @@ class Gameboard {
 
   #getMissOnCell(x, y) {
     return this.#misses.find(([missX, missY]) => x === missX && y === missY);
-  }
-
-  #isNewShot(x, y) {
-    return !this.#getHitOnCell(x, y) && !this.#getMissOnCell(x, y);
   }
 }
 

@@ -45,29 +45,6 @@ test('gameboard.receiveAttack() does not record the coordinates of a hit ship as
   expect(gameboard.getMisses()).not.toContainEqual([0, 0]);
 });
 
-test('gameboard.receiveAttack() does not record a miss more than once if a shot is the same as an old shot', () => {
-  const ship = new Ship(1);
-
-  const gameboard = new Gameboard();
-  gameboard.placeShip(ship, 0, 0);
-  gameboard.receiveAttack(5, 5);
-  gameboard.receiveAttack(5, 5);
-
-  expect(gameboard.getMisses()).toEqual([[5, 5]]);
-});
-
-test('gameboard.receiveAttack() does not record a hit more than once if a shot is the same as an old shot', () => {
-  const ship = new Ship(1);
-  const spy = jest.spyOn(ship, 'hit');
-
-  const gameboard = new Gameboard();
-  gameboard.placeShip(ship, 0, 0);
-  gameboard.receiveAttack(0, 0);
-  gameboard.receiveAttack(0, 0);
-
-  expect(spy).toHaveBeenCalledTimes(1);
-});
-
 test('gameboard.allShipsSunk() returns false when all ships are not sunk', () => {
   const ship1 = new Ship(1);
   const ship2 = new Ship(2);
@@ -174,4 +151,24 @@ test('gameboard.getShipOnCell() returns the ship that is covering a cell', () =>
   gameboard.placeShip(ship, 0, 0);
 
   expect(gameboard.getShipOnCell(1, 0)).toBe(ship);
+});
+
+test('gameboard.isExistingShot() returns false if a shot does not exist for the given co-ords', () => {
+  const ship = new Ship(3);
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship, 5, 5);
+  gameboard.receiveAttack(2, 3);
+
+  expect(gameboard.isExistingShot(5, 5)).toBe(false);
+});
+
+test('gameboard.isExistingShot() returns true if a shot exists for the given co-ords', () => {
+  const ship = new Ship(3);
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship, 5, 5);
+  gameboard.receiveAttack(5, 5);
+
+  expect(gameboard.isExistingShot(5, 5)).toBe(true);
 });
