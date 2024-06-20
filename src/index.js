@@ -30,6 +30,10 @@ function handleTurn(clickData) {
   const cell = clickData.cell;
   const gameboardElement = clickData.gameboard;
 
+  if (gameboardElement.disabled) {
+    return;
+  }
+
   if (isPlayerClickingOwnGameboard(gameboardElement)) {
     return;
   }

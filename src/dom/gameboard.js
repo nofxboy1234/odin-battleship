@@ -182,15 +182,12 @@ class Gameboard {
   }
 
   handleClick(event) {
-    if (this.isDisabled()) {
-      return;
-    }
-
     const clickData = {};
     clickData.cell = event.cell;
     clickData.gameboard = {
       controller: this.#controller,
       player: this.player,
+      disabled: this.isDisabled(),
     };
 
     this.handleTurnCallback(clickData);
