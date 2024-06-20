@@ -9,12 +9,10 @@ class Gameboard {
   #ships = [];
   #controller = undefined;
 
-  constructor(player, disabled) {
+  constructor(player, nextTurnCallback) {
     this.player = player;
     this.#controller = player.gameboard;
-    if (disabled) {
-      this.disable();
-    }
+    this.nextTurnCallback = nextTurnCallback;
 
     this.#element.classList.add('gameboard');
 
@@ -61,6 +59,14 @@ class Gameboard {
   enable() {
     this.#disabled = false;
     this.#element.classList.remove('disabled');
+
+    this.enableHoverOnAllCells();
+  }
+
+  enableHoverOnAllCells() {
+    this.#cells.forEach((cellDOM) => {
+      cellDOM.enableHover();
+    });
   }
 
   isDisabled() {
@@ -181,14 +187,13 @@ class Gameboard {
     }
 
     const cell = event.cell;
-
     this.#controller.receiveAttack(cell.x, cell.y);
 
     if (this.#controller.isShipOnCell(cell.x, cell.y)) {
       cell.enableHit();
     } else {
       cell.enableMiss();
-      this.disable();
+      this.nextTurnCallback(this);
     }
   }
 }
