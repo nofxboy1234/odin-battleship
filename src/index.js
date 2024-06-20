@@ -20,6 +20,10 @@ function nextTurn() {
   if (currentGameboardElement === enemyGameboardElement) {
     currentGameboardElement = humanGameboardElement;
     humanGameboardElement.enable();
+    const [x, y] = enemy.play();
+    // click on cell at x, y on human gameboard
+    const cellDOM = humanGameboardElement.getCellDOM(x, y);
+    cellDOM.render().click();
   } else {
     currentGameboardElement = enemyGameboardElement;
     enemyGameboardElement.enable();
@@ -59,9 +63,9 @@ function newGame() {
   const enemyGameboard = new Gameboard();
   const humanGameboard = new Gameboard();
 
-  const enemy = new Player(enemyGameboard);
+  enemy = new Player(enemyGameboard);
   enemy.placeShips();
-  const human = new Player(humanGameboard);
+  human = new Player(humanGameboard);
   currentPlayer = human;
   human.placeShips();
 
@@ -83,6 +87,8 @@ newGameButton.addEventListener('click', () => {
 let enemyGameboardElement;
 let humanGameboardElement;
 let currentGameboardElement;
+let enemy;
+let human;
 let currentPlayer;
 const enemyContainer = document.getElementById('gameboard-container-enemy');
 const humanContainer = document.getElementById('gameboard-container-human');

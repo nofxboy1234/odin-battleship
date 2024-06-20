@@ -5,6 +5,12 @@ class Player {
     this.gameboard = gameboard;
   }
 
+  play() {
+    const x = this.#getRandomInt();
+    const y = this.#getRandomInt();
+    return [x, y];
+  }
+
   placeShips() {
     this.gameboard.placeShip(new Ship(4), 0, 0);
 
@@ -19,6 +25,10 @@ class Player {
     this.gameboard.placeShip(new Ship(1), 2, 6);
     this.gameboard.placeShip(new Ship(1), 4, 6);
     this.gameboard.placeShip(new Ship(1), 6, 6);
+  }
+
+  #getRandomInt() {
+    return Math.floor(Math.random() * 10);
   }
 }
 

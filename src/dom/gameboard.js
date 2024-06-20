@@ -155,6 +155,12 @@ class Gameboard {
     });
   }
 
+  getCellDOM(x, y) {
+    return this.#cells.find((cellDOM) => {
+      return cellDOM.x === x && cellDOM.y === y;
+    });
+  }
+
   getShipCellDOMs(ship) {
     return this.#cells.filter((cellDOM) => {
       const shipBack = ship.x;

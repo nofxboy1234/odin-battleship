@@ -2,3 +2,5 @@ computer random plays: shouldn’t shoot the same coordinate twice
 
 game ends once one player’s ships have all been sunk
 have a button to cycle through random placements
+
+~disable hover on cells for the owner of that board 
