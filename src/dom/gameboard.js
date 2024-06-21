@@ -136,11 +136,11 @@ class Gameboard {
   }
 
   #createCells() {
-    const xyArray = this.#controller.cells;
+    const cells = this.#controller.cells;
 
-    for (let index = 0; index < 100; index++) {
-      const x = xyArray[index][0];
-      const y = xyArray[index][1];
+    for (let index = 0; index < cells.length; index++) {
+      const x = cells[index][0];
+      const y = cells[index][1];
       const cellDOM = new Cell(x, y, this.isDisabled());
       this.#cells.push(cellDOM);
     }
