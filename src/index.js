@@ -18,13 +18,15 @@ function isPlayerClickingOwnGameboard(clickedGameboardElement) {
 function nextTurn() {
   currentGameboardElement.disable();
   if (currentGameboardElement === enemyGameboardElement) {
+    currentPlayer = enemy;
     currentGameboardElement = humanGameboardElement;
     humanGameboardElement.enable();
+
     const [x, y] = enemy.play();
-    // click on cell at x, y on human gameboard
     const cellDOM = humanGameboardElement.getCellDOM(x, y);
     cellDOM.render().click();
   } else {
+    currentPlayer = human;
     currentGameboardElement = enemyGameboardElement;
     enemyGameboardElement.enable();
   }
@@ -63,9 +65,9 @@ function newGame() {
   const enemyGameboard = new Gameboard();
   const humanGameboard = new Gameboard();
 
-  enemy = new Player(enemyGameboard);
+  enemy = new Player(enemyGameboard, 'enemy');
   enemy.placeShips();
-  human = new Player(humanGameboard);
+  human = new Player(humanGameboard, 'human');
   currentPlayer = human;
   human.placeShips();
 

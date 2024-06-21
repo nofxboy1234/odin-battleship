@@ -1,8 +1,9 @@
 import Ship from './ship';
 
 class Player {
-  constructor(gameboard) {
+  constructor(gameboard, name) {
     this.gameboard = gameboard;
+    this.name = name;
   }
 
   play() {
