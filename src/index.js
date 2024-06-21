@@ -34,7 +34,6 @@ async function nextTurn() {
 
     await delay(2000);
     enemyPlay();
-    await delay(2000);
   } else {
     currentPlayer = human;
     currentGameboardElement = enemyGameboardElement;
