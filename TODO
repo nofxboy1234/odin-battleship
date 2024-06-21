@@ -1,5 +1,5 @@
-if shot the same coordinate twice, play again
 if shot hits a ship, play again
+if shot the same coordinate twice, play again
 
 game ends once one player’s ships have all been sunk
 have a button to cycle through random placements
