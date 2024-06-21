@@ -66,7 +66,24 @@ async function handleTurn(clickData) {
 
   if (gameboardElement.controller.isShipOnCell(cell.x, cell.y)) {
     cell.enableHit();
+
+    if (currentPlayer === human) {
+      if (enemyGameboard.allShipsSunk()) {
+        console.log('human won!');
+        enemyGameboardElement.disable();
+        humanGameboardElement.disable();
+        return;
+      }
+    }
+
     if (currentPlayer === enemy) {
+      if (humanGameboard.allShipsSunk()) {
+        console.log('enemy won!');
+        enemyGameboardElement.disable();
+        humanGameboardElement.disable();
+        return;
+      }
+
       await delay(2000);
       enemyPlay();
     }
@@ -80,8 +97,8 @@ function newGame() {
   removeGameboard(enemyContainer);
   removeGameboard(humanContainer);
 
-  const enemyGameboard = new Gameboard();
-  const humanGameboard = new Gameboard();
+  enemyGameboard = new Gameboard();
+  humanGameboard = new Gameboard();
 
   enemy = new Player(enemyGameboard, 'enemy');
   enemy.placeShips();
@@ -107,6 +124,8 @@ newGameButton.addEventListener('click', () => {
 let enemyGameboardElement;
 let humanGameboardElement;
 let currentGameboardElement;
+let enemyGameboard;
+let humanGameboard;
 let enemy;
 let human;
 let currentPlayer;
