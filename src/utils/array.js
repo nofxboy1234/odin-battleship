@@ -1,29 +1,12 @@
 function zipArrays() {
-  const xArray = createXArray();
-  const yArray = createYArray();
-  return xArray.map((element, index) => [element, yArray[index]]);
-}
+  const cellArray = [];
 
-function createXArray() {
-  const xArray = [];
-
-  for (let value = 0; value < 10; value++) {
-    for (let index = 0; index < 10; index++) {
-      xArray.push(index);
+  for (let y = 0; y < 10; y++) {
+    for (let x = 0; x < 10; x++) {
+      cellArray.push([x, y]);
     }
   }
-  return xArray;
-}
-
-function createYArray() {
-  const yArray = [];
-
-  for (let value = 0; value < 10; value++) {
-    for (let index = 0; index < 10; index++) {
-      yArray.push(value);
-    }
-  }
-  return yArray;
+  return cellArray;
 }
 
 export { zipArrays };
