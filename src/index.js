@@ -54,6 +54,11 @@ async function handleTurn(clickData) {
   }
 
   if (gameboardElement.controller.isExistingShot(cell.x, cell.y)) {
+    if (currentPlayer === enemy) {
+      await delay(2000);
+      enemyPlay();
+    }
+
     return;
   }
 
