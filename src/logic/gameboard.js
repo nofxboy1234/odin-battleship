@@ -30,6 +30,10 @@ class Gameboard {
     return [...this.#misses];
   }
 
+  getHits() {
+    return this.#ships.flatMap((ship) => ship.getHits());
+  }
+
   isShipOnCell(x, y) {
     return !!this.getShipOnCell(x, y);
   }
@@ -48,7 +52,7 @@ class Gameboard {
   }
 
   #getHitOnCell(x, y) {
-    const hits = this.#ships.flatMap((ship) => ship.getHits());
+    const hits = this.getHits();
     return hits.find(([hitX, hitY]) => x === hitX && y === hitY);
   }
 

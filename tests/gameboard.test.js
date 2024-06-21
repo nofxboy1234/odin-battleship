@@ -97,7 +97,7 @@ test('gameboard.getMisses() returns an empty array when gameboard is empty', () 
   expect(gameboard.getMisses()).toEqual([]);
 });
 
-test('gameboard.getMisses() returns an array when a shot misses', () => {
+test('gameboard.getMisses() returns an empty array when a shot hits', () => {
   const ship1 = new Ship(3);
 
   const gameboard = new Gameboard();
@@ -107,7 +107,7 @@ test('gameboard.getMisses() returns an array when a shot misses', () => {
   expect(gameboard.getMisses()).toEqual([]);
 });
 
-test('gameboard.getMisses() returns an array of 1 when a shot hits', () => {
+test('gameboard.getMisses() returns an array of 1 when a shot misses', () => {
   const ship1 = new Ship(3);
 
   const gameboard = new Gameboard();
@@ -115,6 +115,21 @@ test('gameboard.getMisses() returns an array of 1 when a shot hits', () => {
   gameboard.receiveAttack(3, 0);
 
   expect(gameboard.getMisses()).toEqual([[3, 0]]);
+});
+
+test.skip('gameboard.getHits() returns an empty array when gameboard is empty', () => {
+  const gameboard = new Gameboard();
+  expect(gameboard.getHits()).toEqual([]);
+});
+
+test('gameboard.getHits() returns an array of 1 when a shot hits', () => {
+  const ship1 = new Ship(3);
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship1, 0, 0);
+  gameboard.receiveAttack(1, 0);
+
+  expect(gameboard.getHits()).toEqual([[1, 0]]);
 });
 
 test('gameboard.isShipOnCell() returns true if a ship is covering a cell', () => {

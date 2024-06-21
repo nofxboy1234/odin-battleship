@@ -6,4 +6,6 @@ have a button to cycle through random placements
 disable human clicking own board
 ~disable hover on cells for the owner of that board 
 
-enemy y adjacent slots after getting a ‘hit’.
+vertical aligned ships
+
+enemy shoots adjacent slots after getting a ‘hit’.
