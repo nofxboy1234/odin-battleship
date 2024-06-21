@@ -25,7 +25,7 @@ class Gameboard {
     this.createLabelsTop();
 
     this.createGrid();
-    this.createCells();
+    this.#createCells();
     this.renderCells();
     this.createShips();
     this.renderShips();
@@ -135,7 +135,7 @@ class Gameboard {
     });
   }
 
-  createCells() {
+  #createCells() {
     const xyArray = this.#controller.cells;
 
     for (let index = 0; index < 100; index++) {
