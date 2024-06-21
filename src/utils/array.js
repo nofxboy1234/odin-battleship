@@ -1,5 +1,7 @@
-function zipArrays(arrayA, arrayB) {
-  return arrayA.map((element, index) => [element, arrayB[index]]);
+function zipArrays() {
+  const xArray = createXArray();
+  const yArray = createYArray();
+  return xArray.map((element, index) => [element, yArray[index]]);
 }
 
 function createXArray() {
@@ -24,4 +26,4 @@ function createYArray() {
   return yArray;
 }
 
-export { zipArrays, createXArray, createYArray };
+export { zipArrays };
