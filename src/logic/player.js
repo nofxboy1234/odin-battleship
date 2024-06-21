@@ -6,7 +6,7 @@ class Player {
     this.name = name;
   }
 
-  play() {
+  play(enemyGameboard) {
     // Get all hits and all misses on enemy gameboard
 
     // Combine all hits and misses

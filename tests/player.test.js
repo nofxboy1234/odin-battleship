@@ -11,6 +11,7 @@ test('player contains a gameboard', () => {
 test('play() returns an array of length 2', () => {
   const gameboard = new Gameboard();
   const player = new Player(gameboard);
+  const enemyGameboard = new Gameboard();
 
-  expect(player.play().length).toBe(2);
+  expect(player.play(enemyGameboard).length).toBe(2);
 });
