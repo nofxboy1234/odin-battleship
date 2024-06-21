@@ -187,3 +187,15 @@ test('gameboard.isExistingShot() returns true if a shot exists for the given co-
 
   expect(gameboard.isExistingShot(5, 5)).toBe(true);
 });
+
+test('gameboard.cells returns an array of all the cells in its grid', () => {
+  const gameboard = new Gameboard();
+
+  expect(gameboard.cells.length).toEqual(100);
+});
+
+test('gameboard.cells returns an array of all the cells in its grid', () => {
+  const gameboard = new Gameboard(5);
+
+  expect(gameboard.cells.length).toEqual(25);
+});

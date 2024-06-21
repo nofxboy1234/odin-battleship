@@ -2,7 +2,7 @@ class Gameboard {
   #ships = [];
   #misses = [];
 
-  constructor(size) {
+  constructor(size = 10) {
     this.cells = this.#createCellArray(size);
   }
 
