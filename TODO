@@ -1,4 +1,5 @@
-computer random plays: shouldn’t shoot the same coordinate twice
+if shot the same coordinate twice, play again
+if shot hits a ship, play again
 
 game ends once one player’s ships have all been sunk
 have a button to cycle through random placements
