@@ -1,4 +1,3 @@
-import { zipArrays } from '../utils/array';
 import Cell from './cell';
 import Ship from './ship';
 
