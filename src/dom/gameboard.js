@@ -136,7 +136,7 @@ class Gameboard {
   }
 
   createCells() {
-    const xyArray = zipArrays();
+    const xyArray = this.#controller.cells;
 
     for (let index = 0; index < 100; index++) {
       const x = xyArray[index][0];
