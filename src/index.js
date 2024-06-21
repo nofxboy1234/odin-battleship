@@ -41,7 +41,7 @@ async function nextTurn() {
   }
 }
 
-function handleTurn(clickData) {
+async function handleTurn(clickData) {
   const cell = clickData.cell;
   const gameboardElement = clickData.gameboard;
 
@@ -61,6 +61,10 @@ function handleTurn(clickData) {
 
   if (gameboardElement.controller.isShipOnCell(cell.x, cell.y)) {
     cell.enableHit();
+    if (currentPlayer === enemy) {
+      await delay(2000);
+      enemyPlay();
+    }
   } else {
     cell.enableMiss();
     nextTurn();
