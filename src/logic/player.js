@@ -7,6 +7,13 @@ class Player {
   }
 
   play() {
+    // Get all hits and all misses on enemy gameboard
+
+    // Combine all hits and misses
+    // Filter those hits and misses out from all available cells on enemy gameboard
+    // Get random int of filtered array length
+    // Get element in filtered array at that random int
+
     const x = this.#getRandomInt();
     const y = this.#getRandomInt();
     return [x, y];
