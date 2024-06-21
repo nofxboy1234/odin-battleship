@@ -2,8 +2,8 @@ class Gameboard {
   #ships = [];
   #misses = [];
 
-  constructor() {
-    this.cells = this.#createCellArray();
+  constructor(size) {
+    this.cells = this.#createCellArray(size);
   }
 
   placeShip(ship, x, y) {
@@ -53,11 +53,11 @@ class Gameboard {
     return !!this.#getHitOnCell(x, y) || !!this.#getMissOnCell(x, y);
   }
 
-  #createCellArray() {
+  #createCellArray(size) {
     const cellArray = [];
 
-    for (let y = 0; y < 10; y++) {
-      for (let x = 0; x < 10; x++) {
+    for (let y = 0; y < size; y++) {
+      for (let x = 0; x < size; x++) {
         cellArray.push([x, y]);
       }
     }

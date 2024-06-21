@@ -97,8 +97,8 @@ function newGame() {
   removeGameboard(enemyContainer);
   removeGameboard(humanContainer);
 
-  enemyGameboard = new Gameboard();
-  humanGameboard = new Gameboard();
+  enemyGameboard = new Gameboard(10);
+  humanGameboard = new Gameboard(10);
 
   enemy = new Player(enemyGameboard, 'enemy');
   enemy.placeShips();
