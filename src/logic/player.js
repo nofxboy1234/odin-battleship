@@ -14,6 +14,8 @@ class Player {
     // Get random int of filtered array length
     // Get element in filtered array at that random int
 
+    return [1, 1];
+
     const x = this.#getRandomInt();
     const y = this.#getRandomInt();
     return [x, y];

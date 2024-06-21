@@ -18,13 +18,14 @@ test('play() returns an array of length 2', () => {
 });
 
 test('play() returns a new shot', () => {
-  const gameboard = new Gameboard();
+  const gameboard = new Gameboard(2);
   const player = new Player(gameboard);
-  const enemyGameboard = new Gameboard();
-  const ship = new Ship(3);
+  const enemyGameboard = new Gameboard(2);
+  const ship = new Ship(1);
   enemyGameboard.placeShip(ship, 0, 0);
   enemyGameboard.receiveAttack(0, 0);
-  enemyGameboard.receiveAttack(5, 5);
+  enemyGameboard.receiveAttack(1, 0);
+  enemyGameboard.receiveAttack(0, 1);
 
-  expect(player.play(enemyGameboard).length).toBe(2);
+  expect(player.play(enemyGameboard)).toEqual([1, 1]);
 });
