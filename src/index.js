@@ -21,14 +21,20 @@ function enemyPlay() {
   cellDOM.render().click();
 }
 
-function nextTurn() {
+async function delay(time) {
+  await new Promise((resolve) => setTimeout(resolve, time));
+}
+
+async function nextTurn() {
   currentGameboardElement.disable();
   if (currentGameboardElement === enemyGameboardElement) {
     currentPlayer = enemy;
     currentGameboardElement = humanGameboardElement;
     humanGameboardElement.enable();
 
+    await delay(2000);
     enemyPlay();
+    await delay(2000);
   } else {
     currentPlayer = human;
     currentGameboardElement = enemyGameboardElement;
