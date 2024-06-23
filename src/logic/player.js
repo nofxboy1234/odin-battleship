@@ -7,12 +7,12 @@ class Player {
   }
 
   play(enemyGameboard) {
-    const existingHits = enemyGameboard.getHits();
-    const existingMisses = enemyGameboard.getMisses();
-    const existingShots = existingHits.concat(existingMisses);
+    const hits = enemyGameboard.getHits();
+    const misses = enemyGameboard.getMisses();
+    const shots = hits.concat(misses);
     // Get all cells that are NOT found inside existing hits or existing misses
     const remainingCells = enemyGameboard.cells.filter((cell) => {
-      return !existingShots.find((existingShot) => {
+      return !shots.find((existingShot) => {
         cell[0] === existingShot[0] && cell[1] === existingShot[1];
       });
     });
