@@ -11,30 +11,16 @@ class Player {
     const misses = enemyGameboard.getMisses();
     const shots = hits.concat(misses);
 
-    // return shots;
-
-    // return shots.find((shot) => {
-    //   return !(1 === shot[0]) && !(1 === shot[1]);
-    // });
-
-    // return [[1, 1]];
-
     const availableCells = enemyGameboard.cells.filter((cell) => {
       const found = shots.find((shot) => {
         return cell[0] === shot[0] && cell[1] === shot[1];
       });
       return !found;
     });
-    return availableCells;
 
-    // const availableCells = enemyGameboard.cells.filter((cell) => {
-    //   return cell[0] === 1 && cell[1] === 1;
-    // });
-    // return availableCells;
-
-    // const randomIndex = this.#getRandomInt(remainingCells.length);
-    // const randomCell = remainingCells[randomIndex];
-    // return randomCell;
+    const randomIndex = this.#getRandomInt(availableCells.length);
+    const randomCell = availableCells[randomIndex];
+    return randomCell;
   }
 
   placeShips() {
