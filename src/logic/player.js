@@ -7,18 +7,18 @@ class Player {
   }
 
   play(enemyGameboard) {
-    // Get all hits and all misses on enemy gameboard
-
-    // Combine all hits and misses
-    // Filter those hits and misses out from all available cells on enemy gameboard
-    // Get random int of filtered array length
-    // Get element in filtered array at that random int
-
-    return [1, 1];
-
-    const x = this.#getRandomInt();
-    const y = this.#getRandomInt();
-    return [x, y];
+    const existingHits = enemyGameboard.getHits();
+    const existingMisses = enemyGameboard.getMisses();
+    const existingShots = existingHits.concat(existingMisses);
+    // Get all cells that are NOT found inside existing hits or existing misses
+    const remainingCells = enemyGameboard.cells.filter((cell) => {
+      return !existingShots.find((existingShot) => {
+        cell[0] === existingShot[0] && cell[1] === existingShot[1];
+      });
+    });
+    const randomIndex = this.#getRandomInt(remainingCells.length);
+    const randomCell = remainingCells[randomIndex];
+    return randomCell;
   }
 
   placeShips() {
@@ -37,8 +37,8 @@ class Player {
     this.gameboard.placeShip(new Ship(1), 6, 6);
   }
 
-  #getRandomInt() {
-    return Math.floor(Math.random() * 10);
+  #getRandomInt(max) {
+    return Math.floor(Math.random() * max);
   }
 }
 

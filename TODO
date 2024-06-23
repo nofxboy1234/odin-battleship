@@ -1,12 +1,10 @@
 enemy shouldn’t shoot the same coordinate twice
 
-have a button to cycle through random placements
+vertical aligned ships
+have a button to cycle through random placements: keep 1 space margin around each ship
 
 disable human clicking own board
 disable hover on cells for the owner of that board
 
-vertical aligned ships
-
+extra:
 enemy shoots adjacent slots after getting a ‘hit’.
-
-fix bug when clicking and dragging to an adjacent cell on gameboard

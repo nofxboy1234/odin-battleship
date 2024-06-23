@@ -6,6 +6,17 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
+test('new Gameboard() creates a gameboard with a squared number of cells', () => {
+  const gameboard = new Gameboard(2);
+
+  expect(gameboard.cells).toEqual([
+    [0, 0],
+    [1, 0],
+    [0, 1],
+    [1, 1],
+  ]);
+});
+
 test('gameboard.placeShip() calls ship.place()', () => {
   const ship = new Ship(1);
   const spy = jest.spyOn(ship, 'place');
