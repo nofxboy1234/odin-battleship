@@ -6,6 +6,8 @@ disable hover on cells for the owner of that board
 
 display current player
 
+Make appropriate methods private in dom classes
+
 extra:
 enemy shoots adjacent slots after getting a ‘hit’.
 show log of each hit or miss
