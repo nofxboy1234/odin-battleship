@@ -128,7 +128,7 @@ test('gameboard.getMisses() returns an array of 1 when a shot misses', () => {
   expect(gameboard.getMisses()).toEqual([[3, 0]]);
 });
 
-test.skip('gameboard.getHits() returns an empty array when gameboard is empty', () => {
+test('gameboard.getHits() returns an empty array when gameboard is empty', () => {
   const gameboard = new Gameboard();
   expect(gameboard.getHits()).toEqual([]);
 });
