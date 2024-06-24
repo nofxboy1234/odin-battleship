@@ -26,17 +26,17 @@ class Player {
   placeShips() {
     this.gameboard.placeShip(new Ship(4, 'horizontal'), 0, 0);
 
-    this.gameboard.placeShip(new Ship(3, 'horizontal'), 0, 2);
-    this.gameboard.placeShip(new Ship(3, 'horizontal'), 4, 2);
+    this.gameboard.placeShip(new Ship(3, 'vertical'), 0, 2);
+    this.gameboard.placeShip(new Ship(3, 'vertical'), 2, 4);
 
-    this.gameboard.placeShip(new Ship(2, 'horizontal'), 0, 4);
-    this.gameboard.placeShip(new Ship(2, 'horizontal'), 3, 4);
-    this.gameboard.placeShip(new Ship(2, 'horizontal'), 6, 4);
+    this.gameboard.placeShip(new Ship(2, 'horizontal'), 0, 6);
+    this.gameboard.placeShip(new Ship(2, 'horizontal'), 3, 6);
+    this.gameboard.placeShip(new Ship(2, 'horizontal'), 6, 6);
 
-    this.gameboard.placeShip(new Ship(1, 'horizontal'), 0, 6);
-    this.gameboard.placeShip(new Ship(1, 'horizontal'), 2, 6);
-    this.gameboard.placeShip(new Ship(1, 'horizontal'), 4, 6);
-    this.gameboard.placeShip(new Ship(1, 'horizontal'), 6, 6);
+    this.gameboard.placeShip(new Ship(1, 'vertical'), 0, 8);
+    this.gameboard.placeShip(new Ship(1, 'vertical'), 2, 8);
+    this.gameboard.placeShip(new Ship(1, 'vertical'), 4, 8);
+    this.gameboard.placeShip(new Ship(1, 'vertical'), 6, 8);
   }
 
   #getRandomInt(max) {
