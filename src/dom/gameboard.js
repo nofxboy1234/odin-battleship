@@ -162,12 +162,14 @@ class Gameboard {
 
   getShipCellDOMs(ship) {
     return this.#cells.filter((cellDOM) => {
-      const shipBack = ship.x;
-      const shipFront = ship.x + ship.length;
+      if (ship.orientation === 'horizontal') {
+        const shipBack = ship.x;
+        const shipFront = ship.x + ship.length;
 
-      return (
-        cellDOM.x >= shipBack && cellDOM.x < shipFront && cellDOM.y === ship.y
-      );
+        return (
+          cellDOM.x >= shipBack && cellDOM.x < shipFront && cellDOM.y === ship.y
+        );
+      }
     });
   }
 
