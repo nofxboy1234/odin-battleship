@@ -113,6 +113,11 @@ function newGame() {
 
   enemyContainer.appendChild(enemyGameboardElement.render());
   humanContainer.appendChild(humanGameboardElement.render());
+
+  const randomizeButton = document.createElement('button');
+  randomizeButton.textContent = 'Randomize';
+  randomizeButton.id = 'randomize-btn';
+  document.body.appendChild(randomizeButton);
 }
 
 const newGameButton = document.getElementById('new-game-btn');
