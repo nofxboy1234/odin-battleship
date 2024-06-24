@@ -2,8 +2,9 @@ class Ship {
   #orientation = 'horizontal';
   #hits = [];
 
-  constructor(length = 1) {
+  constructor(length = 1, orientation = 'horizontal') {
     this.length = length;
+    this.#orientation = orientation;
     this.#hits = [];
   }
 
