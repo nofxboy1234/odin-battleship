@@ -6,5 +6,8 @@ have a button to cycle through random placements: keep 1 space margin around eac
 disable human clicking own board
 disable hover on cells for the owner of that board
 
+display current player
+
 extra:
 enemy shoots adjacent slots after getting a ‘hit’.
+show log of each hit or miss

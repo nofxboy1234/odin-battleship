@@ -204,9 +204,3 @@ test('gameboard.cells returns an array of all the cells in its grid', () => {
 
   expect(gameboard.cells.length).toEqual(100);
 });
-
-test('gameboard.cells returns an array of all the cells in its grid', () => {
-  const gameboard = new Gameboard(5);
-
-  expect(gameboard.cells.length).toEqual(25);
-});

@@ -16,7 +16,7 @@ function isPlayerClickingOwnGameboard(clickedGameboardElement) {
 }
 
 function enemyPlay() {
-  const [x, y] = enemy.play();
+  const [x, y] = enemy.play(humanGameboard);
   const cellDOM = humanGameboardElement.getCellDOM(x, y);
   cellDOM.render().click();
 }
@@ -97,8 +97,8 @@ function newGame() {
   removeGameboard(enemyContainer);
   removeGameboard(humanContainer);
 
-  enemyGameboard = new Gameboard(10);
-  humanGameboard = new Gameboard(10);
+  enemyGameboard = new Gameboard();
+  humanGameboard = new Gameboard();
 
   enemy = new Player(enemyGameboard, 'enemy');
   enemy.placeShips();
