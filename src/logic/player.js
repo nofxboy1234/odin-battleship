@@ -24,19 +24,52 @@ class Player {
   }
 
   placeShips() {
-    this.gameboard.placeShip(new Ship(4, 'horizontal'), 0, 0);
+    // - don't overlap other ships
+    // - don't let ship length go off board
+    // - keep 1 space margin around each ship
 
-    this.gameboard.placeShip(new Ship(3, 'vertical'), 0, 2);
-    this.gameboard.placeShip(new Ship(3, 'vertical'), 2, 2);
+    const shipOrientations = ['horizontal', 'vertical'];
 
-    this.gameboard.placeShip(new Ship(2, 'horizontal'), 0, 6);
-    this.gameboard.placeShip(new Ship(2, 'horizontal'), 3, 6);
-    this.gameboard.placeShip(new Ship(2, 'horizontal'), 6, 6);
+    this.#shipTypes().forEach((shipType) => {
+      for (let index = 0; index < shipType.count; index++) {
+        const orientation = this.#getRandomShipOrientation(shipOrientations);
+        const x = this.#getRandomShipXY();
+        const y = this.#getRandomShipXY();
+        this.gameboard.placeShip(new Ship(shipType.length, orientation), x, y);
+      }
+    });
+  }
 
-    this.gameboard.placeShip(new Ship(1, 'vertical'), 0, 8);
-    this.gameboard.placeShip(new Ship(1, 'vertical'), 2, 8);
-    this.gameboard.placeShip(new Ship(1, 'vertical'), 4, 8);
-    this.gameboard.placeShip(new Ship(1, 'vertical'), 6, 8);
+  #shipTypes() {
+    const ships = [
+      {
+        count: 1,
+        length: 4,
+      },
+      {
+        count: 2,
+        length: 3,
+      },
+      {
+        count: 3,
+        length: 2,
+      },
+      {
+        count: 4,
+        length: 1,
+      },
+    ];
+
+    return ships;
+  }
+
+  #getRandomShipXY() {
+    return this.#getRandomInt(this.gameboard.size);
+  }
+
+  #getRandomShipOrientation(orientations) {
+    const index = this.#getRandomInt(orientations.length);
+    return orientations[index];
   }
 
   #getRandomInt(max) {

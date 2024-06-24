@@ -3,6 +3,7 @@ class Gameboard {
   #misses = [];
 
   constructor(size = 10) {
+    this.size = size;
     this.cells = this.#createCellArray(size);
   }
 
