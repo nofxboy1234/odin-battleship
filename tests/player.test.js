@@ -28,4 +28,9 @@ test('play() returns a new shot', () => {
   enemyGameboard.receiveAttack(0, 1);
 
   expect(player.play(enemyGameboard)).toEqual([1, 1]);
+  expect([
+    [0, 0],
+    [1, 0],
+    [0, 1],
+  ]).not.toContainEqual(player.play(enemyGameboard));
 });
