@@ -118,10 +118,16 @@ function newGame() {
   randomizeButton.textContent = 'Randomize';
   randomizeButton.id = 'randomize-btn';
   document.body.appendChild(randomizeButton);
+  randomizeButton.addEventListener('click', () => {
+    randomize();
+  });
+}
+
+function randomize() {
+  console.log('randomize');
 }
 
 const newGameButton = document.getElementById('new-game-btn');
-
 newGameButton.addEventListener('click', () => {
   newGame();
 });
