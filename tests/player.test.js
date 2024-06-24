@@ -80,3 +80,11 @@ test('placeShips() to call gameboard.placeShip() 10 times', () => {
 
   expect(spy).toHaveBeenCalledTimes(10);
 });
+
+test('placeShips() to call gameboard.placeShip() 10 times', () => {
+  const gameboard = new Gameboard();
+  const player = new Player(gameboard);
+  player.placeShips();
+
+  expect(gameboard.getShips().length).toEqual(10);
+});
