@@ -169,6 +169,13 @@ class Gameboard {
         return (
           cellDOM.x >= shipBack && cellDOM.x < shipFront && cellDOM.y === ship.y
         );
+      } else if (ship.orientation === 'vertical') {
+        const shipBack = ship.y;
+        const shipFront = ship.y + ship.length;
+
+        return (
+          cellDOM.y >= shipBack && cellDOM.y < shipFront && cellDOM.x === ship.x
+        );
       }
     });
   }

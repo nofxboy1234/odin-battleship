@@ -27,7 +27,7 @@ class Player {
     this.gameboard.placeShip(new Ship(4, 'horizontal'), 0, 0);
 
     this.gameboard.placeShip(new Ship(3, 'vertical'), 0, 2);
-    this.gameboard.placeShip(new Ship(3, 'vertical'), 2, 4);
+    this.gameboard.placeShip(new Ship(3, 'vertical'), 2, 2);
 
     this.gameboard.placeShip(new Ship(2, 'horizontal'), 0, 6);
     this.gameboard.placeShip(new Ship(2, 'horizontal'), 3, 6);
