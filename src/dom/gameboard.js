@@ -26,8 +26,6 @@ class Gameboard {
     this.createGrid();
     this.#createCells();
     this.renderCells();
-    this.createShips();
-    this.renderShips();
   }
 
   render() {

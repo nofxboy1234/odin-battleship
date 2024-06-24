@@ -102,18 +102,23 @@ function newGame() {
 
   enemy = new Player(enemyGameboard, 'enemy');
   enemy.placeShips();
+  enemyGameboardElement = new GameboardElement(enemy, handleTurn);
+  enemyGameboardElement.createShips();
+  enemyGameboardElement.renderShips();
+  enemyContainer.appendChild(enemyGameboardElement.render());
+
   human = new Player(humanGameboard, 'human');
   currentPlayer = human;
-  human.placeShips();
-
-  enemyGameboardElement = new GameboardElement(enemy, handleTurn);
   currentGameboardElement = enemyGameboardElement;
+
   humanGameboardElement = new GameboardElement(human, handleTurn);
   humanGameboardElement.disable();
-
-  enemyContainer.appendChild(enemyGameboardElement.render());
   humanContainer.appendChild(humanGameboardElement.render());
 
+  addRandomizeButton();
+}
+
+function addRandomizeButton() {
   const randomizeButton = document.createElement('button');
   randomizeButton.textContent = 'Randomize';
   randomizeButton.id = 'randomize-btn';
@@ -124,7 +129,9 @@ function newGame() {
 }
 
 function randomize() {
-  console.log('randomize');
+  human.placeShips();
+  humanGameboardElement.createShips();
+  humanGameboardElement.renderShips();
 }
 
 const newGameButton = document.getElementById('new-game-btn');
