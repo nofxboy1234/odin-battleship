@@ -61,6 +61,13 @@ class Gameboard {
     return !!this.#getHitOnCell(x, y) || !!this.#getMissOnCell(x, y);
   }
 
+  getRandomPosition() {
+    const x = this.#getRandomInt(this.size);
+    const y = this.#getRandomInt(this.size);
+
+    return [x, y];
+  }
+
   #createCellArray(size) {
     const cellArray = [];
 
@@ -79,6 +86,10 @@ class Gameboard {
 
   #getMissOnCell(x, y) {
     return this.#misses.find(([missX, missY]) => x === missX && y === missY);
+  }
+
+  #getRandomInt(max) {
+    return Math.floor(Math.random() * max);
   }
 }
 

@@ -204,3 +204,23 @@ test('gameboard.cells returns an array of all the cells in its grid', () => {
 
   expect(gameboard.cells.length).toEqual(100);
 });
+
+test('gameboard.getRandomPosition() returns an array of length 2', () => {
+  const gameboard = new Gameboard();
+
+  expect(gameboard.getRandomPosition().length).toEqual(2);
+});
+
+test('gameboard.getRandomPosition() to call Math.random', () => {
+  const gameboard = new Gameboard();
+  const spy = jest.spyOn(Math, 'random');
+  gameboard.getRandomPosition();
+  expect(spy).toHaveBeenCalled();
+});
+
+test('gameboard.getRandomPosition() to call Math.floor', () => {
+  const gameboard = new Gameboard();
+  const spy = jest.spyOn(Math, 'floor');
+  gameboard.getRandomPosition();
+  expect(spy).toHaveBeenCalled();
+});
