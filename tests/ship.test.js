@@ -53,3 +53,10 @@ test('setVertical() sets orientation property to "vertical"', () => {
   ship.setVertical();
   expect(ship.orientation).toEqual('vertical');
 });
+
+test('setHorizontal() sets orientation property to "horizontal"', () => {
+  const ship = new Ship(1);
+  ship.setVertical();
+  ship.setHorizontal();
+  expect(ship.orientation).toEqual('horizontal');
+});

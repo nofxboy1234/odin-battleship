@@ -27,6 +27,10 @@ class Ship {
   setVertical() {
     this.orientation = 'vertical';
   }
+
+  setHorizontal() {
+    this.orientation = 'horizontal';
+  }
 }
 
 export default Ship;
