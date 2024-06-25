@@ -1,5 +1,6 @@
 import Ship from './ship';
 import getRandomInt from './helpers';
+import gameboardShips from './rules';
 
 class Player {
   constructor(gameboard, name) {
@@ -28,40 +29,17 @@ class Player {
     // - don't overlap other ships
     // - don't let ship length go off board
     // - keep 1 space margin around each ship
-    this.#shipTypes().forEach((shipType) => {
-      for (let index = 0; index < shipType.count; index++) {
-        const ship = this.#createShipWithRandomOrientation(shipType);
+    gameboardShips.forEach((boardShip) => {
+      for (let index = 0; index < boardShip.count; index++) {
+        const ship = this.#createShipWithRandomOrientation(boardShip);
         const [x, y] = this.gameboard.getRandomPosition();
         this.gameboard.placeShip(ship, x, y);
       }
     });
   }
 
-  #shipTypes() {
-    const ships = [
-      {
-        count: 1,
-        length: 4,
-      },
-      {
-        count: 2,
-        length: 3,
-      },
-      {
-        count: 3,
-        length: 2,
-      },
-      {
-        count: 4,
-        length: 1,
-      },
-    ];
-
-    return ships;
-  }
-
-  #createShipWithRandomOrientation(shipType) {
-    const ship = new Ship(shipType.length);
+  #createShipWithRandomOrientation(boardShip) {
+    const ship = new boardShip.type();
     ship.setRandomOrientation();
     return ship;
   }

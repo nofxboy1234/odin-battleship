@@ -6,19 +6,19 @@ import Submarine from './submarine';
 const gameboardShips = [
   {
     count: 1,
-    Battleship,
+    type: Battleship,
   },
   {
     count: 2,
-    Destroyer,
+    type: Destroyer,
   },
   {
     count: 3,
-    Submarine,
+    type: Submarine,
   },
   {
     count: 4,
-    PatrolBoat,
+    type: PatrolBoat,
   },
 ];
 
