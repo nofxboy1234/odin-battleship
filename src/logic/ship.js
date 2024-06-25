@@ -1,9 +1,9 @@
 class Ship {
   #hits = [];
 
-  constructor(length = 1, orientation = 'horizontal') {
+  constructor(length = 1) {
     this.length = length;
-    this.orientation = orientation;
+    this.orientation = 'horizontal';
     this.#hits = [];
   }
 
@@ -22,6 +22,10 @@ class Ship {
 
   getHits() {
     return [...this.#hits];
+  }
+
+  setVertical() {
+    this.orientation = 'vertical';
   }
 }
 

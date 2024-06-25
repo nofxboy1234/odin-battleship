@@ -47,3 +47,9 @@ test('getHits() returns an array of 2 hits when ship has 2 hits', () => {
     [1, 0],
   ]);
 });
+
+test('setVertical() sets orientation property to "vertical"', () => {
+  const ship = new Ship(1);
+  ship.setVertical();
+  expect(ship.orientation).toEqual('vertical');
+});
