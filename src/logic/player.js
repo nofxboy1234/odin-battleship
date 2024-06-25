@@ -23,7 +23,7 @@ class Player {
     return randomCell;
   }
 
-  placeShips() {
+  placeShipsRandomly() {
     // - don't overlap other ships
     // - don't let ship length go off board
     // - keep 1 space margin around each ship

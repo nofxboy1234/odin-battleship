@@ -101,7 +101,7 @@ function newGame() {
   humanGameboard = new Gameboard();
 
   enemy = new Player(enemyGameboard, 'enemy');
-  enemy.placeShips();
+  enemy.placeShipsRandomly();
   enemyGameboardElement = new GameboardElement(enemy, handleTurn);
   enemyGameboardElement.createShips();
   enemyGameboardElement.renderShips();
@@ -129,7 +129,7 @@ function addRandomizeButton() {
 }
 
 function randomize() {
-  human.placeShips();
+  human.placeShipsRandomly();
   humanGameboardElement.createShips();
   humanGameboardElement.renderShips();
 }
