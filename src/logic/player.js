@@ -29,7 +29,7 @@ class Player {
     // - keep 1 space margin around each ship
     this.#shipTypes().forEach((shipType) => {
       for (let index = 0; index < shipType.count; index++) {
-        const ship = this.#createShip(shipType);
+        const ship = this.#createShipWithRandomOrientation(shipType);
         const [x, y] = this.gameboard.getRandomPosition();
         this.gameboard.placeShip(ship, x, y);
       }
@@ -63,7 +63,7 @@ class Player {
     return Math.floor(Math.random() * max);
   }
 
-  #createShip(shipType) {
+  #createShipWithRandomOrientation(shipType) {
     const ship = new Ship(shipType.length);
     ship.setRandomOrientation();
     return ship;
