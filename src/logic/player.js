@@ -1,4 +1,5 @@
 import Ship from './ship';
+import getRandomInt from './helpers';
 
 class Player {
   constructor(gameboard, name) {
@@ -18,7 +19,7 @@ class Player {
       return !found;
     });
 
-    const randomIndex = this.#getRandomInt(availableCells.length);
+    const randomIndex = getRandomInt(availableCells.length);
     const randomCell = availableCells[randomIndex];
     return randomCell;
   }
@@ -57,10 +58,6 @@ class Player {
     ];
 
     return ships;
-  }
-
-  #getRandomInt(max) {
-    return Math.floor(Math.random() * max);
   }
 
   #createShipWithRandomOrientation(shipType) {

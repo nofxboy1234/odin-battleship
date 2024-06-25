@@ -1,3 +1,5 @@
+import getRandomInt from './helpers';
+
 class Ship {
   #hits = [];
 
@@ -34,12 +36,8 @@ class Ship {
 
   setRandomOrientation() {
     const orientations = ['horizontal', 'vertical'];
-    const index = this.#getRandomInt(orientations.length);
+    const index = getRandomInt(orientations.length);
     this.orientation = orientations[index];
-  }
-
-  #getRandomInt(max) {
-    return Math.floor(Math.random() * max);
   }
 }
 

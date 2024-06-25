@@ -1,3 +1,5 @@
+import getRandomInt from './helpers';
+
 class Gameboard {
   #ships = [];
   #misses = [];
@@ -62,8 +64,8 @@ class Gameboard {
   }
 
   getRandomPosition() {
-    const x = this.#getRandomInt(this.size);
-    const y = this.#getRandomInt(this.size);
+    const x = getRandomInt(this.size);
+    const y = getRandomInt(this.size);
 
     return [x, y];
   }
@@ -86,10 +88,6 @@ class Gameboard {
 
   #getMissOnCell(x, y) {
     return this.#misses.find(([missX, missY]) => x === missX && y === missY);
-  }
-
-  #getRandomInt(max) {
-    return Math.floor(Math.random() * max);
   }
 }
 
