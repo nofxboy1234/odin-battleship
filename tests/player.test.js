@@ -72,7 +72,16 @@ test('play() returns a new random shot from an available array of 3 after 1 miss
   expect([[0, 1]]).not.toContainEqual(player.play(enemyGameboard));
 });
 
-test('placeShips() to call gameboard.placeShip() 10 times', () => {
+test('placeShips() calls gameboard.getRandomPosition() 10 times', () => {
+  const gameboard = new Gameboard();
+  const spy = jest.spyOn(gameboard, 'getRandomPosition');
+  const player = new Player(gameboard);
+  player.placeShips();
+
+  expect(spy).toHaveBeenCalledTimes(10);
+});
+
+test('placeShips() calls gameboard.placeShip() 10 times', () => {
   const gameboard = new Gameboard();
   const spy = jest.spyOn(gameboard, 'placeShip');
   const player = new Player(gameboard);
@@ -81,7 +90,7 @@ test('placeShips() to call gameboard.placeShip() 10 times', () => {
   expect(spy).toHaveBeenCalledTimes(10);
 });
 
-test('placeShips() to call gameboard.placeShip() 10 times', () => {
+test('placeShips() adds 10 ships to a gameboard', () => {
   const gameboard = new Gameboard();
   const player = new Player(gameboard);
   player.placeShips();
