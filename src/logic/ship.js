@@ -31,6 +31,16 @@ class Ship {
   setHorizontal() {
     this.orientation = 'horizontal';
   }
+
+  setRandomOrientation() {
+    const orientations = ['horizontal', 'vertical'];
+    const index = this.#getRandomInt(orientations.length);
+    this.orientation = orientations[index];
+  }
+
+  #getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
 }
 
 export default Ship;

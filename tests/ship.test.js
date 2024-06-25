@@ -1,5 +1,9 @@
 import Ship from '../src/logic/ship';
 
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
 test('hit() increases the number of hits', () => {
   const ship = new Ship();
   ship.hit(0, 0);
@@ -58,5 +62,39 @@ test('setHorizontal() sets orientation property to "horizontal"', () => {
   const ship = new Ship(1);
   ship.setVertical();
   ship.setHorizontal();
+  expect(ship.orientation).toEqual('horizontal');
+});
+
+test('setRandomOrientation() sets orientation property to "horizontal" or "vertical"', () => {
+  const ship = new Ship(1);
+  ship.setRandomOrientation();
+  expect(['horizontal', 'vertical']).toContainEqual(ship.orientation);
+});
+
+test('setRandomOrientation() calls Math.random', () => {
+  const ship = new Ship(1);
+  const spy = jest.spyOn(Math, 'random');
+  ship.setRandomOrientation();
+  expect(spy).toHaveBeenCalled();
+});
+
+test('setRandomOrientation() calls Math.floor', () => {
+  const ship = new Ship(1);
+  const spy = jest.spyOn(Math, 'floor');
+  ship.setRandomOrientation();
+  expect(spy).toHaveBeenCalled();
+});
+
+test('setRandomOrientation() sets orientation property to "vertical" when random number is 0.54321', () => {
+  const ship = new Ship(1);
+  jest.spyOn(Math, 'random').mockReturnValue(0.54321);
+  ship.setRandomOrientation();
+  expect(ship.orientation).toEqual('vertical');
+});
+
+test('setRandomOrientation() sets orientation property to "horizontal" when random number is 0.321', () => {
+  const ship = new Ship(1);
+  jest.spyOn(Math, 'random').mockReturnValue(0.321);
+  ship.setRandomOrientation();
   expect(ship.orientation).toEqual('horizontal');
 });
