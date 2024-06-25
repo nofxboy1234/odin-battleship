@@ -3,7 +3,7 @@ import Destroyer from './destroyer';
 import PatrolBoat from './patrolBoat';
 import Submarine from './submarine';
 
-const shipTypes = [
+const gameboardShips = [
   {
     count: 1,
     Battleship,
@@ -22,4 +22,4 @@ const shipTypes = [
   },
 ];
 
-export default shipTypes;
+export default gameboardShips;
