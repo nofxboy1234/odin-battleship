@@ -23,11 +23,7 @@ const gameboardShips = [
 ];
 
 function hasOverlappingShips(ships) {
-  const results = [];
-
-  const ship1 = ships[0];
-
-  return ships.some((ship) => {
+  const someShipOverlapsAnotherShip = ships.some((ship) => {
     const otherShips = ships.filter((otherShip) => otherShip !== ship);
 
     const someCellsOverlap = otherShips.some((otherShip) => {
@@ -37,26 +33,7 @@ function hasOverlappingShips(ships) {
     return someCellsOverlap;
   });
 
-  // const ship2 = ships[1];
-  // const someCellsOverlap = ship2.cells.some((cell) =>
-  //   ship1.cells.includes(cell),
-  // );
-  // return someCellsOverlap;
-
-  // ------------------------------------
-
-  // const results = [];
-
-  // ships.forEach((ship) => {
-  //   const otherShips = ships.filter((otherShip) => otherShip !== ship);
-
-  //   const allCellsDifferent = otherShips.every((otherShip) => {
-  //     return otherShip.cells !== ship.cells;
-  //   });
-  //   results.push(allCellsDifferent);
-  // });
-
-  // return results.every((result) => result);
+  return someShipOverlapsAnotherShip;
 }
 
 export { gameboardShips, hasOverlappingShips };
