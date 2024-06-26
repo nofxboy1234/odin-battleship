@@ -69,7 +69,7 @@ describe('When 2 ships have the same cells', () => {
   });
 });
 
-describe('When every cell of every ships is different to every cell of all other ships', () => {
+describe('When every cell of every ship is different to every cell of all other ships', () => {
   test('hasOverlappingShips() returns false', () => {
     const gameboard = new Gameboard();
     const ships = [];
