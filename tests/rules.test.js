@@ -66,16 +66,5 @@ describe('When 2 ships have the same cells', () => {
     ships.push(patrolboat4);
 
     expect(hasOverlappingShips(ships)).toEqual(true);
-    // expect(noOverlappingShips(ships)).toStrictEqual([
-    //   destroyer1,
-    //   destroyer2,
-    //   submarine1,
-    //   submarine2,
-    //   submarine3,
-    //   patrolboat1,
-    //   patrolboat2,
-    //   patrolboat3,
-    //   patrolboat4,
-    // ]);
   });
 });
