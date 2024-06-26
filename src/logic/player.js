@@ -1,6 +1,6 @@
-import Ship from './ship';
 import getRandomInt from './helpers';
 import { gameboardShips } from './rules';
+import { hasOverlappingShips } from './rules';
 
 class Player {
   constructor(gameboard, name) {
@@ -26,51 +26,34 @@ class Player {
   }
 
   placeShipsRandomly() {
-    // - don't overlap other ships
-    // -- None of a ship's cells should be the same as another ship's cells
-
     // - don't let ship length go off board
-
     // - keep 1 space margin around each ship
 
     let shipsInValidPosition = false;
-    // while (!shipsInValidPosition) {
-    const ships = [];
 
-    gameboardShips.forEach((boardShip) => {
-      for (let index = 0; index < boardShip.count; index++) {
-        const ship = this.#createShipWithRandomOrientation(boardShip);
-        const [x, y] = this.gameboard.getRandomPosition();
-        ship.place(x, y, this.gameboard);
-        ships.push(ship);
+    while (!shipsInValidPosition) {
+      const ships = [];
+
+      gameboardShips.forEach((boardShip) => {
+        for (let index = 0; index < boardShip.count; index++) {
+          const ship = this.#createShipWithRandomOrientation(boardShip);
+          const [x, y] = this.gameboard.getRandomPosition();
+          ship.place(x, y, this.gameboard);
+          ships.push(ship);
+        }
+      });
+
+      if (!hasOverlappingShips(ships)) {
+        shipsInValidPosition = true;
+        ships.forEach((ship) => this.gameboard.placeShip(ship, ship.x, ship.y));
       }
-    });
-
-    if (this.#noShipsOverlapping(ships)) {
-      shipsInValidPosition = true;
-      ships.forEach((ship) => this.gameboard.placeShip(ship, ship.x, ship.y));
     }
-    // }
   }
 
   #createShipWithRandomOrientation(boardShip) {
     const ship = new boardShip.type();
     ship.setRandomOrientation();
     return ship;
-  }
-
-  #noShipsOverlapping(ships) {
-    const results = [];
-
-    ships.forEach((ship) => {
-      const otherShips = ships.filter((otherShip) => otherShip !== ship);
-      const allCellsDifferent = otherShips.every((otherShip) => {
-        return otherShip.cells !== ship.cells;
-      });
-      results.push(allCellsDifferent);
-    });
-
-    return results.every((result) => result);
   }
 }
 
