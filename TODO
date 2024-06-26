@@ -1,11 +1,6 @@
-have a button to cycle through random placements
-
-disable human clicking own board
-disable hover on cells for the owner of that board
-
-display current player
-
-Make appropriate methods private in dom classes
-
-Refactor any code that is not readable
-
+- have a button to cycle through random placements
+- disable human clicking own board
+- disable hover on cells for the owner of that board
+- display current player and end game message
+- Make appropriate methods private in classes
+- ~Refactor any code that is not readable
