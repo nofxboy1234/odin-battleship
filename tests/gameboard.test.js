@@ -1,5 +1,6 @@
 import Ship from '../src/logic/ship';
 import Gameboard from '../src/logic/gameboard';
+import Cell from '../src/logic/cell';
 
 afterEach(() => {
   // restore the spy created with spyOn
@@ -10,11 +11,18 @@ test('new Gameboard() creates a gameboard with a squared number of cells', () =>
   const gameboard = new Gameboard(2);
 
   expect(gameboard.cells).toEqual([
-    [0, 0],
-    [1, 0],
-    [0, 1],
-    [1, 1],
+    new Cell(0, 0),
+    new Cell(1, 0),
+    new Cell(0, 1),
+    new Cell(1, 1),
   ]);
+
+  // expect(gameboard.cells).toEqual([
+  //   [0, 0],
+  //   [1, 0],
+  //   [0, 1],
+  //   [1, 1],
+  // ]);
 });
 
 test('gameboard.placeShip() calls ship.place()', () => {
@@ -43,7 +51,9 @@ test('gameboard.receiveAttack() records the coordinates of a missed shot', () =>
   gameboard.placeShip(ship, 0, 0);
   gameboard.receiveAttack(5, 4);
 
-  expect(gameboard.getMisses()).toContainEqual([5, 4]);
+  const cell = new Cell(5, 4);
+
+  expect(gameboard.getMisses()).toContainEqual(cell);
 });
 
 test('gameboard.receiveAttack() does not record the coordinates of a hit ship as a miss', () => {
@@ -125,7 +135,9 @@ test('gameboard.getMisses() returns an array of 1 when a shot misses', () => {
   gameboard.placeShip(ship1, 0, 0);
   gameboard.receiveAttack(3, 0);
 
-  expect(gameboard.getMisses()).toEqual([[3, 0]]);
+  const cell = new Cell(3, 0);
+
+  expect(gameboard.getMisses()).toEqual([cell]);
 });
 
 test('gameboard.getHits() returns an empty array when gameboard is empty', () => {
@@ -140,7 +152,9 @@ test('gameboard.getHits() returns an array of 1 when a shot hits', () => {
   gameboard.placeShip(ship1, 0, 0);
   gameboard.receiveAttack(1, 0);
 
-  expect(gameboard.getHits()).toEqual([[1, 0]]);
+  const cell = new Cell(1, 0);
+
+  expect(gameboard.getHits()).toEqual([cell]);
 });
 
 test('gameboard.isShipOnCell() returns true if a ship is covering a cell', () => {

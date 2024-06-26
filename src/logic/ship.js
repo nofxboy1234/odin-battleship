@@ -1,3 +1,4 @@
+import Cell from './cell';
 import getRandomInt from './helpers';
 
 class Ship {
@@ -10,7 +11,7 @@ class Ship {
   }
 
   hit(x, y) {
-    this.#hits.push([x, y]);
+    this.#hits.push(new Cell(x, y));
   }
 
   isSunk() {
@@ -38,6 +39,20 @@ class Ship {
     const orientations = ['horizontal', 'vertical'];
     const index = getRandomInt(orientations.length);
     this.orientation = orientations[index];
+  }
+
+  getCells(gameboard) {
+    return gameboard.cells.filter((cell) => {
+      if (this.orientation === 'horizontal') {
+        const back = this.x;
+        const front = this.x + this.length;
+        return cell.x >= back && cell.x < front && cell.y === this.y;
+      } else if (this.orientation === 'vertical') {
+        const shipBack = this.y;
+        const shipFront = this.y + this.length;
+        return cell.y >= shipBack && cell.y < shipFront && cell.x === this.x;
+      }
+    });
   }
 }
 

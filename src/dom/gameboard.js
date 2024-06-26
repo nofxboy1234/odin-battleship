@@ -135,12 +135,12 @@ class Gameboard {
   #createCells() {
     const cells = this.#controller.cells;
 
-    for (let index = 0; index < cells.length; index++) {
-      const x = cells[index][0];
-      const y = cells[index][1];
+    cells.forEach((cell) => {
+      const x = cell.x;
+      const y = cell.y;
       const cellDOM = new Cell(x, y, this.isDisabled());
       this.#cells.push(cellDOM);
-    }
+    });
   }
 
   createShips() {

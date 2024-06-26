@@ -1,3 +1,4 @@
+import Cell from './cell';
 import getRandomInt from './helpers';
 
 class Gameboard {
@@ -6,7 +7,8 @@ class Gameboard {
 
   constructor(size = 10) {
     this.size = size;
-    this.cells = this.#createCellArray(size);
+    this.cells = [];
+    this.#createCells();
   }
 
   placeShip(ship, x, y) {
@@ -19,7 +21,7 @@ class Gameboard {
     if (hitShip) {
       hitShip.hit(x, y);
     } else {
-      this.#misses.push([x, y]);
+      this.#misses.push(new Cell(x, y));
     }
   }
 
@@ -70,24 +72,22 @@ class Gameboard {
     return [x, y];
   }
 
-  #createCellArray(size) {
-    const cellArray = [];
-
-    for (let y = 0; y < size; y++) {
-      for (let x = 0; x < size; x++) {
-        cellArray.push([x, y]);
+  #createCells() {
+    for (let y = 0; y < this.size; y++) {
+      for (let x = 0; x < this.size; x++) {
+        const cell = new Cell(x, y);
+        this.cells.push(cell);
       }
     }
-    return cellArray;
   }
 
   #getHitOnCell(x, y) {
     const hits = this.getHits();
-    return hits.find(([hitX, hitY]) => x === hitX && y === hitY);
+    return hits.find((cell) => x === cell.x && y === cell.y);
   }
 
   #getMissOnCell(x, y) {
-    return this.#misses.find(([missX, missY]) => x === missX && y === missY);
+    return this.#misses.find((cell) => x === cell.x && y === cell.y);
   }
 }
 

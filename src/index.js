@@ -16,8 +16,8 @@ function isPlayerClickingOwnGameboard(clickedGameboardElement) {
 }
 
 function enemyPlay() {
-  const [x, y] = enemy.play(humanGameboard);
-  const cellDOM = humanGameboardElement.getCellDOM(x, y);
+  const cell = enemy.play(humanGameboard);
+  const cellDOM = humanGameboardElement.getCellDOM(cell.x, cell.y);
   cellDOM.render().click();
 }
 
