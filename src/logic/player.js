@@ -35,7 +35,6 @@ class Player {
 
     let shipsInValidPosition = false;
     while (!shipsInValidPosition) {
-      console.log('checking ship positions');
       const ships = [];
 
       gameboardShips.forEach((boardShip) => {
@@ -65,13 +64,11 @@ class Player {
 
     ships.forEach((ship) => {
       const otherShips = ships.filter((otherShip) => otherShip !== ship);
-
       const allCellsDifferent = otherShips.every((otherShip) => {
         return (
           otherShip.getCells(this.gameboard) !== ship.getCells(this.gameboard)
         );
       });
-
       results.push(allCellsDifferent);
     });
 
