@@ -23,10 +23,6 @@ const gameboardShips = [
 ];
 
 function hasOutOfBoundsShips(ships, gameboard) {
-  // if ship is horizontal
-  // - random position.x must be <= board.size - ship.length
-  // if ship is vertical
-  // - random position.y must be <= board.size - ship.length
   const someShipGoesOutOfBounds = ships.some((ship) => {
     if (ship.orientation === 'horizontal') {
       return ship.x > gameboard.size - ship.length;
