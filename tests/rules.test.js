@@ -368,7 +368,7 @@ describe('horizontal and vertical ships', () => {
   });
 });
 
-describe('When all ships cells are in the bounds of the board', () => {
+describe('When all ships are in the bounds of the board', () => {
   test('hasOutOfBoundsShips() returns false', () => {
     const gameboard = new Gameboard();
     const ships = [];
@@ -389,5 +389,53 @@ describe('When all ships cells are in the bounds of the board', () => {
     ships.push(submarine1);
 
     expect(hasOutOfBoundsShips(ships, gameboard)).toEqual(false);
+  });
+});
+
+describe('When a horizontal ship is out of bounds of the board', () => {
+  test('hasOutOfBoundsShips() returns true', () => {
+    const gameboard = new Gameboard();
+    const ships = [];
+
+    const battleship1 = new Battleship();
+    battleship1.setHorizontal();
+    battleship1.place(7, 0, gameboard);
+    ships.push(battleship1);
+
+    const destroyer1 = new Destroyer();
+    destroyer1.setHorizontal();
+    destroyer1.place(7, 3, gameboard);
+    ships.push(destroyer1);
+
+    const submarine1 = new Submarine();
+    submarine1.setVertical();
+    submarine1.place(9, 7, gameboard);
+    ships.push(submarine1);
+
+    expect(hasOutOfBoundsShips(ships, gameboard)).toEqual(true);
+  });
+});
+
+describe('When a vertical ship is out of bounds of the board', () => {
+  test('hasOutOfBoundsShips() returns true', () => {
+    const gameboard = new Gameboard();
+    const ships = [];
+
+    const battleship1 = new Battleship();
+    battleship1.setHorizontal();
+    battleship1.place(0, 0, gameboard);
+    ships.push(battleship1);
+
+    const destroyer1 = new Destroyer();
+    destroyer1.setHorizontal();
+    destroyer1.place(7, 3, gameboard);
+    ships.push(destroyer1);
+
+    const submarine1 = new Submarine();
+    submarine1.setVertical();
+    submarine1.place(9, 9, gameboard);
+    ships.push(submarine1);
+
+    expect(hasOutOfBoundsShips(ships, gameboard)).toEqual(true);
   });
 });
