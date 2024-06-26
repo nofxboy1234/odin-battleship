@@ -367,3 +367,68 @@ describe('vertical ships', () => {
     });
   });
 });
+
+describe('horizontal and vertical ships', () => {
+  describe('When 2 ships have some cells that are the same', () => {});
+
+  describe('When 3 ships have some cells that are the same', () => {});
+
+  describe('When every cell of every ship is different to every cell of all other ships', () => {
+    test('hasOverlappingShips() returns false', () => {
+      const gameboard = new Gameboard();
+      const ships = [];
+
+      const battleship1 = new Battleship();
+      battleship1.setVertical();
+      battleship1.place(0, 0, gameboard);
+      ships.push(battleship1);
+
+      const destroyer1 = new Destroyer();
+      destroyer1.setHorizontal();
+      destroyer1.place(1, 0, gameboard);
+      ships.push(destroyer1);
+
+      const destroyer2 = new Destroyer();
+      destroyer2.setVertical();
+      destroyer2.place(2, 1, gameboard);
+      ships.push(destroyer2);
+
+      const submarine1 = new Submarine();
+      submarine1.setVertical();
+      submarine1.place(3, 1, gameboard);
+      ships.push(submarine1);
+
+      const submarine2 = new Submarine();
+      submarine2.setVertical();
+      submarine2.place(4, 0, gameboard);
+      ships.push(submarine2);
+
+      const submarine3 = new Submarine();
+      submarine3.setVertical();
+      submarine3.place(5, 0, gameboard);
+      ships.push(submarine3);
+
+      const patrolboat1 = new PatrolBoat();
+      patrolboat1.setVertical();
+      patrolboat1.place(6, 0, gameboard);
+      ships.push(patrolboat1);
+
+      const patrolboat2 = new PatrolBoat();
+      patrolboat2.setVertical();
+      patrolboat2.place(7, 0, gameboard);
+      ships.push(patrolboat2);
+
+      const patrolboat3 = new PatrolBoat();
+      patrolboat3.setVertical();
+      patrolboat3.place(8, 0, gameboard);
+      ships.push(patrolboat3);
+
+      const patrolboat4 = new PatrolBoat();
+      patrolboat4.setVertical();
+      patrolboat4.place(9, 0, gameboard);
+      ships.push(patrolboat4);
+
+      expect(hasOverlappingShips(ships)).toEqual(false);
+    });
+  });
+});
