@@ -12,7 +12,7 @@ class Gameboard {
   }
 
   placeShip(ship, x, y) {
-    ship.place(x, y);
+    ship.place(x, y, this);
     this.#ships.push(ship);
   }
 
@@ -43,6 +43,10 @@ class Gameboard {
 
   isShipOnCell(x, y) {
     return !!this.getShipOnCell(x, y);
+  }
+
+  getCellAt(x, y) {
+    return this.cells.find((cell) => cell.x === x && cell.y === y);
   }
 
   getShipOnCell(x, y) {

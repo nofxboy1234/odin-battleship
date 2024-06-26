@@ -18,9 +18,11 @@ class Ship {
     return this.#hits.length === this.length;
   }
 
-  place(x, y) {
+  place(x, y, gameboard) {
     this.x = x;
     this.y = y;
+
+    this.#setCells(gameboard);
   }
 
   getHits() {
@@ -41,8 +43,8 @@ class Ship {
     this.orientation = orientations[index];
   }
 
-  getCells(gameboard) {
-    return gameboard.cells.filter((cell) => {
+  #setCells(gameboard) {
+    this.cells = gameboard.cells.filter((cell) => {
       if (this.orientation === 'horizontal') {
         const back = this.x;
         const front = this.x + this.length;

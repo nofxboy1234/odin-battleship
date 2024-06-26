@@ -22,4 +22,20 @@ const gameboardShips = [
   },
 ];
 
-export default gameboardShips;
+function noOverlappingShips(ships) {
+  return false;
+
+  const results = [];
+
+  ships.forEach((ship) => {
+    const otherShips = ships.filter((otherShip) => otherShip !== ship);
+    const allCellsDifferent = otherShips.every((otherShip) => {
+      return otherShip.cells !== ship.cells;
+    });
+    results.push(allCellsDifferent);
+  });
+
+  return results.every((result) => result);
+}
+
+export { gameboardShips, noOverlappingShips };

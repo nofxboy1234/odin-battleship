@@ -28,11 +28,36 @@ test('isSunk() returns true when hits equals length', () => {
   expect(ship.isSunk()).toBe(true);
 });
 
-test('place() sets the x and y co-ordinates', () => {
-  const ship = new Ship(3);
-  ship.place(0, 0);
-  expect(ship.x).toBe(0);
-  expect(ship.y).toBe(0);
+describe('When place() is called on a ship of length 3 with x: 0, y: 0 and a gameboard', () => {
+  test('it sets the x and y co-ordinates to 0, 0', () => {
+    const gameboard = new Gameboard();
+    const ship = new Ship(3);
+    ship.place(0, 0, gameboard);
+    expect(ship.x).toBe(0);
+    expect(ship.y).toBe(0);
+  });
+
+  test('ship.cells has a length of 3', () => {
+    const gameboard = new Gameboard();
+    const ship = new Ship(3);
+    ship.place(0, 0, gameboard);
+    expect(ship.cells.length).toBe(3);
+  });
+
+  test('it stores the gameboard cells that the ship occupies', () => {
+    const gameboard = new Gameboard();
+    const ship = new Ship(3);
+    ship.place(0, 0, gameboard);
+
+    const cell1 = gameboard.getCellAt(0, 0);
+    const cell2 = gameboard.getCellAt(1, 0);
+    const cell3 = gameboard.getCellAt(2, 0);
+
+    expect(ship.cells).toStrictEqual([cell1, cell2, cell3]);
+    expect(ship.cells[0]).toBe(cell1);
+    expect(ship.cells[1]).toBe(cell2);
+    expect(ship.cells[2]).toBe(cell3);
+  });
 });
 
 test('getHits() returns an array of 2 hits when ship has 2 hits', () => {
@@ -91,16 +116,4 @@ test('setRandomOrientation() sets orientation property to "horizontal" when rand
   jest.spyOn(Math, 'random').mockReturnValue(0.321);
   ship.setRandomOrientation();
   expect(ship.orientation).toEqual('horizontal');
-});
-
-test('getCells() returns the cells of a gameboard that a ship is composed of', () => {
-  const ship = new Ship(3);
-  ship.place(0, 0);
-  const gameboard = new Gameboard();
-
-  expect(ship.getCells(gameboard)).toEqual([
-    new Cell(0, 0),
-    new Cell(1, 0),
-    new Cell(2, 0),
-  ]);
 });

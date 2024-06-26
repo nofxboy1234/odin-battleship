@@ -238,3 +238,9 @@ test('gameboard.getRandomPosition() to call Math.floor', () => {
   gameboard.getRandomPosition();
   expect(spy).toHaveBeenCalled();
 });
+
+test('gameboard.getCellAt() returns the cell at a position', () => {
+  const gameboard = new Gameboard();
+  const cell = new Cell(0, 0);
+  expect(gameboard.getCellAt(0, 0)).toEqual(cell);
+});

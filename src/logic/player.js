@@ -1,6 +1,6 @@
 import Ship from './ship';
 import getRandomInt from './helpers';
-import gameboardShips from './rules';
+import { gameboardShips } from './rules';
 
 class Player {
   constructor(gameboard, name) {
@@ -34,23 +34,23 @@ class Player {
     // - keep 1 space margin around each ship
 
     let shipsInValidPosition = false;
-    while (!shipsInValidPosition) {
-      const ships = [];
+    // while (!shipsInValidPosition) {
+    const ships = [];
 
-      gameboardShips.forEach((boardShip) => {
-        for (let index = 0; index < boardShip.count; index++) {
-          const ship = this.#createShipWithRandomOrientation(boardShip);
-          const [x, y] = this.gameboard.getRandomPosition();
-          ship.place(x, y);
-          ships.push(ship);
-        }
-      });
-
-      if (this.#noShipsOverlapping(ships)) {
-        shipsInValidPosition = true;
-        ships.forEach((ship) => this.gameboard.placeShip(ship, ship.x, ship.y));
+    gameboardShips.forEach((boardShip) => {
+      for (let index = 0; index < boardShip.count; index++) {
+        const ship = this.#createShipWithRandomOrientation(boardShip);
+        const [x, y] = this.gameboard.getRandomPosition();
+        ship.place(x, y, this.gameboard);
+        ships.push(ship);
       }
+    });
+
+    if (this.#noShipsOverlapping(ships)) {
+      shipsInValidPosition = true;
+      ships.forEach((ship) => this.gameboard.placeShip(ship, ship.x, ship.y));
     }
+    // }
   }
 
   #createShipWithRandomOrientation(boardShip) {
@@ -65,9 +65,7 @@ class Player {
     ships.forEach((ship) => {
       const otherShips = ships.filter((otherShip) => otherShip !== ship);
       const allCellsDifferent = otherShips.every((otherShip) => {
-        return (
-          otherShip.getCells(this.gameboard) !== ship.getCells(this.gameboard)
-        );
+        return otherShip.cells !== ship.cells;
       });
       results.push(allCellsDifferent);
     });
