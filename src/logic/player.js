@@ -26,12 +26,6 @@ class Player {
   }
 
   placeShipsRandomly() {
-    // - don't let ship length go off board
-    // if ship is horizontal
-    // - random position.x must be <= board.size - ship.length
-    // if ship is vertical
-    // - random position.y must be <= board.size - ship.length
-
     // - keep 1 space margin around each ship
 
     let shipsInValidPosition = false;

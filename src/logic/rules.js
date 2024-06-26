@@ -22,6 +22,22 @@ const gameboardShips = [
   },
 ];
 
+function hasOutOfBoundsShips(ships, gameboard) {
+  // if ship is horizontal
+  // - random position.x must be <= board.size - ship.length
+  // if ship is vertical
+  // - random position.y must be <= board.size - ship.length
+  const someShipGoesOutOfBounds = ships.some((ship) => {
+    if (ship.orientation === 'horizontal') {
+      return ship.x > gameboard.size - ship.length;
+    } else if (ship.orientation === 'vertical') {
+      return ship.y > gameboard.size - ship.length;
+    }
+  });
+
+  return someShipGoesOutOfBounds;
+}
+
 function hasOverlappingShips(ships) {
   const someShipOverlapsAnotherShip = ships.some((ship) => {
     const otherShips = ships.filter((otherShip) => otherShip !== ship);
@@ -36,4 +52,4 @@ function hasOverlappingShips(ships) {
   return someShipOverlapsAnotherShip;
 }
 
-export { gameboardShips, hasOverlappingShips };
+export { gameboardShips, hasOverlappingShips, hasOutOfBoundsShips };

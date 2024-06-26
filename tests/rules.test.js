@@ -2,7 +2,7 @@ import Battleship from '../src/logic/battleship';
 import Destroyer from '../src/logic/destroyer';
 import Gameboard from '../src/logic/gameboard';
 import PatrolBoat from '../src/logic/patrolBoat';
-import { hasOverlappingShips } from '../src/logic/rules';
+import { hasOverlappingShips, hasOutOfBoundsShips } from '../src/logic/rules';
 import Submarine from '../src/logic/submarine';
 
 afterEach(() => {
@@ -365,5 +365,29 @@ describe('horizontal and vertical ships', () => {
 
       expect(hasOverlappingShips(ships)).toEqual(false);
     });
+  });
+});
+
+describe('When all ships cells are in the bounds of the board', () => {
+  test('hasOutOfBoundsShips() returns false', () => {
+    const gameboard = new Gameboard();
+    const ships = [];
+
+    const battleship1 = new Battleship();
+    battleship1.setHorizontal();
+    battleship1.place(0, 0, gameboard);
+    ships.push(battleship1);
+
+    const destroyer1 = new Destroyer();
+    destroyer1.setHorizontal();
+    destroyer1.place(7, 3, gameboard);
+    ships.push(destroyer1);
+
+    const submarine1 = new Submarine();
+    submarine1.setVertical();
+    submarine1.place(9, 7, gameboard);
+    ships.push(submarine1);
+
+    expect(hasOutOfBoundsShips(ships, gameboard)).toEqual(false);
   });
 });
