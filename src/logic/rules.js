@@ -22,20 +22,41 @@ const gameboardShips = [
   },
 ];
 
-function noOverlappingShips(ships) {
-  return false;
-
+function hasOverlappingShips(ships) {
   const results = [];
 
-  ships.forEach((ship) => {
+  const ship1 = ships[0];
+
+  return ships.some((ship) => {
     const otherShips = ships.filter((otherShip) => otherShip !== ship);
-    const allCellsDifferent = otherShips.every((otherShip) => {
-      return otherShip.cells !== ship.cells;
+
+    const someCellsOverlap = otherShips.some((otherShip) => {
+      return otherShip.cells.some((cell) => ship.cells.includes(cell));
     });
-    results.push(allCellsDifferent);
+
+    return someCellsOverlap;
   });
 
-  return results.every((result) => result);
+  // const ship2 = ships[1];
+  // const someCellsOverlap = ship2.cells.some((cell) =>
+  //   ship1.cells.includes(cell),
+  // );
+  // return someCellsOverlap;
+
+  // ------------------------------------
+
+  // const results = [];
+
+  // ships.forEach((ship) => {
+  //   const otherShips = ships.filter((otherShip) => otherShip !== ship);
+
+  //   const allCellsDifferent = otherShips.every((otherShip) => {
+  //     return otherShip.cells !== ship.cells;
+  //   });
+  //   results.push(allCellsDifferent);
+  // });
+
+  // return results.every((result) => result);
 }
 
-export { gameboardShips, noOverlappingShips };
+export { gameboardShips, hasOverlappingShips };
