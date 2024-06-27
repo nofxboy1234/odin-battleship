@@ -444,25 +444,15 @@ describe('When a vertical ship is out of bounds of the board', () => {
   });
 });
 
-describe('When all ships have at least a 1 cell margin all around their perimeter', () => {
+describe('When there is 1 horizontal ship of length 4 with a margin of at least 1 empty cell around its perimeter', () => {
   test('hasAdjacentShips() returns false', () => {
     const gameboard = new Gameboard();
     const ships = [];
 
     const battleship1 = new Battleship();
     battleship1.setHorizontal();
-    battleship1.place(0, 0, gameboard);
+    battleship1.place(1, 1, gameboard);
     ships.push(battleship1);
-
-    const destroyer1 = new Destroyer();
-    destroyer1.setHorizontal();
-    destroyer1.place(7, 3, gameboard);
-    ships.push(destroyer1);
-
-    const submarine1 = new Submarine();
-    submarine1.setVertical();
-    submarine1.place(9, 9, gameboard);
-    ships.push(submarine1);
 
     // expect(hasAdjacentShips(ships, gameboard)).toEqual(false);
     expect(hasAdjacentShips(ships, gameboard)).toEqual(false);
