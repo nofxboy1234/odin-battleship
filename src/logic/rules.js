@@ -63,14 +63,20 @@ function hasAdjacentShips(ships, gameboard) {
     rightCell = gameboard.getCellAt(shipFrontX + 1, shipFrontY - 1);
     rightCells.push(rightCell);
 
+    // -- check if (x + 1, y) has no ship cell, unless (x === board.size - ship.length)
+    rightCell = gameboard.getCellAt(shipFrontX + 1, shipFrontY);
+    rightCells.push(rightCell);
+
+    // -- check if (x + 1, y + 1) has no ship cell, unless (x === board.size - ship.length)
+    rightCell = gameboard.getCellAt(shipFrontX + 1, shipFrontY + 1);
+    rightCells.push(rightCell);
+
     const someShipCellIsToTheRight = otherShips.some((otherShip) => {
       return rightCells.some((rightCell) =>
         otherShip.cells.includes(rightCell),
       );
     });
 
-    // -- check if (x + 1, y) has no ship cell, unless (x === board.size - ship.length)
-    // -- check if (x + 1, y + 1) has no ship cell, unless (x === board.size - ship.length)
     return someShipCellIsToTheRight;
     //
   });

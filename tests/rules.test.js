@@ -454,7 +454,6 @@ describe('When there is 1 horizontal ship of length 4 with a margin of at least 
     battleship1.place(1, 1, gameboard);
     ships.push(battleship1);
 
-    // expect(hasAdjacentShips(ships, gameboard)).toEqual(false);
     expect(hasAdjacentShips(ships, gameboard)).toEqual(false);
   });
 });
