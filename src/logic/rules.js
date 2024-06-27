@@ -49,17 +49,6 @@ function hasOverlappingShips(ships) {
 }
 
 function hasAdjacentShips(ships, gameboard) {
-  // ----- horizontal ships
-  // if collision on left:
-  // - get ship back
-  // -- check if (x - 1, y - 1) has no ship cell, unless (x === 0)
-  // -- check if (x - 1, y) has no ship cell, unless (x === 0)
-  // -- check if (x - 1, y + 1) has no ship cell, unless (x === 0)
-  //
-  // if collision on bottom:
-  // - for each ship-body-cell
-  // -- check if (x, y + 1) has no ship cell, unless (y === board.size - ship.length)
-
   return (
     someShipIsToTheRight(ships, gameboard) ||
     someShipIsAtTheTop(ships, gameboard)
