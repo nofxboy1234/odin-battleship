@@ -445,7 +445,7 @@ describe('When a vertical ship is out of bounds of the board', () => {
 });
 
 describe('When all ships have at least a 1 cell margin all around their perimeter', () => {
-  test('hasCollision()', () => {
+  test('hasAdjacentShips() returns false', () => {
     const gameboard = new Gameboard();
     const ships = [];
 
@@ -464,6 +464,7 @@ describe('When all ships have at least a 1 cell margin all around their perimete
     submarine1.place(9, 9, gameboard);
     ships.push(submarine1);
 
+    // expect(hasAdjacentShips(ships, gameboard)).toEqual(false);
     expect(hasAdjacentShips(ships, gameboard)).toEqual(false);
   });
 });
