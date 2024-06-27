@@ -2,7 +2,11 @@ import Battleship from '../src/logic/battleship';
 import Destroyer from '../src/logic/destroyer';
 import Gameboard from '../src/logic/gameboard';
 import PatrolBoat from '../src/logic/patrolBoat';
-import { hasOverlappingShips, hasOutOfBoundsShips } from '../src/logic/rules';
+import {
+  hasOverlappingShips,
+  hasOutOfBoundsShips,
+  hasAdjacentShips,
+} from '../src/logic/rules';
 import Submarine from '../src/logic/submarine';
 
 afterEach(() => {
@@ -440,22 +444,26 @@ describe('When a vertical ship is out of bounds of the board', () => {
   });
 });
 
-test('hasCollision()', () => {
-  // ----- horizontal ships
-  // if collision on right
-  // - get ship front
-  // -- check if (x + 1, y - 1) has no ship cell, unless (x === board.size - ship.length)
-  // -- check if (x + 1, y) has no ship cell, unless (x === board.size - ship.length)
-  // -- check if (x + 1, y + 1) has no ship cell, unless (x === board.size - ship.length)
-  // if collision on left
-  // - get ship back
-  // -- check if (x - 1, y - 1) has no ship cell, unless (x === 0)
-  // -- check if (x - 1, y) has no ship cell, unless (x === 0)
-  // -- check if (x - 1, y + 1) has no ship cell, unless (x === 0)
-  // if collision on top
-  // - for each ship-body-cell
-  // -- check if (x, y - 1) has no ship cell, unless (y === 0)
-  // if collision on bottom
-  // - for each ship-body-cell
-  // -- check if (x, y + 1) has no ship cell, unless (y === board.size - ship.length)
+describe('When all ships have at least a 1 cell margin all around their perimeter', () => {
+  test('hasCollision()', () => {
+    const gameboard = new Gameboard();
+    const ships = [];
+
+    const battleship1 = new Battleship();
+    battleship1.setHorizontal();
+    battleship1.place(0, 0, gameboard);
+    ships.push(battleship1);
+
+    const destroyer1 = new Destroyer();
+    destroyer1.setHorizontal();
+    destroyer1.place(7, 3, gameboard);
+    ships.push(destroyer1);
+
+    const submarine1 = new Submarine();
+    submarine1.setVertical();
+    submarine1.place(9, 9, gameboard);
+    ships.push(submarine1);
+
+    expect(hasAdjacentShips(ships, gameboard)).toEqual(false);
+  });
 });
