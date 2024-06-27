@@ -81,7 +81,9 @@ function hasAdjacentShips(ships, gameboard) {
   // - for each ship-body-cell
   // -- check if (x, y + 1) has no ship cell, unless (y === board.size - ship.length)
 
-  return false;
+  // return someShipIsToTheRight || someShipIsAtTheBottom || someShipIsToTheLeft || someShipIsAtTheTop;
+  return someShipIsToTheRight;
+  // return false;
 }
 
 export {
