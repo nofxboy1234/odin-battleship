@@ -56,15 +56,14 @@ function hasAdjacentShips(ships, gameboard) {
   // -- check if (x - 1, y) has no ship cell, unless (x === 0)
   // -- check if (x - 1, y + 1) has no ship cell, unless (x === 0)
   //
-  // if collision on top:
-  // - for each ship-body-cell
-  // -- check if (x, y - 1) has no ship cell, unless (y === 0)
-  //
   // if collision on bottom:
   // - for each ship-body-cell
   // -- check if (x, y + 1) has no ship cell, unless (y === board.size - ship.length)
 
-  return someShipIsToTheRight(ships, gameboard);
+  return (
+    someShipIsToTheRight(ships, gameboard) ||
+    someShipIsAtTheTop(ships, gameboard)
+  );
 }
 
 function someShipIsToTheRight(ships, gameboard) {
@@ -99,8 +98,35 @@ function someShipIsToTheRight(ships, gameboard) {
   });
 }
 
+function someShipIsAtTheTop(ships, gameboard) {
+  return ships.some((ship) => {
+    if (shipAgainstTopWall(ship.y)) {
+      return false;
+    }
+
+    const otherShips = ships.filter((otherShip) => otherShip !== ship);
+    // - for each ship-cell
+    const topCells = [];
+    let topCell;
+    ship.cells.forEach((cell) => {
+      topCell = gameboard.getCellAt(cell.x, cell.y - 1);
+      topCells.push(topCell);
+    });
+
+    const someShipCellIsAtTheTop = otherShips.some((otherShip) => {
+      return topCells.some((topCell) => otherShip.cells.includes(topCell));
+    });
+
+    return someShipCellIsAtTheTop;
+  });
+}
+
 function shipAgainstRightWall(shipFrontX, gameboard) {
   return shipFrontX === gameboard.size - 1;
+}
+
+function shipAgainstTopWall(shipY) {
+  return shipY === 0;
 }
 
 export {
