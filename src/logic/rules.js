@@ -52,17 +52,31 @@ function hasAdjacentShips(ships, gameboard) {
   // ----- horizontal ships
   // if collision on right:
   // - get ship front
-  // -- check if (x + 1, y - 1) has no ship cell, unless (x === board.size - ship.length)
-  // -- check if (x + 1, y) has no ship cell, unless (x === board.size - ship.length)
-  // -- check if (x + 1, y + 1) has no ship cell, unless (x === board.size - ship.length)
+  const someShipIsToTheRight = ships.some((ship) => {
+    const otherShips = ships.filter((otherShip) => otherShip !== ship);
+    const shipFrontX = ship.x + ship.length;
+    const shipFrontY = ship.y;
+    // -- check if (x + 1, y - 1) has no ship cell, unless (x === board.size - ship.length)
+    const marginCell = gameboard.getCellAt(shipFrontX + 1, shipFrontY - 1);
+    const someShipCellIsToTheRight = otherShips.some((otherShip) => {
+      return otherShip.cells.includes(marginCell);
+    });
+
+    // -- check if (x + 1, y) has no ship cell, unless (x === board.size - ship.length)
+    // -- check if (x + 1, y + 1) has no ship cell, unless (x === board.size - ship.length)
+    return someShipCellIsToTheRight;
+    //
+  });
   // if collision on left:
   // - get ship back
   // -- check if (x - 1, y - 1) has no ship cell, unless (x === 0)
   // -- check if (x - 1, y) has no ship cell, unless (x === 0)
   // -- check if (x - 1, y + 1) has no ship cell, unless (x === 0)
+  //
   // if collision on top:
   // - for each ship-body-cell
   // -- check if (x, y - 1) has no ship cell, unless (y === 0)
+  //
   // if collision on bottom:
   // - for each ship-body-cell
   // -- check if (x, y + 1) has no ship cell, unless (y === board.size - ship.length)
