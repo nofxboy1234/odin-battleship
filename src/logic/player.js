@@ -1,6 +1,6 @@
 import getRandomInt from './helpers';
 import { gameboardShips } from './rules';
-import { hasOverlappingShips } from './rules';
+import { hasOverlappingShips, hasOutOfBoundsShips } from './rules';
 
 class Player {
   constructor(gameboard, name) {
@@ -42,7 +42,10 @@ class Player {
         }
       });
 
-      if (!hasOverlappingShips(ships)) {
+      if (
+        !hasOverlappingShips(ships) &&
+        !hasOutOfBoundsShips(ships, this.gameboard)
+      ) {
         shipsInValidPosition = true;
         ships.forEach((ship) => this.gameboard.placeShip(ship, ship.x, ship.y));
       }
