@@ -439,3 +439,23 @@ describe('When a vertical ship is out of bounds of the board', () => {
     expect(hasOutOfBoundsShips(ships, gameboard)).toEqual(true);
   });
 });
+
+test('hasCollision()', () => {
+  // ----- horizontal ships
+  // if collision on right
+  // - get ship front
+  // -- check if (x + 1, y - 1) has no ship cell, unless (x === board.size - ship.length)
+  // -- check if (x + 1, y) has no ship cell, unless (x === board.size - ship.length)
+  // -- check if (x + 1, y + 1) has no ship cell, unless (x === board.size - ship.length)
+  // if collision on left
+  // - get ship back
+  // -- check if (x - 1, y - 1) has no ship cell, unless (x === 0)
+  // -- check if (x - 1, y) has no ship cell, unless (x === 0)
+  // -- check if (x - 1, y + 1) has no ship cell, unless (x === 0)
+  // if collision on top
+  // - for each ship-body-cell
+  // -- check if (x, y - 1) has no ship cell, unless (y === 0)
+  // if collision on bottom
+  // - for each ship-body-cell
+  // -- check if (x, y + 1) has no ship cell, unless (y === board.size - ship.length)
+});
