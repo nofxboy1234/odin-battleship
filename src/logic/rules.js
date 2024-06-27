@@ -94,7 +94,6 @@ function someShipIsAtTheTop(ships, gameboard) {
     }
 
     const otherShips = ships.filter((otherShip) => otherShip !== ship);
-    // - for each ship-cell
     const topCells = [];
     let topCell;
     ship.cells.forEach((cell) => {
