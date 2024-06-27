@@ -444,7 +444,7 @@ describe('When a vertical ship is out of bounds of the board', () => {
   });
 });
 
-describe('When there are 2 horizontal ships of length 4, and length 3, with the ships being adjacent to one another', () => {
+describe('When there are 2 horizontal ships, with one ship being adjacent-right to the other', () => {
   test('hasAdjacentShips() returns true', () => {
     const gameboard = new Gameboard();
     const ships = [];
@@ -463,7 +463,27 @@ describe('When there are 2 horizontal ships of length 4, and length 3, with the 
   });
 });
 
-describe('When there is 1 horizontal ship of length 4 with a margin of at least 1 empty cell around its perimeter', () => {
+describe('When there are 2 horizontal ships, with the ships not being adjacent-right to one another', () => {
+  test('hasAdjacentShips() returns false', () => {
+    const gameboard = new Gameboard();
+    const ships = [];
+
+    const battleship1 = new Battleship();
+    battleship1.setHorizontal();
+    battleship1.place(1, 1, gameboard);
+    ships.push(battleship1);
+
+    const destroyer1 = new Destroyer();
+    destroyer1.setHorizontal();
+    destroyer1.place(6, 1, gameboard);
+    ships.push(destroyer1);
+
+    // expect(hasAdjacentShips(ships, gameboard)).toEqual(false);
+    expect(hasAdjacentShips(ships, gameboard)).toEqual(false);
+  });
+});
+
+describe('When there is 1 horizontal ship with a margin of at least 1 empty cell around its perimeter', () => {
   test('hasAdjacentShips() returns false', () => {
     const gameboard = new Gameboard();
     const ships = [];

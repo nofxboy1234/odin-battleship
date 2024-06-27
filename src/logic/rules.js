@@ -54,7 +54,7 @@ function hasAdjacentShips(ships, gameboard) {
   // - get ship front
   const someShipIsToTheRight = ships.some((ship) => {
     const otherShips = ships.filter((otherShip) => otherShip !== ship);
-    const shipFrontX = ship.x + ship.length;
+    const shipFrontX = ship.x + ship.length - 1;
     const shipFrontY = ship.y;
 
     const rightCells = [];
