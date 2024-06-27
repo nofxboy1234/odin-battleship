@@ -478,8 +478,46 @@ describe('When there are 2 horizontal ships, with the ships not being adjacent-r
     destroyer1.place(6, 1, gameboard);
     ships.push(destroyer1);
 
-    // expect(hasAdjacentShips(ships, gameboard)).toEqual(false);
     expect(hasAdjacentShips(ships, gameboard)).toEqual(false);
+  });
+});
+
+describe('When there are 2 horizontal ships, with the ships not being adjacent-right to one another and one ship against the right wall of the gameboard', () => {
+  test('hasAdjacentShips() returns false', () => {
+    const gameboard = new Gameboard();
+    const ships = [];
+
+    const battleship1 = new Battleship();
+    battleship1.setHorizontal();
+    battleship1.place(1, 1, gameboard);
+    ships.push(battleship1);
+
+    const destroyer1 = new Destroyer();
+    destroyer1.setHorizontal();
+    destroyer1.place(7, 1, gameboard);
+    ships.push(destroyer1);
+
+    expect(hasAdjacentShips(ships, gameboard)).toEqual(false);
+  });
+});
+
+describe('When there are 2 horizontal ships, with the ships not being adjacent-right to one another and one ship against the right wall of the gameboard', () => {
+  test('hasAdjacentShips() does not call gameboar.getCellAt()', () => {
+    const gameboard = new Gameboard();
+    const spy = jest.spyOn(gameboard, 'getCellAt');
+    const ships = [];
+
+    const battleship1 = new Battleship();
+    battleship1.setHorizontal();
+    battleship1.place(1, 1, gameboard);
+    ships.push(battleship1);
+
+    const destroyer1 = new Destroyer();
+    destroyer1.setHorizontal();
+    destroyer1.place(7, 1, gameboard);
+    ships.push(destroyer1);
+
+    expect(spy).not.toBeCalled();
   });
 });
 

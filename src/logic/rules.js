@@ -53,21 +53,23 @@ function hasAdjacentShips(ships, gameboard) {
   // if collision on right:
   // - get ship front
   const someShipIsToTheRight = ships.some((ship) => {
-    const otherShips = ships.filter((otherShip) => otherShip !== ship);
     const shipFrontX = ship.x + ship.length - 1;
     const shipFrontY = ship.y;
 
+    if (shipAgainstRightWall(shipFrontX, gameboard)) {
+      return false;
+    }
+
+    const otherShips = ships.filter((otherShip) => otherShip !== ship);
     const rightCells = [];
-    // -- check if (x + 1, y - 1) has no ship cell, unless (x === board.size - ship.length)
+
     let rightCell;
     rightCell = gameboard.getCellAt(shipFrontX + 1, shipFrontY - 1);
     rightCells.push(rightCell);
 
-    // -- check if (x + 1, y) has no ship cell, unless (x === board.size - ship.length)
     rightCell = gameboard.getCellAt(shipFrontX + 1, shipFrontY);
     rightCells.push(rightCell);
 
-    // -- check if (x + 1, y + 1) has no ship cell, unless (x === board.size - ship.length)
     rightCell = gameboard.getCellAt(shipFrontX + 1, shipFrontY + 1);
     rightCells.push(rightCell);
 
@@ -78,7 +80,6 @@ function hasAdjacentShips(ships, gameboard) {
     });
 
     return someShipCellIsToTheRight;
-    //
   });
   // if collision on left:
   // - get ship back
@@ -97,6 +98,10 @@ function hasAdjacentShips(ships, gameboard) {
   // return someShipIsToTheRight || someShipIsAtTheBottom || someShipIsToTheLeft || someShipIsAtTheTop;
   return someShipIsToTheRight;
   // return false;
+}
+
+function shipAgainstRightWall(shipFrontX, gameboard) {
+  return shipFrontX === gameboard.size - 1;
 }
 
 export {
