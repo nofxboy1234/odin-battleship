@@ -63,7 +63,6 @@ function someShipIsToTheRight(ships, gameboard) {
       }
 
       const otherShips = ships.filter((otherShip) => otherShip !== ship);
-
       const rightCells = getCellsToTheRight(gameboard, ship);
 
       const someShipCellIsToTheRight = otherShips.some((otherShip) => {
