@@ -97,7 +97,7 @@ function getCellsToTheRight(gameboard, ship) {
 function someShipIsAtTheTop(ships, gameboard) {
   return ships.some((ship) => {
     if (ship.orientation === 'horizontal') {
-      if (shipAgainstTopWall(ship.y)) {
+      if (shipAgainstTopWall(ship)) {
         return false;
       }
 
@@ -119,12 +119,11 @@ function someShipIsAtTheTop(ships, gameboard) {
 }
 
 function shipAgainstRightWall(ship, gameboard) {
-  const shipFrontX = ship.x + ship.length - 1;
-  return shipFrontX === gameboard.size - 1;
+  return ship.front().x === gameboard.size - 1;
 }
 
-function shipAgainstTopWall(shipY) {
-  return shipY === 0;
+function shipAgainstTopWall(ship) {
+  return ship.y === 0;
 }
 
 export {
