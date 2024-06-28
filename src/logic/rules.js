@@ -58,25 +58,13 @@ function hasAdjacentShips(ships, gameboard) {
 function someShipIsToTheRight(ships, gameboard) {
   return ships.some((ship) => {
     if (ship.orientation === 'horizontal') {
-      const shipFrontX = ship.x + ship.length - 1;
-      const shipFrontY = ship.y;
-
-      if (shipAgainstRightWall(shipFrontX, gameboard)) {
+      if (shipAgainstRightWall(ship, gameboard)) {
         return false;
       }
 
       const otherShips = ships.filter((otherShip) => otherShip !== ship);
-      const rightCells = [];
 
-      let rightCell;
-      rightCell = gameboard.getCellAt(shipFrontX + 1, shipFrontY - 1);
-      rightCells.push(rightCell);
-
-      rightCell = gameboard.getCellAt(shipFrontX + 1, shipFrontY);
-      rightCells.push(rightCell);
-
-      rightCell = gameboard.getCellAt(shipFrontX + 1, shipFrontY + 1);
-      rightCells.push(rightCell);
+      const rightCells = getCellsToTheRight(gameboard, ship);
 
       const someShipCellIsToTheRight = otherShips.some((otherShip) => {
         return rightCells.some((rightCell) =>
@@ -87,6 +75,23 @@ function someShipIsToTheRight(ships, gameboard) {
       return someShipCellIsToTheRight;
     }
   });
+}
+
+function getCellsToTheRight(gameboard, ship) {
+  const shipFrontX = ship.x + ship.length - 1;
+  const shipFrontY = ship.y;
+
+  const rightCells = [];
+  let rightCell;
+  rightCell = gameboard.getCellAt(shipFrontX + 1, shipFrontY - 1);
+  rightCells.push(rightCell);
+
+  rightCell = gameboard.getCellAt(shipFrontX + 1, shipFrontY);
+  rightCells.push(rightCell);
+
+  rightCell = gameboard.getCellAt(shipFrontX + 1, shipFrontY + 1);
+  rightCells.push(rightCell);
+  return rightCells;
 }
 
 function someShipIsAtTheTop(ships, gameboard) {
@@ -113,7 +118,8 @@ function someShipIsAtTheTop(ships, gameboard) {
   });
 }
 
-function shipAgainstRightWall(shipFrontX, gameboard) {
+function shipAgainstRightWall(ship, gameboard) {
+  const shipFrontX = ship.x + ship.length - 1;
   return shipFrontX === gameboard.size - 1;
 }
 
