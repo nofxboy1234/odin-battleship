@@ -55,14 +55,14 @@ class Ship {
     this.cells = gameboard.cells.filter((cell) => {
       if (this.orientation === 'horizontal') {
         const back = this.x;
-        const front = this.x + this.length;
+        const front = this.x + this.length - 1;
 
-        return cell.x >= back && cell.x < front && cell.y === this.y;
+        return cell.x >= back && cell.x <= front && cell.y === this.y;
       } else if (this.orientation === 'vertical') {
-        const shipBack = this.y;
-        const shipFront = this.y + this.length;
+        const back = this.y;
+        const front = this.y + this.length - 1;
 
-        return cell.y >= shipBack && cell.y < shipFront && cell.x === this.x;
+        return cell.y >= back && cell.y <= front && cell.x === this.x;
       }
     });
   }
