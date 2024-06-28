@@ -43,6 +43,10 @@ class Ship {
     this.orientation = orientations[index];
   }
 
+  front() {
+    return this.cells.at(-1);
+  }
+
   #setCells(gameboard) {
     this.cells = gameboard.cells.filter((cell) => {
       if (this.orientation === 'horizontal') {

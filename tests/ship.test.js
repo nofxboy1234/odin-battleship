@@ -117,3 +117,12 @@ test('setRandomOrientation() sets orientation property to "horizontal" when rand
   ship.setRandomOrientation();
   expect(ship.orientation).toEqual('horizontal');
 });
+
+test('front() returns the Cell at the front of a ship', () => {
+  const gameboard = new Gameboard();
+  const ship = new Ship(3);
+  ship.place(3, 1, gameboard);
+  const frontCell = new Cell(5, 1);
+
+  expect(ship.front()).toEqual(frontCell);
+});
