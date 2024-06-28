@@ -77,18 +77,17 @@ function someShipIsToTheRight(ships, gameboard) {
 }
 
 function getCellsToTheRight(gameboard, ship) {
-  const shipFrontX = ship.front().x;
-  const shipFrontY = ship.front().y;
+  const shipFront = ship.front();
 
   const rightCells = [];
   let rightCell;
-  rightCell = gameboard.getCellAt(shipFrontX + 1, shipFrontY - 1);
+  rightCell = gameboard.getCellAt(shipFront.x + 1, shipFront.y - 1);
   rightCells.push(rightCell);
 
-  rightCell = gameboard.getCellAt(shipFrontX + 1, shipFrontY);
+  rightCell = gameboard.getCellAt(shipFront.x + 1, shipFront.y);
   rightCells.push(rightCell);
 
-  rightCell = gameboard.getCellAt(shipFrontX + 1, shipFrontY + 1);
+  rightCell = gameboard.getCellAt(shipFront.x + 1, shipFront.y + 1);
   rightCells.push(rightCell);
   return rightCells;
 }
