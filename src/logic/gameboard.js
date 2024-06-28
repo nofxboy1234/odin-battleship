@@ -51,16 +51,13 @@ class Gameboard {
 
   getShipOnCell(x, y) {
     return this.#ships.find((ship) => {
+      const shipBack = ship.back();
+      const shipFront = ship.front();
+
       if (ship.orientation === 'horizontal') {
-        const shipBack = ship.x;
-        const shipFront = ship.x + ship.length;
-
-        return x >= shipBack && x < shipFront && y === ship.y;
+        return x >= shipBack.x && x <= shipFront.x && y === ship.y;
       } else if (ship.orientation === 'vertical') {
-        const shipBack = ship.y;
-        const shipFront = ship.y + ship.length;
-
-        return y >= shipBack && y < shipFront && x === ship.x;
+        return y >= shipBack.y && y <= shipFront.y && x === ship.x;
       }
     });
   }

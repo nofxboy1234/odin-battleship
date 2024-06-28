@@ -78,8 +78,8 @@ function someShipIsToTheRight(ships, gameboard) {
 }
 
 function getCellsToTheRight(gameboard, ship) {
-  const shipFrontX = ship.x + ship.length - 1;
-  const shipFrontY = ship.y;
+  const shipFrontX = ship.front().x;
+  const shipFrontY = ship.front().y;
 
   const rightCells = [];
   let rightCell;

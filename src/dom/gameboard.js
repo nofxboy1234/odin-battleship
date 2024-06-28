@@ -159,20 +159,21 @@ class Gameboard {
   }
 
   getShipCellDOMs(ship) {
+    const shipBack = ship.back();
+    const shipFront = ship.front();
+
     return this.#cells.filter((cellDOM) => {
       if (ship.orientation === 'horizontal') {
-        const shipBack = ship.x;
-        const shipFront = ship.x + ship.length;
-
         return (
-          cellDOM.x >= shipBack && cellDOM.x < shipFront && cellDOM.y === ship.y
+          cellDOM.x >= shipBack.x &&
+          cellDOM.x <= shipFront.x &&
+          cellDOM.y === ship.y
         );
       } else if (ship.orientation === 'vertical') {
-        const shipBack = ship.y;
-        const shipFront = ship.y + ship.length;
-
         return (
-          cellDOM.y >= shipBack && cellDOM.y < shipFront && cellDOM.x === ship.x
+          cellDOM.y >= shipBack.y &&
+          cellDOM.y <= shipFront.y &&
+          cellDOM.x === ship.x
         );
       }
     });
