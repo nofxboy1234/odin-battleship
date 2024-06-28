@@ -126,3 +126,12 @@ test('front() returns the Cell at the front of a ship', () => {
 
   expect(ship.front()).toEqual(frontCell);
 });
+
+test('back() returns the Cell at the back of a ship', () => {
+  const gameboard = new Gameboard();
+  const ship = new Ship(3);
+  ship.place(3, 1, gameboard);
+  const backCell = new Cell(3, 1);
+
+  expect(ship.back()).toEqual(backCell);
+});
