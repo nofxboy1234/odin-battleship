@@ -49,6 +49,10 @@ class Gameboard {
     return this.cells.find((cell) => cell.x === x && cell.y === y);
   }
 
+  offsetCell(cell, x, y) {
+    return this.getCellAt(cell.x + x, cell.y + y);
+  }
+
   getShipOnCell(x, y) {
     return this.#ships.find((ship) => {
       const shipBack = ship.back();

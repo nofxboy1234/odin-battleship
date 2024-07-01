@@ -244,3 +244,11 @@ test('gameboard.getCellAt() returns the cell at a position', () => {
   const cell = new Cell(0, 0);
   expect(gameboard.getCellAt(0, 0)).toEqual(cell);
 });
+
+test('offsetCell() returns a Cell on a board offset from the given Cell by positive x and y', () => {
+  const board = new Gameboard();
+  const cell = board.getCellAt(3, 4);
+  const offsetCell = board.getCellAt(4, 6);
+
+  expect(board.offsetCell(cell, 1, 2)).toBe(offsetCell);
+});
