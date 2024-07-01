@@ -1,4 +1,3 @@
-- disable hover on cells for the owner of that board
 - Make appropriate methods private in classes
 
 - ~Refactor any code that is not readable
