@@ -77,6 +77,11 @@ class Gameboard {
     return [x, y];
   }
 
+  reset() {
+    this.#ships = [];
+    this.#misses = [];
+  }
+
   #createCells() {
     for (let y = 0; y < this.size; y++) {
       for (let x = 0; x < this.size; x++) {

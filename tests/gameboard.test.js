@@ -245,10 +245,32 @@ test('gameboard.getCellAt() returns the cell at a position', () => {
   expect(gameboard.getCellAt(0, 0)).toEqual(cell);
 });
 
-test('offsetCell() returns a Cell on a board offset from the given Cell by positive x and y', () => {
+test('offsetCell() returns a Cell on a board, offset from the given Cell by x and y', () => {
   const board = new Gameboard();
   const cell = board.getCellAt(3, 4);
   const offsetCell = board.getCellAt(4, 6);
 
   expect(board.offsetCell(cell, 1, 2)).toBe(offsetCell);
+});
+
+describe('When a board has ships and misses stored', () => {
+  test('reset() resets `ships` property', () => {
+    const board = new Gameboard();
+    const ship = new Ship(3);
+    board.placeShip(ship, 0, 0);
+    board.receiveAttack(5, 5);
+    board.reset();
+
+    expect(board.getShips()).toEqual([]);
+  });
+
+  test('reset() resets `misses` property', () => {
+    const board = new Gameboard();
+    const ship = new Ship(3);
+    board.placeShip(ship, 0, 0);
+    board.receiveAttack(5, 5);
+    board.reset();
+
+    expect(board.getMisses()).toEqual([]);
+  });
 });
