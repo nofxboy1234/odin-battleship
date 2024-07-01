@@ -96,26 +96,27 @@ async function handleTurn(clickData) {
 function newGame() {
   removeGameboard(enemyContainer);
   removeGameboard(humanContainer);
+  removeRandomizeButton();
 
   enemyGameboard = new Gameboard();
-  humanGameboard = new Gameboard();
-
   enemy = new Player(enemyGameboard, 'enemy');
   enemy.placeShipsRandomly();
   enemyGameboardElement = new GameboardElement(enemy, handleTurn);
   enemyGameboardElement.createShips();
   enemyGameboardElement.renderShips();
+  currentGameboardElement = enemyGameboardElement;
   enemyContainer.appendChild(enemyGameboardElement.render());
 
-  human = new Player(humanGameboard, 'human');
-  currentPlayer = human;
-  currentGameboardElement = enemyGameboardElement;
-
-  humanGameboardElement = new GameboardElement(human, handleTurn);
-  humanGameboardElement.disable();
-  humanContainer.appendChild(humanGameboardElement.render());
+  setupHumanPlayer();
 
   addRandomizeButton();
+}
+
+function removeRandomizeButton() {
+  const button = document.getElementById('randomize-btn');
+  if (button) {
+    button.remove();
+  }
 }
 
 function addRandomizeButton() {
@@ -129,6 +130,10 @@ function addRandomizeButton() {
 }
 
 function randomize() {
+  removeGameboard(humanContainer);
+
+  setupHumanPlayer();
+
   human.placeShipsRandomly();
   humanGameboardElement.createShips();
   humanGameboardElement.renderShips();
@@ -149,3 +154,11 @@ let human;
 let currentPlayer;
 const enemyContainer = document.getElementById('gameboard-container-enemy');
 const humanContainer = document.getElementById('gameboard-container-human');
+function setupHumanPlayer() {
+  humanGameboard = new Gameboard();
+  human = new Player(humanGameboard, 'human');
+  currentPlayer = human;
+  humanGameboardElement = new GameboardElement(human, handleTurn);
+  humanGameboardElement.disable();
+  humanContainer.appendChild(humanGameboardElement.render());
+}
