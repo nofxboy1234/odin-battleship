@@ -5,3 +5,4 @@
 - display current player and end game message
 - Make appropriate methods private in classes
 - ~Refactor any code that is not readable
+- make new game and randomize async so 'New game done' message is immediate
