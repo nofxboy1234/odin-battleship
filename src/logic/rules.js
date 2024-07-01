@@ -103,20 +103,18 @@ function getCellsToTheRight(gameboard, ship) {
 
 function someShipIsAtTheTop(ships, gameboard) {
   return ships.some((ship) => {
-    if (ship.orientation === 'horizontal') {
-      if (shipAgainstTopWall(ship)) {
-        return false;
-      }
-
-      const otherShips = ships.filter((otherShip) => otherShip !== ship);
-      const topCells = getCellsAtTheTop(gameboard, ship);
-
-      const someShipCellIsAtTheTop = otherShips.some((otherShip) => {
-        return topCells.some((topCell) => otherShip.cells.includes(topCell));
-      });
-
-      return someShipCellIsAtTheTop;
+    if (shipAgainstTopWall(ship)) {
+      return false;
     }
+
+    const otherShips = ships.filter((otherShip) => otherShip !== ship);
+    const topCells = getCellsAtTheTop(gameboard, ship);
+
+    const someShipCellIsAtTheTop = otherShips.some((otherShip) => {
+      return topCells.some((topCell) => otherShip.cells.includes(topCell));
+    });
+
+    return someShipCellIsAtTheTop;
   });
 }
 
@@ -124,12 +122,27 @@ function getCellsAtTheTop(gameboard, ship) {
   const topCells = [];
   let topCell;
 
-  ship.cells.forEach((cell) => {
-    topCell = gameboard.offsetCell(cell, 0, -1);
-    topCells.push(topCell);
-  });
+  if (ship.orientation === 'horizontal') {
+    ship.cells.forEach((cell) => {
+      topCell = gameboard.offsetCell(cell, 0, -1);
+      topCells.push(topCell);
+    });
 
-  return topCells;
+    return topCells;
+  } else if (ship.orientation === 'vertical') {
+    const shipBack = ship.back();
+
+    topCell = gameboard.offsetCell(shipBack, -1, -1);
+    topCells.push(topCell);
+
+    topCell = gameboard.offsetCell(shipBack, 0, -1);
+    topCells.push(topCell);
+
+    topCell = gameboard.offsetCell(shipBack, 1, -1);
+    topCells.push(topCell);
+
+    return topCells;
+  }
 }
 
 function shipAgainstRightWall(ship, gameboard) {

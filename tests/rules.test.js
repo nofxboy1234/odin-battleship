@@ -503,9 +503,9 @@ describe('horizontal ships: adjacent-right ships', () => {
   });
 
   describe('When there are 2 horizontal ships, with the ships not being adjacent-right to one another and one ship against the right wall of the gameboard', () => {
-    test('hasAdjacentShips() does not call gameboard.getCellAt()', () => {
+    test('hasAdjacentShips() does not call gameboard.offsetCell()', () => {
       const gameboard = new Gameboard();
-      const spy = jest.spyOn(gameboard, 'getCellAt');
+      const spy = jest.spyOn(gameboard, 'offsetCell');
       const ships = [];
 
       const battleship1 = new Battleship();
@@ -596,9 +596,9 @@ describe('horizontal ships: adjacent-top ships', () => {
   });
 
   describe('When there are 2 horizontal ships, with the ships not being adjacent-top to one another and one ship against the top wall of the gameboard', () => {
-    test('hasAdjacentShips() does not call gameboard.getCellAt()', () => {
+    test('hasAdjacentShips() does not call gameboard.offsetCell()', () => {
       const gameboard = new Gameboard();
-      const spy = jest.spyOn(gameboard, 'getCellAt');
+      const spy = jest.spyOn(gameboard, 'offsetCell');
       const ships = [];
 
       const battleship1 = new Battleship();
@@ -650,48 +650,48 @@ describe('vertical ships: adjacent-right ships', () => {
     });
   });
 
-  describe('When there are 2 horizontal ships, with the ships not being adjacent-right to one another', () => {
+  describe('When there are 2 vertical ships, with the ships not being adjacent-right to one another', () => {
     test('hasAdjacentShips() returns false', () => {
       const gameboard = new Gameboard();
       const ships = [];
 
       const battleship1 = new Battleship();
-      battleship1.setHorizontal();
+      battleship1.setVertical();
       battleship1.place(1, 1, gameboard);
       ships.push(battleship1);
 
       const destroyer1 = new Destroyer();
-      destroyer1.setHorizontal();
-      destroyer1.place(6, 1, gameboard);
+      destroyer1.setVertical();
+      destroyer1.place(3, 1, gameboard);
       ships.push(destroyer1);
 
       expect(hasAdjacentShips(ships, gameboard)).toEqual(false);
     });
   });
 
-  describe('When there are 2 horizontal ships, with the ships not being adjacent-right to one another and one ship against the right wall of the gameboard', () => {
+  describe('When there are 2 vertical ships, with the ships not being adjacent-right to one another and one ship against the right wall of the gameboard', () => {
     test('hasAdjacentShips() returns false', () => {
       const gameboard = new Gameboard();
       const ships = [];
 
       const battleship1 = new Battleship();
-      battleship1.setHorizontal();
+      battleship1.setVertical();
       battleship1.place(1, 1, gameboard);
       ships.push(battleship1);
 
       const destroyer1 = new Destroyer();
-      destroyer1.setHorizontal();
-      destroyer1.place(7, 1, gameboard);
+      destroyer1.setVertical();
+      destroyer1.place(9, 1, gameboard);
       ships.push(destroyer1);
 
       expect(hasAdjacentShips(ships, gameboard)).toEqual(false);
     });
   });
 
-  describe('When there are 2 horizontal ships, with the ships not being adjacent-right to one another and one ship against the right wall of the gameboard', () => {
-    test('hasAdjacentShips() does not call gameboard.getCellAt()', () => {
+  describe('When there are 2 vertical ships, with the ships not being adjacent-right to one another and one ship against the right wall of the gameboard', () => {
+    test('hasAdjacentShips() does not call gameboard.offsetCell()', () => {
       const gameboard = new Gameboard();
-      const spy = jest.spyOn(gameboard, 'getCellAt');
+      const spy = jest.spyOn(gameboard, 'offsetCell');
       const ships = [];
 
       const battleship1 = new Battleship();
@@ -701,20 +701,20 @@ describe('vertical ships: adjacent-right ships', () => {
 
       const destroyer1 = new Destroyer();
       destroyer1.setHorizontal();
-      destroyer1.place(7, 1, gameboard);
+      destroyer1.place(9, 1, gameboard);
       ships.push(destroyer1);
 
       expect(spy).not.toBeCalled();
     });
   });
 
-  describe('When there is 1 horizontal ship with a margin of at least 1 empty cell around its perimeter', () => {
+  describe('When there is 1 vertical ship with a margin of at least 1 empty cell around its perimeter', () => {
     test('hasAdjacentShips() returns false', () => {
       const gameboard = new Gameboard();
       const ships = [];
 
       const battleship1 = new Battleship();
-      battleship1.setHorizontal();
+      battleship1.setVertical();
       battleship1.place(1, 1, gameboard);
       ships.push(battleship1);
 
@@ -723,20 +723,20 @@ describe('vertical ships: adjacent-right ships', () => {
   });
 });
 
-describe('horizontal ships: adjacent-top ships', () => {
-  describe('When there are 2 horizontal ships, with one ship being adjacent-top to the other', () => {
+describe('vertical ships: adjacent-top ships', () => {
+  describe('When there are 2 vertical ships, with one ship being adjacent-top to the other', () => {
     test('hasAdjacentShips() returns true', () => {
       const gameboard = new Gameboard();
       const ships = [];
 
       const battleship1 = new Battleship();
-      battleship1.setHorizontal();
+      battleship1.setVertical();
       battleship1.place(1, 1, gameboard);
       ships.push(battleship1);
 
       const destroyer1 = new Destroyer();
-      destroyer1.setHorizontal();
-      destroyer1.place(1, 2, gameboard);
+      destroyer1.setVertical();
+      destroyer1.place(1, 5, gameboard);
       ships.push(destroyer1);
 
       expect(hasAdjacentShips(ships, gameboard)).toEqual(true);
@@ -782,9 +782,9 @@ describe('horizontal ships: adjacent-top ships', () => {
   });
 
   describe('When there are 2 horizontal ships, with the ships not being adjacent-top to one another and one ship against the top wall of the gameboard', () => {
-    test('hasAdjacentShips() does not call gameboard.getCellAt()', () => {
+    test('hasAdjacentShips() does not call gameboard.offsetCell()', () => {
       const gameboard = new Gameboard();
-      const spy = jest.spyOn(gameboard, 'getCellAt');
+      const spy = jest.spyOn(gameboard, 'offsetCell');
       const ships = [];
 
       const battleship1 = new Battleship();
