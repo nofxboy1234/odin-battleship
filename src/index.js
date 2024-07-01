@@ -102,6 +102,7 @@ function newGame() {
   setupHumanPlayer();
 
   addRandomizeButton();
+  randomizePlayerBoard();
 }
 
 function setupComputerPlayer() {
@@ -137,11 +138,11 @@ function addRandomizeButton() {
   randomizeButton.id = 'randomize-btn';
   document.body.appendChild(randomizeButton);
   randomizeButton.addEventListener('click', () => {
-    randomize();
+    randomizePlayerBoard();
   });
 }
 
-function randomize() {
+function randomizePlayerBoard() {
   removeGameboard(humanContainer);
 
   setupHumanPlayer();
