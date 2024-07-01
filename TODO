@@ -1,3 +1,4 @@
+- ~ Add another 2000 delay after the enemy has clicked a cell
 - Make appropriate methods private in classes
 
 - ~Refactor any code that is not readable
