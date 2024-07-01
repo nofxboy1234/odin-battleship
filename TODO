@@ -1,3 +1,4 @@
+- Add methods for clearing gameboard dom ships and gameboard logic ships
 - have a button to cycle through random placements
 - disable human clicking own board
 - disable hover on cells for the owner of that board
