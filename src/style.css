@@ -100,7 +100,7 @@
 }
 
 .disabled {
-  filter: contrast(50%);
+  filter: contrast(20%);
 }
 
 button {

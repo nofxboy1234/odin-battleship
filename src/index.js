@@ -109,6 +109,8 @@ function newGame() {
 function play() {
   enemyGameboardElement.enable();
   message.textContent = 'Your turn!';
+  randomizeButton.disabled = true;
+  playButton.disabled = true;
 }
 
 function setupHumanGameboardElement() {
