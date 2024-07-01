@@ -29,6 +29,7 @@ async function nextTurn() {
   currentGameboardElement.disable();
   if (currentGameboardElement === enemyGameboardElement) {
     currentPlayer = enemy;
+    message.textContent = "Enemy's turn!";
     currentGameboardElement = humanGameboardElement;
     humanGameboardElement.enable();
 
@@ -36,6 +37,7 @@ async function nextTurn() {
     enemyPlay();
   } else {
     currentPlayer = human;
+    message.textContent = 'Your turn!';
     currentGameboardElement = enemyGameboardElement;
     enemyGameboardElement.enable();
   }
@@ -69,7 +71,7 @@ async function handleTurn(clickData) {
 
     if (currentPlayer === human) {
       if (enemyGameboard.allShipsSunk()) {
-        console.log('human won!');
+        message.textContent = 'You won!';
         enemyGameboardElement.disable();
         humanGameboardElement.disable();
         return;
@@ -78,7 +80,7 @@ async function handleTurn(clickData) {
 
     if (currentPlayer === enemy) {
       if (humanGameboard.allShipsSunk()) {
-        console.log('enemy won!');
+        message.textContent = 'Enemy won!';
         enemyGameboardElement.disable();
         humanGameboardElement.disable();
         return;
@@ -104,11 +106,18 @@ function newGame() {
   setupHumanPlayer();
   setupHumanGameboardElement();
   randomizeHumanGameboard();
+
+  message.textContent =
+    "Randomize your ships until you're happy with their positions, then press Play!";
+
+  randomizeButton.disabled = false;
+  playButton.disabled = false;
 }
 
 function play() {
   enemyGameboardElement.enable();
   message.textContent = 'Your turn!';
+
   randomizeButton.disabled = true;
   playButton.disabled = true;
 }
