@@ -127,11 +127,11 @@ function randomizeHumanGameboard() {
   setupHumanPlayer();
   humanGameboardElement = new GameboardElement(human, handleTurn);
   humanGameboardElement.disable();
-  humanContainer.appendChild(humanGameboardElement.render());
 
   human.placeShipsRandomly();
   humanGameboardElement.createShips();
   humanGameboardElement.renderShips();
+  humanContainer.appendChild(humanGameboardElement.render());
 }
 
 const newGameButton = document.getElementById('new-game-btn');
