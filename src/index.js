@@ -119,16 +119,15 @@ function setupHumanPlayer() {
   humanGameboard = new Gameboard();
   human = new Player(humanGameboard, 'human');
   currentPlayer = human;
-
-  humanGameboardElement = new GameboardElement(human, handleTurn);
-  humanGameboardElement.disable();
-  humanContainer.appendChild(humanGameboardElement.render());
 }
 
 function randomizeHumanGameboard() {
   removeGameboard(humanContainer);
 
   setupHumanPlayer();
+  humanGameboardElement = new GameboardElement(human, handleTurn);
+  humanGameboardElement.disable();
+  humanContainer.appendChild(humanGameboardElement.render());
 
   human.placeShipsRandomly();
   humanGameboardElement.createShips();
