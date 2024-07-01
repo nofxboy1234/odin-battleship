@@ -114,6 +114,7 @@ function setupHumanGameboardElement() {
 function setupComputerGameboardElement() {
   enemyGameboardElement = new GameboardElement(enemy, handleTurn);
   enemyGameboardElement.disable();
+  currentGameboardElement = enemyGameboardElement;
 }
 
 function setupComputerPlayer() {
@@ -134,7 +135,6 @@ function randomizeComputerGameboard() {
   enemy.placeShipsRandomly();
   enemyGameboardElement.createShips();
   enemyGameboardElement.renderShips();
-  currentGameboardElement = enemyGameboardElement;
   enemyContainer.appendChild(enemyGameboardElement.render());
 }
 
