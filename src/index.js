@@ -151,6 +151,7 @@ function randomizeHumanGameboard() {
 const newGameButton = document.getElementById('new-game-btn');
 newGameButton.addEventListener('click', () => {
   newGame();
+  console.log('New game done!');
 });
 
 const randomizeButton = document.getElementById('randomize-btn');

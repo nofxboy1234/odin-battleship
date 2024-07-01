@@ -15,9 +15,9 @@
   gap: 1rem;
 }
 
-#top-elements {
+.button-container {
   display: flex;
-  gap: 1rem;
+  justify-content: center;
 }
 
 .board-label {
@@ -104,4 +104,18 @@
 
 button {
   width: 100px;
+}
+
+#enemy-board-label {
+  background-color: orange;
+}
+
+#human-board-label {
+  background-color: greenyellow;
+}
+
+#message {
+  border: 1px solid black;
+  padding: 1rem;
+  background-color: yellow;
 }
