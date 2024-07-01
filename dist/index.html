@@ -6,8 +6,28 @@
     <title>Battleship!</title>
   <script defer src="runtime.bundle.js"></script><script defer src="index.bundle.js"></script></head>
   <body>
-    <button id="new-game-btn">New Game</button>
-    <div id="gameboard-container-enemy"></div>
-    <div id="gameboard-container-human"></div>
+    <div id="main-layout">
+      <div id="content-layout">
+        <div class="button-container">
+          <button id="new-game-btn">New Game</button>
+        </div>
+        <div id="gameboard-container-enemy"></div>
+        <div class="board-label">
+          <div id="enemy-board-label">Enemy's board</div>
+        </div>
+        <div id="gameboard-container-human"></div>
+        <div class="board-label">
+          <div id="human-board-label">Your board</div>
+        </div>
+        <div id="message">
+          Randomize your ships until you're happy with their positions, then
+          press Play!
+        </div>
+        <div class="button-container">
+          <button id="randomize-btn">Randomize</button>
+          <button id="play-btn">Play</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

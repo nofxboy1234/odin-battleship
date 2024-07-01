@@ -106,6 +106,11 @@ function newGame() {
   randomizeHumanGameboard();
 }
 
+function play() {
+  enemyGameboardElement.enable();
+  message.textContent = 'Your turn!';
+}
+
 function setupHumanGameboardElement() {
   humanGameboardElement = new GameboardElement(human, handleTurn);
   humanGameboardElement.disable();
@@ -158,6 +163,11 @@ const randomizeButton = document.getElementById('randomize-btn');
 randomizeButton.addEventListener('click', () => {
   randomizeHumanGameboard();
 });
+
+const message = document.getElementById('message');
+
+const playButton = document.getElementById('play-btn');
+playButton.addEventListener('click', play);
 
 let enemyGameboardElement;
 let humanGameboardElement;
