@@ -202,6 +202,7 @@ class Gameboard {
       player: this.player,
       disabled: this.isDisabled(),
     };
+    clickData.pointerType = event.pointerType;
 
     this.handleTurnCallback(clickData);
   }
