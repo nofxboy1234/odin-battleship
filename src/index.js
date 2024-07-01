@@ -166,3 +166,5 @@ let human;
 let currentPlayer;
 const enemyContainer = document.getElementById('gameboard-container-enemy');
 const humanContainer = document.getElementById('gameboard-container-human');
+
+newGame();
