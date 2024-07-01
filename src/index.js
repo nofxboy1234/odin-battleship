@@ -96,13 +96,10 @@ async function handleTurn(clickData) {
 function newGame() {
   removeGameboard(enemyContainer);
   removeGameboard(humanContainer);
-  removeRandomizeButton();
 
   setupComputerPlayer();
   setupHumanPlayer();
-
-  addRandomizeButton();
-  randomizePlayerBoard();
+  randomizeHumanGameboard();
 }
 
 function setupComputerPlayer() {
@@ -113,6 +110,7 @@ function setupComputerPlayer() {
   enemyGameboardElement.createShips();
   enemyGameboardElement.renderShips();
   currentGameboardElement = enemyGameboardElement;
+  enemyGameboardElement.disable();
   enemyContainer.appendChild(enemyGameboardElement.render());
 }
 
@@ -125,24 +123,7 @@ function setupHumanPlayer() {
   humanContainer.appendChild(humanGameboardElement.render());
 }
 
-function removeRandomizeButton() {
-  const button = document.getElementById('randomize-btn');
-  if (button) {
-    button.remove();
-  }
-}
-
-function addRandomizeButton() {
-  const randomizeButton = document.createElement('button');
-  randomizeButton.textContent = 'Randomize';
-  randomizeButton.id = 'randomize-btn';
-  document.body.appendChild(randomizeButton);
-  randomizeButton.addEventListener('click', () => {
-    randomizePlayerBoard();
-  });
-}
-
-function randomizePlayerBoard() {
+function randomizeHumanGameboard() {
   removeGameboard(humanContainer);
 
   setupHumanPlayer();
@@ -155,6 +136,11 @@ function randomizePlayerBoard() {
 const newGameButton = document.getElementById('new-game-btn');
 newGameButton.addEventListener('click', () => {
   newGame();
+});
+
+const randomizeButton = document.getElementById('randomize-btn');
+randomizeButton.addEventListener('click', () => {
+  randomizeHumanGameboard();
 });
 
 let enemyGameboardElement;
