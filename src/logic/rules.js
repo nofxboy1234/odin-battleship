@@ -101,12 +101,7 @@ function someShipIsAtTheTop(ships, gameboard) {
       }
 
       const otherShips = ships.filter((otherShip) => otherShip !== ship);
-      const topCells = [];
-      let topCell;
-      ship.cells.forEach((cell) => {
-        topCell = gameboard.getCellAt(cell.x, cell.y - 1);
-        topCells.push(topCell);
-      });
+      const topCells = getCellsAtTheTop(gameboard, ship);
 
       const someShipCellIsAtTheTop = otherShips.some((otherShip) => {
         return topCells.some((topCell) => otherShip.cells.includes(topCell));
@@ -115,6 +110,18 @@ function someShipIsAtTheTop(ships, gameboard) {
       return someShipCellIsAtTheTop;
     }
   });
+}
+
+function getCellsAtTheTop(gameboard, ship) {
+  const topCells = [];
+  let topCell;
+
+  ship.cells.forEach((cell) => {
+    topCell = gameboard.getCellAt(cell.x, cell.y - 1);
+    topCells.push(topCell);
+  });
+
+  return topCells;
 }
 
 function shipAgainstRightWall(ship, gameboard) {
