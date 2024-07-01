@@ -36,6 +36,7 @@ async function nextTurn() {
     message.textContent = "Enemy's turn!";
     currentGameboardElement = humanGameboardElement;
     humanGameboardElement.enable();
+    humanGameboardElement.disableHoverOnAllCells();
 
     await delay(2000);
     enemyPlay();
