@@ -81,14 +81,15 @@ function getCellsToTheRight(gameboard, ship) {
 
   const rightCells = [];
   let rightCell;
-  rightCell = gameboard.getCellAt(shipFront.x + 1, shipFront.y - 1);
+  rightCell = gameboard.offsetCell(shipFront, 1, -1);
   rightCells.push(rightCell);
 
-  rightCell = gameboard.getCellAt(shipFront.x + 1, shipFront.y);
+  rightCell = gameboard.offsetCell(shipFront, 1, 0);
   rightCells.push(rightCell);
 
-  rightCell = gameboard.getCellAt(shipFront.x + 1, shipFront.y + 1);
+  rightCell = gameboard.offsetCell(shipFront, 1, 1);
   rightCells.push(rightCell);
+
   return rightCells;
 }
 
