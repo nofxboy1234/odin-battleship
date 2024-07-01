@@ -117,7 +117,7 @@ function getCellsAtTheTop(gameboard, ship) {
   let topCell;
 
   ship.cells.forEach((cell) => {
-    topCell = gameboard.getCellAt(cell.x, cell.y - 1);
+    topCell = gameboard.offsetCell(cell, 0, -1);
     topCells.push(topCell);
   });
 
