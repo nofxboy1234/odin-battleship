@@ -1,4 +1,3 @@
-- display current player and end game message
 - disable human clicking own board
 - disable hover on cells for the owner of that board
 - Make appropriate methods private in classes
