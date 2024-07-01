@@ -106,6 +106,7 @@ function setupComputerPlayer() {
   enemyGameboard = new Gameboard();
   enemy = new Player(enemyGameboard, 'enemy');
   enemy.placeShipsRandomly();
+
   enemyGameboardElement = new GameboardElement(enemy, handleTurn);
   enemyGameboardElement.createShips();
   enemyGameboardElement.renderShips();
@@ -118,6 +119,7 @@ function setupHumanPlayer() {
   humanGameboard = new Gameboard();
   human = new Player(humanGameboard, 'human');
   currentPlayer = human;
+
   humanGameboardElement = new GameboardElement(human, handleTurn);
   humanGameboardElement.disable();
   humanContainer.appendChild(humanGameboardElement.render());
