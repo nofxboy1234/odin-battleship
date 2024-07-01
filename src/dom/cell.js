@@ -62,6 +62,12 @@ class Cell {
   handleClick(event) {
     event.cell = this;
   }
+
+  reset() {
+    this.disableFill();
+    this.disableHit();
+    this.disableMiss();
+  }
 }
 
 export default Cell;

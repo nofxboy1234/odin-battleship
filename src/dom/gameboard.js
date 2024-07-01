@@ -205,6 +205,11 @@ class Gameboard {
 
     this.handleTurnCallback(clickData);
   }
+
+  reset() {
+    this.#ships = [];
+    this.#cells.forEach((cellDOM) => cellDOM.reset());
+  }
 }
 
 export default Gameboard;
