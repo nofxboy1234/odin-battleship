@@ -98,21 +98,27 @@ function newGame() {
   removeGameboard(humanContainer);
 
   setupComputerPlayer();
+  setupComputerGameboardElement();
+  randomizeComputerGameboard();
+
   setupHumanPlayer();
+  setupHumanGameboardElement();
   randomizeHumanGameboard();
+}
+
+function setupHumanGameboardElement() {
+  humanGameboardElement = new GameboardElement(human, handleTurn);
+  humanGameboardElement.disable();
+}
+
+function setupComputerGameboardElement() {
+  enemyGameboardElement = new GameboardElement(enemy, handleTurn);
+  enemyGameboardElement.disable();
 }
 
 function setupComputerPlayer() {
   enemyGameboard = new Gameboard();
   enemy = new Player(enemyGameboard, 'enemy');
-  enemy.placeShipsRandomly();
-
-  enemyGameboardElement = new GameboardElement(enemy, handleTurn);
-  enemyGameboardElement.createShips();
-  enemyGameboardElement.renderShips();
-  currentGameboardElement = enemyGameboardElement;
-  enemyGameboardElement.disable();
-  enemyContainer.appendChild(enemyGameboardElement.render());
 }
 
 function setupHumanPlayer() {
@@ -121,12 +127,20 @@ function setupHumanPlayer() {
   currentPlayer = human;
 }
 
-function randomizeHumanGameboard() {
-  removeGameboard(humanContainer);
+function randomizeComputerGameboard() {
+  enemyGameboard.reset();
+  enemyGameboardElement.reset();
 
-  setupHumanPlayer();
-  humanGameboardElement = new GameboardElement(human, handleTurn);
-  humanGameboardElement.disable();
+  enemy.placeShipsRandomly();
+  enemyGameboardElement.createShips();
+  enemyGameboardElement.renderShips();
+  currentGameboardElement = enemyGameboardElement;
+  enemyContainer.appendChild(enemyGameboardElement.render());
+}
+
+function randomizeHumanGameboard() {
+  humanGameboard.reset();
+  humanGameboardElement.reset();
 
   human.placeShipsRandomly();
   humanGameboardElement.createShips();
