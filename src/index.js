@@ -98,6 +98,13 @@ function newGame() {
   removeGameboard(humanContainer);
   removeRandomizeButton();
 
+  setupComputerPlayer();
+  setupHumanPlayer();
+
+  addRandomizeButton();
+}
+
+function setupComputerPlayer() {
   enemyGameboard = new Gameboard();
   enemy = new Player(enemyGameboard, 'enemy');
   enemy.placeShipsRandomly();
@@ -106,10 +113,6 @@ function newGame() {
   enemyGameboardElement.renderShips();
   currentGameboardElement = enemyGameboardElement;
   enemyContainer.appendChild(enemyGameboardElement.render());
-
-  setupHumanPlayer();
-
-  addRandomizeButton();
 }
 
 function setupHumanPlayer() {
