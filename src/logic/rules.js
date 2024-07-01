@@ -57,40 +57,48 @@ function hasAdjacentShips(ships, gameboard) {
 
 function someShipIsToTheRight(ships, gameboard) {
   return ships.some((ship) => {
-    if (ship.orientation === 'horizontal') {
-      if (shipAgainstRightWall(ship, gameboard)) {
-        return false;
-      }
-
-      const otherShips = ships.filter((otherShip) => otherShip !== ship);
-      const rightCells = getCellsToTheRight(gameboard, ship);
-
-      const someShipCellIsToTheRight = otherShips.some((otherShip) => {
-        return rightCells.some((rightCell) =>
-          otherShip.cells.includes(rightCell),
-        );
-      });
-
-      return someShipCellIsToTheRight;
+    if (shipAgainstRightWall(ship, gameboard)) {
+      return false;
     }
+
+    const otherShips = ships.filter((otherShip) => otherShip !== ship);
+    const rightCells = getCellsToTheRight(gameboard, ship);
+
+    const someShipCellIsToTheRight = otherShips.some((otherShip) => {
+      return rightCells.some((rightCell) =>
+        otherShip.cells.includes(rightCell),
+      );
+    });
+
+    return someShipCellIsToTheRight;
   });
 }
 
 function getCellsToTheRight(gameboard, ship) {
-  const shipFront = ship.front();
-
   const rightCells = [];
   let rightCell;
-  rightCell = gameboard.offsetCell(shipFront, 1, -1);
-  rightCells.push(rightCell);
 
-  rightCell = gameboard.offsetCell(shipFront, 1, 0);
-  rightCells.push(rightCell);
+  if (ship.orientation === 'horizontal') {
+    const shipFront = ship.front();
 
-  rightCell = gameboard.offsetCell(shipFront, 1, 1);
-  rightCells.push(rightCell);
+    rightCell = gameboard.offsetCell(shipFront, 1, -1);
+    rightCells.push(rightCell);
 
-  return rightCells;
+    rightCell = gameboard.offsetCell(shipFront, 1, 0);
+    rightCells.push(rightCell);
+
+    rightCell = gameboard.offsetCell(shipFront, 1, 1);
+    rightCells.push(rightCell);
+
+    return rightCells;
+  } else if (ship.orientation === 'vertical') {
+    ship.cells.forEach((cell) => {
+      rightCell = gameboard.offsetCell(cell, 1, 0);
+      rightCells.push(rightCell);
+    });
+
+    return rightCells;
+  }
 }
 
 function someShipIsAtTheTop(ships, gameboard) {
