@@ -3,6 +3,11 @@
   margin: 0;
 }
 
+#top-elements {
+  display: flex;
+  gap: 1rem;
+}
+
 .gameboard {
   display: flex;
 }
