@@ -25,22 +25,40 @@ afterEach(() => {
 });
 
 describe('placeRandomShips()', () => {
-  // describe('adds 10 ships to the player gameboard', () => {
-  //   const gameboard = new Gameboard();
-  //   const player = new Player(gameboard);
-  //   player.placeRandomShips();
-  //   expect(gameboard.getShips().length).toEqual(10);
-  // });
-
   describe('when there are overlapping ships once', () => {
     test('it adds 10 ships to the player gameboard', () => {
       hasOverlappingShips.mockReturnValue(false).mockReturnValueOnce(true);
       hasOutOfBoundsShips.mockReturnValue(false);
       hasAdjacentShips.mockReturnValue(false);
+
       const gameboard = new Gameboard();
       const player = new Player(gameboard);
       player.placeRandomShips();
       expect(gameboard.getShips().length).toEqual(10);
+    });
+
+    test('it calls gameboard.getRandomPosition 10 times', () => {
+      hasOverlappingShips.mockReturnValue(false).mockReturnValueOnce(true);
+      hasOutOfBoundsShips.mockReturnValue(false);
+      hasAdjacentShips.mockReturnValue(false);
+
+      const gameboard = new Gameboard();
+      const spy = jest.spyOn(gameboard, 'getRandomPosition');
+      const player = new Player(gameboard);
+      player.placeRandomShips();
+      expect(spy).toHaveBeenCalledTimes(20);
+    });
+
+    test('it calls gameboard.getRandomPosition 10 times', () => {
+      hasOverlappingShips.mockReturnValue(false).mockReturnValueOnce(true);
+      hasOutOfBoundsShips.mockReturnValue(false);
+      hasAdjacentShips.mockReturnValue(false);
+
+      const gameboard = new Gameboard();
+      const spy = jest.spyOn(gameboard, 'placeShip');
+      const player = new Player(gameboard);
+      player.placeRandomShips();
+      expect(spy).toHaveBeenCalledTimes(10);
     });
   });
 });
