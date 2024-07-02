@@ -1,6 +1,5 @@
-- Display `loading ships` message
-- ~ Add another 2000 delay after the enemy has clicked a cell
 - Make appropriate methods private in classes
-
 - ~Refactor any code that is not readable
+
+- Display `loading ships` message
 - ~make new game and randomize async so 'New game done' message is immediate
