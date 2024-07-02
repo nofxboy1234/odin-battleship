@@ -1,3 +1,4 @@
+- Rename `player` to `owner`
 - Display `loading ships` message
 - ~ Add another 2000 delay after the enemy has clicked a cell
 - Make appropriate methods private in classes

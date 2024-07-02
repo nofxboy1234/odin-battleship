@@ -154,7 +154,7 @@ function randomizeComputerGameboard() {
   enemyGameboard.reset();
   enemyGameboardElement.reset();
 
-  enemy.placeShipsRandomly();
+  enemy.placeShips();
   enemyGameboardElement.createShips();
   enemyGameboardElement.renderShips();
   enemyContainer.appendChild(enemyGameboardElement.render());
@@ -164,7 +164,7 @@ function randomizeHumanGameboard() {
   humanGameboard.reset();
   humanGameboardElement.reset();
 
-  human.placeShipsRandomly();
+  human.placeShips();
   humanGameboardElement.createShips();
   humanGameboardElement.renderShips();
   humanContainer.appendChild(humanGameboardElement.render());

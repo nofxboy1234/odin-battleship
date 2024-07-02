@@ -25,18 +25,27 @@ class Player {
     return randomCell;
   }
 
-  placeShipsRandomly() {
-    let shipsInValidPosition = false;
-
-    while (!shipsInValidPosition) {
-      const ships = this.createRandomShips();
-
-      if (this.#allShipsInValidPositions(ships)) {
-        shipsInValidPosition = true;
-        ships.forEach((ship) => this.gameboard.placeShip(ship, ship.x, ship.y));
-      }
+  placeShips(ships) {
+    if (this.#allShipsInValidPositions(ships)) {
+      ships.forEach((ship) => this.gameboard.placeShip(ship, ship.x, ship.y));
+      return true;
     }
+
+    return false;
   }
+
+  // placeRandomShips() {
+  //   let shipsInValidPosition = false;
+
+  //   while (!shipsInValidPosition) {
+  //     const ships = this.createRandomShips();
+
+  //     if (this.#allShipsInValidPositions(ships)) {
+  //       shipsInValidPosition = true;
+  //       ships.forEach((ship) => this.gameboard.placeShip(ship, ship.x, ship.y));
+  //     }
+  //   }
+  // }
 
   #allShipsInValidPositions(ships) {
     return (
@@ -57,6 +66,7 @@ class Player {
         ships.push(ship);
       }
     });
+
     return ships;
   }
 

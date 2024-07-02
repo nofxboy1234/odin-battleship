@@ -2,6 +2,10 @@ import Cell from '../src/logic/cell';
 import Gameboard from '../src/logic/gameboard';
 import Player from '../src/logic/player';
 import Ship from '../src/logic/ship';
+import Battleship from '../src/logic/battleship';
+import Destroyer from '../src/logic/destroyer';
+import Submarine from '../src/logic/submarine';
+import PatrolBoat from '../src/logic/patrolBoat';
 
 afterEach(() => {
   // restore the spy created with spyOn
@@ -72,31 +76,112 @@ test('play() returns a new random shot from an available array of 3 after 1 miss
   expect([cell3]).not.toContainEqual(player.play(enemyGameboard));
 });
 
-test('placeShipsRandomly() adds 10 ships to the player gameboard', () => {
-  const gameboard = new Gameboard();
-  const player = new Player(gameboard);
-  player.placeShipsRandomly();
+describe('When there are 10 ships', () => {
+  let gameboard;
+  let player;
+  let ships;
+  let ship1;
+  let ship2;
+  let ship3;
+  let ship4;
+  let ship5;
+  let ship6;
+  let ship7;
+  let ship8;
+  let ship9;
+  let ship10;
 
-  expect(gameboard.getShips().length).toEqual(10);
-});
+  beforeEach(() => {
+    gameboard = new Gameboard();
+    player = new Player(gameboard);
+    ships = [];
 
-describe('When all random ships are in valid positions after 1 iteration', () => {
-  test('placeShipsRandomly() calls gameboard.getRandomPosition() 10 times', () => {
-    const gameboard = new Gameboard();
-    const spy = jest.spyOn(gameboard, 'getRandomPosition');
-    spy.mockReturnValueOnce();
-    const player = new Player(gameboard);
-    player.placeShipsRandomly();
+    ship1 = new Battleship();
+    ship1.setHorizontal();
+    ship1.place(0, 0, gameboard);
+    ships.push(ship1);
 
-    expect(spy).toHaveBeenCalledTimes(10);
+    ship2 = new Destroyer();
+    ship2.setVertical();
+    ship2.place(3, 2, gameboard);
+    ships.push(ship2);
+
+    ship3 = new Destroyer();
+    ship3.setHorizontal();
+    ship3.place(1, 7, gameboard);
+    ships.push(ship3);
+
+    ship4 = new Submarine();
+    ship4.setVertical();
+    ship4.place(5, 4, gameboard);
+    ships.push(ship4);
+
+    ship5 = new Submarine();
+    ship5.setHorizontal();
+    ship5.place(6, 1, gameboard);
+    ships.push(ship5);
+
+    ship6 = new Submarine();
+    ship6.setHorizontal();
+    ship6.place(8, 3, gameboard);
+    ships.push(ship6);
+
+    ship7 = new PatrolBoat();
+    ship7.setHorizontal();
+    ship7.place(6, 7, gameboard);
+    ships.push(ship7);
+
+    ship8 = new PatrolBoat();
+    ship8.setHorizontal();
+    ship8.place(7, 5, gameboard);
+    ships.push(ship8);
+
+    ship9 = new PatrolBoat();
+    ship9.setHorizontal();
+    ship9.place(9, 7, gameboard);
+    ships.push(ship9);
+
+    ship10 = new PatrolBoat();
+    ship10.setHorizontal();
+    ship10.place(8, 9, gameboard);
+    ships.push(ship10);
   });
-});
 
-test.skip('placeShipsRandomly() calls gameboard.placeShip() 10 times', () => {
-  const gameboard = new Gameboard();
-  const spy = jest.spyOn(gameboard, 'placeShip');
-  const player = new Player(gameboard);
-  player.placeShipsRandomly();
+  describe('When all ships are in valid positions', () => {
+    test('placeShips() adds 10 ships to the player gameboard', () => {
+      player.placeShips(ships);
+      expect(gameboard.getShips().length).toEqual(10);
+    });
 
-  expect(spy).toHaveBeenCalledTimes(10);
+    test('placeShips() returns true', () => {
+      expect(player.placeShips(ships)).toEqual(true);
+    });
+
+    test('placeShips() calls gameboard.placeShip() 10 times', () => {
+      const spy = jest.spyOn(gameboard, 'placeShip');
+      player.placeShips(ships);
+      expect(spy).toHaveBeenCalledTimes(10);
+    });
+  });
+
+  describe('When 1 ship is in an invalid position', () => {
+    beforeEach(() => {
+      ship2.place(3, 1, gameboard);
+    });
+
+    test('placeShips() does not add 10 ships to the player gameboard', () => {
+      player.placeShips(ships);
+      expect(gameboard.getShips().length).toEqual(0);
+    });
+
+    test('placeShips() returns true', () => {
+      expect(player.placeShips(ships)).toEqual(false);
+    });
+
+    test('placeShips() calls gameboard.placeShip() 0 times', () => {
+      const spy = jest.spyOn(gameboard, 'placeShip');
+      player.placeShips(ships);
+      expect(spy).not.toHaveBeenCalled();
+    });
+  });
 });
