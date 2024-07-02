@@ -3,7 +3,6 @@ import Gameboard from '../src/logic/gameboard';
 import Cell from '../src/logic/cell';
 
 afterEach(() => {
-  // restore the spy created with spyOn
   jest.restoreAllMocks();
 });
 
@@ -16,13 +15,6 @@ test('new Gameboard() creates a gameboard with a squared number of cells', () =>
     new Cell(0, 1),
     new Cell(1, 1),
   ]);
-
-  // expect(gameboard.cells).toEqual([
-  //   [0, 0],
-  //   [1, 0],
-  //   [0, 1],
-  //   [1, 1],
-  // ]);
 });
 
 test('gameboard.placeShip() calls ship.place()', () => {
