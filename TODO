@@ -1,4 +1,3 @@
-- Fix any eslint and prettier warnings
 - Make appropriate methods private in classes
 - ~Refactor any code that is not readable
 
