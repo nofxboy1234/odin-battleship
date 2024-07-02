@@ -72,6 +72,14 @@ test('play() returns a new random shot from an available array of 3 after 1 miss
   expect([cell3]).not.toContainEqual(player.play(enemyGameboard));
 });
 
+test('placeShipsRandomly() adds 10 ships to the player gameboard', () => {
+  const gameboard = new Gameboard();
+  const player = new Player(gameboard);
+  player.placeShipsRandomly();
+
+  expect(gameboard.getShips().length).toEqual(10);
+});
+
 test.skip('placeShipsRandomly() calls gameboard.getRandomPosition() 10 times', () => {
   const gameboard = new Gameboard();
   const spy = jest.spyOn(gameboard, 'getRandomPosition');
@@ -88,12 +96,4 @@ test.skip('placeShipsRandomly() calls gameboard.placeShip() 10 times', () => {
   player.placeShipsRandomly();
 
   expect(spy).toHaveBeenCalledTimes(10);
-});
-
-test.skip('placeShipsRandomly() adds 10 ships to a gameboard', () => {
-  const gameboard = new Gameboard();
-  const player = new Player(gameboard);
-  player.placeShipsRandomly();
-
-  expect(gameboard.getShips().length).toEqual(10);
 });
