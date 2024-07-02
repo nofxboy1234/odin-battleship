@@ -8,7 +8,6 @@ import Submarine from '../src/logic/submarine';
 import PatrolBoat from '../src/logic/patrolBoat';
 
 afterEach(() => {
-  // restore the spy created with spyOn
   jest.restoreAllMocks();
 });
 

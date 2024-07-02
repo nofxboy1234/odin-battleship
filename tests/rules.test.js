@@ -10,7 +10,6 @@ import {
 import Submarine from '../src/logic/submarine';
 
 afterEach(() => {
-  // restore the spy created with spyOn
   jest.restoreAllMocks();
 });
 
