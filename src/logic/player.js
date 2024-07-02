@@ -34,18 +34,18 @@ class Player {
     return false;
   }
 
-  // placeRandomShips() {
-  //   let shipsInValidPosition = false;
+  placeRandomShips() {
+    let shipsInValidPosition = false;
 
-  //   while (!shipsInValidPosition) {
-  //     const ships = this.createRandomShips();
+    while (!shipsInValidPosition) {
+      const ships = this.createRandomShips();
 
-  //     if (this.#allShipsInValidPositions(ships)) {
-  //       shipsInValidPosition = true;
-  //       ships.forEach((ship) => this.gameboard.placeShip(ship, ship.x, ship.y));
-  //     }
-  //   }
-  // }
+      if (this.#allShipsInValidPositions(ships)) {
+        shipsInValidPosition = true;
+        ships.forEach((ship) => this.gameboard.placeShip(ship, ship.x, ship.y));
+      }
+    }
+  }
 
   #allShipsInValidPositions(ships) {
     return (
