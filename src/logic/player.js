@@ -29,26 +29,35 @@ class Player {
     let shipsInValidPosition = false;
 
     while (!shipsInValidPosition) {
-      const ships = [];
+      const ships = this.createRandomShips();
 
-      gameboardShips.forEach((boardShip) => {
-        for (let index = 0; index < boardShip.count; index++) {
-          const ship = this.#createShipWithRandomOrientation(boardShip);
-          const [x, y] = this.gameboard.getRandomPosition();
-          ship.place(x, y, this.gameboard);
-          ships.push(ship);
-        }
-      });
-
-      if (
-        !hasOverlappingShips(ships) &&
-        !hasOutOfBoundsShips(ships, this.gameboard) &&
-        !hasAdjacentShips(ships, this.gameboard)
-      ) {
+      if (this.#allShipsInValidPositions(ships)) {
         shipsInValidPosition = true;
         ships.forEach((ship) => this.gameboard.placeShip(ship, ship.x, ship.y));
       }
     }
+  }
+
+  #allShipsInValidPositions(ships) {
+    return (
+      !hasOverlappingShips(ships) &&
+      !hasOutOfBoundsShips(ships, this.gameboard) &&
+      !hasAdjacentShips(ships, this.gameboard)
+    );
+  }
+
+  createRandomShips() {
+    const ships = [];
+
+    gameboardShips.forEach((boardShip) => {
+      for (let index = 0; index < boardShip.count; index++) {
+        const ship = this.#createShipWithRandomOrientation(boardShip);
+        const [x, y] = this.gameboard.getRandomPosition();
+        ship.place(x, y, this.gameboard);
+        ships.push(ship);
+      }
+    });
+    return ships;
   }
 
   #createShipWithRandomOrientation(boardShip) {

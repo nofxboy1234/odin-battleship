@@ -80,13 +80,16 @@ test('placeShipsRandomly() adds 10 ships to the player gameboard', () => {
   expect(gameboard.getShips().length).toEqual(10);
 });
 
-test.skip('placeShipsRandomly() calls gameboard.getRandomPosition() 10 times', () => {
-  const gameboard = new Gameboard();
-  const spy = jest.spyOn(gameboard, 'getRandomPosition');
-  const player = new Player(gameboard);
-  player.placeShipsRandomly();
+describe('When all random ships are in valid positions after 1 iteration', () => {
+  test('placeShipsRandomly() calls gameboard.getRandomPosition() 10 times', () => {
+    const gameboard = new Gameboard();
+    const spy = jest.spyOn(gameboard, 'getRandomPosition');
+    spy.mockReturnValueOnce();
+    const player = new Player(gameboard);
+    player.placeShipsRandomly();
 
-  expect(spy).toHaveBeenCalledTimes(10);
+    expect(spy).toHaveBeenCalledTimes(10);
+  });
 });
 
 test.skip('placeShipsRandomly() calls gameboard.placeShip() 10 times', () => {
