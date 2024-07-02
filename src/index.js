@@ -13,9 +13,9 @@ function removeGameboard(container) {
 
 function isPlayerClickingOwnGameboard(clickedGameboardElement, pointerType) {
   return (
-    clickedGameboardElement.player === currentPlayer ||
-    (clickedGameboardElement.player === human && pointerType === 'mouse') ||
-    (clickedGameboardElement.player === enemy && pointerType === '')
+    clickedGameboardElement.owner === currentPlayer ||
+    (clickedGameboardElement.owner === human && pointerType === 'mouse') ||
+    (clickedGameboardElement.owner === enemy && pointerType === '')
   );
 }
 

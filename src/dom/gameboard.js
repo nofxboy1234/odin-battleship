@@ -199,7 +199,7 @@ class Gameboard {
     clickData.cell = event.cell;
     clickData.gameboard = {
       controller: this.#controller,
-      player: this.player,
+      owner: this.player,
       disabled: this.isDisabled(),
     };
     clickData.pointerType = event.pointerType;
