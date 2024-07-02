@@ -1,11 +1,5 @@
-import Cell from '../src/logic/cell';
 import Gameboard from '../src/logic/gameboard';
 import Player from '../src/logic/player';
-import Ship from '../src/logic/ship';
-import Battleship from '../src/logic/battleship';
-import Destroyer from '../src/logic/destroyer';
-import Submarine from '../src/logic/submarine';
-import PatrolBoat from '../src/logic/patrolBoat';
 
 import {
   hasAdjacentShips,
