@@ -19,6 +19,17 @@ function isPlayerClickingOwnGameboard(clickedGameboardElement, pointerType) {
   );
 }
 
+function isHumanTakingAnotherShotAfterMissing(
+  clickedGameboardElement,
+  pointerType,
+) {
+  return (
+    currentPlayer === enemy &&
+    clickedGameboardElement.owner === enemy &&
+    pointerType === 'mouse'
+  );
+}
+
 function enemyPlay() {
   const cell = enemy.play(humanGameboard);
   const cellDOM = humanGameboardElement.getCellDOM(cell.x, cell.y);
@@ -32,18 +43,18 @@ async function delay(time) {
 async function nextTurn() {
   currentGameboardElement.disable();
   if (currentGameboardElement === enemyGameboardElement) {
-    currentPlayer = enemy;
     message.textContent = "Enemy's turn!";
     currentGameboardElement = humanGameboardElement;
+
     humanGameboardElement.enable();
     humanGameboardElement.disableHoverOnAllCells();
 
     await delay(2000);
     enemyPlay();
   } else {
-    currentPlayer = human;
     message.textContent = 'Your turn!';
     currentGameboardElement = enemyGameboardElement;
+
     enemyGameboardElement.enable();
   }
 }
@@ -54,6 +65,10 @@ async function handleTurn(clickData) {
   const pointerType = clickData.pointerType;
 
   if (gameboardElement.disabled) {
+    return;
+  }
+
+  if (isHumanTakingAnotherShotAfterMissing(gameboardElement, pointerType)) {
     return;
   }
 
@@ -97,6 +112,14 @@ async function handleTurn(clickData) {
     }
   } else {
     cell.enableMiss();
+
+    if (currentGameboardElement === enemyGameboardElement) {
+      currentPlayer = enemy;
+    } else {
+      currentPlayer = human;
+    }
+
+    await delay(2000);
     nextTurn();
   }
 }
