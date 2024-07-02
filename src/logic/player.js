@@ -26,8 +26,6 @@ class Player {
   }
 
   placeShipsRandomly() {
-    // - keep 1 space margin around each ship
-
     let shipsInValidPosition = false;
 
     while (!shipsInValidPosition) {
