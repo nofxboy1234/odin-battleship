@@ -1,6 +1,6 @@
+- disable hover on a cell if it is a hit or miss
 - Make appropriate methods private in classes
 - ~Refactor any code that is not readable
 
-- disable hover on a cell if it is a hit or miss
 - Display `loading ships` message
 - ~make new game and randomize async so 'New game done' message is immediate
