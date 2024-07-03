@@ -63,6 +63,10 @@ function isShotInvalid({ gameboard: gameboardElement, pointerType, cell }) {
     return true;
   }
 
+  if (isHumanTakingAnotherShotAfterMissing(gameboardElement, pointerType)) {
+    return true;
+  }
+
   return false;
 }
 
@@ -70,10 +74,6 @@ async function handleTurn(clickData) {
   const { gameboard: gameboardElement, cell, pointerType } = clickData;
 
   if (isShotInvalid(clickData)) {
-    return;
-  }
-
-  if (isHumanTakingAnotherShotAfterMissing(gameboardElement, pointerType)) {
     return;
   }
 
