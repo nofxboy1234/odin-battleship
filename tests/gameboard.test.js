@@ -48,14 +48,40 @@ test('gameboard.receiveAttack() records the coordinates of a missed shot', () =>
   expect(gameboard.getMisses()).toContainEqual(cell);
 });
 
-test('gameboard.receiveAttack() does not record the coordinates of a hit ship as a miss', () => {
+test('gameboard.receiveAttack() does not record a miss as a hit', () => {
+  const ship = new Ship(1);
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship, 0, 0);
+  gameboard.receiveAttack(5, 4);
+
+  const cell = new Cell(5, 4);
+
+  expect(gameboard.getHits()).not.toContainEqual(cell);
+});
+
+test('gameboard.receiveAttack() records the coordinates of a shot that hits', () => {
   const ship = new Ship(1);
 
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
   gameboard.receiveAttack(0, 0);
 
-  expect(gameboard.getMisses()).not.toContainEqual([0, 0]);
+  const cell = new Cell(0, 0);
+
+  expect(gameboard.getHits()).toContainEqual(cell);
+});
+
+test('gameboard.receiveAttack() does not record a hit as a miss', () => {
+  const ship = new Ship(1);
+
+  const gameboard = new Gameboard();
+  gameboard.placeShip(ship, 0, 0);
+  gameboard.receiveAttack(0, 0);
+
+  const cell = new Cell(0, 0);
+
+  expect(gameboard.getMisses()).not.toContainEqual(cell);
 });
 
 test('gameboard.allShipsSunk() returns false when all ships are not sunk', () => {
