@@ -76,11 +76,6 @@ async function isShotInvalid({
   }
 
   if (gameboardElement.controller.isExistingShot(cell.x, cell.y)) {
-    if (currentPlayer === enemy) {
-      await delay(2000);
-      enemyPlay();
-    }
-
     return true;
   }
 
@@ -91,6 +86,11 @@ async function handleTurn(clickData) {
   const { gameboard: gameboardElement, cell, pointerType } = clickData;
 
   if (await isShotInvalid(clickData)) {
+    if (currentPlayer === enemy) {
+      await delay(2000);
+      enemyPlay();
+    }
+
     return;
   }
 
