@@ -53,19 +53,6 @@ class Gameboard {
     return this.getCellAt(cell.x + x, cell.y + y);
   }
 
-  #getShipOnCell(x, y) {
-    return this.#ships.find((ship) => {
-      const shipBack = ship.back();
-      const shipFront = ship.front();
-
-      if (ship.orientation === 'horizontal') {
-        return x >= shipBack.x && x <= shipFront.x && y === ship.y;
-      } else if (ship.orientation === 'vertical') {
-        return y >= shipBack.y && y <= shipFront.y && x === ship.x;
-      }
-    });
-  }
-
   isExistingShot(x, y) {
     return !!this.#getHitOnCell(x, y) || !!this.#getMissOnCell(x, y);
   }
@@ -98,6 +85,19 @@ class Gameboard {
 
   #getMissOnCell(x, y) {
     return this.#misses.find((cell) => x === cell.x && y === cell.y);
+  }
+
+  #getShipOnCell(x, y) {
+    return this.#ships.find((ship) => {
+      const shipBack = ship.back();
+      const shipFront = ship.front();
+
+      if (ship.orientation === 'horizontal') {
+        return x >= shipBack.x && x <= shipFront.x && y === ship.y;
+      } else if (ship.orientation === 'vertical') {
+        return y >= shipBack.y && y <= shipFront.y && x === ship.x;
+      }
+    });
   }
 }
 
