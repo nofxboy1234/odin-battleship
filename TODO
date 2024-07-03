@@ -1,6 +1,2 @@
-- Remove unused methods/properties
-- Make appropriate methods private in classes
-- ~Refactor any code that is not readable
-
 - Display `loading ships` message
 - ~make new game and randomize async so 'New game done' message is immediate
