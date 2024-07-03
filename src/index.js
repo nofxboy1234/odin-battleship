@@ -59,11 +59,7 @@ async function nextTurn() {
 }
 
 async function handleTurn(clickData) {
-  const {
-    gameboard: gameboardElement,
-    cell: cell,
-    pointerType: pointerType,
-  } = clickData;
+  const { gameboard: gameboardElement, cell, pointerType } = clickData;
 
   if (gameboardElement.disabled) {
     return;
