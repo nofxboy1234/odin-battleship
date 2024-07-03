@@ -58,7 +58,11 @@ async function nextTurn() {
   }
 }
 
-function isShotInvalid({ gameboard: gameboardElement, pointerType, cell }) {
+async function isShotInvalid({
+  gameboard: gameboardElement,
+  pointerType,
+  cell,
+}) {
   if (gameboardElement.disabled) {
     return true;
   }
@@ -71,22 +75,22 @@ function isShotInvalid({ gameboard: gameboardElement, pointerType, cell }) {
     return true;
   }
 
-  return false;
-}
-
-async function handleTurn(clickData) {
-  const { gameboard: gameboardElement, cell, pointerType } = clickData;
-
-  if (isShotInvalid(clickData)) {
-    return;
-  }
-
   if (gameboardElement.controller.isExistingShot(cell.x, cell.y)) {
     if (currentPlayer === enemy) {
       await delay(2000);
       enemyPlay();
     }
 
+    return true;
+  }
+
+  return false;
+}
+
+async function handleTurn(clickData) {
+  const { gameboard: gameboardElement, cell, pointerType } = clickData;
+
+  if (await isShotInvalid(clickData)) {
     return;
   }
 
