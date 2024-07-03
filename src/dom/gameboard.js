@@ -174,9 +174,7 @@ class Gameboard {
 
   #enableHoverOnAllOpenCells() {
     this.#cells.forEach((cellDOM) => {
-      // -if there's not a hit or a miss on a cell (isOpen)
       if (!this.#controller.isExistingShot(cellDOM.x, cellDOM.y)) {
-        // ---enable hover on that cell
         cellDOM.enableHover();
       }
     });
