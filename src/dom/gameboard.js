@@ -56,16 +56,6 @@ class Gameboard {
     this.#enableHoverOnAllOpenCells();
   }
 
-  #enableHoverOnAllOpenCells() {
-    this.#cells.forEach((cellDOM) => {
-      // -if there's not a hit or a miss on a cell (isOpen)
-      if (!this.#controller.isExistingShot(cellDOM.x, cellDOM.y)) {
-        // ---enable hover on that cell
-        cellDOM.enableHover();
-      }
-    });
-  }
-
   isDisabled() {
     return this.#disabled;
   }
@@ -132,8 +122,43 @@ class Gameboard {
     this.gameboard_1_1 = element;
 
     this.gameboard_1_1.addEventListener('click', (event) => {
-      this.handleClick(event);
+      this.#handleClick(event);
     });
+  }
+
+  createShips() {
+    const ships = this.#controller.getShips();
+    ships.forEach((ship) => {
+      const cellDOMs = this.#getShipCellDOMs(ship);
+      const shipDOM = new Ship(ship.x, ship.y, ship.length, cellDOMs);
+      this.#ships.push(shipDOM);
+    });
+  }
+
+  getCellDOM(x, y) {
+    return this.#cells.find((cellDOM) => {
+      return cellDOM.x === x && cellDOM.y === y;
+    });
+  }
+
+  renderCells() {
+    this.#cells.forEach((cellDOM) => {
+      this.gameboard_1_1.appendChild(cellDOM.render());
+    });
+  }
+
+  renderShips() {
+    this.#ships.forEach((shipDOM) => {
+      const cellDOMs = shipDOM.cells;
+      cellDOMs.forEach((cellDOM) => {
+        cellDOM.enableFill();
+      });
+    });
+  }
+
+  reset() {
+    this.#ships = [];
+    this.#cells.forEach((cellDOM) => cellDOM.reset());
   }
 
   #createCells() {
@@ -147,22 +172,17 @@ class Gameboard {
     });
   }
 
-  createShips() {
-    const ships = this.#controller.getShips();
-    ships.forEach((ship) => {
-      const cellDOMs = this.getShipCellDOMs(ship);
-      const shipDOM = new Ship(ship.x, ship.y, ship.length, cellDOMs);
-      this.#ships.push(shipDOM);
+  #enableHoverOnAllOpenCells() {
+    this.#cells.forEach((cellDOM) => {
+      // -if there's not a hit or a miss on a cell (isOpen)
+      if (!this.#controller.isExistingShot(cellDOM.x, cellDOM.y)) {
+        // ---enable hover on that cell
+        cellDOM.enableHover();
+      }
     });
   }
 
-  getCellDOM(x, y) {
-    return this.#cells.find((cellDOM) => {
-      return cellDOM.x === x && cellDOM.y === y;
-    });
-  }
-
-  getShipCellDOMs(ship) {
+  #getShipCellDOMs(ship) {
     const shipBack = ship.back();
     const shipFront = ship.front();
 
@@ -183,22 +203,7 @@ class Gameboard {
     });
   }
 
-  renderCells() {
-    this.#cells.forEach((cellDOM) => {
-      this.gameboard_1_1.appendChild(cellDOM.render());
-    });
-  }
-
-  renderShips() {
-    this.#ships.forEach((shipDOM) => {
-      const cellDOMs = shipDOM.cells;
-      cellDOMs.forEach((cellDOM) => {
-        cellDOM.enableFill();
-      });
-    });
-  }
-
-  handleClick(event) {
+  #handleClick(event) {
     const clickData = {};
     clickData.cell = event.cell;
     clickData.gameboard = {
@@ -209,11 +214,6 @@ class Gameboard {
     clickData.pointerType = event.pointerType;
 
     this.handleTurnCallback(clickData);
-  }
-
-  reset() {
-    this.#ships = [];
-    this.#cells.forEach((cellDOM) => cellDOM.reset());
   }
 }
 
