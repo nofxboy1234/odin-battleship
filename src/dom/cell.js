@@ -15,7 +15,7 @@ class Cell {
     }
 
     this.#element.addEventListener('click', (event) => {
-      this.handleClick(event);
+      this.#handleClick(event);
     });
   }
 
@@ -35,10 +35,6 @@ class Cell {
     this.#element.classList.add('hit');
   }
 
-  disableHit() {
-    this.#element.classList.remove('hit');
-  }
-
   enableHover() {
     this.#element.classList.add('hover');
   }
@@ -47,13 +43,13 @@ class Cell {
     this.#element.classList.remove('hover');
   }
 
-  handleClick(event) {
+  #handleClick(event) {
     event.cell = this;
   }
 
   reset() {
     this.#disableFill();
-    this.disableHit();
+    this.#disableHit();
     this.#disableMiss();
   }
 
@@ -63,6 +59,10 @@ class Cell {
 
   #disableMiss() {
     this.#element.classList.remove('miss');
+  }
+
+  #disableHit() {
+    this.#element.classList.remove('hit');
   }
 }
 
