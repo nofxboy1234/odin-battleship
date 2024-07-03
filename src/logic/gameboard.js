@@ -17,7 +17,7 @@ class Gameboard {
   }
 
   receiveAttack(x, y) {
-    const hitShip = this.getShipOnCell(x, y);
+    const hitShip = this.#getShipOnCell(x, y);
     if (hitShip) {
       hitShip.hit(x, y);
     } else {
@@ -42,7 +42,7 @@ class Gameboard {
   }
 
   isShipOnCell(x, y) {
-    return !!this.getShipOnCell(x, y);
+    return !!this.#getShipOnCell(x, y);
   }
 
   getCellAt(x, y) {
@@ -53,7 +53,7 @@ class Gameboard {
     return this.getCellAt(cell.x + x, cell.y + y);
   }
 
-  getShipOnCell(x, y) {
+  #getShipOnCell(x, y) {
     return this.#ships.find((ship) => {
       const shipBack = ship.back();
       const shipFront = ship.front();
