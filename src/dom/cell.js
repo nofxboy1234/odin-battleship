@@ -27,16 +27,8 @@ class Cell {
     this.#element.classList.add('fill');
   }
 
-  disableFill() {
-    this.#element.classList.remove('fill');
-  }
-
   enableMiss() {
     this.#element.classList.add('miss');
-  }
-
-  disableMiss() {
-    this.#element.classList.remove('miss');
   }
 
   enableHit() {
@@ -60,9 +52,17 @@ class Cell {
   }
 
   reset() {
-    this.disableFill();
+    this.#disableFill();
     this.disableHit();
-    this.disableMiss();
+    this.#disableMiss();
+  }
+
+  #disableFill() {
+    this.#element.classList.remove('fill');
+  }
+
+  #disableMiss() {
+    this.#element.classList.remove('miss');
   }
 }
 
