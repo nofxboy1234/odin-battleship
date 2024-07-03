@@ -83,7 +83,7 @@ async function isShotInvalid({
 }
 
 async function handleTurn(clickData) {
-  const { gameboard: gameboardElement, cell, pointerType } = clickData;
+  const { gameboard: gameboardElement, cell } = clickData;
 
   if (await isShotInvalid(clickData)) {
     if (currentPlayer === enemy) {
