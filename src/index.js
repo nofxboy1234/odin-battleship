@@ -42,7 +42,7 @@ async function delay(time) {
 
 async function nextTurn() {
   currentGameboardElement.disable();
-  if (currentGameboardElement === enemyGameboardElement) {
+  if (currentPlayer === enemy) {
     message.textContent = "Enemy's turn!";
     currentGameboardElement = humanGameboardElement;
 
@@ -115,7 +115,7 @@ async function handleTurn(clickData) {
     cell.enableMiss();
     cell.disableHover();
 
-    if (currentGameboardElement === enemyGameboardElement) {
+    if (currentPlayer === human) {
       currentPlayer = enemy;
     } else {
       currentPlayer = human;
