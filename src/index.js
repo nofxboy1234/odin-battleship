@@ -101,8 +101,7 @@ async function handleTurn(clickData) {
   const hit = attackGameboard(gameboardElement, cell);
 
   if (hit) {
-    cell.enableHit();
-    cell.disableHover();
+    renderHit(cell);
 
     if (currentPlayer === human) {
       if (enemyGameboard.allShipsSunk()) {
@@ -125,8 +124,7 @@ async function handleTurn(clickData) {
       enemyPlay();
     }
   } else {
-    cell.enableMiss();
-    cell.disableHover();
+    renderMiss(cell);
 
     if (currentPlayer === human) {
       currentPlayer = enemy;
@@ -137,6 +135,16 @@ async function handleTurn(clickData) {
     await delay(2000);
     nextTurn();
   }
+}
+
+function renderMiss(cell) {
+  cell.enableMiss();
+  cell.disableHover();
+}
+
+function renderHit(cell) {
+  cell.enableHit();
+  cell.disableHover();
 }
 
 function newGame() {
