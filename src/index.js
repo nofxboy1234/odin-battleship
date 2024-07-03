@@ -58,10 +58,18 @@ async function nextTurn() {
   }
 }
 
+function isShotInvalid({ gameboard: gameboardElement, pointerType, cell }) {
+  if (gameboardElement.disabled) {
+    return true;
+  }
+
+  return false;
+}
+
 async function handleTurn(clickData) {
   const { gameboard: gameboardElement, cell, pointerType } = clickData;
 
-  if (gameboardElement.disabled) {
+  if (isShotInvalid(clickData)) {
     return;
   }
 
