@@ -38,7 +38,7 @@ class Player {
     let shipsInValidPosition = false;
 
     while (!shipsInValidPosition) {
-      const ships = this.createRandomShips();
+      const ships = this.#createRandomShips();
 
       if (this.#allShipsInValidPositions(ships)) {
         shipsInValidPosition = true;
@@ -55,7 +55,7 @@ class Player {
     );
   }
 
-  createRandomShips() {
+  #createRandomShips() {
     const ships = [];
 
     gameboardShips.forEach((boardShip) => {
