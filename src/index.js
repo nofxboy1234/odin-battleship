@@ -1,8 +1,8 @@
 import './style.css';
 import Player from './logic/player';
-
 import GameboardElement from './dom/gameboard';
 import Gameboard from './logic/gameboard';
+import message from './logic/message';
 
 function removeGameboard(container) {
   const child = container.firstChild;
@@ -44,7 +44,7 @@ async function nextTurn() {
   currentGameboardElement.disable();
 
   if (currentPlayer === enemy) {
-    message.textContent = "Enemy's turn!";
+    message.setEnemyTurn();
     currentGameboardElement = humanGameboardElement;
     currentGameboardElement.enable();
     currentGameboardElement.disableHoverOnAllCells();
@@ -52,7 +52,7 @@ async function nextTurn() {
     await delay(2000);
     enemyPlay();
   } else {
-    message.textContent = 'Your turn!';
+    message.setHumanTurn();
     currentGameboardElement = enemyGameboardElement;
     currentGameboardElement.enable();
   }
@@ -92,7 +92,7 @@ async function handleTurn(clickData) {
 
     if (currentPlayer === human) {
       if (enemyGameboard.allShipsSunk()) {
-        message.textContent = 'You won!';
+        message.setHumanWon();
         enemyGameboardElement.disable();
         humanGameboardElement.disable();
         return;
@@ -101,7 +101,7 @@ async function handleTurn(clickData) {
 
     if (currentPlayer === enemy) {
       if (humanGameboard.allShipsSunk()) {
-        message.textContent = 'Enemy won!';
+        message.setEnemyWon();
         enemyGameboardElement.disable();
         humanGameboardElement.disable();
         return;
@@ -137,8 +137,7 @@ function newGame() {
   setupHumanGameboardElement();
   randomizeHumanGameboard();
 
-  message.textContent =
-    "Randomize your ships until you're happy with their positions, then press Play!";
+  message.setInstruction();
 
   randomizeButton.disabled = false;
   playButton.disabled = false;
@@ -146,7 +145,7 @@ function newGame() {
 
 function play() {
   enemyGameboardElement.enable();
-  message.textContent = 'Your turn!';
+  message.setHumanTurn();
 
   randomizeButton.disabled = true;
   playButton.disabled = true;
@@ -204,8 +203,6 @@ const randomizeButton = document.getElementById('randomize-btn');
 randomizeButton.addEventListener('click', () => {
   randomizeHumanGameboard();
 });
-
-const message = document.getElementById('message');
 
 const playButton = document.getElementById('play-btn');
 playButton.addEventListener('click', play);
