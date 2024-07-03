@@ -2,7 +2,7 @@ import './style.css';
 import Player from './logic/player';
 import GameboardElement from './dom/gameboard';
 import Gameboard from './logic/gameboard';
-import message from './logic/message';
+import message from './dom/message';
 
 function removeGameboard(container) {
   const child = container.firstChild;
@@ -217,5 +217,6 @@ let human;
 let currentPlayer;
 const enemyContainer = document.getElementById('gameboard-container-enemy');
 const humanContainer = document.getElementById('gameboard-container-human');
+message.setElement(document.getElementById('message'));
 
 newGame();
