@@ -5,8 +5,6 @@ class Ship {
     this.length = length;
     this.cells = cells;
   }
-
-  render() {}
 }
 
 export default Ship;
