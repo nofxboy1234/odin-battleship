@@ -106,8 +106,7 @@ async function handleTurn(clickData) {
     if (currentPlayer === human) {
       if (enemyGameboard.allShipsSunk()) {
         message.setHumanWon();
-        enemyGameboardElement.disable();
-        humanGameboardElement.disable();
+        disableBothGameboards();
         return;
       }
     }
@@ -115,8 +114,7 @@ async function handleTurn(clickData) {
     if (currentPlayer === enemy) {
       if (humanGameboard.allShipsSunk()) {
         message.setEnemyWon();
-        enemyGameboardElement.disable();
-        humanGameboardElement.disable();
+        disableBothGameboards();
         return;
       }
 
@@ -135,6 +133,11 @@ async function handleTurn(clickData) {
     await delay(2000);
     nextTurn();
   }
+}
+
+function disableBothGameboards() {
+  enemyGameboardElement.disable();
+  humanGameboardElement.disable();
 }
 
 function renderMiss(cell) {
