@@ -59,7 +59,14 @@ async function nextTurn() {
 }
 
 async function handleTurn(clickData) {
-  const { gameboardElement, pointerType, cell } = extractClickData(clickData);
+  let gameboardElement;
+  let cell;
+  let pointerType;
+  ({
+    gameboard: gameboardElement,
+    cell: cell,
+    pointerType: pointerType,
+  } = clickData);
 
   if (gameboardElement.disabled) {
     return;
@@ -121,13 +128,6 @@ async function handleTurn(clickData) {
     await delay(2000);
     nextTurn();
   }
-}
-
-function extractClickData(clickData) {
-  const cell = clickData.cell;
-  const gameboardElement = clickData.gameboard;
-  const pointerType = clickData.pointerType;
-  return { gameboardElement, pointerType, cell };
 }
 
 function newGame() {
