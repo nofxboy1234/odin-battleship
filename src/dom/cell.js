@@ -55,10 +55,6 @@ class Cell {
     this.#element.classList.remove('hover');
   }
 
-  toggleHover() {
-    this.#element.classList.toggle('hover');
-  }
-
   handleClick(event) {
     event.cell = this;
   }
