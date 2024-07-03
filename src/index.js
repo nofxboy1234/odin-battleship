@@ -89,6 +89,7 @@ async function handleTurn(clickData) {
 
   if (gameboardElement.controller.isShipOnCell(cell.x, cell.y)) {
     cell.enableHit();
+    cell.disableHover();
 
     if (currentPlayer === human) {
       if (enemyGameboard.allShipsSunk()) {
@@ -112,6 +113,7 @@ async function handleTurn(clickData) {
     }
   } else {
     cell.enableMiss();
+    cell.disableHover();
 
     if (currentGameboardElement === enemyGameboardElement) {
       currentPlayer = enemy;
