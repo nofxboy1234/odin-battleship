@@ -56,12 +56,6 @@ class Gameboard {
     this.#enableHoverOnAllOpenCells();
   }
 
-  enableHoverOnAllCells() {
-    this.#cells.forEach((cellDOM) => {
-      cellDOM.enableHover();
-    });
-  }
-
   #enableHoverOnAllOpenCells() {
     this.#cells.forEach((cellDOM) => {
       // -if there's not a hit or a miss on a cell (isOpen)
