@@ -146,7 +146,6 @@ function newGame() {
 function play() {
   enemyGameboardElement.enable();
   message.setHumanTurn();
-
   randomizeButton.disabled = true;
   playButton.disabled = true;
 }
