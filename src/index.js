@@ -123,15 +123,18 @@ async function handleTurn(clickData) {
     }
   } else {
     renderMiss(cell);
-
-    if (currentPlayer === human) {
-      currentPlayer = enemy;
-    } else {
-      currentPlayer = human;
-    }
+    setCurrentPlayer();
 
     await delay(2000);
     nextTurn();
+  }
+}
+
+function setCurrentPlayer() {
+  if (currentPlayer === human) {
+    currentPlayer = enemy;
+  } else {
+    currentPlayer = human;
   }
 }
 
