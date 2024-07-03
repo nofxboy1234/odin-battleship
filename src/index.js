@@ -222,8 +222,8 @@ function randomizeHumanGameboard() {
 
 const newGameButton = document.getElementById('new-game-btn');
 newGameButton.addEventListener('click', () => {
-  newGame();
-  console.log('New game done!');
+  Promise.resolve().then(() => newGame());
+  console.log('Do other stuff while newGame is processing!');
 });
 
 const randomizeButton = document.getElementById('randomize-btn');
