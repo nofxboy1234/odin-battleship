@@ -82,6 +82,10 @@ async function isShotInvalid({
   return false;
 }
 
+function attackGameboard(gameboardElement, cell) {
+  gameboardElement.controller.receiveAttack(cell.x, cell.y);
+}
+
 async function handleTurn(clickData) {
   const { gameboard: gameboardElement, cell } = clickData;
 
@@ -94,7 +98,7 @@ async function handleTurn(clickData) {
     return;
   }
 
-  gameboardElement.controller.receiveAttack(cell.x, cell.y);
+  attackGameboard(gameboardElement, cell);
 
   if (gameboardElement.controller.isShipOnCell(cell.x, cell.y)) {
     cell.enableHit();
