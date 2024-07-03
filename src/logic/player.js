@@ -8,17 +8,11 @@ class Player {
     this.name = name;
   }
 
-  play(enemyGameboard) {
-    const hits = enemyGameboard.getHits();
-    const misses = enemyGameboard.getMisses();
+  play(oppositionGameboard) {
+    const hits = oppositionGameboard.getHits();
+    const misses = oppositionGameboard.getMisses();
     const shots = hits.concat(misses);
-
-    const availableCells = enemyGameboard.cells.filter((cell) => {
-      const found = shots.find((shot) => {
-        return cell.x === shot.x && cell.y === shot.y;
-      });
-      return !found;
-    });
+    const availableCells = this.#getAvailableCells(oppositionGameboard, shots);
 
     const randomIndex = getRandomInt(availableCells.length);
     const randomCell = availableCells[randomIndex];
@@ -74,6 +68,15 @@ class Player {
     const ship = new boardShip.type();
     ship.setRandomOrientation();
     return ship;
+  }
+
+  #getAvailableCells(gameboard, shots) {
+    return gameboard.cells.filter((cell) => {
+      const found = shots.find((shot) => {
+        return cell.x === shot.x && cell.y === shot.y;
+      });
+      return !found;
+    });
   }
 }
 
