@@ -222,7 +222,6 @@ function setup() {
   message.setLoadingShips();
   setTimeout(() => newGame());
   setTimeout(() => message.setInstruction());
-  console.log('end');
 }
 
 const newGameButton = document.getElementById('new-game-btn');
