@@ -93,6 +93,8 @@ async function handleTurn(clickData) {
         message.setEnemyWon();
         disableBothGameboards();
         return;
+      } else {
+        // is a ship sunk?
       }
 
       await delay(2000);

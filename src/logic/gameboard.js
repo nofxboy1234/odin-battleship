@@ -23,7 +23,7 @@ class Gameboard {
       return true;
     } else {
       this.#misses.push(new Cell(x, y));
-      return false;
+      return { hit: false, ship: undefined };
     }
   }
 
