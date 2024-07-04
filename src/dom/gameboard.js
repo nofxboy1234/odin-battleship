@@ -7,11 +7,11 @@ class Gameboard {
   #disableClick = false;
   #cells = [];
   #ships = [];
-  #controller = undefined;
+  controller = undefined;
 
   constructor(player, handleTurnCallback) {
-    this.player = player;
-    this.#controller = player.gameboard;
+    this.owner = player;
+    this.controller = player.gameboard;
     this.handleTurnCallback = handleTurnCallback;
 
     this.#element.classList.add('gameboard');
@@ -136,7 +136,7 @@ class Gameboard {
   }
 
   createShips() {
-    const ships = this.#controller.getShips();
+    const ships = this.controller.getShips();
     ships.forEach((ship) => {
       const cellDOMs = this.#getShipCellDOMs(ship);
       const shipDOM = new Ship(ship.x, ship.y, ship.length, cellDOMs);
@@ -171,7 +171,7 @@ class Gameboard {
   }
 
   #createCells() {
-    const cells = this.#controller.cells;
+    const cells = this.controller.cells;
 
     cells.forEach((cell) => {
       const x = cell.x;
@@ -183,7 +183,7 @@ class Gameboard {
 
   #enableHoverOnAllOpenCells() {
     this.#cells.forEach((cellDOM) => {
-      if (!this.#controller.isExistingShot(cellDOM.x, cellDOM.y)) {
+      if (!this.controller.isExistingShot(cellDOM.x, cellDOM.y)) {
         cellDOM.enableHover();
       }
     });
@@ -218,8 +218,8 @@ class Gameboard {
     const clickData = {};
     clickData.cell = event.cell;
     clickData.gameboard = {
-      controller: this.#controller,
-      owner: this.player,
+      controller: this.controller,
+      owner: this.owner,
       disabled: this.isDisabled(),
     };
     clickData.pointerType = event.pointerType;

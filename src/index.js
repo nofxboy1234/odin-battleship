@@ -4,13 +4,6 @@ import GameboardElement from './dom/gameboard';
 import Gameboard from './logic/gameboard';
 import message from './dom/message';
 
-function removeGameboard(container) {
-  const child = container.firstChild;
-  if (child) {
-    container.removeChild(child);
-  }
-}
-
 function isPlayerClickingOwnGameboard(clickedGameboardElement, pointerType) {
   return (
     clickedGameboardElement.owner === currentPlayer ||
@@ -151,11 +144,6 @@ function renderHit(cell) {
   cell.disableHover();
 }
 
-function randomizeGameboards() {
-  randomizeComputerGameboard();
-  randomizeHumanGameboard();
-}
-
 function play() {
   enemyGameboardElement.enable();
   message.setHumanTurn();
@@ -183,22 +171,13 @@ function setupHumanPlayer() {
   human = new Player(humanGameboard, 'human');
 }
 
-function randomizeComputerGameboard() {
-  enemyGameboard.reset();
-  enemyGameboardElement.reset();
+function randomizeGameboard(gameboardElement) {
+  gameboardElement.controller.reset();
+  gameboardElement.reset();
 
-  enemy.placeRandomShips();
-  enemyGameboardElement.createShips();
-  enemyGameboardElement.renderShips();
-}
-
-function randomizeHumanGameboard() {
-  humanGameboard.reset();
-  humanGameboardElement.reset();
-
-  human.placeRandomShips();
-  humanGameboardElement.createShips();
-  humanGameboardElement.renderShips();
+  gameboardElement.owner.placeRandomShips();
+  gameboardElement.createShips();
+  gameboardElement.renderShips();
 }
 
 function setupGame() {
@@ -211,7 +190,10 @@ function setupGame() {
   playButton.disabled = false;
 
   message.setLoadingShips();
-  setTimeout(() => randomizeGameboards());
+  setTimeout(() => {
+    randomizeGameboard(enemyGameboardElement);
+    randomizeGameboard(humanGameboardElement);
+  });
   setTimeout(() => message.setInstruction());
 }
 
@@ -222,7 +204,7 @@ newGameButton.addEventListener('click', () => {
 
 const randomizeButton = document.getElementById('randomize-btn');
 randomizeButton.addEventListener('click', () => {
-  randomizeHumanGameboard();
+  randomizeGameboard(humanGameboardElement);
 });
 
 const playButton = document.getElementById('play-btn');
