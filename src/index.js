@@ -157,12 +157,16 @@ function setupHumanPlayer() {
 }
 
 function randomizeGameboard(gameboardElement) {
-  gameboardElement.controller.reset();
-  gameboardElement.reset();
+  message.setLoadingShips();
+  setTimeout(() => {
+    gameboardElement.controller.reset();
+    gameboardElement.reset();
 
-  gameboardElement.owner.placeRandomShips();
-  gameboardElement.createShips();
-  gameboardElement.renderShips();
+    gameboardElement.owner.placeRandomShips();
+    gameboardElement.createShips();
+    gameboardElement.renderShips();
+  });
+  setTimeout(() => message.setInstruction());
 }
 
 function setupGame() {
@@ -174,12 +178,8 @@ function setupGame() {
   randomizeButton.disabled = false;
   playButton.disabled = false;
 
-  message.setLoadingShips();
-  setTimeout(() => {
-    randomizeGameboard(enemyGameboardElement);
-    randomizeGameboard(humanGameboardElement);
-  });
-  setTimeout(() => message.setInstruction());
+  randomizeGameboard(enemyGameboardElement);
+  randomizeGameboard(humanGameboardElement);
 }
 
 const newGameButton = document.getElementById('new-game-btn');
