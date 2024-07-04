@@ -220,7 +220,7 @@ function randomizeHumanGameboard() {
 
 const newGameButton = document.getElementById('new-game-btn');
 newGameButton.addEventListener('click', () => {
-  Promise.resolve().then(() => message.setLoadingShips());
+  message.setLoadingShips();
   setTimeout(() => newGame());
   setTimeout(() => message.setInstruction());
   console.log('end');
