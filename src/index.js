@@ -42,11 +42,13 @@ async function delay(time) {
 
 async function nextTurn() {
   currentGameboardElement.disable();
+  setNextPlayer();
 
   if (currentPlayer === enemy) {
     message.setEnemyTurn();
     currentGameboardElement = humanGameboardElement;
     currentGameboardElement.enable();
+    currentGameboardElement.enableClick();
     currentGameboardElement.disableHoverOnAllCells();
 
     await delay(2000);
@@ -55,14 +57,11 @@ async function nextTurn() {
     message.setHumanTurn();
     currentGameboardElement = enemyGameboardElement;
     currentGameboardElement.enable();
+    currentGameboardElement.enableClick();
   }
 }
 
-async function isShotInvalid({
-  gameboard: gameboardElement,
-  pointerType,
-  cell,
-}) {
+function isShotInvalid({ gameboard: gameboardElement, pointerType, cell }) {
   if (gameboardElement.disabled) {
     return true;
   }
@@ -76,11 +75,6 @@ async function isShotInvalid({
   }
 
   if (gameboardElement.controller.isExistingShot(cell.x, cell.y)) {
-    if (currentPlayer === enemy) {
-      await delay(2000);
-      enemyPlay();
-    }
-
     return true;
   }
 
@@ -94,7 +88,12 @@ function attackGameboard(gameboardElement, cell) {
 async function handleTurn(clickData) {
   const { gameboard: gameboardElement, cell } = clickData;
 
-  if (await isShotInvalid(clickData)) {
+  if (isShotInvalid(clickData)) {
+    if (currentPlayer === enemy) {
+      await delay(2000);
+      enemyPlay();
+    }
+
     return;
   }
 
@@ -123,14 +122,13 @@ async function handleTurn(clickData) {
     }
   } else {
     renderMiss(cell);
-    setCurrentPlayer();
-
+    currentGameboardElement.disableClick();
     await delay(2000);
     nextTurn();
   }
 }
 
-function setCurrentPlayer() {
+function setNextPlayer() {
   if (currentPlayer === human) {
     currentPlayer = enemy;
   } else {

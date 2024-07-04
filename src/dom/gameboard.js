@@ -4,6 +4,7 @@ import Ship from './ship';
 class Gameboard {
   #element = document.createElement('div');
   #disabled = false;
+  #disableClick = false;
   #cells = [];
   #ships = [];
   #controller = undefined;
@@ -34,6 +35,14 @@ class Gameboard {
 
   appendChild(element) {
     this.#element.appendChild(element);
+  }
+
+  disableClick() {
+    this.#disableClick = true;
+  }
+
+  enableClick() {
+    this.#disableClick = false;
   }
 
   disable() {
@@ -202,6 +211,10 @@ class Gameboard {
   }
 
   #handleClick(event) {
+    if (this.#disableClick) {
+      return;
+    }
+
     const clickData = {};
     clickData.cell = event.cell;
     clickData.gameboard = {
