@@ -12,17 +12,6 @@ function isPlayerClickingOwnGameboard(clickedGameboardElement, pointerType) {
   );
 }
 
-function isHumanTakingAnotherShotAfterMissing(
-  clickedGameboardElement,
-  pointerType,
-) {
-  return (
-    currentPlayer === enemy &&
-    clickedGameboardElement.owner === enemy &&
-    pointerType === 'mouse'
-  );
-}
-
 function enemyPlay() {
   const cell = enemy.play(humanGameboard);
   const cellDOM = humanGameboardElement.getCellDOM(cell.x, cell.y);
@@ -56,10 +45,6 @@ async function nextTurn() {
 
 function isShotInvalid({ gameboard: gameboardElement, pointerType, cell }) {
   if (gameboardElement.disabled) {
-    return true;
-  }
-
-  if (isHumanTakingAnotherShotAfterMissing(gameboardElement, pointerType)) {
     return true;
   }
 
