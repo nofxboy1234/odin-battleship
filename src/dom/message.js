@@ -20,6 +20,10 @@ const message = {
     element.textContent =
       "Randomize your ships until you're happy with their positions, then press Play!";
   },
+  setLoadingShips() {
+    element.textContent = 'Loading random ships...';
+    return element;
+  },
   text() {
     return element.textContent;
   },

@@ -165,8 +165,6 @@ function newGame() {
   setupHumanGameboardElement();
   randomizeHumanGameboard();
 
-  message.setInstruction();
-
   randomizeButton.disabled = false;
   playButton.disabled = false;
 }
@@ -220,10 +218,25 @@ function randomizeHumanGameboard() {
   humanContainer.appendChild(humanGameboardElement.render());
 }
 
+async function showLoadingMessage() {
+  // console.log('Loading random ships...');
+  message.setLoadingShips();
+}
+
+function showInstructionMessage() {
+  message.setInstruction();
+}
+
+function newGameButtonHandler() {
+  newGame();
+}
+
 const newGameButton = document.getElementById('new-game-btn');
 newGameButton.addEventListener('click', () => {
-  Promise.resolve().then(() => newGame());
-  console.log('Do other stuff while newGame is processing!');
+  Promise.resolve()
+    .then(() => showLoadingMessage())
+    .then(() => setTimeout(newGameButtonHandler))
+    .then(() => setTimeout(showInstructionMessage));
 });
 
 const randomizeButton = document.getElementById('randomize-btn');
