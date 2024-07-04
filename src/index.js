@@ -218,24 +218,11 @@ function randomizeHumanGameboard() {
   humanContainer.appendChild(humanGameboardElement.render());
 }
 
-async function showLoadingMessage() {
-  // console.log('Loading random ships...');
-}
-
-function showInstructionMessage() {
-  message.setInstruction();
-}
-
-function newGameButtonHandler() {
-  newGame();
-}
-
 const newGameButton = document.getElementById('new-game-btn');
 newGameButton.addEventListener('click', () => {
-  Promise.resolve()
-    .then(() => message.setLoadingShips())
-    .then(() => setTimeout(newGameButtonHandler))
-    .then(() => setTimeout(showInstructionMessage));
+  Promise.resolve().then(() => message.setLoadingShips());
+  setTimeout(() => newGame());
+  setTimeout(() => message.setInstruction());
   console.log('end');
 });
 
