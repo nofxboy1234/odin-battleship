@@ -218,12 +218,16 @@ function randomizeHumanGameboard() {
   humanContainer.appendChild(humanGameboardElement.render());
 }
 
-const newGameButton = document.getElementById('new-game-btn');
-newGameButton.addEventListener('click', () => {
+function setup() {
   message.setLoadingShips();
   setTimeout(() => newGame());
   setTimeout(() => message.setInstruction());
   console.log('end');
+}
+
+const newGameButton = document.getElementById('new-game-btn');
+newGameButton.addEventListener('click', () => {
+  setup();
 });
 
 const randomizeButton = document.getElementById('randomize-btn');
@@ -246,4 +250,4 @@ const enemyContainer = document.getElementById('gameboard-container-enemy');
 const humanContainer = document.getElementById('gameboard-container-human');
 message.setElement(document.getElementById('message'));
 
-newGame();
+setup();
