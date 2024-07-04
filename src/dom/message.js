@@ -22,7 +22,6 @@ const message = {
   },
   setLoadingShips() {
     element.textContent = 'Loading random ships...';
-    return element;
   },
   text() {
     return element.textContent;

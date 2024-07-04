@@ -220,7 +220,6 @@ function randomizeHumanGameboard() {
 
 async function showLoadingMessage() {
   // console.log('Loading random ships...');
-  message.setLoadingShips();
 }
 
 function showInstructionMessage() {
@@ -234,9 +233,10 @@ function newGameButtonHandler() {
 const newGameButton = document.getElementById('new-game-btn');
 newGameButton.addEventListener('click', () => {
   Promise.resolve()
-    .then(() => showLoadingMessage())
+    .then(() => message.setLoadingShips())
     .then(() => setTimeout(newGameButtonHandler))
     .then(() => setTimeout(showInstructionMessage));
+  console.log('end');
 });
 
 const randomizeButton = document.getElementById('randomize-btn');
