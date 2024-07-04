@@ -20,7 +20,7 @@ class Gameboard {
     const hitShip = this.#getShipOnCell(x, y);
     if (hitShip) {
       hitShip.hit(x, y);
-      return true;
+      return { hit: true, ship: hitShip };
     } else {
       this.#misses.push(new Cell(x, y));
       return { hit: false, ship: undefined };

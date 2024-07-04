@@ -96,13 +96,16 @@ test('gameboard.receiveAttack() does not record a hit as a miss', () => {
   expect(gameboard.getMisses()).not.toContainEqual(cell);
 });
 
-test('gameboard.receiveAttack() returns true when a shot hits', () => {
+test('gameboard.receiveAttack() returns a result object with object.hit === true when a shot hits', () => {
   const ship = new Ship(1);
 
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
 
-  expect(gameboard.receiveAttack(0, 0)).toEqual(true);
+  expect(gameboard.receiveAttack(0, 0)).toStrictEqual({
+    hit: true,
+    ship: ship,
+  });
 });
 
 test('gameboard.allShipsSunk() returns false when all ships are not sunk', () => {
