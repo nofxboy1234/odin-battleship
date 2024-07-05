@@ -157,6 +157,10 @@ function shipAgainstBottomWall(ship, gameboard) {
   return ship.front().y === gameboard.size - 1;
 }
 
+function shipAgainstLeftWall(ship) {
+  return ship.x === 0;
+}
+
 export {
   gameboardShips,
   hasOverlappingShips,
@@ -165,4 +169,5 @@ export {
   shipAgainstTopWall,
   shipAgainstRightWall,
   shipAgainstBottomWall,
+  shipAgainstLeftWall,
 };

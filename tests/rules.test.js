@@ -10,6 +10,7 @@ import {
   shipAgainstTopWall,
   shipAgainstRightWall,
   shipAgainstBottomWall,
+  shipAgainstLeftWall,
 } from '../src/logic/rules';
 import Player from '../src/logic/player';
 import Ship from '../src/logic/ship';
@@ -669,6 +670,48 @@ describe('shipAgainstBottomWall()', () => {
       const gameboard = new Gameboard();
       gameboard.placeShip(ship, 0, 6);
       expect(shipAgainstBottomWall(ship, gameboard)).toBe(false);
+    });
+  });
+});
+
+describe('shipAgainstLeftWall()', () => {
+  describe('When a horizontal ship is against the left wall of a gameboard', () => {
+    test('it returns true', () => {
+      const ship = new Ship(3);
+      ship.setHorizontal();
+      const gameboard = new Gameboard();
+      gameboard.placeShip(ship, 0, 9);
+      expect(shipAgainstLeftWall(ship, gameboard)).toBe(true);
+    });
+  });
+
+  describe('When a horizontal ship is not against the left wall of a gameboard', () => {
+    test('it returns false', () => {
+      const ship = new Ship(3);
+      ship.setHorizontal();
+      const gameboard = new Gameboard();
+      gameboard.placeShip(ship, 1, 9);
+      expect(shipAgainstLeftWall(ship, gameboard)).toBe(false);
+    });
+  });
+
+  describe('When a vertical ship is against the left wall of a gameboard', () => {
+    test('it returns true', () => {
+      const ship = new Ship(3);
+      ship.setVertical();
+      const gameboard = new Gameboard();
+      gameboard.placeShip(ship, 0, 6);
+      expect(shipAgainstLeftWall(ship, gameboard)).toBe(true);
+    });
+  });
+
+  describe('When a vertical ship is not against the left wall of a gameboard', () => {
+    test('it returns false', () => {
+      const ship = new Ship(3);
+      ship.setVertical();
+      const gameboard = new Gameboard();
+      gameboard.placeShip(ship, 1, 6);
+      expect(shipAgainstLeftWall(ship, gameboard)).toBe(false);
     });
   });
 });
