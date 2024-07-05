@@ -159,4 +159,5 @@ export {
   hasOutOfBoundsShips,
   hasAdjacentShips,
   shipAgainstRightWall,
+  shipAgainstTopWall,
 };

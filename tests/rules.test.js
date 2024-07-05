@@ -8,6 +8,7 @@ import {
   hasOutOfBoundsShips,
   hasAdjacentShips,
   shipAgainstRightWall,
+  shipAgainstTopWall,
 } from '../src/logic/rules';
 import Player from '../src/logic/player';
 import Ship from '../src/logic/ship';
@@ -545,42 +546,86 @@ describe('vertical ships: adjacent-top ships', () => {
   });
 });
 
-describe('When a horizontal ship is against the right wall of a gameboard', () => {
-  test('shipAgainstRightWall() returns true', () => {
-    const ship = new Ship(3);
-    ship.setHorizontal();
-    const gameboard = new Gameboard();
-    gameboard.placeShip(ship, 7, 0);
-    expect(shipAgainstRightWall(ship, gameboard)).toBe(true);
+describe('shipAgainstRightWall()', () => {
+  describe('When a horizontal ship is against the right wall of a gameboard', () => {
+    test('it returns true', () => {
+      const ship = new Ship(3);
+      ship.setHorizontal();
+      const gameboard = new Gameboard();
+      gameboard.placeShip(ship, 7, 0);
+      expect(shipAgainstRightWall(ship, gameboard)).toBe(true);
+    });
+  });
+
+  describe('When a horizontal ship is not against the right wall of a gameboard', () => {
+    test('it returns false', () => {
+      const ship = new Ship(3);
+      ship.setHorizontal();
+      const gameboard = new Gameboard();
+      gameboard.placeShip(ship, 6, 0);
+      expect(shipAgainstRightWall(ship, gameboard)).toBe(false);
+    });
+  });
+
+  describe('When a vertical ship is against the right wall of a gameboard', () => {
+    test('it returns true', () => {
+      const ship = new Ship(3);
+      ship.setVertical();
+      const gameboard = new Gameboard();
+      gameboard.placeShip(ship, 9, 0);
+      expect(shipAgainstRightWall(ship, gameboard)).toBe(true);
+    });
+  });
+
+  describe('When a vertical ship is not against the right wall of a gameboard', () => {
+    test('it returns false', () => {
+      const ship = new Ship(3);
+      ship.setVertical();
+      const gameboard = new Gameboard();
+      gameboard.placeShip(ship, 8, 0);
+      expect(shipAgainstRightWall(ship, gameboard)).toBe(false);
+    });
   });
 });
 
-describe('When a horizontal ship is not against the right wall of a gameboard', () => {
-  test('shipAgainstRightWall() returns false', () => {
-    const ship = new Ship(3);
-    ship.setHorizontal();
-    const gameboard = new Gameboard();
-    gameboard.placeShip(ship, 6, 0);
-    expect(shipAgainstRightWall(ship, gameboard)).toBe(false);
+describe('shipAgainstTopWall()', () => {
+  describe('When a horizontal ship is against the top wall of a gameboard', () => {
+    test('it returns true', () => {
+      const ship = new Ship(3);
+      ship.setHorizontal();
+      const gameboard = new Gameboard();
+      gameboard.placeShip(ship, 0, 0);
+      expect(shipAgainstTopWall(ship, gameboard)).toBe(true);
+    });
   });
-});
 
-describe('When a vertical ship is against the right wall of a gameboard', () => {
-  test('shipAgainstRightWall() returns true', () => {
-    const ship = new Ship(3);
-    ship.setVertical();
-    const gameboard = new Gameboard();
-    gameboard.placeShip(ship, 9, 0);
-    expect(shipAgainstRightWall(ship, gameboard)).toBe(true);
+  describe('When a horizontal ship is not against the top wall of a gameboard', () => {
+    test('it returns false', () => {
+      const ship = new Ship(3);
+      ship.setHorizontal();
+      const gameboard = new Gameboard();
+      gameboard.placeShip(ship, 0, 1);
+      expect(shipAgainstTopWall(ship, gameboard)).toBe(false);
+    });
   });
-});
 
-describe('When a vertical ship is not against the right wall of a gameboard', () => {
-  test('shipAgainstRightWall() returns false', () => {
-    const ship = new Ship(3);
-    ship.setVertical();
-    const gameboard = new Gameboard();
-    gameboard.placeShip(ship, 8, 0);
-    expect(shipAgainstRightWall(ship, gameboard)).toBe(false);
+  describe('When a vertical ship is against the top wall of a gameboard', () => {
+    test('it returns true', () => {
+      const ship = new Ship(3);
+      ship.setVertical();
+      const gameboard = new Gameboard();
+      gameboard.placeShip(ship, 0, 0);
+      expect(shipAgainstTopWall(ship, gameboard)).toBe(true);
+    });
+  });
+
+  describe('When a vertical ship is not against the top wall of a gameboard', () => {
+    test('it returns false', () => {
+      const ship = new Ship(3);
+      ship.setVertical();
+      const gameboard = new Gameboard();
+      gameboard.placeShip(ship, 0, 1);
+      expect(shipAgainstTopWall(ship, gameboard)).toBe(false);
+    });
   });
 });
