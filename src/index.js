@@ -13,7 +13,7 @@ function isPlayerClickingOwnGameboard(clickedGameboardElement, pointerType) {
 }
 
 function enemyPlay() {
-  enemy.play(humanGameboard);
+  enemy.play(humanGameboard, humanGameboardElement);
 }
 
 async function delay(time) {
@@ -94,10 +94,10 @@ async function handleTurn(clickData) {
       } else {
         if (result.ship.isSunk()) {
           // --clear any stored shipToSink in enemy player
-          enemy.shipToSink = undefined;
+          enemy.shipToSink.reset();
         } else {
           // -- store the shipToSink in player to continue searching for hits on next turn if they miss with the next shot
-          enemy.shipToSink = result.ship;
+          enemy.shipToSink.ship = result.ship;
         }
 
         await delay(2000);

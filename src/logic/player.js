@@ -1,16 +1,30 @@
 import getRandomInt from './helpers';
 import { gameboardShips, hasAdjacentShips } from './rules';
-import { hasOverlappingShips, hasOutOfBoundsShips } from './rules';
+import {
+  hasOverlappingShips,
+  hasOutOfBoundsShips,
+  shipAgainstTopWall,
+  shipAgainstRightWall,
+  shipAgainstBottomWall,
+  shipAgainstLeftWall,
+} from './rules';
 
 class Player {
   constructor(gameboard, name) {
     this.gameboard = gameboard;
     this.name = name;
-    this.shipToSink = undefined;
+    this.shipToSink = {
+      ship: undefined,
+      shots: [],
+      reset() {
+        this.ship = undefined;
+        this.shots.length = 0;
+      },
+    };
   }
 
-  play(targetGameboard) {
-    const ship = this.shipToSink;
+  play(targetGameboard, targetGameboardElement) {
+    const ship = this.shipToSink.ship;
     let nextShot;
 
     if (ship) {
@@ -21,7 +35,21 @@ class Player {
         const right = targetGameboard.offsetCell(onlyHit, 1, 0);
         const bottom = targetGameboard.offsetCell(onlyHit, 0, 1);
         const left = targetGameboard.offsetCell(onlyHit, -1, 0);
-        const potentialHits = [top, right, bottom, left];
+
+        const potentialHits = [];
+        if (!shipAgainstTopWall(ship)) {
+          potentialHits.push(top);
+        }
+        if (!shipAgainstRightWall(ship, targetGameboard)) {
+          potentialHits.push(right);
+        }
+        if (!shipAgainstBottomWall(ship, targetGameboard)) {
+          potentialHits.push(bottom);
+        }
+        if (!shipAgainstLeftWall(ship)) {
+          potentialHits.push(left);
+        }
+
         const randomIndex = getRandomInt(potentialHits.length);
         nextShot = potentialHits[randomIndex];
       } else {
@@ -34,7 +62,15 @@ class Player {
           const lastHit = xHits.at(-1);
           const left = targetGameboard.offsetCell(firstHit, -1, 0);
           const right = targetGameboard.offsetCell(lastHit, 1, 0);
-          const potentialHits = [left, right];
+
+          const potentialHits = [];
+          if (!shipAgainstLeftWall(ship)) {
+            potentialHits.push(left);
+          }
+          if (!shipAgainstRightWall(ship, targetGameboard)) {
+            potentialHits.push(right);
+          }
+
           const randomIndex = getRandomInt(potentialHits.length);
           nextShot = potentialHits[randomIndex];
         }
@@ -47,11 +83,21 @@ class Player {
           const lastHit = yHits.at(-1);
           const top = targetGameboard.offsetCell(firstHit, -1, 0);
           const bottom = targetGameboard.offsetCell(lastHit, 1, 0);
-          const potentialHits = [top, bottom];
+
+          const potentialHits = [];
+          if (!shipAgainstTopWall(ship)) {
+            potentialHits.push(top);
+          }
+          if (!shipAgainstBottomWall(ship, targetGameboard)) {
+            potentialHits.push(bottom);
+          }
+
           const randomIndex = getRandomInt(potentialHits.length);
           nextShot = potentialHits[randomIndex];
         }
       }
+
+      this.shipToSink.shots.push(nextShot);
     } else {
       const hits = targetGameboard.getHits();
       const misses = targetGameboard.getMisses();
@@ -62,7 +108,7 @@ class Player {
       nextShot = availableCells[randomIndex];
     }
 
-    const cellDOM = targetGameboard.getCellDOM(nextShot.x, nextShot.y);
+    const cellDOM = targetGameboardElement.getCellDOM(nextShot.x, nextShot.y);
     cellDOM.render().click();
   }
 
