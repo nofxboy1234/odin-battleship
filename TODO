@@ -1,0 +1,3 @@
+Get game to error on player:124
+Move memoization in player.play() lower down
+Check bug with human clicking their own board during their turn
