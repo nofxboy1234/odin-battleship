@@ -81,8 +81,8 @@ class Player {
           // ---attack left of first hit in array || right of last hit in array
           const firstHit = yHits.at(0);
           const lastHit = yHits.at(-1);
-          const top = targetGameboard.offsetCell(firstHit, -1, 0);
-          const bottom = targetGameboard.offsetCell(lastHit, 1, 0);
+          const top = targetGameboard.offsetCell(firstHit, 0, -1);
+          const bottom = targetGameboard.offsetCell(lastHit, 0, 1);
 
           const potentialHits = [];
           if (!shipAgainstTopWall(ship)) {
