@@ -25,6 +25,7 @@ class Player {
 
   play(targetGameboard, targetGameboardElement) {
     const ship = this.shipToSink.ship;
+    const shots = this.shipToSink.shots;
     let nextShot;
 
     if (ship) {
@@ -37,16 +38,22 @@ class Player {
         const left = targetGameboard.offsetCell(onlyHit, -1, 0);
 
         const potentialHits = [];
-        if (!shipAgainstTopWall(ship)) {
+        if (!shipAgainstTopWall(ship) && !shots.includes(top)) {
           potentialHits.push(top);
         }
-        if (!shipAgainstRightWall(ship, targetGameboard)) {
+        if (
+          !shipAgainstRightWall(ship, targetGameboard) &&
+          !shots.includes(right)
+        ) {
           potentialHits.push(right);
         }
-        if (!shipAgainstBottomWall(ship, targetGameboard)) {
+        if (
+          !shipAgainstBottomWall(ship, targetGameboard) &&
+          !shots.includes(bottom)
+        ) {
           potentialHits.push(bottom);
         }
-        if (!shipAgainstLeftWall(ship)) {
+        if (!shipAgainstLeftWall(ship) && !shots.includes(left)) {
           potentialHits.push(left);
         }
 
@@ -64,10 +71,13 @@ class Player {
           const right = targetGameboard.offsetCell(lastHit, 1, 0);
 
           const potentialHits = [];
-          if (!shipAgainstLeftWall(ship)) {
+          if (!shipAgainstLeftWall(ship) && !shots.includes(left)) {
             potentialHits.push(left);
           }
-          if (!shipAgainstRightWall(ship, targetGameboard)) {
+          if (
+            !shipAgainstRightWall(ship, targetGameboard) &&
+            !shots.includes(right)
+          ) {
             potentialHits.push(right);
           }
 
@@ -85,10 +95,13 @@ class Player {
           const bottom = targetGameboard.offsetCell(lastHit, 0, 1);
 
           const potentialHits = [];
-          if (!shipAgainstTopWall(ship)) {
+          if (!shipAgainstTopWall(ship) && !shots.includes(top)) {
             potentialHits.push(top);
           }
-          if (!shipAgainstBottomWall(ship, targetGameboard)) {
+          if (
+            !shipAgainstBottomWall(ship, targetGameboard) &&
+            !shots.includes(bottom)
+          ) {
             potentialHits.push(bottom);
           }
 
