@@ -7,8 +7,9 @@ import {
   hasOverlappingShips,
   hasOutOfBoundsShips,
   hasAdjacentShips,
-  shipAgainstRightWall,
   shipAgainstTopWall,
+  shipAgainstRightWall,
+  shipAgainstBottomWall,
 } from '../src/logic/rules';
 import Player from '../src/logic/player';
 import Ship from '../src/logic/ship';
@@ -626,6 +627,48 @@ describe('shipAgainstTopWall()', () => {
       const gameboard = new Gameboard();
       gameboard.placeShip(ship, 0, 1);
       expect(shipAgainstTopWall(ship, gameboard)).toBe(false);
+    });
+  });
+});
+
+describe('shipAgainstBottomWall()', () => {
+  describe('When a horizontal ship is against the bottom wall of a gameboard', () => {
+    test('it returns true', () => {
+      const ship = new Ship(3);
+      ship.setHorizontal();
+      const gameboard = new Gameboard();
+      gameboard.placeShip(ship, 0, 9);
+      expect(shipAgainstBottomWall(ship, gameboard)).toBe(true);
+    });
+  });
+
+  describe('When a horizontal ship is not against the bottom wall of a gameboard', () => {
+    test('it returns false', () => {
+      const ship = new Ship(3);
+      ship.setHorizontal();
+      const gameboard = new Gameboard();
+      gameboard.placeShip(ship, 0, 8);
+      expect(shipAgainstBottomWall(ship, gameboard)).toBe(false);
+    });
+  });
+
+  describe('When a vertical ship is against the bottom wall of a gameboard', () => {
+    test('it returns true', () => {
+      const ship = new Ship(3);
+      ship.setVertical();
+      const gameboard = new Gameboard();
+      gameboard.placeShip(ship, 0, 7);
+      expect(shipAgainstBottomWall(ship, gameboard)).toBe(true);
+    });
+  });
+
+  describe('When a vertical ship is not against the bottom wall of a gameboard', () => {
+    test('it returns false', () => {
+      const ship = new Ship(3);
+      ship.setVertical();
+      const gameboard = new Gameboard();
+      gameboard.placeShip(ship, 0, 6);
+      expect(shipAgainstBottomWall(ship, gameboard)).toBe(false);
     });
   });
 });

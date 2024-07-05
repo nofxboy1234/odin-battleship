@@ -145,12 +145,16 @@ function getCellsAtTheTop(gameboard, ship) {
   }
 }
 
+function shipAgainstTopWall(ship) {
+  return ship.y === 0;
+}
+
 function shipAgainstRightWall(ship, gameboard) {
   return ship.front().x === gameboard.size - 1;
 }
 
-function shipAgainstTopWall(ship) {
-  return ship.y === 0;
+function shipAgainstBottomWall(ship, gameboard) {
+  return ship.front().y === gameboard.size - 1;
 }
 
 export {
@@ -158,6 +162,7 @@ export {
   hasOverlappingShips,
   hasOutOfBoundsShips,
   hasAdjacentShips,
-  shipAgainstRightWall,
   shipAgainstTopWall,
+  shipAgainstRightWall,
+  shipAgainstBottomWall,
 };
