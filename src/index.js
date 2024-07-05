@@ -13,9 +13,7 @@ function isPlayerClickingOwnGameboard(clickedGameboardElement, pointerType) {
 }
 
 function enemyPlay() {
-  const cell = enemy.play(humanGameboard);
-  const cellDOM = humanGameboardElement.getCellDOM(cell.x, cell.y);
-  cellDOM.render().click();
+  enemy.play(humanGameboard);
 }
 
 async function delay(time) {
@@ -75,9 +73,9 @@ async function handleTurn(clickData) {
     return;
   }
 
-  const hit = attackGameboard(gameboardElement, cell);
+  const result = attackGameboard(gameboardElement, cell);
 
-  if (hit) {
+  if (result.hit) {
     renderHit(cell);
 
     if (currentPlayer === human) {
@@ -94,11 +92,17 @@ async function handleTurn(clickData) {
         disableBothGameboards();
         return;
       } else {
-        // is a ship sunk?
-      }
+        if (result.ship.isSunk()) {
+          // --clear any stored shipToSink in enemy player
+          enemy.shipToSink = undefined;
+        } else {
+          // -- store the shipToSink in player to continue searching for hits on next turn if they miss with the next shot
+          enemy.shipToSink = result.ship;
+        }
 
-      await delay(2000);
-      enemyPlay();
+        await delay(2000);
+        enemyPlay();
+      }
     }
   } else {
     renderMiss(cell);

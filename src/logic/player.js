@@ -6,17 +6,64 @@ class Player {
   constructor(gameboard, name) {
     this.gameboard = gameboard;
     this.name = name;
+    this.shipToSink = undefined;
   }
 
-  play(oppositionGameboard) {
-    const hits = oppositionGameboard.getHits();
-    const misses = oppositionGameboard.getMisses();
-    const shots = hits.concat(misses);
-    const availableCells = this.#getAvailableCells(oppositionGameboard, shots);
+  play(targetGameboard) {
+    const ship = this.shipToSink;
+    let nextShot;
 
-    const randomIndex = getRandomInt(availableCells.length);
-    const randomCell = availableCells[randomIndex];
-    return randomCell;
+    if (ship) {
+      const hits = ship.getHits();
+      if (hits.length === 1) {
+        const onlyHit = hits.at(0);
+        const top = targetGameboard.offsetCell(onlyHit, 0, -1);
+        const right = targetGameboard.offsetCell(onlyHit, 1, 0);
+        const bottom = targetGameboard.offsetCell(onlyHit, 0, 1);
+        const left = targetGameboard.offsetCell(onlyHit, -1, 0);
+        const potentialHits = [top, right, bottom, left];
+        const randomIndex = getRandomInt(potentialHits.length);
+        nextShot = potentialHits[randomIndex];
+      } else {
+        // --if hit array length is > 1
+        if (ship.orientation === 'horizontal') {
+          // ---order hits by x
+          const xHits = hits.toSorted((a, b) => Math.sign(a.x - b.x));
+          // ---attack left of first hit in array || right of last hit in array
+          const firstHit = xHits.at(0);
+          const lastHit = xHits.at(-1);
+          const left = targetGameboard.offsetCell(firstHit, -1, 0);
+          const right = targetGameboard.offsetCell(lastHit, 1, 0);
+          const potentialHits = [left, right];
+          const randomIndex = getRandomInt(potentialHits.length);
+          nextShot = potentialHits[randomIndex];
+        }
+
+        if (ship.orientation === 'vertical') {
+          // ---order hits by y
+          const yHits = hits.toSorted((a, b) => Math.sign(a.y - b.y));
+          // ---attack left of first hit in array || right of last hit in array
+          const firstHit = yHits.at(0);
+          const lastHit = yHits.at(-1);
+          const top = targetGameboard.offsetCell(firstHit, -1, 0);
+          const bottom = targetGameboard.offsetCell(lastHit, 1, 0);
+          const potentialHits = [top, bottom];
+          const randomIndex = getRandomInt(potentialHits.length);
+          nextShot = potentialHits[randomIndex];
+        }
+      }
+    } else {
+      const hits = targetGameboard.getHits();
+      const misses = targetGameboard.getMisses();
+      const shots = hits.concat(misses);
+      const availableCells = this.#getAvailableCells(targetGameboard, shots);
+
+      const randomIndex = getRandomInt(availableCells.length);
+      nextShot = availableCells[randomIndex];
+    }
+
+    const cellDOM = targetGameboard.getCellDOM(nextShot.x, nextShot.y);
+    cellDOM.render().click();
   }
 
   placeShips(ships) {
