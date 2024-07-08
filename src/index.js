@@ -115,7 +115,7 @@ async function handleTurn(clickData) {
 
   if (attackResult.hit) {
     renderHit(cell);
-    message.setCellHit(cell, currentPlayer);
+    message.setCellHit(cell, currentPlayer, currentGameboardElement);
 
     if (currentPlayer === human) {
       if (enemyGameboard.allShipsSunk()) {
@@ -124,7 +124,7 @@ async function handleTurn(clickData) {
         return;
       } else {
         if (attackResult.ship.isSunk()) {
-          message.setShipSunk(cell, currentPlayer);
+          message.setShipSunk(cell, currentPlayer, currentGameboardElement);
         }
       }
     }
@@ -137,6 +137,7 @@ async function handleTurn(clickData) {
       } else {
         if (attackResult.ship.isSunk()) {
           enemy.shipToSink.reset();
+          message.setShipSunk(cell, currentPlayer, currentGameboardElement);
         } else {
           enemy.shipToSink.ship = attackResult.ship;
         }
@@ -147,7 +148,7 @@ async function handleTurn(clickData) {
     }
   } else {
     renderMiss(cell);
-    message.setCellMiss(cell, currentPlayer);
+    message.setCellMiss(cell, currentPlayer, currentGameboardElement);
     currentGameboardElement.disableClick();
     await delay(2000);
     nextTurn();

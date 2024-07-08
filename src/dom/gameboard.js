@@ -8,6 +8,8 @@ class Gameboard {
   #cells = [];
   #ships = [];
   controller = undefined;
+  #labelsLeft = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+  #labelsTop = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
   constructor(owner, handleTurnCallback) {
     this.owner = owner;
@@ -77,10 +79,16 @@ class Gameboard {
     this.labelsLeftContainer = element;
   }
 
-  createLabelsLeft() {
-    const labels = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+  labelLeftAt(y) {
+    return this.#labelsLeft.at(y + 1);
+  }
 
-    labels.forEach((label, index) => {
+  labelTopAt(x) {
+    return this.#labelsTop.at(x);
+  }
+
+  createLabelsLeft() {
+    this.#labelsLeft.forEach((label, index) => {
       const element = document.createElement('div');
 
       if (index === 0) {
@@ -111,9 +119,7 @@ class Gameboard {
   }
 
   createLabelsTop() {
-    const labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-
-    labels.forEach((label) => {
+    this.#labelsTop.forEach((label) => {
       const element = document.createElement('div');
 
       element.classList.add('gameboard-1-0-label');

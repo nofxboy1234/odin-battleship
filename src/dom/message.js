@@ -28,15 +28,19 @@ const message = {
   setLoadingShips() {
     setText('Loading random ships...');
   },
-  setCellHit(cell, player) {
-    setText(`${player.name} hit a ship at ${cell.x}, ${cell.y}. Attack again.`);
-  },
-  setCellMiss(cell, player) {
-    setText(`${player.name} missed at ${cell.x}, ${cell.y}. End of turn.`);
-  },
-  setShipSunk(cell, player) {
+  setCellHit(cell, player, gameboardElement) {
     setText(
-      `${player.name} sunk a ship after hitting ${cell.x}, ${cell.y}. Attack again.`,
+      `${player.name} hit a ship at ${gameboardElement.labelTopAt(cell.x) + gameboardElement.labelLeftAt(cell.y)}. Attack again.`,
+    );
+  },
+  setCellMiss(cell, player, gameboardElement) {
+    setText(
+      `${player.name} missed at ${gameboardElement.labelTopAt(cell.x) + gameboardElement.labelLeftAt(cell.y)}. End of turn.`,
+    );
+  },
+  setShipSunk(cell, player, gameboardElement) {
+    setText(
+      `${player.name} sunk a ship after hitting ${gameboardElement.labelTopAt(cell.x) + gameboardElement.labelLeftAt(cell.y)}. Attack again.`,
     );
   },
 
