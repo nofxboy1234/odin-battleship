@@ -65,10 +65,6 @@ function validateShot({ gameboard: gameboardElement, pointerType, cell }) {
     return result;
   }
 
-  // if (gameboardElement.disabled) {
-  //   return true;
-  // }
-
   if (gameboardElement.controller.isExistingShot(cell.x, cell.y)) {
     result.valid = false;
     result.reason = 'isExistingShot';
@@ -131,10 +127,8 @@ async function handleTurn(clickData) {
         return;
       } else {
         if (attackResult.ship.isSunk()) {
-          // --clear any stored shipToSink in enemy player
           enemy.shipToSink.reset();
         } else {
-          // -- store the shipToSink in player to continue searching for hits on next turn if they miss with the next shot
           enemy.shipToSink.ship = attackResult.ship;
         }
 
