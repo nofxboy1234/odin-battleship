@@ -3,8 +3,8 @@ import Ship from './ship';
 
 class Gameboard {
   #element = document.createElement('div');
-  #disabled = false;
-  #disableClick = false;
+  #disabled = true;
+  #disableClick = true;
   #cells = [];
   #ships = [];
   controller = undefined;
