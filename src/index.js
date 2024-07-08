@@ -4,12 +4,14 @@ import GameboardElement from './dom/gameboard';
 import Gameboard from './logic/gameboard';
 import message from './dom/message';
 
-function isPlayerClickingOwnGameboard(clickedGameboardElement, pointerType) {
-  return (
-    clickedGameboardElement.owner === currentPlayer ||
-    (clickedGameboardElement.owner === human && pointerType === 'mouse') ||
-    (clickedGameboardElement.owner === enemy && pointerType === '')
-  );
+function isPlayerClickingOwnGameboard(clickedGameboardElement, clicker) {
+  const humanClickedOwnGameboard =
+    clickedGameboardElement.owner === human && clicker === human;
+
+  const computerClickedOwnGameboard =
+    clickedGameboardElement.owner === enemy && clicker === enemy;
+
+  return humanClickedOwnGameboard || computerClickedOwnGameboard;
 }
 
 function enemyPlay() {
@@ -41,20 +43,39 @@ async function nextTurn() {
   }
 }
 
-function isShotInvalid({ gameboard: gameboardElement, pointerType, cell }) {
-  if (gameboardElement.disabled) {
-    return true;
+function validateShot({ gameboard: gameboardElement, pointerType, cell }) {
+  const result = {
+    valid: true,
+  };
+
+  if (pointerType === 'mouse') {
+    result.clicker = human;
+  } else if (pointerType === '') {
+    result.clicker = enemy;
   }
 
-  if (isPlayerClickingOwnGameboard(gameboardElement, pointerType)) {
-    return true;
+  const playerClickingOwnGameboard = isPlayerClickingOwnGameboard(
+    gameboardElement,
+    result.clicker,
+  );
+
+  if (playerClickingOwnGameboard) {
+    result.valid = false;
+    result.reason = 'playerClickingOwnGameboard';
+    return result;
   }
+
+  // if (gameboardElement.disabled) {
+  //   return true;
+  // }
 
   if (gameboardElement.controller.isExistingShot(cell.x, cell.y)) {
-    return true;
+    result.valid = false;
+    result.reason = 'isExistingShot';
+    return result;
   }
 
-  return false;
+  return result;
 }
 
 function attackGameboard(gameboardElement, cell) {
@@ -64,18 +85,35 @@ function attackGameboard(gameboardElement, cell) {
 async function handleTurn(clickData) {
   const { gameboard: gameboardElement, cell } = clickData;
 
-  if (isShotInvalid(clickData)) {
-    if (currentPlayer === enemy) {
-      await delay(2000);
-      enemyPlay();
+  const validityResult = validateShot(clickData);
+
+  if (!validityResult.valid) {
+    if (validityResult.reason === 'playerClickingOwnGameboard') {
+      if (validityResult.clicker === enemy) {
+        enemyPlay();
+        return;
+      }
+
+      if (validityResult.clicker === human) {
+        return;
+      }
     }
 
-    return;
+    if (validityResult.reason === 'isExistingShot') {
+      if (validityResult.clicker === enemy) {
+        enemyPlay();
+        return;
+      }
+
+      if (validityResult.clicker === human) {
+        return;
+      }
+    }
   }
 
-  const result = attackGameboard(gameboardElement, cell);
+  const attackResult = attackGameboard(gameboardElement, cell);
 
-  if (result.hit) {
+  if (attackResult.hit) {
     renderHit(cell);
 
     if (currentPlayer === human) {
@@ -92,12 +130,12 @@ async function handleTurn(clickData) {
         disableBothGameboards();
         return;
       } else {
-        if (result.ship.isSunk()) {
+        if (attackResult.ship.isSunk()) {
           // --clear any stored shipToSink in enemy player
           enemy.shipToSink.reset();
         } else {
           // -- store the shipToSink in player to continue searching for hits on next turn if they miss with the next shot
-          enemy.shipToSink.ship = result.ship;
+          enemy.shipToSink.ship = attackResult.ship;
         }
 
         await delay(2000);
