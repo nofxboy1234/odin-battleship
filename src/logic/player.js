@@ -23,13 +23,31 @@ class Player {
     };
   }
 
+  #hitAgainstTopWall(hit) {
+    return hit.y === 0;
+  }
+
+  #hitAgainstRightWall(hit, gameboard) {
+    return hit.x === gameboard.size - 1;
+  }
+
+  #hitAgainstBottomWall(hit, gameboard) {
+    return hit.y === gameboard.size - 1;
+  }
+
+  #hitAgainstLeftWall(hit) {
+    return hit.x === 0;
+  }
+
   play(targetGameboard, targetGameboardElement) {
-    const ship = this.shipToSink.ship;
-    const shots = this.shipToSink.shots;
     let nextShot;
 
-    if (ship) {
+    if (this.shipToSink.ship) {
+      // ships with length >= 2 && ships with hit >= 1
+      const ship = this.shipToSink.ship;
+      const shots = this.shipToSink.shots;
       const hits = ship.getHits();
+
       if (hits.length === 1) {
         const onlyHit = hits.at(0);
         const top = targetGameboard.offsetCell(onlyHit, 0, -1);
@@ -38,22 +56,22 @@ class Player {
         const left = targetGameboard.offsetCell(onlyHit, -1, 0);
 
         const potentialHits = [];
-        if (!shipAgainstTopWall(ship) && !shots.includes(top)) {
+        if (!this.#hitAgainstTopWall(onlyHit) && !shots.includes(top)) {
           potentialHits.push(top);
         }
         if (
-          !shipAgainstRightWall(ship, targetGameboard) &&
+          !this.#hitAgainstRightWall(onlyHit, targetGameboard) &&
           !shots.includes(right)
         ) {
           potentialHits.push(right);
         }
         if (
-          !shipAgainstBottomWall(ship, targetGameboard) &&
+          !this.#hitAgainstBottomWall(onlyHit, targetGameboard) &&
           !shots.includes(bottom)
         ) {
           potentialHits.push(bottom);
         }
-        if (!shipAgainstLeftWall(ship) && !shots.includes(left)) {
+        if (!this.#hitAgainstLeftWall(onlyHit) && !shots.includes(left)) {
           potentialHits.push(left);
         }
 
@@ -64,18 +82,17 @@ class Player {
         if (ship.orientation === 'horizontal') {
           // ---order hits by x
           const xHits = hits.toSorted((a, b) => Math.sign(a.x - b.x));
-          // ---attack left of first hit in array || right of last hit in array
           const firstHit = xHits.at(0);
           const lastHit = xHits.at(-1);
           const left = targetGameboard.offsetCell(firstHit, -1, 0);
           const right = targetGameboard.offsetCell(lastHit, 1, 0);
 
           const potentialHits = [];
-          if (!shipAgainstLeftWall(ship) && !shots.includes(left)) {
+          if (!this.#hitAgainstLeftWall(firstHit) && !shots.includes(left)) {
             potentialHits.push(left);
           }
           if (
-            !shipAgainstRightWall(ship, targetGameboard) &&
+            !this.#hitAgainstRightWall(lastHit, targetGameboard) &&
             !shots.includes(right)
           ) {
             potentialHits.push(right);
@@ -88,18 +105,17 @@ class Player {
         if (ship.orientation === 'vertical') {
           // ---order hits by y
           const yHits = hits.toSorted((a, b) => Math.sign(a.y - b.y));
-          // ---attack left of first hit in array || right of last hit in array
           const firstHit = yHits.at(0);
           const lastHit = yHits.at(-1);
           const top = targetGameboard.offsetCell(firstHit, 0, -1);
           const bottom = targetGameboard.offsetCell(lastHit, 0, 1);
 
           const potentialHits = [];
-          if (!shipAgainstTopWall(ship) && !shots.includes(top)) {
+          if (!this.#hitAgainstTopWall(firstHit) && !shots.includes(top)) {
             potentialHits.push(top);
           }
           if (
-            !shipAgainstBottomWall(ship, targetGameboard) &&
+            !this.#hitAgainstBottomWall(lastHit, targetGameboard) &&
             !shots.includes(bottom)
           ) {
             potentialHits.push(bottom);
