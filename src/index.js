@@ -140,10 +140,10 @@ async function handleTurn(clickData) {
         return;
       } else {
         if (attackResult.ship.isSunk()) {
-          enemy.shipToSink.reset();
+          enemy.target.reset();
           message.setShipSunk(cell, currentPlayer, currentGameboardElement);
         } else {
-          enemy.shipToSink.ship = attackResult.ship;
+          enemy.target.ship = attackResult.ship;
         }
 
         await delay(2000);

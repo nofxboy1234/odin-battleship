@@ -6,7 +6,7 @@ class Player {
   constructor(gameboard, name) {
     this.gameboard = gameboard;
     this.name = name;
-    this.shipToSink = {
+    this.target = {
       ship: undefined,
       shots: [],
       reset() {
@@ -35,10 +35,14 @@ class Player {
   play(targetGameboard, targetGameboardElement) {
     let nextShot;
 
-    if (this.shipToSink.ship) {
-      // ships with length >= 2 && ships with hit >= 1
-      const ship = this.shipToSink.ship;
-      const shots = this.shipToSink.shots;
+    const allHits = targetGameboard.getHits();
+    const allMisses = targetGameboard.getMisses();
+    const allShots = allHits.concat(allMisses);
+
+    if (this.target.ship) {
+      // ships with length >= 2
+      const ship = this.target.ship;
+      const targetShots = this.target.shots;
       const hits = ship.getHits();
 
       if (hits.length === 1) {
@@ -49,22 +53,32 @@ class Player {
         const left = targetGameboard.offsetCell(onlyHit, -1, 0);
 
         const potentialHits = [];
-        if (!this.#hitAgainstTopWall(onlyHit) && !shots.includes(top)) {
+        if (
+          !this.#hitAgainstTopWall(onlyHit) &&
+          !targetShots.includes(top) &&
+          !allShots.includes(top)
+        ) {
           potentialHits.push(top);
         }
         if (
           !this.#hitAgainstRightWall(onlyHit, targetGameboard) &&
-          !shots.includes(right)
+          !targetShots.includes(right) &&
+          !allShots.includes(right)
         ) {
           potentialHits.push(right);
         }
         if (
           !this.#hitAgainstBottomWall(onlyHit, targetGameboard) &&
-          !shots.includes(bottom)
+          !targetShots.includes(bottom) &&
+          !allShots.includes(bottom)
         ) {
           potentialHits.push(bottom);
         }
-        if (!this.#hitAgainstLeftWall(onlyHit) && !shots.includes(left)) {
+        if (
+          !this.#hitAgainstLeftWall(onlyHit) &&
+          !targetShots.includes(left) &&
+          !allShots.includes(left)
+        ) {
           potentialHits.push(left);
         }
 
@@ -73,7 +87,6 @@ class Player {
       } else {
         // --if hit array length is > 1
         if (ship.orientation === 'horizontal') {
-          // ---order hits by x
           const xHits = hits.toSorted((a, b) => Math.sign(a.x - b.x));
           const firstHit = xHits.at(0);
           const lastHit = xHits.at(-1);
@@ -81,12 +94,17 @@ class Player {
           const right = targetGameboard.offsetCell(lastHit, 1, 0);
 
           const potentialHits = [];
-          if (!this.#hitAgainstLeftWall(firstHit) && !shots.includes(left)) {
+          if (
+            !this.#hitAgainstLeftWall(firstHit) &&
+            !targetShots.includes(left) &&
+            !allShots.includes(left)
+          ) {
             potentialHits.push(left);
           }
           if (
             !this.#hitAgainstRightWall(lastHit, targetGameboard) &&
-            !shots.includes(right)
+            !targetShots.includes(right) &&
+            !allShots.includes(right)
           ) {
             potentialHits.push(right);
           }
@@ -103,12 +121,17 @@ class Player {
           const bottom = targetGameboard.offsetCell(lastHit, 0, 1);
 
           const potentialHits = [];
-          if (!this.#hitAgainstTopWall(firstHit) && !shots.includes(top)) {
+          if (
+            !this.#hitAgainstTopWall(firstHit) &&
+            !targetShots.includes(top) &&
+            !allShots.includes(top)
+          ) {
             potentialHits.push(top);
           }
           if (
             !this.#hitAgainstBottomWall(lastHit, targetGameboard) &&
-            !shots.includes(bottom)
+            !targetShots.includes(bottom) &&
+            !allShots.includes(bottom)
           ) {
             potentialHits.push(bottom);
           }
@@ -118,12 +141,9 @@ class Player {
         }
       }
 
-      shots.push(nextShot);
+      targetShots.push(nextShot);
     } else {
-      const hits = targetGameboard.getHits();
-      const misses = targetGameboard.getMisses();
-      const shots = hits.concat(misses);
-      const availableCells = this.#getAvailableCells(targetGameboard, shots);
+      const availableCells = this.#getAvailableCells(targetGameboard, allShots);
 
       const randomIndex = getRandomInt(availableCells.length);
       nextShot = availableCells[randomIndex];
