@@ -81,6 +81,10 @@ function attackGameboard(gameboardElement, cell) {
 async function handleTurn(clickData) {
   const { gameboard: gameboardElement, cell } = clickData;
 
+  if (!cell) {
+    return;
+  }
+
   const validityResult = validateShot(clickData);
 
   if (!validityResult.valid) {
