@@ -9,9 +9,9 @@ class Gameboard {
   #ships = [];
   controller = undefined;
 
-  constructor(player, handleTurnCallback) {
-    this.owner = player;
-    this.controller = player.gameboard;
+  constructor(owner, handleTurnCallback) {
+    this.owner = owner;
+    this.controller = owner.gameboard;
     this.handleTurnCallback = handleTurnCallback;
 
     this.#element.classList.add('gameboard');
