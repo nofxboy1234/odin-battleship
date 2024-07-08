@@ -115,12 +115,17 @@ async function handleTurn(clickData) {
 
   if (attackResult.hit) {
     renderHit(cell);
+    message.setCellHit(cell, currentPlayer);
 
     if (currentPlayer === human) {
       if (enemyGameboard.allShipsSunk()) {
         message.setHumanWon();
         disableBothGameboards();
         return;
+      } else {
+        if (attackResult.ship.isSunk()) {
+          message.setShipSunk(cell, currentPlayer);
+        }
       }
     }
 
@@ -142,6 +147,7 @@ async function handleTurn(clickData) {
     }
   } else {
     renderMiss(cell);
+    message.setCellMiss(cell, currentPlayer);
     currentGameboardElement.disableClick();
     await delay(2000);
     nextTurn();

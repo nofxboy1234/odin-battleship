@@ -1,28 +1,45 @@
 let element;
 
+function setText(text) {
+  element.textContent = text;
+}
+
 const message = {
   setElement(div) {
     element = div;
   },
   setEnemyTurn() {
-    element.textContent = "Enemy's turn!";
+    setText("Enemy's turn!");
   },
   setHumanTurn() {
-    element.textContent = 'Your turn!';
+    setText('Your turn!');
   },
   setEnemyWon() {
-    element.textContent = 'Enemy won!';
+    setText('Enemy won!');
   },
   setHumanWon() {
-    element.textContent = 'You won!';
+    setText('You won!');
   },
   setInstruction() {
-    element.textContent =
-      "Randomize your ships until you're happy with their positions, then press Play!";
+    setText(
+      "Randomize your ships until you're happy with their positions, then press Play!",
+    );
   },
   setLoadingShips() {
-    element.textContent = 'Loading random ships...';
+    setText('Loading random ships...');
   },
+  setCellHit(cell, player) {
+    setText(`${player.name} hit a ship at ${cell.x}, ${cell.y}. Attack again.`);
+  },
+  setCellMiss(cell, player) {
+    setText(`${player.name} missed at ${cell.x}, ${cell.y}. End of turn.`);
+  },
+  setShipSunk(cell, player) {
+    setText(
+      `${player.name} sunk a ship after hitting ${cell.x}, ${cell.y}. Attack again.`,
+    );
+  },
+
   text() {
     return element.textContent;
   },
