@@ -43,7 +43,11 @@ const message = {
       `${player.name} sunk a ship after hitting ${gameboardElement.labelTopAt(cell.x) + gameboardElement.labelLeftAt(cell.y)}. Attack again.`,
     );
   },
-
+  setExistingShot(cell, player, gameboardElement) {
+    setText(
+      `Invalid shot: ${player.name} repeated a shot at ${gameboardElement.labelTopAt(cell.x) + gameboardElement.labelLeftAt(cell.y)}. Attack again.`,
+    );
+  },
   text() {
     return element.textContent;
   },

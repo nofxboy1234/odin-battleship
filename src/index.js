@@ -90,6 +90,7 @@ async function handleTurn(clickData) {
   if (!validityResult.valid) {
     if (validityResult.reason === 'playerClickingOwnGameboard') {
       if (validityResult.clicker === enemy) {
+        await delay(2000);
         enemyPlay();
         return;
       }
@@ -100,7 +101,10 @@ async function handleTurn(clickData) {
     }
 
     if (validityResult.reason === 'isExistingShot') {
+      message.setExistingShot(cell, currentPlayer, currentGameboardElement);
+
       if (validityResult.clicker === enemy) {
+        await delay(2000);
         enemyPlay();
         return;
       }

@@ -1,13 +1,6 @@
 import getRandomInt from './helpers';
 import { gameboardShips, hasAdjacentShips } from './rules';
-import {
-  hasOverlappingShips,
-  hasOutOfBoundsShips,
-  shipAgainstTopWall,
-  shipAgainstRightWall,
-  shipAgainstBottomWall,
-  shipAgainstLeftWall,
-} from './rules';
+import { hasOverlappingShips, hasOutOfBoundsShips } from './rules';
 
 class Player {
   constructor(gameboard, name) {
@@ -103,7 +96,6 @@ class Player {
         }
 
         if (ship.orientation === 'vertical') {
-          // ---order hits by y
           const yHits = hits.toSorted((a, b) => Math.sign(a.y - b.y));
           const firstHit = yHits.at(0);
           const lastHit = yHits.at(-1);
@@ -126,7 +118,7 @@ class Player {
         }
       }
 
-      this.shipToSink.shots.push(nextShot);
+      shots.push(nextShot);
     } else {
       const hits = targetGameboard.getHits();
       const misses = targetGameboard.getMisses();
