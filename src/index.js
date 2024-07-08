@@ -137,6 +137,7 @@ function renderHit(cell) {
 
 function play() {
   enemyGameboardElement.enable();
+  enemyGameboardElement.enableClick();
   message.setHumanTurn();
   randomizeButton.disabled = true;
   playButton.disabled = true;
