@@ -302,4 +302,32 @@ describe('getAllSunkShips()', () => {
       expect(gameboard.getAllSunkShips()).toEqual([]);
     });
   });
+
+  describe('when there is 1 sunk ship', () => {
+    test('it returns an array of 1 ship', () => {
+      const gameboard = new Gameboard();
+      const ship = new Ship(2);
+      gameboard.placeShip(ship, 3, 4);
+      gameboard.receiveAttack(3, 4);
+      gameboard.receiveAttack(4, 4);
+      expect(gameboard.getAllSunkShips()).toEqual([ship]);
+    });
+  });
+
+  describe('when there are 2 sunk ships', () => {
+    test('it returns an array of 2 ships', () => {
+      const gameboard = new Gameboard();
+
+      const ship1 = new Ship(2);
+      gameboard.placeShip(ship1, 3, 4);
+      gameboard.receiveAttack(3, 4);
+      gameboard.receiveAttack(4, 4);
+
+      const ship2 = new Ship(1);
+      gameboard.placeShip(ship2, 0, 0);
+      gameboard.receiveAttack(0, 0);
+
+      expect(gameboard.getAllSunkShips()).toEqual([ship1, ship2]);
+    });
+  });
 });
