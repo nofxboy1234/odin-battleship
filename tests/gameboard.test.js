@@ -42,10 +42,9 @@ test('gameboard.receiveAttack() records the coordinates of a missed shot', () =>
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
   gameboard.receiveAttack(5, 4);
+  const cell = gameboard.getCellAt(5, 4);
 
-  const cell = new Cell(5, 4);
-
-  expect(gameboard.getMisses()).toContainEqual(cell);
+  expect(gameboard.getMisses()).toContain(cell);
 });
 
 test('gameboard.receiveAttack() does not record a miss as a hit', () => {
@@ -54,10 +53,9 @@ test('gameboard.receiveAttack() does not record a miss as a hit', () => {
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
   gameboard.receiveAttack(5, 4);
+  const cell = gameboard.getCellAt(5, 4);
 
-  const cell = new Cell(5, 4);
-
-  expect(gameboard.getHits()).not.toContainEqual(cell);
+  expect(gameboard.getHits()).not.toContain(cell);
 });
 
 test('gameboard.receiveAttack() returns a result object with object.hit === false when a shot misses', () => {
@@ -78,10 +76,9 @@ test('gameboard.receiveAttack() records the coordinates of a shot that hits', ()
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
   gameboard.receiveAttack(0, 0);
+  const cell = gameboard.getCellAt(0, 0);
 
-  const cell = new Cell(0, 0);
-
-  expect(gameboard.getHits()).toContainEqual(cell);
+  expect(gameboard.getHits()).toContain(cell);
 });
 
 test('gameboard.receiveAttack() does not record a hit as a miss', () => {
@@ -90,10 +87,9 @@ test('gameboard.receiveAttack() does not record a hit as a miss', () => {
   const gameboard = new Gameboard();
   gameboard.placeShip(ship, 0, 0);
   gameboard.receiveAttack(0, 0);
+  const cell = gameboard.getCellAt(0, 0);
 
-  const cell = new Cell(0, 0);
-
-  expect(gameboard.getMisses()).not.toContainEqual(cell);
+  expect(gameboard.getMisses()).not.toContain(cell);
 });
 
 test('gameboard.receiveAttack() returns a result object with object.hit === true when a shot hits', () => {

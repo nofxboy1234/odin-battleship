@@ -1,4 +1,3 @@
-import Cell from './cell';
 import getRandomInt from './helpers';
 
 class Ship {
@@ -10,8 +9,8 @@ class Ship {
     this.#hits = [];
   }
 
-  hit(x, y) {
-    this.#hits.push(new Cell(x, y));
+  hit(cell) {
+    this.#hits.push(cell);
   }
 
   isSunk() {

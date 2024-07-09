@@ -19,10 +19,10 @@ class Gameboard {
   receiveAttack(x, y) {
     const hitShip = this.#getShipOnCell(x, y);
     if (hitShip) {
-      hitShip.hit(x, y);
+      hitShip.hit(this.getCellAt(x, y));
       return { hit: true, ship: hitShip };
     } else {
-      this.#misses.push(new Cell(x, y));
+      this.#misses.push(this.getCellAt(x, y));
       return { hit: false, ship: undefined };
     }
   }

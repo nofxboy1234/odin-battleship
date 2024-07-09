@@ -6,9 +6,19 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
+test('hit() stores the provided Cell in its "hits" property', () => {
+  const ship = new Ship();
+  const gameboard = new Gameboard();
+  const cell = gameboard.getCellAt(0, 0);
+  ship.hit(cell);
+  expect(ship.getHits()).toContain(cell);
+});
+
 test('hit() increases the number of hits', () => {
   const ship = new Ship();
-  ship.hit(0, 0);
+  const gameboard = new Gameboard();
+  const cell = gameboard.getCellAt(0, 0);
+  ship.hit(cell);
   expect(ship.getHits().length).toEqual(1);
 });
 
@@ -22,9 +32,36 @@ test('isSunk() returns false when hits does not equal length', () => {
   expect(ship.isSunk()).toBe(false);
 });
 
+test('isSunk() returns false when hits does not equal length', () => {
+  const ship = new Ship(4);
+  const cell1 = new Cell(0, 0);
+  const cell2 = new Cell(1, 0);
+  const cell3 = new Cell(2, 0);
+  ship.hit(cell1);
+  ship.hit(cell2);
+  ship.hit(cell3);
+
+  expect(ship.isSunk()).toBe(false);
+});
+
 test('isSunk() returns true when hits equals length', () => {
   const ship = new Ship(1);
-  ship.hit(0, 0);
+  const cell = new Cell(0, 0);
+  ship.hit(cell);
+  expect(ship.isSunk()).toBe(true);
+});
+
+test('isSunk() returns true when hits equals length', () => {
+  const ship = new Ship(4);
+  const cell1 = new Cell(0, 0);
+  const cell2 = new Cell(1, 0);
+  const cell3 = new Cell(2, 0);
+  const cell4 = new Cell(3, 0);
+  ship.hit(cell1);
+  ship.hit(cell2);
+  ship.hit(cell3);
+  ship.hit(cell4);
+
   expect(ship.isSunk()).toBe(true);
 });
 
@@ -62,11 +99,10 @@ describe('When place() is called on a ship of length 3 with x: 0, y: 0 and a gam
 
 test('getHits() returns an array of 2 hits when ship has 2 hits', () => {
   const ship = new Ship(3);
-  ship.hit(0, 0);
-  ship.hit(1, 0);
-
   const cell1 = new Cell(0, 0);
   const cell2 = new Cell(1, 0);
+  ship.hit(cell1);
+  ship.hit(cell2);
 
   expect(ship.getHits()).toEqual([cell1, cell2]);
 });

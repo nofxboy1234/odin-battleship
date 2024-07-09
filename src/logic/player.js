@@ -42,7 +42,6 @@ class Player {
     if (this.target.ship) {
       // ships with length >= 2
       const ship = this.target.ship;
-      const targetShots = this.target.shots;
       const hits = ship.getHits();
 
       if (hits.length === 1) {
@@ -53,32 +52,22 @@ class Player {
         const left = targetGameboard.offsetCell(onlyHit, -1, 0);
 
         const potentialHits = [];
-        if (
-          !this.#hitAgainstTopWall(onlyHit) &&
-          !targetShots.includes(top) &&
-          !allShots.includes(top)
-        ) {
+        if (!this.#hitAgainstTopWall(onlyHit) && !allShots.includes(top)) {
           potentialHits.push(top);
         }
         if (
           !this.#hitAgainstRightWall(onlyHit, targetGameboard) &&
-          !targetShots.includes(right) &&
           !allShots.includes(right)
         ) {
           potentialHits.push(right);
         }
         if (
           !this.#hitAgainstBottomWall(onlyHit, targetGameboard) &&
-          !targetShots.includes(bottom) &&
           !allShots.includes(bottom)
         ) {
           potentialHits.push(bottom);
         }
-        if (
-          !this.#hitAgainstLeftWall(onlyHit) &&
-          !targetShots.includes(left) &&
-          !allShots.includes(left)
-        ) {
+        if (!this.#hitAgainstLeftWall(onlyHit) && !allShots.includes(left)) {
           potentialHits.push(left);
         }
 
@@ -94,16 +83,11 @@ class Player {
           const right = targetGameboard.offsetCell(lastHit, 1, 0);
 
           const potentialHits = [];
-          if (
-            !this.#hitAgainstLeftWall(firstHit) &&
-            !targetShots.includes(left) &&
-            !allShots.includes(left)
-          ) {
+          if (!this.#hitAgainstLeftWall(firstHit) && !allShots.includes(left)) {
             potentialHits.push(left);
           }
           if (
             !this.#hitAgainstRightWall(lastHit, targetGameboard) &&
-            !targetShots.includes(right) &&
             !allShots.includes(right)
           ) {
             potentialHits.push(right);
@@ -121,16 +105,11 @@ class Player {
           const bottom = targetGameboard.offsetCell(lastHit, 0, 1);
 
           const potentialHits = [];
-          if (
-            !this.#hitAgainstTopWall(firstHit) &&
-            !targetShots.includes(top) &&
-            !allShots.includes(top)
-          ) {
+          if (!this.#hitAgainstTopWall(firstHit) && !allShots.includes(top)) {
             potentialHits.push(top);
           }
           if (
             !this.#hitAgainstBottomWall(lastHit, targetGameboard) &&
-            !targetShots.includes(bottom) &&
             !allShots.includes(bottom)
           ) {
             potentialHits.push(bottom);
@@ -140,8 +119,6 @@ class Player {
           nextShot = potentialHits[randomIndex];
         }
       }
-
-      targetShots.push(nextShot);
     } else {
       const availableCells = this.#getAvailableCells(targetGameboard, allShots);
 
