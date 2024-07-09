@@ -262,4 +262,8 @@ export {
   shipAgainstRightWall,
   shipAgainstBottomWall,
   shipAgainstLeftWall,
+  getCellsAtTheTop,
+  getCellsToTheRight,
+  getCellsAtTheBottom,
+  getCellsToTheLeft,
 };

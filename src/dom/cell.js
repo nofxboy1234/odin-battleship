@@ -48,6 +48,7 @@ class Cell {
     this.#disableHit();
     this.#disableMiss();
     this.#disableSunk();
+    this.#disableSunkAdjacent();
   }
 
   enableShot() {
@@ -59,11 +60,19 @@ class Cell {
   }
 
   enableSunk() {
-    this.#element.classList.add('sunk');
+    this.#element.classList.add('ship-sunk');
+  }
+
+  enableSunkAdjacent() {
+    this.#element.classList.add('ship-sunk-adjacent');
   }
 
   #disableSunk() {
-    this.#element.classList.remove('sunk');
+    this.#element.classList.remove('ship-sunk');
+  }
+
+  #disableSunkAdjacent() {
+    this.#element.classList.remove('ship-sunk-adjacent');
   }
 
   #handleClick(event) {
