@@ -43,7 +43,11 @@ async function nextTurn() {
   }
 }
 
-function validateShot({ gameboard: gameboardElement, pointerType, cell }) {
+function validateShot({
+  gameboard: gameboardElement,
+  pointerType,
+  cell: cellDOM,
+}) {
   const result = {
     valid: true,
   };
@@ -65,9 +69,24 @@ function validateShot({ gameboard: gameboardElement, pointerType, cell }) {
     return result;
   }
 
-  if (gameboardElement.controller.isExistingShot(cell.x, cell.y)) {
+  const isExistingShot = gameboardElement.controller.isExistingShot(
+    cellDOM.x,
+    cellDOM.y,
+  );
+
+  if (isExistingShot) {
     result.valid = false;
     result.reason = 'isExistingShot';
+    return result;
+  }
+
+  const adjacentCells =
+    gameboardElement.controller.getAllSunkShipsAdjacentCells();
+  const cell = gameboardElement.controller.getCellAt(cellDOM.x, cellDOM.y);
+  const isAdjacentCell = adjacentCells.includes(cell);
+  if (isAdjacentCell) {
+    result.valid = false;
+    result.reason = 'isAdjacentCell';
     return result;
   }
 
@@ -102,6 +121,20 @@ async function handleTurn(clickData) {
 
     if (validityResult.reason === 'isExistingShot') {
       message.setExistingShot(cell, currentPlayer, currentGameboardElement);
+
+      if (validityResult.clicker === enemy) {
+        await delay(2000);
+        enemyPlay();
+        return;
+      }
+
+      if (validityResult.clicker === human) {
+        return;
+      }
+    }
+
+    if (validityResult.reason === 'isAdjacentCell') {
+      message.setAdjacentCell(cell, currentPlayer, currentGameboardElement);
 
       if (validityResult.clicker === enemy) {
         await delay(2000);

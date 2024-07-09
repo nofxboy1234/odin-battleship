@@ -48,6 +48,12 @@ const message = {
       `Invalid shot: ${player.name} repeated a shot at ${gameboardElement.labelTopAt(cell.x) + gameboardElement.labelLeftAt(cell.y)}. Attack again.`,
     );
   },
+  setAdjacentCell(cell, player, gameboardElement) {
+    setText(
+      `Invalid shot: ${player.name} shot at adjacent cell: ${gameboardElement.labelTopAt(cell.x) + gameboardElement.labelLeftAt(cell.y)}. Attack again.`,
+    );
+  },
+
   text() {
     return element.textContent;
   },
