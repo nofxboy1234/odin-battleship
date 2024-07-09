@@ -219,7 +219,7 @@ function setupHumanPlayer() {
   human = new Player(humanGameboard, 'human');
 }
 
-function randomizeGameboard(gameboardElement) {
+function randomizeGameboard(gameboardElement, renderShips = true) {
   message.setLoadingShips();
   setTimeout(() => {
     gameboardElement.controller.reset();
@@ -227,7 +227,10 @@ function randomizeGameboard(gameboardElement) {
 
     gameboardElement.owner.placeRandomShips();
     gameboardElement.createShips();
-    gameboardElement.renderShips();
+
+    if (renderShips) {
+      gameboardElement.renderShips();
+    }
   });
   setTimeout(() => message.setInstruction());
 }
@@ -241,7 +244,7 @@ function setupGame() {
   randomizeButton.disabled = false;
   playButton.disabled = false;
 
-  randomizeGameboard(enemyGameboardElement);
+  randomizeGameboard(enemyGameboardElement, false);
   randomizeGameboard(humanGameboardElement);
 }
 

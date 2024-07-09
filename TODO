@@ -6,3 +6,4 @@ Refactor
 ~ Make these adjacent cells invalid when human clicks them
 ~ Transition shot to a hit or miss
 ~ Give computer player ability to know where specific length ships could be
+~ Render ships key to the side to show which ship types have been sunk

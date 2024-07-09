@@ -6,7 +6,7 @@ class Cell {
     this.y = y;
 
     this.#element.classList.add('gameboard-1-1-cell');
-    this.#element.textContent = `${x}, ${y}`;
+    // this.#element.textContent = `${x}, ${y}`;
 
     if (disabled) {
       this.disableHover();
