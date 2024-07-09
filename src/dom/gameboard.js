@@ -1,9 +1,3 @@
-import {
-  getCellsAtTheBottom,
-  getCellsAtTheTop,
-  getCellsToTheLeft,
-  getCellsToTheRight,
-} from '../logic/rules';
 import Cell from './cell';
 import Ship from './ship';
 
@@ -186,17 +180,9 @@ class Gameboard {
     const shipDOM = this.#getShipAt(ship.x, ship.y);
     shipDOM.setSunk();
 
-    const topCells = getCellsAtTheTop(this.controller, ship);
-    const rightCells = getCellsToTheRight(this.controller, ship);
-    const bottomCells = getCellsAtTheBottom(this.controller, ship);
-    const leftCells = getCellsToTheLeft(this.controller, ship);
-    const adjacentCells = topCells.concat(rightCells, bottomCells, leftCells);
+    const adjacentCells = this.controller.getShipAdjacentCells(ship);
 
-    const validAdjacentCells = adjacentCells.filter(
-      (cell) => cell !== undefined,
-    );
-
-    validAdjacentCells.forEach((cell) => {
+    adjacentCells.forEach((cell) => {
       const cellDOM = this.getCellDOM(cell.x, cell.y);
       cellDOM.enableSunkAdjacent();
     });

@@ -248,7 +248,7 @@ function setupGame() {
   randomizeButton.disabled = false;
   playButton.disabled = false;
 
-  randomizeGameboard(enemyGameboardElement, false);
+  randomizeGameboard(enemyGameboardElement, true);
   randomizeGameboard(humanGameboardElement);
 }
 

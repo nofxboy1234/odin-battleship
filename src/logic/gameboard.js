@@ -1,5 +1,11 @@
 import Cell from './cell';
 import getRandomInt from './helpers';
+import {
+  getCellsAtTheBottom,
+  getCellsAtTheTop,
+  getCellsToTheLeft,
+  getCellsToTheRight,
+} from './rules';
 
 class Gameboard {
   #ships = [];
@@ -73,6 +79,24 @@ class Gameboard {
 
   getAllSunkShips() {
     return this.#ships.filter((ship) => ship.isSunk());
+  }
+
+  getShipAdjacentCells(ship) {
+    const topCells = getCellsAtTheTop(this, ship);
+    const rightCells = getCellsToTheRight(this, ship);
+    const bottomCells = getCellsAtTheBottom(this, ship);
+    const leftCells = getCellsToTheLeft(this, ship);
+    const adjacentCells = topCells.concat(rightCells, bottomCells, leftCells);
+
+    const validAdjacentCells = adjacentCells.filter(
+      (cell) => cell !== undefined,
+    );
+
+    validAdjacentCells.sort(
+      (a, b) => Math.sign(a.x - b.x) || Math.sign(a.y - b.y),
+    );
+
+    return validAdjacentCells;
   }
 
   #createCells() {
