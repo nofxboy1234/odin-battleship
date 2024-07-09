@@ -171,7 +171,9 @@ function setNextPlayer() {
 
 function disableBothGameboards() {
   enemyGameboardElement.disable();
+  enemyGameboardElement.disableClick();
   humanGameboardElement.disable();
+  humanGameboardElement.disableClick();
 }
 
 function renderShot(cell) {
