@@ -202,7 +202,16 @@ class Gameboard {
 
   #enableHoverOnAllOpenCells() {
     this.#cells.forEach((cellDOM) => {
-      if (!this.controller.isExistingShot(cellDOM.x, cellDOM.y)) {
+      const isExistingShot = this.controller.isExistingShot(
+        cellDOM.x,
+        cellDOM.y,
+      );
+
+      const adjacentCells = this.controller.getAllSunkShipsAdjacentCells();
+      const cell = this.controller.getCellAt(cellDOM.x, cellDOM.y);
+      const isAdjacentCell = adjacentCells.includes(cell);
+
+      if (!isExistingShot && !isAdjacentCell) {
         cellDOM.enableHover();
       }
     });

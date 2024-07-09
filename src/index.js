@@ -84,6 +84,7 @@ function validateShot({
     gameboardElement.controller.getAllSunkShipsAdjacentCells();
   const cell = gameboardElement.controller.getCellAt(cellDOM.x, cellDOM.y);
   const isAdjacentCell = adjacentCells.includes(cell);
+
   if (isAdjacentCell) {
     result.valid = false;
     result.reason = 'isAdjacentCell';
@@ -163,6 +164,8 @@ async function handleTurn(clickData) {
         return;
       } else {
         if (attackResult.ship.isSunk()) {
+          renderShot(cell);
+          await delay(1000);
           currentGameboardElement.setShipSunk(attackResult.ship);
           message.setShipSunk(cell, currentPlayer, currentGameboardElement);
         }
