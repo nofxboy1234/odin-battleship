@@ -118,7 +118,8 @@ async function handleTurn(clickData) {
   const attackResult = attackGameboard(gameboardElement, cell);
 
   if (attackResult.hit) {
-    renderHit(cell);
+    renderShot(cell);
+    delay(1000).then(() => renderHit(cell));
     message.setCellHit(cell, currentPlayer, currentGameboardElement);
 
     if (currentPlayer === human) {
@@ -152,10 +153,10 @@ async function handleTurn(clickData) {
     }
   } else {
     renderShot(cell);
+    delay(1000).then(() => renderMiss(cell));
     message.setCellMiss(cell, currentPlayer, currentGameboardElement);
     currentGameboardElement.disableClick();
     await delay(2000);
-    renderMiss(cell);
     nextTurn();
   }
 }
@@ -173,19 +174,19 @@ function disableBothGameboards() {
   humanGameboardElement.disable();
 }
 
-function renderMiss(cell) {
-  cell.disableShot();
-  cell.enableMiss();
-}
-
 function renderShot(cell) {
   cell.disableHover();
   cell.enableShot();
 }
 
+function renderMiss(cell) {
+  cell.disableShot();
+  cell.enableMiss();
+}
+
 function renderHit(cell) {
+  cell.disableShot();
   cell.enableHit();
-  cell.disableHover();
 }
 
 function play() {
