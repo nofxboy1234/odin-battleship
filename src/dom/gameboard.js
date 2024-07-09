@@ -176,6 +176,11 @@ class Gameboard {
     this.#cells.forEach((cellDOM) => cellDOM.reset());
   }
 
+  setShipSunk(ship) {
+    const shipDOM = this.#getShipAt(ship.x, ship.y);
+    shipDOM.setSunk();
+  }
+
   #createCells() {
     const cells = this.controller.cells;
 
@@ -231,6 +236,10 @@ class Gameboard {
     clickData.pointerType = event.pointerType;
 
     this.handleTurnCallback(clickData);
+  }
+
+  #getShipAt(x, y) {
+    return this.#ships.find((ship) => ship.x === x && ship.y === y);
   }
 }
 

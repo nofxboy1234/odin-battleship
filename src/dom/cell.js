@@ -47,6 +47,7 @@ class Cell {
     this.#disableFill();
     this.#disableHit();
     this.#disableMiss();
+    this.#disableSunk();
   }
 
   enableShot() {
@@ -55,6 +56,14 @@ class Cell {
 
   disableShot() {
     this.#element.classList.remove('shot');
+  }
+
+  enableSunk() {
+    this.#element.classList.add('sunk');
+  }
+
+  #disableSunk() {
+    this.#element.classList.remove('sunk');
   }
 
   #handleClick(event) {

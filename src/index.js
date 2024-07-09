@@ -124,11 +124,13 @@ async function handleTurn(clickData) {
 
     if (currentPlayer === human) {
       if (enemyGameboard.allShipsSunk()) {
+        currentGameboardElement.setShipSunk(attackResult.ship);
         message.setHumanWon();
         disableBothGameboards();
         return;
       } else {
         if (attackResult.ship.isSunk()) {
+          currentGameboardElement.setShipSunk(attackResult.ship);
           message.setShipSunk(cell, currentPlayer, currentGameboardElement);
         }
       }
@@ -136,12 +138,14 @@ async function handleTurn(clickData) {
 
     if (currentPlayer === enemy) {
       if (humanGameboard.allShipsSunk()) {
+        currentGameboardElement.setShipSunk(attackResult.ship);
         message.setEnemyWon();
         disableBothGameboards();
         return;
       } else {
         if (attackResult.ship.isSunk()) {
           enemy.target.reset();
+          currentGameboardElement.setShipSunk(attackResult.ship);
           message.setShipSunk(cell, currentPlayer, currentGameboardElement);
         } else {
           enemy.target.ship = attackResult.ship;
@@ -244,7 +248,7 @@ function setupGame() {
   randomizeButton.disabled = false;
   playButton.disabled = false;
 
-  randomizeGameboard(enemyGameboardElement, false);
+  randomizeGameboard(enemyGameboardElement, true);
   randomizeGameboard(humanGameboardElement);
 }
 
