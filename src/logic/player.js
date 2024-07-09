@@ -8,10 +8,8 @@ class Player {
     this.name = name;
     this.target = {
       ship: undefined,
-      shots: [],
       reset() {
         this.ship = undefined;
-        this.shots.length = 0;
       },
     };
   }
