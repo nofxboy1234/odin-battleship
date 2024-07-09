@@ -99,6 +99,11 @@ class Gameboard {
     return validAdjacentCells;
   }
 
+  getAllSunkShipsAdjacentCells() {
+    const sunkShips = this.getAllSunkShips();
+    return sunkShips.flatMap((ship) => this.getShipAdjacentCells(ship));
+  }
+
   #createCells() {
     for (let y = 0; y < this.size; y++) {
       for (let x = 0; x < this.size; x++) {

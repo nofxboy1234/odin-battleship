@@ -389,3 +389,88 @@ describe('getShipAdjacentCells()', () => {
     });
   });
 });
+
+describe('getAllSunkShipsAdjacentCells()', () => {
+  describe('when there are no sunk ships', () => {
+    test('it returns an empty array', () => {
+      const gameboard = new Gameboard();
+      expect(gameboard.getAllSunkShipsAdjacentCells()).toEqual([]);
+    });
+  });
+
+  describe('when there is 1 sunk ship', () => {
+    test('it returns an array of all the cells adjacent to the ship cells', () => {
+      const gameboard = new Gameboard();
+      const ship = new Ship(2);
+      gameboard.placeShip(ship, 3, 3);
+
+      const cell1 = new Cell(2, 2);
+      const cell2 = new Cell(2, 3);
+      const cell3 = new Cell(2, 4);
+
+      const cell4 = new Cell(3, 2);
+      const cell5 = new Cell(3, 4);
+
+      const cell6 = new Cell(4, 2);
+      const cell7 = new Cell(4, 4);
+
+      const cell8 = new Cell(5, 2);
+      const cell9 = new Cell(5, 3);
+      const cell10 = new Cell(5, 4);
+
+      expect(gameboard.getShipAdjacentCells(ship)).toEqual([
+        cell1,
+        cell2,
+        cell3,
+        cell4,
+        cell5,
+        cell6,
+        cell7,
+        cell8,
+        cell9,
+        cell10,
+      ]);
+    });
+  });
+
+  describe('when there are 2 sunk ships', () => {
+    test('it returns an array of all the cells adjacent to the 2 ships cells', () => {
+      const gameboard = new Gameboard();
+
+      const ship1 = new Ship(1);
+      gameboard.placeShip(ship1, 0, 0);
+      gameboard.receiveAttack(0, 0);
+
+      const ship2 = new Ship(1);
+      gameboard.placeShip(ship2, 3, 1);
+      gameboard.receiveAttack(3, 1);
+
+      const cell1 = new Cell(0, 1);
+      const cell2 = new Cell(1, 0);
+      const cell3 = new Cell(1, 1);
+
+      const cell4 = new Cell(2, 0);
+      const cell5 = new Cell(2, 1);
+      const cell6 = new Cell(2, 2);
+      const cell7 = new Cell(3, 0);
+      const cell8 = new Cell(3, 2);
+      const cell9 = new Cell(4, 0);
+      const cell10 = new Cell(4, 1);
+      const cell11 = new Cell(4, 2);
+
+      expect(gameboard.getAllSunkShipsAdjacentCells()).toEqual([
+        cell1,
+        cell2,
+        cell3,
+        cell4,
+        cell5,
+        cell6,
+        cell7,
+        cell8,
+        cell9,
+        cell10,
+        cell11,
+      ]);
+    });
+  });
+});

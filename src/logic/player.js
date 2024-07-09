@@ -38,8 +38,7 @@ class Player {
     const allHits = targetGameboard.getHits();
     const allMisses = targetGameboard.getMisses();
     const allShots = allHits.concat(allMisses);
-    const allAdjacentCells =
-      this.#getAllSunkShipsAdjacentCells(targetGameboard);
+    const allAdjacentCells = targetGameboard.getAllSunkShipsAdjacentCells();
 
     if (this.target.ship) {
       // ships with length >= 2
@@ -220,13 +219,6 @@ class Player {
       const found = foundInShots || foundInAdjacentCells;
       return !found;
     });
-  }
-
-  #getAllSunkShipsAdjacentCells(targetGameboard) {
-    const sunkShips = targetGameboard.getAllSunkShips();
-    return sunkShips.flatMap((ship) =>
-      targetGameboard.getShipAdjacentCells(ship),
-    );
   }
 }
 
