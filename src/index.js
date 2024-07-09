@@ -151,10 +151,11 @@ async function handleTurn(clickData) {
       }
     }
   } else {
-    renderMiss(cell);
+    renderShot(cell);
     message.setCellMiss(cell, currentPlayer, currentGameboardElement);
     currentGameboardElement.disableClick();
     await delay(2000);
+    renderMiss(cell);
     nextTurn();
   }
 }
@@ -173,8 +174,13 @@ function disableBothGameboards() {
 }
 
 function renderMiss(cell) {
+  cell.disableShot();
   cell.enableMiss();
+}
+
+function renderShot(cell) {
   cell.disableHover();
+  cell.enableShot();
 }
 
 function renderHit(cell) {

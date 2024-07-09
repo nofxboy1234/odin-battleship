@@ -43,14 +43,22 @@ class Cell {
     this.#element.classList.remove('hover');
   }
 
-  #handleClick(event) {
-    event.cell = this;
-  }
-
   reset() {
     this.#disableFill();
     this.#disableHit();
     this.#disableMiss();
+  }
+
+  enableShot() {
+    this.#element.classList.add('shot');
+  }
+
+  disableShot() {
+    this.#element.classList.remove('shot');
+  }
+
+  #handleClick(event) {
+    event.cell = this;
   }
 
   #disableFill() {
