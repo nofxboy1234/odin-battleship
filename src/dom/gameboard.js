@@ -185,6 +185,7 @@ class Gameboard {
     adjacentCells.forEach((cell) => {
       const cellDOM = this.getCellDOM(cell.x, cell.y);
       cellDOM.enableSunkAdjacent();
+      cellDOM.disableHover();
     });
   }
 
