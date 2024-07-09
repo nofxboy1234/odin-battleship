@@ -1,4 +1,3 @@
-Colour ship red when sunk?
 Refactor
 
 ~ Remove all adjacent cells around sunk ships from computer's potential moves
