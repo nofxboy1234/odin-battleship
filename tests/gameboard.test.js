@@ -294,3 +294,12 @@ describe('When a board has ships and misses stored', () => {
     expect(board.getMisses()).toEqual([]);
   });
 });
+
+describe('getAllSunkShips()', () => {
+  describe('when there are no sunk ships', () => {
+    test('it returns an empty array', () => {
+      const gameboard = new Gameboard();
+      expect(gameboard.getAllSunkShips()).toEqual([]);
+    });
+  });
+});
