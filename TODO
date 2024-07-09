@@ -1,1 +1,8 @@
+Fix random placement where sometimes a ship is adjacent to another
+Remove all adjacent cells around sunk ships from computer's potential moves
+Colour all adjacent cells around sunk ships
+Make these adjacent cells invalid when human clicks them
 Refactor
+
+~ Transition shot to a hit or miss
+~ Give computer player ability to know where specific length ships could be
