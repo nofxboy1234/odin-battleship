@@ -38,6 +38,8 @@ class Player {
     const allHits = targetGameboard.getHits();
     const allMisses = targetGameboard.getMisses();
     const allShots = allHits.concat(allMisses);
+    const allAdjacentCells =
+      this.#getAllSunkShipsAdjacentCells(targetGameboard);
 
     if (this.target.ship) {
       // ships with length >= 2
@@ -52,22 +54,32 @@ class Player {
         const left = targetGameboard.offsetCell(onlyHit, -1, 0);
 
         const potentialHits = [];
-        if (!this.#hitAgainstTopWall(onlyHit) && !allShots.includes(top)) {
+        if (
+          !this.#hitAgainstTopWall(onlyHit) &&
+          !allShots.includes(top) &&
+          !allAdjacentCells.includes(top)
+        ) {
           potentialHits.push(top);
         }
         if (
           !this.#hitAgainstRightWall(onlyHit, targetGameboard) &&
-          !allShots.includes(right)
+          !allShots.includes(right) &&
+          !allAdjacentCells.includes(right)
         ) {
           potentialHits.push(right);
         }
         if (
           !this.#hitAgainstBottomWall(onlyHit, targetGameboard) &&
-          !allShots.includes(bottom)
+          !allShots.includes(bottom) &&
+          !allAdjacentCells.includes(bottom)
         ) {
           potentialHits.push(bottom);
         }
-        if (!this.#hitAgainstLeftWall(onlyHit) && !allShots.includes(left)) {
+        if (
+          !this.#hitAgainstLeftWall(onlyHit) &&
+          !allShots.includes(left) &&
+          !allAdjacentCells.includes(left)
+        ) {
           potentialHits.push(left);
         }
 
@@ -83,12 +95,17 @@ class Player {
           const right = targetGameboard.offsetCell(lastHit, 1, 0);
 
           const potentialHits = [];
-          if (!this.#hitAgainstLeftWall(firstHit) && !allShots.includes(left)) {
+          if (
+            !this.#hitAgainstLeftWall(firstHit) &&
+            !allShots.includes(left) &&
+            !allAdjacentCells.includes(left)
+          ) {
             potentialHits.push(left);
           }
           if (
             !this.#hitAgainstRightWall(lastHit, targetGameboard) &&
-            !allShots.includes(right)
+            !allShots.includes(right) &&
+            !allAdjacentCells.includes(right)
           ) {
             potentialHits.push(right);
           }
@@ -105,12 +122,17 @@ class Player {
           const bottom = targetGameboard.offsetCell(lastHit, 0, 1);
 
           const potentialHits = [];
-          if (!this.#hitAgainstTopWall(firstHit) && !allShots.includes(top)) {
+          if (
+            !this.#hitAgainstTopWall(firstHit) &&
+            !allShots.includes(top) &&
+            !allAdjacentCells.includes(top)
+          ) {
             potentialHits.push(top);
           }
           if (
             !this.#hitAgainstBottomWall(lastHit, targetGameboard) &&
-            !allShots.includes(bottom)
+            !allShots.includes(bottom) &&
+            !allAdjacentCells.includes(bottom)
           ) {
             potentialHits.push(bottom);
           }
@@ -120,7 +142,11 @@ class Player {
         }
       }
     } else {
-      const availableCells = this.#getAvailableCells(targetGameboard, allShots);
+      const availableCells = this.#getAvailableCells(
+        targetGameboard,
+        allShots,
+        allAdjacentCells,
+      );
 
       const randomIndex = getRandomInt(availableCells.length);
       nextShot = availableCells[randomIndex];
@@ -181,13 +207,26 @@ class Player {
     return ship;
   }
 
-  #getAvailableCells(gameboard, shots) {
+  #getAvailableCells(gameboard, shots, adjacentCells) {
     return gameboard.cells.filter((cell) => {
-      const found = shots.find((shot) => {
+      const foundInShots = shots.find((shot) => {
         return cell.x === shot.x && cell.y === shot.y;
       });
+
+      const foundInAdjacentCells = adjacentCells.find((adjacentCell) => {
+        return cell.x === adjacentCell.x && cell.y === adjacentCell.y;
+      });
+
+      const found = foundInShots || foundInAdjacentCells;
       return !found;
     });
+  }
+
+  #getAllSunkShipsAdjacentCells(targetGameboard) {
+    const sunkShips = targetGameboard.getAllSunkShips();
+    return sunkShips.flatMap((ship) =>
+      targetGameboard.getShipAdjacentCells(ship),
+    );
   }
 }
 
