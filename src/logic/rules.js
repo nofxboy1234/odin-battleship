@@ -50,8 +50,10 @@ function hasOverlappingShips(ships) {
 
 function hasAdjacentShips(ships, gameboard) {
   return (
+    someShipIsAtTheTop(ships, gameboard) ||
     someShipIsToTheRight(ships, gameboard) ||
-    someShipIsAtTheTop(ships, gameboard)
+    someShipIsAtTheBottom(ships, gameboard) ||
+    someShipIsToTheLeft(ships, gameboard)
   );
 }
 
@@ -101,6 +103,50 @@ function getCellsToTheRight(gameboard, ship) {
   }
 }
 
+function someShipIsToTheLeft(ships, gameboard) {
+  return ships.some((ship) => {
+    if (shipAgainstLeftWall(ship)) {
+      return false;
+    }
+
+    const otherShips = ships.filter((otherShip) => otherShip !== ship);
+    const leftCells = getCellsToTheLeft(gameboard, ship);
+
+    const someShipCellIsToTheLeft = otherShips.some((otherShip) => {
+      return leftCells.some((leftCell) => otherShip.cells.includes(leftCell));
+    });
+
+    return someShipCellIsToTheLeft;
+  });
+}
+
+function getCellsToTheLeft(gameboard, ship) {
+  const leftCells = [];
+  let leftCell;
+
+  if (ship.orientation === 'horizontal') {
+    const shipBack = ship.back();
+
+    leftCell = gameboard.offsetCell(shipBack, -1, -1);
+    leftCells.push(leftCell);
+
+    leftCell = gameboard.offsetCell(shipBack, -1, 0);
+    leftCells.push(leftCell);
+
+    leftCell = gameboard.offsetCell(shipBack, -1, 1);
+    leftCells.push(leftCell);
+
+    return leftCells;
+  } else if (ship.orientation === 'vertical') {
+    ship.cells.forEach((cell) => {
+      leftCell = gameboard.offsetCell(cell, -1, 0);
+      leftCells.push(leftCell);
+    });
+
+    return leftCells;
+  }
+}
+
 function someShipIsAtTheTop(ships, gameboard) {
   return ships.some((ship) => {
     if (shipAgainstTopWall(ship)) {
@@ -142,6 +188,52 @@ function getCellsAtTheTop(gameboard, ship) {
     topCells.push(topCell);
 
     return topCells;
+  }
+}
+
+function someShipIsAtTheBottom(ships, gameboard) {
+  return ships.some((ship) => {
+    if (shipAgainstBottomWall(ship, gameboard)) {
+      return false;
+    }
+
+    const otherShips = ships.filter((otherShip) => otherShip !== ship);
+    const bottomCells = getCellsAtTheBottom(gameboard, ship);
+
+    const someShipCellIsAtTheBottom = otherShips.some((otherShip) => {
+      return bottomCells.some((bottomCell) =>
+        otherShip.cells.includes(bottomCell),
+      );
+    });
+
+    return someShipCellIsAtTheBottom;
+  });
+}
+
+function getCellsAtTheBottom(gameboard, ship) {
+  const bottomCells = [];
+  let bottomCell;
+
+  if (ship.orientation === 'horizontal') {
+    ship.cells.forEach((cell) => {
+      bottomCell = gameboard.offsetCell(cell, 0, 1);
+      bottomCells.push(bottomCell);
+    });
+
+    return bottomCells;
+  } else if (ship.orientation === 'vertical') {
+    const shipFront = ship.front();
+
+    bottomCell = gameboard.offsetCell(shipFront, -1, 1);
+    bottomCells.push(bottomCell);
+
+    bottomCell = gameboard.offsetCell(shipFront, 0, 1);
+    bottomCells.push(bottomCell);
+
+    bottomCell = gameboard.offsetCell(shipFront, 1, 1);
+    bottomCells.push(bottomCell);
+
+    return bottomCells;
   }
 }
 

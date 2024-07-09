@@ -681,7 +681,7 @@ describe('shipAgainstLeftWall()', () => {
       ship.setHorizontal();
       const gameboard = new Gameboard();
       gameboard.placeShip(ship, 0, 9);
-      expect(shipAgainstLeftWall(ship, gameboard)).toBe(true);
+      expect(shipAgainstLeftWall(ship)).toBe(true);
     });
   });
 
@@ -691,7 +691,7 @@ describe('shipAgainstLeftWall()', () => {
       ship.setHorizontal();
       const gameboard = new Gameboard();
       gameboard.placeShip(ship, 1, 9);
-      expect(shipAgainstLeftWall(ship, gameboard)).toBe(false);
+      expect(shipAgainstLeftWall(ship)).toBe(false);
     });
   });
 
@@ -701,7 +701,7 @@ describe('shipAgainstLeftWall()', () => {
       ship.setVertical();
       const gameboard = new Gameboard();
       gameboard.placeShip(ship, 0, 6);
-      expect(shipAgainstLeftWall(ship, gameboard)).toBe(true);
+      expect(shipAgainstLeftWall(ship)).toBe(true);
     });
   });
 
@@ -711,7 +711,7 @@ describe('shipAgainstLeftWall()', () => {
       ship.setVertical();
       const gameboard = new Gameboard();
       gameboard.placeShip(ship, 1, 6);
-      expect(shipAgainstLeftWall(ship, gameboard)).toBe(false);
+      expect(shipAgainstLeftWall(ship)).toBe(false);
     });
   });
 });
