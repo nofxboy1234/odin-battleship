@@ -5,16 +5,6 @@ import Gameboard from './logic/gameboard';
 import message from './dom/message';
 import ShotChecker from './shotChecker';
 
-function isPlayerClickingOwnGameboard(clickedGameboardElement, clicker) {
-  const humanClickedOwnGameboard =
-    clickedGameboardElement.owner === human && clicker === human;
-
-  const computerClickedOwnGameboard =
-    clickedGameboardElement.owner === enemy && clicker === enemy;
-
-  return humanClickedOwnGameboard || computerClickedOwnGameboard;
-}
-
 function enemyPlay() {
   enemy.play(humanGameboard, humanGameboardElement);
 }
