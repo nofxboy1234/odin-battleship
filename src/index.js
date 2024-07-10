@@ -67,28 +67,17 @@ async function handleTurn(clickData) {
       return;
     }
 
-    if (currentPlayer === human) {
-      if (attackResult.ship.isSunk()) {
-        await delay(2000);
+    if (attackResult.ship.isSunk()) {
+      await delay(2000);
 
-        currentGameboardElement.setShipSunk(attackResult.ship);
-        message.setShipSunk(cell, currentPlayer, currentGameboardElement);
-      }
+      currentPlayer.target.reset();
+      currentGameboardElement.setShipSunk(attackResult.ship);
+      message.setShipSunk(cell, currentPlayer, currentGameboardElement);
+    } else {
+      currentPlayer.target.ship = attackResult.ship;
     }
 
-    if (currentPlayer === enemy) {
-      if (attackResult.ship.isSunk()) {
-        await delay(2000);
-
-        enemy.target.reset();
-        currentGameboardElement.setShipSunk(attackResult.ship);
-        message.setShipSunk(cell, currentPlayer, currentGameboardElement);
-      } else {
-        enemy.target.ship = attackResult.ship;
-      }
-
-      currentPlayer.play(currentGameboardElement);
-    }
+    currentPlayer.play(currentGameboardElement);
   } else {
     renderShot(cell);
     delay(1000).then(() => {
