@@ -47,9 +47,7 @@ class Shot {
     );
     const isAdjacentCell = adjacentCells.includes(cell);
 
-    if (isAdjacentCell) {
-      return false;
-    }
+    return isAdjacentCell;
   }
 }
 
