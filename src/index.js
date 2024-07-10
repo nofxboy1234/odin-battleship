@@ -59,45 +59,45 @@ async function handleTurn(clickData) {
   }
 
   const shotChecker = new ShotChecker(clickData);
-  const validityResult = shotChecker.check();
+  const result = shotChecker.check();
 
-  if (!validityResult.valid) {
-    if (validityResult.reason === 'playerClickingOwnGameboard') {
-      if (validityResult.clicker === enemy) {
+  if (!result.valid) {
+    if (result.reason === 'playerClickingOwnGameboard') {
+      if (result.clicker === enemy) {
         await delay(2000);
         enemyPlay();
         return;
       }
 
-      if (validityResult.clicker === human) {
+      if (result.clicker === human) {
         return;
       }
     }
 
-    if (validityResult.reason === 'isExistingShot') {
+    if (result.reason === 'isExistingShot') {
       message.setExistingShot(cell, currentPlayer, currentGameboardElement);
 
-      if (validityResult.clicker === enemy) {
+      if (result.clicker === enemy) {
         await delay(2000);
         enemyPlay();
         return;
       }
 
-      if (validityResult.clicker === human) {
+      if (result.clicker === human) {
         return;
       }
     }
 
-    if (validityResult.reason === 'isAdjacentCell') {
+    if (result.reason === 'isAdjacentCell') {
       message.setAdjacentCell(cell, currentPlayer, currentGameboardElement);
 
-      if (validityResult.clicker === enemy) {
+      if (result.clicker === enemy) {
         await delay(2000);
         enemyPlay();
         return;
       }
 
-      if (validityResult.clicker === human) {
+      if (result.clicker === human) {
         return;
       }
     }
