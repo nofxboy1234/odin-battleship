@@ -5,7 +5,8 @@ import Gameboard from './logic/gameboard';
 import message from './dom/message';
 import ShotChecker from './shotChecker';
 
-function enemyPlay() {
+async function enemyPlay() {
+  await delay(2000);
   enemy.play(humanGameboard, humanGameboardElement);
 }
 
@@ -24,7 +25,6 @@ async function nextTurn() {
     currentGameboardElement.enableClick();
     currentGameboardElement.disableHoverOnAllCells();
 
-    await delay(2000);
     enemyPlay();
   } else {
     message.setHumanTurn();
@@ -54,7 +54,6 @@ async function handleTurn(clickData) {
   if (!result.valid) {
     if (result.reason === 'playerClickingOwnGameboard') {
       if (result.clicker === enemy) {
-        await delay(2000);
         enemyPlay();
         return;
       }
@@ -68,7 +67,6 @@ async function handleTurn(clickData) {
       message.setExistingShot(cell, currentPlayer, currentGameboardElement);
 
       if (result.clicker === enemy) {
-        await delay(2000);
         enemyPlay();
         return;
       }
@@ -82,7 +80,6 @@ async function handleTurn(clickData) {
       message.setAdjacentCell(cell, currentPlayer, currentGameboardElement);
 
       if (result.clicker === enemy) {
-        await delay(2000);
         enemyPlay();
         return;
       }
@@ -140,7 +137,6 @@ async function handleTurn(clickData) {
           enemy.target.ship = attackResult.ship;
         }
 
-        await delay(2000);
         enemyPlay();
       }
     }
