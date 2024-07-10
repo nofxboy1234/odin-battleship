@@ -1,16 +1,17 @@
 import Cell from '../src/logic/cell';
+import Computer from '../src/logic/computer';
 import Gameboard from '../src/logic/gameboard';
-import Player from '../src/logic/player';
-import ShotChecker from '../src/shotChecker';
+import Human from '../src/logic/human';
+import Shot from '../src/logic/shot';
 
-describe('check()', () => {
+describe('isValid()', () => {
   describe('when a shot is valid', () => {
-    test('it returns an object specifying that the shot is valid', () => {
+    test('it returns true', () => {
       const cell = new Cell(0, 0);
       const enemyGameboard = new Gameboard();
-      const enemy = new Player(enemyGameboard, 'enemy');
+      const enemy = new Computer(enemyGameboard, 'enemy');
       const humanGameboard = new Gameboard();
-      const human = new Player(humanGameboard, 'human');
+      const human = new Human(humanGameboard, 'human');
 
       const clickData = {
         cell: cell,
@@ -24,14 +25,9 @@ describe('check()', () => {
         enemyPlayer: enemy,
       };
 
-      const shotChecker = new ShotChecker(clickData);
+      const shot = new Shot(clickData);
 
-      const result = {
-        clicker: human,
-        valid: true,
-      };
-
-      expect(shotChecker.check()).toEqual(result);
+      expect(shot.isValid()).toBe(true);
     });
   });
 });

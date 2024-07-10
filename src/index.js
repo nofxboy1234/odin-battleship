@@ -4,7 +4,7 @@ import Human from './logic/human';
 import GameboardElement from './dom/gameboard';
 import Gameboard from './logic/gameboard';
 import message from './dom/message';
-import ShotChecker from './shotChecker';
+import Shot from './logic/shot';
 import { delay } from './logic/helpers';
 
 async function nextTurn() {
@@ -41,10 +41,9 @@ async function handleTurn(clickData) {
     return;
   }
 
-  const shotChecker = new ShotChecker(clickData);
-  const result = shotChecker.check();
+  const shot = new Shot(clickData);
 
-  if (!result.valid) {
+  if (!shot.isValid()) {
     currentPlayer.play(currentGameboardElement);
     return;
   }
