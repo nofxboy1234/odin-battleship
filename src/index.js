@@ -59,7 +59,7 @@ async function handleTurn(clickData) {
     message.setCellHit(cell, currentPlayer, currentGameboardElement);
 
     if (currentPlayer === human) {
-      if (enemyGameboard.allShipsSunk()) {
+      if (currentGameboardElement.controller.allShipsSunk()) {
         await delay(2000);
 
         currentGameboardElement.setShipSunk(attackResult.ship);
@@ -77,7 +77,7 @@ async function handleTurn(clickData) {
     }
 
     if (currentPlayer === enemy) {
-      if (humanGameboard.allShipsSunk()) {
+      if (currentGameboardElement.controller.allShipsSunk()) {
         await delay(2000);
 
         currentGameboardElement.setShipSunk(attackResult.ship);
