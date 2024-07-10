@@ -3,6 +3,7 @@ import Player from './logic/player';
 import GameboardElement from './dom/gameboard';
 import Gameboard from './logic/gameboard';
 import message from './dom/message';
+import ShotChecker from './shotChecker';
 
 function isPlayerClickingOwnGameboard(clickedGameboardElement, clicker) {
   const humanClickedOwnGameboard =
@@ -43,69 +44,22 @@ async function nextTurn() {
   }
 }
 
-function validateShot({
-  gameboard: gameboardElement,
-  pointerType,
-  cell: cellDOM,
-}) {
-  const result = {
-    valid: true,
-  };
-
-  if (pointerType === 'mouse') {
-    result.clicker = human;
-  } else if (pointerType === '') {
-    result.clicker = enemy;
-  }
-
-  const playerClickingOwnGameboard = isPlayerClickingOwnGameboard(
-    gameboardElement,
-    result.clicker,
-  );
-
-  if (playerClickingOwnGameboard) {
-    result.valid = false;
-    result.reason = 'playerClickingOwnGameboard';
-    return result;
-  }
-
-  const isExistingShot = gameboardElement.controller.isExistingShot(
-    cellDOM.x,
-    cellDOM.y,
-  );
-
-  if (isExistingShot) {
-    result.valid = false;
-    result.reason = 'isExistingShot';
-    return result;
-  }
-
-  const adjacentCells =
-    gameboardElement.controller.getAllSunkShipsAdjacentCells();
-  const cell = gameboardElement.controller.getCellAt(cellDOM.x, cellDOM.y);
-  const isAdjacentCell = adjacentCells.includes(cell);
-
-  if (isAdjacentCell) {
-    result.valid = false;
-    result.reason = 'isAdjacentCell';
-    return result;
-  }
-
-  return result;
-}
-
 function attackGameboard(gameboardElement, cell) {
   return gameboardElement.controller.receiveAttack(cell.x, cell.y);
 }
 
 async function handleTurn(clickData) {
+  clickData.humanPlayer = human;
+  clickData.enemyPlayer = enemy;
+
   const { gameboard: gameboardElement, cell } = clickData;
 
   if (!cell) {
     return;
   }
 
-  const validityResult = validateShot(clickData);
+  const shotChecker = new ShotChecker(clickData);
+  const validityResult = shotChecker.check();
 
   if (!validityResult.valid) {
     if (validityResult.reason === 'playerClickingOwnGameboard') {
