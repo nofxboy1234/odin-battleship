@@ -59,11 +59,11 @@ async function handleTurn(clickData) {
     message.setCellHit(cell, currentPlayer, currentGameboardElement);
 
     if (currentGameboardElement.controller.allShipsSunk()) {
+      disableBothGameboards();
       await delay(2000);
 
       currentGameboardElement.setShipSunk(attackResult.ship);
       message.setWon(currentPlayer);
-      disableBothGameboards();
       return;
     }
 
