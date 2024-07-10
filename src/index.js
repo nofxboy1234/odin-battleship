@@ -153,19 +153,24 @@ async function handleTurn(clickData) {
 
   if (attackResult.hit) {
     renderShot(cell);
-    delay(1000).then(() => renderHit(cell));
+    delay(1000).then(() => {
+      renderHit(cell);
+    });
+
     message.setCellHit(cell, currentPlayer, currentGameboardElement);
 
     if (currentPlayer === human) {
       if (enemyGameboard.allShipsSunk()) {
+        await delay(2000);
+
         currentGameboardElement.setShipSunk(attackResult.ship);
         message.setHumanWon();
         disableBothGameboards();
         return;
       } else {
         if (attackResult.ship.isSunk()) {
-          renderShot(cell);
-          await delay(1000);
+          await delay(2000);
+
           currentGameboardElement.setShipSunk(attackResult.ship);
           message.setShipSunk(cell, currentPlayer, currentGameboardElement);
         }
@@ -174,12 +179,16 @@ async function handleTurn(clickData) {
 
     if (currentPlayer === enemy) {
       if (humanGameboard.allShipsSunk()) {
+        await delay(2000);
+
         currentGameboardElement.setShipSunk(attackResult.ship);
         message.setEnemyWon();
         disableBothGameboards();
         return;
       } else {
         if (attackResult.ship.isSunk()) {
+          await delay(2000);
+
           enemy.target.reset();
           currentGameboardElement.setShipSunk(attackResult.ship);
           message.setShipSunk(cell, currentPlayer, currentGameboardElement);
@@ -193,7 +202,10 @@ async function handleTurn(clickData) {
     }
   } else {
     renderShot(cell);
-    delay(1000).then(() => renderMiss(cell));
+    delay(1000).then(() => {
+      renderMiss(cell);
+    });
+
     message.setCellMiss(cell, currentPlayer, currentGameboardElement);
     currentGameboardElement.disableClick();
     await delay(2000);
