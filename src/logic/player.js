@@ -1,4 +1,4 @@
-import getRandomInt from './helpers';
+import { getRandomInt } from './helpers';
 import { gameboardShips, hasAdjacentShips } from './rules';
 import { hasOverlappingShips, hasOutOfBoundsShips } from './rules';
 

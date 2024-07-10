@@ -4,14 +4,11 @@ import GameboardElement from './dom/gameboard';
 import Gameboard from './logic/gameboard';
 import message from './dom/message';
 import ShotChecker from './shotChecker';
+import { delay } from './logic/helpers';
 
 async function enemyPlay() {
   await delay(2000);
   enemy.play(humanGameboard, humanGameboardElement);
-}
-
-function delay(time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
 }
 
 async function nextTurn() {

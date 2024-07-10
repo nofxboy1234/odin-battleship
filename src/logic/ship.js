@@ -1,4 +1,4 @@
-import getRandomInt from './helpers';
+import { getRandomInt } from './helpers';
 
 class Ship {
   #hits = [];

@@ -1,5 +1,5 @@
 import Cell from './cell';
-import getRandomInt from './helpers';
+import { getRandomInt } from './helpers';
 import {
   getCellsAtTheBottom,
   getCellsAtTheTop,
