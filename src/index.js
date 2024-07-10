@@ -1,15 +1,11 @@
 import './style.css';
-import Player from './logic/player';
+import Computer from './logic/computer';
+import Human from './logic/human';
 import GameboardElement from './dom/gameboard';
 import Gameboard from './logic/gameboard';
 import message from './dom/message';
 import ShotChecker from './shotChecker';
 import { delay } from './logic/helpers';
-
-async function enemyPlay() {
-  await delay(2000);
-  enemy.play(humanGameboard, humanGameboardElement);
-}
 
 async function nextTurn() {
   currentGameboardElement.disable();
@@ -22,7 +18,7 @@ async function nextTurn() {
     currentGameboardElement.enableClick();
     currentGameboardElement.disableHoverOnAllCells();
 
-    enemyPlay();
+    currentPlayer.play(currentGameboardElement);
   } else {
     message.setHumanTurn();
     currentGameboardElement = enemyGameboardElement;
@@ -49,42 +45,8 @@ async function handleTurn(clickData) {
   const result = shotChecker.check();
 
   if (!result.valid) {
-    if (result.reason === 'playerClickingOwnGameboard') {
-      if (result.clicker === enemy) {
-        enemyPlay();
-        return;
-      }
-
-      if (result.clicker === human) {
-        return;
-      }
-    }
-
-    if (result.reason === 'isExistingShot') {
-      message.setExistingShot(cell, currentPlayer, currentGameboardElement);
-
-      if (result.clicker === enemy) {
-        enemyPlay();
-        return;
-      }
-
-      if (result.clicker === human) {
-        return;
-      }
-    }
-
-    if (result.reason === 'isAdjacentCell') {
-      message.setAdjacentCell(cell, currentPlayer, currentGameboardElement);
-
-      if (result.clicker === enemy) {
-        enemyPlay();
-        return;
-      }
-
-      if (result.clicker === human) {
-        return;
-      }
-    }
+    currentPlayer.play(currentGameboardElement);
+    return;
   }
 
   const attackResult = attackGameboard(gameboardElement, cell);
@@ -134,7 +96,7 @@ async function handleTurn(clickData) {
           enemy.target.ship = attackResult.ship;
         }
 
-        enemyPlay();
+        currentPlayer.play(currentGameboardElement);
       }
     }
   } else {
@@ -200,12 +162,12 @@ function setupComputerGameboardElement() {
 
 function setupComputerPlayer() {
   enemyGameboard = new Gameboard();
-  enemy = new Player(enemyGameboard, 'enemy');
+  enemy = new Computer(enemyGameboard, 'enemy');
 }
 
 function setupHumanPlayer() {
   humanGameboard = new Gameboard();
-  human = new Player(humanGameboard, 'human');
+  human = new Human(humanGameboard, 'human');
 }
 
 function randomizeGameboard(gameboardElement, renderShips = true) {
