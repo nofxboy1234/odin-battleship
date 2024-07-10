@@ -9,8 +9,8 @@ function enemyPlay() {
   enemy.play(humanGameboard, humanGameboardElement);
 }
 
-async function delay(time) {
-  await new Promise((resolve) => setTimeout(resolve, time));
+function delay(time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
 }
 
 async function nextTurn() {
