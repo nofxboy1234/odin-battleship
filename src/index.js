@@ -58,45 +58,36 @@ async function handleTurn(clickData) {
 
     message.setCellHit(cell, currentPlayer, currentGameboardElement);
 
+    if (currentGameboardElement.controller.allShipsSunk()) {
+      await delay(2000);
+
+      currentGameboardElement.setShipSunk(attackResult.ship);
+      message.setWon(currentPlayer);
+      disableBothGameboards();
+      return;
+    }
+
     if (currentPlayer === human) {
-      if (currentGameboardElement.controller.allShipsSunk()) {
+      if (attackResult.ship.isSunk()) {
         await delay(2000);
 
         currentGameboardElement.setShipSunk(attackResult.ship);
-        message.setHumanWon();
-        disableBothGameboards();
-        return;
-      } else {
-        if (attackResult.ship.isSunk()) {
-          await delay(2000);
-
-          currentGameboardElement.setShipSunk(attackResult.ship);
-          message.setShipSunk(cell, currentPlayer, currentGameboardElement);
-        }
+        message.setShipSunk(cell, currentPlayer, currentGameboardElement);
       }
     }
 
     if (currentPlayer === enemy) {
-      if (currentGameboardElement.controller.allShipsSunk()) {
+      if (attackResult.ship.isSunk()) {
         await delay(2000);
 
+        enemy.target.reset();
         currentGameboardElement.setShipSunk(attackResult.ship);
-        message.setEnemyWon();
-        disableBothGameboards();
-        return;
+        message.setShipSunk(cell, currentPlayer, currentGameboardElement);
       } else {
-        if (attackResult.ship.isSunk()) {
-          await delay(2000);
-
-          enemy.target.reset();
-          currentGameboardElement.setShipSunk(attackResult.ship);
-          message.setShipSunk(cell, currentPlayer, currentGameboardElement);
-        } else {
-          enemy.target.ship = attackResult.ship;
-        }
-
-        currentPlayer.play(currentGameboardElement);
+        enemy.target.ship = attackResult.ship;
       }
+
+      currentPlayer.play(currentGameboardElement);
     }
   } else {
     renderShot(cell);

@@ -14,11 +14,8 @@ const message = {
   setHumanTurn() {
     setText('Your turn!');
   },
-  setEnemyWon() {
-    setText('Enemy won!');
-  },
-  setHumanWon() {
-    setText('You won!');
+  setWon(player) {
+    setText(`${player.name} won!`);
   },
   setInstruction() {
     setText(
