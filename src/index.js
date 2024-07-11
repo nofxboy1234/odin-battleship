@@ -95,11 +95,6 @@ function handleTurn(clickData) {
   handleShot(attackResult, cell);
 }
 
-function disableClickOnBothGameboards() {
-  humanGameboardElement.disableClick();
-  enemyGameboardElement.disableClick();
-}
-
 function setNextPlayer() {
   if (currentPlayer === human) {
     currentPlayer = enemy;
