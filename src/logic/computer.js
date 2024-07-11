@@ -4,7 +4,7 @@ import { delay } from './helpers';
 
 class Computer extends Player {
   async play(targetGameboardElement) {
-    await delay(2000);
+    await delay(500);
 
     const targetGameboard = targetGameboardElement.controller;
     let nextShot;

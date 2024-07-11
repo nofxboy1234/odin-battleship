@@ -197,24 +197,24 @@ class Gameboard {
     cell.enableShot();
 
     if (attackResult.hit) {
-      await delay(1000);
+      await delay(500);
       this.renderHit(cell);
 
       if (attackResult.ship.isSunk()) {
         if (this.controller.allShipsSunk()) {
           this.disableClick();
-          await delay(1000);
+          await delay(500);
           this.renderSunkShip(attackResult.ship);
           this.renderAdjacentCells(attackResult.ship);
         } else {
-          await delay(1000);
+          await delay(500);
           this.renderSunkShip(attackResult.ship);
           this.renderAdjacentCells(attackResult.ship);
         }
       }
     } else {
       this.disableClick();
-      await delay(1000);
+      await delay(500);
       this.renderMiss(cell);
     }
   }
