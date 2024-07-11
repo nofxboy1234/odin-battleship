@@ -49,44 +49,37 @@ async function handleTurn(clickData) {
   }
 
   const attackResult = attackGameboard(gameboardElement, cell);
+  renderShot(cell);
 
   if (attackResult.hit) {
-    renderShot(cell);
-    delay(1000).then(() => {
-      renderHit(cell);
-    });
-
     message.setCellHit(cell, currentPlayer, currentGameboardElement);
-
-    if (currentGameboardElement.controller.allShipsSunk()) {
-      disableBothGameboards();
-      await delay(2000);
-
-      currentGameboardElement.setShipSunk(attackResult.ship);
-      message.setWon(currentPlayer);
-      return;
-    }
+    await delay(1000);
+    renderHit(cell);
 
     if (attackResult.ship.isSunk()) {
-      await delay(2000);
-
-      currentPlayer.target.reset();
-      currentGameboardElement.setShipSunk(attackResult.ship);
+      await delay(1000);
       message.setShipSunk(cell, currentPlayer, currentGameboardElement);
+      currentGameboardElement.setShipSunk(attackResult.ship);
+      currentPlayer.target.reset();
     } else {
       currentPlayer.target.ship = attackResult.ship;
     }
 
+    if (currentGameboardElement.controller.allShipsSunk()) {
+      currentGameboardElement.disableClick();
+      await delay(1000);
+      message.setWon(currentPlayer);
+      return;
+    }
+
     currentPlayer.play(currentGameboardElement);
   } else {
-    renderShot(cell);
-    delay(1000).then(() => {
-      renderMiss(cell);
-    });
-
     message.setCellMiss(cell, currentPlayer, currentGameboardElement);
     currentGameboardElement.disableClick();
-    await delay(2000);
+    await delay(1000);
+    renderMiss(cell);
+
+    await delay(1000);
     nextTurn();
   }
 }
@@ -97,13 +90,6 @@ function setNextPlayer() {
   } else {
     currentPlayer = human;
   }
-}
-
-function disableBothGameboards() {
-  enemyGameboardElement.disable();
-  enemyGameboardElement.disableClick();
-  humanGameboardElement.disable();
-  humanGameboardElement.disableClick();
 }
 
 function renderShot(cell) {
