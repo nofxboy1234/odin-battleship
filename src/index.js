@@ -31,31 +31,7 @@ function attackGameboard(gameboardElement, cell) {
   return gameboardElement.controller.receiveAttack(cell.x, cell.y);
 }
 
-async function handleTurn(clickData) {
-  clickData.humanPlayer = human;
-  clickData.enemyPlayer = enemy;
-
-  const { gameboard: gameboardElement, cell } = clickData;
-
-  if (!cell) {
-    console.log('undefined cell');
-    return;
-  }
-
-  const shot = new Shot(clickData);
-
-  if (shot.isOnOwnGameboard()) {
-    return;
-  }
-
-  if (!shot.isValid()) {
-    currentPlayer.play(currentGameboardElement);
-    return;
-  }
-
-  const attackResult = attackGameboard(gameboardElement, cell);
-  renderShot(cell);
-
+async function handleShot(attackResult, cell) {
   if (attackResult.hit) {
     message.setCellHit(cell, currentPlayer, currentGameboardElement);
     await delay(1000);
@@ -89,6 +65,34 @@ async function handleTurn(clickData) {
     await delay(1000);
     nextTurn();
   }
+}
+
+function handleTurn(clickData) {
+  clickData.humanPlayer = human;
+  clickData.enemyPlayer = enemy;
+
+  const { gameboard: gameboardElement, cell } = clickData;
+
+  if (!cell) {
+    console.log('undefined cell');
+    return;
+  }
+
+  const shot = new Shot(clickData);
+
+  if (shot.isOnOwnGameboard()) {
+    return;
+  }
+
+  if (!shot.isValid()) {
+    currentPlayer.play(currentGameboardElement);
+    return;
+  }
+
+  const attackResult = attackGameboard(gameboardElement, cell);
+  renderShot(cell);
+
+  handleShot(attackResult, cell);
 }
 
 function disableClickOnBothGameboards() {
