@@ -118,7 +118,7 @@ function renderHit(cell) {
   cell.enableHit();
 }
 
-function play() {
+function startGame() {
   enemyGameboardElement.enable();
   enemyGameboardElement.enableClick();
   message.setHumanTurn();
@@ -186,7 +186,7 @@ randomizeButton.addEventListener('click', () => {
 });
 
 const playButton = document.getElementById('play-btn');
-playButton.addEventListener('click', play);
+playButton.addEventListener('click', startGame);
 
 let enemyGameboardElement;
 let humanGameboardElement;
