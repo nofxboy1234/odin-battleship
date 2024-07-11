@@ -28,14 +28,26 @@ class Shot {
   }
 
   #isPlayerClickingOwnGameboard() {
-    return this.gameboardElement.owner === this.clicker;
+    const result = this.gameboardElement.owner === this.clicker;
+
+    if (result) {
+      console.log('PlayerClickingOwnGameboard');
+    }
+
+    return result;
   }
 
   #isExistingShot() {
-    return this.gameboardElement.controller.isExistingShot(
+    const result = this.gameboardElement.controller.isExistingShot(
       this.cellDOM.x,
       this.cellDOM.y,
     );
+
+    if (result) {
+      console.log('isExistingShot');
+    }
+
+    return result;
   }
 
   #isAdjacentCell() {
@@ -46,6 +58,10 @@ class Shot {
       this.cellDOM.y,
     );
     const isAdjacentCell = adjacentCells.includes(cell);
+
+    if (isAdjacentCell) {
+      console.log('isAdjacentCell');
+    }
 
     return isAdjacentCell;
   }
