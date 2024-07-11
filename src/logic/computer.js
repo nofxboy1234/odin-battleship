@@ -28,28 +28,28 @@ class Computer extends Player {
 
         const potentialHits = [];
         if (
-          !this.#hitAgainstTopWall(onlyHit) &&
+          !this.#isHitAgainstTopWall(onlyHit) &&
           !allShots.includes(top) &&
           !allAdjacentCells.includes(top)
         ) {
           potentialHits.push(top);
         }
         if (
-          !this.#hitAgainstRightWall(onlyHit, targetGameboard) &&
+          !this.#isHitAgainstRightWall(onlyHit, targetGameboard) &&
           !allShots.includes(right) &&
           !allAdjacentCells.includes(right)
         ) {
           potentialHits.push(right);
         }
         if (
-          !this.#hitAgainstBottomWall(onlyHit, targetGameboard) &&
+          !this.#isHitAgainstBottomWall(onlyHit, targetGameboard) &&
           !allShots.includes(bottom) &&
           !allAdjacentCells.includes(bottom)
         ) {
           potentialHits.push(bottom);
         }
         if (
-          !this.#hitAgainstLeftWall(onlyHit) &&
+          !this.#isHitAgainstLeftWall(onlyHit) &&
           !allShots.includes(left) &&
           !allAdjacentCells.includes(left)
         ) {
@@ -69,14 +69,14 @@ class Computer extends Player {
 
           const potentialHits = [];
           if (
-            !this.#hitAgainstLeftWall(firstHit) &&
+            !this.#isHitAgainstLeftWall(firstHit) &&
             !allShots.includes(left) &&
             !allAdjacentCells.includes(left)
           ) {
             potentialHits.push(left);
           }
           if (
-            !this.#hitAgainstRightWall(lastHit, targetGameboard) &&
+            !this.#isHitAgainstRightWall(lastHit, targetGameboard) &&
             !allShots.includes(right) &&
             !allAdjacentCells.includes(right)
           ) {
@@ -96,14 +96,14 @@ class Computer extends Player {
 
           const potentialHits = [];
           if (
-            !this.#hitAgainstTopWall(firstHit) &&
+            !this.#isHitAgainstTopWall(firstHit) &&
             !allShots.includes(top) &&
             !allAdjacentCells.includes(top)
           ) {
             potentialHits.push(top);
           }
           if (
-            !this.#hitAgainstBottomWall(lastHit, targetGameboard) &&
+            !this.#isHitAgainstBottomWall(lastHit, targetGameboard) &&
             !allShots.includes(bottom) &&
             !allAdjacentCells.includes(bottom)
           ) {
@@ -144,19 +144,19 @@ class Computer extends Player {
     });
   }
 
-  #hitAgainstTopWall(hit) {
+  #isHitAgainstTopWall(hit) {
     return hit.y === 0;
   }
 
-  #hitAgainstRightWall(hit, gameboard) {
+  #isHitAgainstRightWall(hit, gameboard) {
     return hit.x === gameboard.size - 1;
   }
 
-  #hitAgainstBottomWall(hit, gameboard) {
+  #isHitAgainstBottomWall(hit, gameboard) {
     return hit.y === gameboard.size - 1;
   }
 
-  #hitAgainstLeftWall(hit) {
+  #isHitAgainstLeftWall(hit) {
     return hit.x === 0;
   }
 }
