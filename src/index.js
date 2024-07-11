@@ -59,6 +59,10 @@ async function handleTurn(clickData) {
   renderMessage(attackResult, cell);
   currentGameboardElement.renderShot(attackResult, cell);
 
+  if (currentGameboardElement.controller.allShipsSunk()) {
+    return;
+  }
+
   if (attackResult.hit) {
     currentPlayer.play(currentGameboardElement);
   } else {
