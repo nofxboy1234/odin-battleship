@@ -189,6 +189,21 @@ class Gameboard {
     });
   }
 
+  renderShot(cell) {
+    cell.disableHover();
+    cell.enableShot();
+  }
+
+  renderMiss(cell) {
+    cell.disableShot();
+    cell.enableMiss();
+  }
+
+  renderHit(cell) {
+    cell.disableShot();
+    cell.enableHit();
+  }
+
   #createCells() {
     const cells = this.controller.cells;
 

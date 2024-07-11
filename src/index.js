@@ -35,7 +35,7 @@ async function handleShot(attackResult, cell) {
   if (attackResult.hit) {
     message.setCellHit(cell, currentPlayer, currentGameboardElement);
     await delay(1000);
-    renderHit(cell);
+    currentGameboardElement.renderHit(cell);
 
     if (attackResult.ship.isSunk()) {
       currentPlayer.target.reset();
@@ -60,7 +60,7 @@ async function handleShot(attackResult, cell) {
     message.setCellMiss(cell, currentPlayer, currentGameboardElement);
     currentGameboardElement.disableClick();
     await delay(1000);
-    renderMiss(cell);
+    currentGameboardElement.renderMiss(cell);
 
     await delay(1000);
     nextTurn();
@@ -90,7 +90,7 @@ function handleTurn(clickData) {
   }
 
   const attackResult = attackGameboard(gameboardElement, cell);
-  renderShot(cell);
+  currentGameboardElement.renderShot(cell);
 
   handleShot(attackResult, cell);
 }
@@ -101,21 +101,6 @@ function setNextPlayer() {
   } else {
     currentPlayer = human;
   }
-}
-
-function renderShot(cell) {
-  cell.disableHover();
-  cell.enableShot();
-}
-
-function renderMiss(cell) {
-  cell.disableShot();
-  cell.enableMiss();
-}
-
-function renderHit(cell) {
-  cell.disableShot();
-  cell.enableHit();
 }
 
 function startGame() {
