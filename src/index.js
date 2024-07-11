@@ -45,11 +45,13 @@ async function handleShot(attackResult, cell) {
         message.setWon(currentPlayer);
         await delay(1000);
         currentGameboardElement.renderSunkShip(attackResult.ship);
+        currentGameboardElement.renderAdjacentCells(attackResult.ship);
         return;
       } else {
         message.setShipSunk(cell, currentPlayer, currentGameboardElement);
         await delay(1000);
         currentGameboardElement.renderSunkShip(attackResult.ship);
+        currentGameboardElement.renderAdjacentCells(attackResult.ship);
       }
     } else {
       currentPlayer.target.ship = attackResult.ship;

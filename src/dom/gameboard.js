@@ -179,7 +179,9 @@ class Gameboard {
   renderSunkShip(ship) {
     const shipDOM = this.#getShipAt(ship.x, ship.y);
     shipDOM.setSunk();
+  }
 
+  renderAdjacentCells(ship) {
     const adjacentCells = this.controller.getShipAdjacentCells(ship);
 
     adjacentCells.forEach((cell) => {
