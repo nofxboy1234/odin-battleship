@@ -62,7 +62,7 @@ async function handleTurn(clickData) {
   if (attackResult.hit) {
     currentPlayer.play(currentGameboardElement);
   } else {
-    await delay(1000);
+    await delay(2000);
     nextTurn();
   }
 }
