@@ -176,7 +176,7 @@ class Gameboard {
     this.#cells.forEach((cellDOM) => cellDOM.reset());
   }
 
-  setShipSunk(ship) {
+  renderSunkShip(ship) {
     const shipDOM = this.#getShipAt(ship.x, ship.y);
     shipDOM.setSunk();
 
