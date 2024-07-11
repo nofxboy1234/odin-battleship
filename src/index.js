@@ -31,45 +31,7 @@ function attackGameboard(gameboardElement, cell) {
   return gameboardElement.controller.receiveAttack(cell.x, cell.y);
 }
 
-async function handleShot(attackResult, cell) {
-  if (attackResult.hit) {
-    message.setCellHit(cell, currentPlayer, currentGameboardElement);
-    await delay(1000);
-    currentGameboardElement.renderHit(cell);
-
-    if (attackResult.ship.isSunk()) {
-      currentPlayer.target.reset();
-
-      if (currentGameboardElement.controller.allShipsSunk()) {
-        currentGameboardElement.disableClick();
-        message.setWon(currentPlayer);
-        await delay(1000);
-        currentGameboardElement.renderSunkShip(attackResult.ship);
-        currentGameboardElement.renderAdjacentCells(attackResult.ship);
-        return;
-      } else {
-        message.setShipSunk(cell, currentPlayer, currentGameboardElement);
-        await delay(1000);
-        currentGameboardElement.renderSunkShip(attackResult.ship);
-        currentGameboardElement.renderAdjacentCells(attackResult.ship);
-      }
-    } else {
-      currentPlayer.target.ship = attackResult.ship;
-    }
-
-    currentPlayer.play(currentGameboardElement);
-  } else {
-    message.setCellMiss(cell, currentPlayer, currentGameboardElement);
-    currentGameboardElement.disableClick();
-    await delay(1000);
-    currentGameboardElement.renderMiss(cell);
-
-    await delay(1000);
-    nextTurn();
-  }
-}
-
-function handleTurn(clickData) {
+async function handleTurn(clickData) {
   clickData.humanPlayer = human;
   clickData.enemyPlayer = enemy;
 
@@ -92,9 +54,43 @@ function handleTurn(clickData) {
   }
 
   const attackResult = attackGameboard(gameboardElement, cell);
-  currentGameboardElement.renderShot(cell);
 
-  handleShot(attackResult, cell);
+  updatePlayerState(attackResult);
+  renderMessage(attackResult, cell);
+  currentGameboardElement.renderShot(attackResult, cell);
+
+  if (attackResult.hit) {
+    currentPlayer.play(currentGameboardElement);
+  } else {
+    await delay(1000);
+    nextTurn();
+  }
+}
+
+function updatePlayerState(attackResult) {
+  if (attackResult.hit) {
+    if (attackResult.ship.isSunk()) {
+      currentPlayer.target.reset();
+    } else {
+      currentPlayer.target.ship = attackResult.ship;
+    }
+  }
+}
+
+function renderMessage(attackResult, cell) {
+  if (attackResult.hit) {
+    message.setCellHit(cell, currentPlayer, currentGameboardElement);
+
+    if (attackResult.ship.isSunk()) {
+      if (currentGameboardElement.controller.allShipsSunk()) {
+        message.setWon(currentPlayer);
+      } else {
+        message.setShipSunk(cell, currentPlayer, currentGameboardElement);
+      }
+    }
+  } else {
+    message.setCellMiss(cell, currentPlayer, currentGameboardElement);
+  }
 }
 
 function setNextPlayer() {

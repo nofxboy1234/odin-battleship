@@ -1,5 +1,6 @@
 import Cell from './cell';
 import Ship from './ship';
+import { delay } from '../logic/helpers';
 
 class Gameboard {
   #element = document.createElement('div');
@@ -191,9 +192,31 @@ class Gameboard {
     });
   }
 
-  renderShot(cell) {
+  async renderShot(attackResult, cell) {
     cell.disableHover();
     cell.enableShot();
+
+    if (attackResult.hit) {
+      await delay(1000);
+      this.renderHit(cell);
+
+      if (attackResult.ship.isSunk()) {
+        if (this.controller.allShipsSunk()) {
+          this.disableClick();
+          await delay(1000);
+          this.renderSunkShip(attackResult.ship);
+          this.renderAdjacentCells(attackResult.ship);
+        } else {
+          await delay(1000);
+          this.renderSunkShip(attackResult.ship);
+          this.renderAdjacentCells(attackResult.ship);
+        }
+      }
+    } else {
+      this.disableClick();
+      await delay(1000);
+      this.renderMiss(cell);
+    }
   }
 
   renderMiss(cell) {
