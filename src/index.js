@@ -7,7 +7,7 @@ import message from './dom/message';
 import Shot from './logic/shot';
 import { delay } from './logic/helpers';
 
-async function nextTurn() {
+function nextTurn() {
   currentGameboardElement.disable();
   setNextPlayer();
 
