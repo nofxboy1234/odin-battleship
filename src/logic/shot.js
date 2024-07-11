@@ -20,14 +20,10 @@ class Shot {
   }
 
   isValid() {
-    return (
-      !this.#isPlayerClickingOwnGameboard() &&
-      !this.#isExistingShot() &&
-      !this.#isAdjacentCell()
-    );
+    return !this.#isExistingShot() && !this.#isAdjacentCell();
   }
 
-  #isPlayerClickingOwnGameboard() {
+  isOnOwnGameboard() {
     const result = this.gameboardElement.owner === this.clicker;
 
     if (result) {

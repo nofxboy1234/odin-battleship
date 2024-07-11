@@ -38,10 +38,15 @@ async function handleTurn(clickData) {
   const { gameboard: gameboardElement, cell } = clickData;
 
   if (!cell) {
+    console.log('undefined cell');
     return;
   }
 
   const shot = new Shot(clickData);
+
+  if (shot.isOnOwnGameboard()) {
+    return;
+  }
 
   if (!shot.isValid()) {
     currentPlayer.play(currentGameboardElement);
