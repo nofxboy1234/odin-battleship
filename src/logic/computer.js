@@ -125,9 +125,6 @@ class Computer extends Player {
     }
 
     return nextShot;
-
-    // const cellDOM = targetGameboardElement.getCellDOM(nextShot.x, nextShot.y);
-    // cellDOM.render().click();
   }
 
   #getAvailableCells(gameboard, shots, adjacentCells) {
