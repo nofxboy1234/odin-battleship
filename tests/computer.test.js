@@ -86,14 +86,16 @@ describe('When there are 10 ships on the human gameboard', () => {
     human.placeShips(ships);
   });
 
-  describe('play()', () => {
+  describe('getNextShot()', () => {
     describe('when the computer has no target', () => {
       test('it returns a random Cell for the next shot', async () => {
-        await expect(computer.play(humanGameboard)).resolves.toBeInstanceOf(
-          Cell,
-        );
+        await expect(
+          computer.getNextShot(humanGameboard),
+        ).resolves.toBeInstanceOf(Cell);
       });
+    });
 
+    describe('when the computer has a target', () => {
       test.skip('it returns a random Cell for the next shot that is available', async () => {
         const misses = [];
         const miss1 = new Cell(0, 0);
@@ -106,7 +108,7 @@ describe('When there are 10 ships on the human gameboard', () => {
         humanGameboard.receiveAttack(4, 0);
         humanGameboard.receiveAttack(8, 5);
 
-        const result = await computer.play(humanGameboard);
+        const result = await computer.getNextShot(humanGameboard);
 
         expect(misses).toContainEqual(result);
       });

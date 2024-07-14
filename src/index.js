@@ -18,7 +18,9 @@ function nextTurn() {
     currentGameboardElement.enableClick();
     currentGameboardElement.disableHoverOnAllCells();
 
-    const nextShot = currentPlayer.play(currentGameboardElement.controller);
+    const nextShot = currentPlayer.getNextShot(
+      currentGameboardElement.controller,
+    );
     clickCell(nextShot);
   } else {
     message.setHumanTurn();
@@ -55,7 +57,9 @@ async function handleTurn(clickData) {
   }
 
   if (!shot.isValid()) {
-    const nextShot = currentPlayer.play(currentGameboardElement.controller);
+    const nextShot = currentPlayer.getNextShot(
+      currentGameboardElement.controller,
+    );
     clickCell(nextShot);
     return;
   }
@@ -71,7 +75,9 @@ async function handleTurn(clickData) {
   }
 
   if (attackResult.hit) {
-    const nextShot = currentPlayer.play(currentGameboardElement.controller);
+    const nextShot = currentPlayer.getNextShot(
+      currentGameboardElement.controller,
+    );
     clickCell(nextShot);
   } else {
     await delay(1000);
