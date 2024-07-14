@@ -593,21 +593,133 @@ describe('When there are 10 ships on the human gameboard', () => {
       });
     });
 
-    describe('when there is a miss and a hit on the board', () => {
-      test('it returns an array of all Cells on the board excluding the miss', () => {
-        const miss = new Cell(4, 0);
-        const hit = new Cell(1, 0);
+    describe('when there is a sunk ship on the board', () => {
+      let hit1;
+      let hit2;
+      let hit3;
+      let hit4;
+
+      beforeEach(() => {
+        hit1 = new Cell(0, 0);
+        humanGameboard.receiveAttack(hit1.x, hit1.y);
+        hit2 = new Cell(1, 0);
+        humanGameboard.receiveAttack(hit2.x, hit2.y);
+        hit3 = new Cell(2, 0);
+        humanGameboard.receiveAttack(hit3.x, hit3.y);
+        hit4 = new Cell(3, 0);
+        humanGameboard.receiveAttack(hit4.x, hit4.y);
+      });
+
+      test('it returns an array of all Cells on the board excluding the sunk ship cells', () => {
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(hit1);
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(hit2);
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(hit3);
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(hit4);
+      });
+
+      test('it returns an array of all Cells on the board excluding the sunk ship adjacent cells', () => {
+        const adjacentCell1 = new Cell(0, 1);
+        const adjacentCell2 = new Cell(1, 1);
+        const adjacentCell3 = new Cell(2, 1);
+        const adjacentCell4 = new Cell(3, 1);
+        const adjacentCell5 = new Cell(4, 0);
+        const adjacentCell6 = new Cell(4, 1);
+
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(
+          adjacentCell1,
+        );
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(
+          adjacentCell2,
+        );
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(
+          adjacentCell3,
+        );
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(
+          adjacentCell4,
+        );
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(
+          adjacentCell5,
+        );
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(
+          adjacentCell6,
+        );
+      });
+
+      test('it returns an array of length 90', () => {
+        expect(humanGameboard.getAvailableCells().length).toBe(90);
+      });
+    });
+
+    describe('when there is a miss, a hit and a sunk ship on the board', () => {
+      let miss;
+      let hit0;
+
+      let hit1;
+      let hit2;
+      let hit3;
+      let hit4;
+
+      beforeEach(() => {
+        miss = new Cell(9, 5);
         humanGameboard.receiveAttack(miss.x, miss.y);
-        humanGameboard.receiveAttack(hit.x, hit.y);
+        hit0 = new Cell(8, 3);
+        humanGameboard.receiveAttack(hit0.x, hit0.y);
+
+        hit1 = new Cell(0, 0);
+        humanGameboard.receiveAttack(hit1.x, hit1.y);
+        hit2 = new Cell(1, 0);
+        humanGameboard.receiveAttack(hit2.x, hit2.y);
+        hit3 = new Cell(2, 0);
+        humanGameboard.receiveAttack(hit3.x, hit3.y);
+        hit4 = new Cell(3, 0);
+        humanGameboard.receiveAttack(hit4.x, hit4.y);
+      });
+
+      test('it returns an array of all Cells on the board excluding the miss', () => {
         expect(humanGameboard.getAvailableCells()).not.toContainEqual(miss);
       });
 
       test('it returns an array of all Cells on the board excluding the hit', () => {
-        const miss = new Cell(4, 0);
-        const hit = new Cell(1, 0);
-        humanGameboard.receiveAttack(miss.x, miss.y);
-        humanGameboard.receiveAttack(hit.x, hit.y);
-        expect(humanGameboard.getAvailableCells()).not.toContainEqual(hit);
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(hit0);
+      });
+
+      test('it returns an array of all Cells on the board excluding the sunk ship cells', () => {
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(hit1);
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(hit2);
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(hit3);
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(hit4);
+      });
+
+      test('it returns an array of all Cells on the board excluding the sunk ship adjacent cells', () => {
+        const adjacentCell1 = new Cell(0, 1);
+        const adjacentCell2 = new Cell(1, 1);
+        const adjacentCell3 = new Cell(2, 1);
+        const adjacentCell4 = new Cell(3, 1);
+        const adjacentCell5 = new Cell(4, 0);
+        const adjacentCell6 = new Cell(4, 1);
+
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(
+          adjacentCell1,
+        );
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(
+          adjacentCell2,
+        );
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(
+          adjacentCell3,
+        );
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(
+          adjacentCell4,
+        );
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(
+          adjacentCell5,
+        );
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(
+          adjacentCell6,
+        );
+      });
+
+      test('it returns an array of length 88', () => {
+        expect(humanGameboard.getAvailableCells().length).toBe(88);
       });
     });
   });
