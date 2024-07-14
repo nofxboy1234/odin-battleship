@@ -3,10 +3,9 @@ import { getRandomInt } from './helpers';
 import { delay } from './helpers';
 
 class Computer extends Player {
-  async play(targetGameboardElement) {
+  async play(targetGameboard) {
     await delay(500);
 
-    const targetGameboard = targetGameboardElement.controller;
     let nextShot;
 
     const allHits = targetGameboard.getHits();
@@ -125,8 +124,10 @@ class Computer extends Player {
       nextShot = availableCells[randomIndex];
     }
 
-    const cellDOM = targetGameboardElement.getCellDOM(nextShot.x, nextShot.y);
-    cellDOM.render().click();
+    return nextShot;
+
+    // const cellDOM = targetGameboardElement.getCellDOM(nextShot.x, nextShot.y);
+    // cellDOM.render().click();
   }
 
   #getAvailableCells(gameboard, shots, adjacentCells) {
