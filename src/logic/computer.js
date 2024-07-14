@@ -5,7 +5,6 @@ import { delay } from './helpers';
 class Computer extends Player {
   async play(targetGameboard) {
     await delay(500);
-
     let nextShot;
 
     if (this.target.ship) {
