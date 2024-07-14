@@ -28,29 +28,25 @@ class Computer extends Player {
         const potentialHits = [];
         if (
           !this.#isHitAgainstTopWall(onlyHit) &&
-          !allShots.includes(top) &&
-          !allAdjacentCells.includes(top)
+          targetGameboard.getAvailableCells().includes(top)
         ) {
           potentialHits.push(top);
         }
         if (
           !this.#isHitAgainstRightWall(onlyHit, targetGameboard) &&
-          !allShots.includes(right) &&
-          !allAdjacentCells.includes(right)
+          targetGameboard.getAvailableCells().includes(right)
         ) {
           potentialHits.push(right);
         }
         if (
           !this.#isHitAgainstBottomWall(onlyHit, targetGameboard) &&
-          !allShots.includes(bottom) &&
-          !allAdjacentCells.includes(bottom)
+          targetGameboard.getAvailableCells().includes(bottom)
         ) {
           potentialHits.push(bottom);
         }
         if (
           !this.#isHitAgainstLeftWall(onlyHit) &&
-          !allShots.includes(left) &&
-          !allAdjacentCells.includes(left)
+          targetGameboard.getAvailableCells().includes(left)
         ) {
           potentialHits.push(left);
         }
@@ -69,15 +65,13 @@ class Computer extends Player {
           const potentialHits = [];
           if (
             !this.#isHitAgainstLeftWall(firstHit) &&
-            !allShots.includes(left) &&
-            !allAdjacentCells.includes(left)
+            targetGameboard.getAvailableCells().includes(left)
           ) {
             potentialHits.push(left);
           }
           if (
             !this.#isHitAgainstRightWall(lastHit, targetGameboard) &&
-            !allShots.includes(right) &&
-            !allAdjacentCells.includes(right)
+            targetGameboard.getAvailableCells().includes(right)
           ) {
             potentialHits.push(right);
           }
@@ -96,15 +90,13 @@ class Computer extends Player {
           const potentialHits = [];
           if (
             !this.#isHitAgainstTopWall(firstHit) &&
-            !allShots.includes(top) &&
-            !allAdjacentCells.includes(top)
+            targetGameboard.getAvailableCells().includes(top)
           ) {
             potentialHits.push(top);
           }
           if (
             !this.#isHitAgainstBottomWall(lastHit, targetGameboard) &&
-            !allShots.includes(bottom) &&
-            !allAdjacentCells.includes(bottom)
+            targetGameboard.getAvailableCells().includes(bottom)
           ) {
             potentialHits.push(bottom);
           }
