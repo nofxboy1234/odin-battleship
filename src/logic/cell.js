@@ -12,17 +12,17 @@ class Cell {
     return this.y === 0;
   }
 
-  // isHitAgainstRightWall(hit, gameboard) {
-  //   return hit.x === gameboard.size - 1;
-  // }
+  isAgainstRightWall(gameboard) {
+    return this.x === gameboard.size - 1;
+  }
 
-  // isHitAgainstBottomWall(hit, gameboard) {
-  //   return hit.y === gameboard.size - 1;
-  // }
+  isAgainstBottomWall(gameboard) {
+    return this.y === gameboard.size - 1;
+  }
 
-  // isHitAgainstLeftWall(hit) {
-  //   return hit.x === 0;
-  // }
+  isAgainstLeftWall() {
+    return this.x === 0;
+  }
 }
 
 export default Cell;
