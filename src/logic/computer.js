@@ -8,11 +8,6 @@ class Computer extends Player {
 
     let nextShot;
 
-    const allHits = targetGameboard.getHits();
-    const allMisses = targetGameboard.getMisses();
-    const allShots = allHits.concat(allMisses);
-    const allAdjacentCells = targetGameboard.getAllSunkShipsAdjacentCells();
-
     if (this.target.ship) {
       // ships with length >= 2
       const ship = this.target.ship;
