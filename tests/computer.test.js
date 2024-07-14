@@ -88,31 +88,27 @@ describe('When there are 10 ships on the human gameboard', () => {
 
   describe('play()', () => {
     describe('when the computer has no target', () => {
-      describe('when there are no shots on the board', () => {
-        test('it returns a random Cell for the next shot', async () => {
-          await expect(computer.play(humanGameboard)).resolves.toBeInstanceOf(
-            Cell,
-          );
-        });
+      test('it returns a random Cell for the next shot', async () => {
+        await expect(computer.play(humanGameboard)).resolves.toBeInstanceOf(
+          Cell,
+        );
       });
 
-      describe.skip('when there are only misses on the board', () => {
-        test('it returns a random Cell for the next shot that is not any of the misses', async () => {
-          const misses = [];
-          const miss1 = new Cell(0, 0);
-          misses.push(miss1);
-          const miss2 = new Cell(5, 5);
-          misses.push(miss2);
-          const miss3 = new Cell(9, 9);
-          misses.push(miss3);
+      test.skip('it returns a random Cell for the next shot that is available', async () => {
+        const misses = [];
+        const miss1 = new Cell(0, 0);
+        misses.push(miss1);
+        const miss2 = new Cell(5, 5);
+        misses.push(miss2);
+        const miss3 = new Cell(9, 9);
+        misses.push(miss3);
 
-          humanGameboard.receiveAttack(4, 0);
-          humanGameboard.receiveAttack(8, 5);
+        humanGameboard.receiveAttack(4, 0);
+        humanGameboard.receiveAttack(8, 5);
 
-          const result = await computer.play(humanGameboard);
+        const result = await computer.play(humanGameboard);
 
-          expect(misses).toContainEqual(result);
-        });
+        expect(misses).toContainEqual(result);
       });
     });
   });
