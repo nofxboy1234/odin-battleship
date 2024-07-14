@@ -20,28 +20,16 @@ class Computer extends Player {
         const left = targetGameboard.offsetCell(onlyHit, -1, 0);
 
         const potentialHits = [];
-        if (
-          !onlyHit.isAgainstTopWall() &&
-          targetGameboard.getAvailableCells().includes(top)
-        ) {
+        if (targetGameboard.getAvailableCells().includes(top)) {
           potentialHits.push(top);
         }
-        if (
-          !onlyHit.isAgainstRightWall(targetGameboard) &&
-          targetGameboard.getAvailableCells().includes(right)
-        ) {
+        if (targetGameboard.getAvailableCells().includes(right)) {
           potentialHits.push(right);
         }
-        if (
-          !onlyHit.isAgainstBottomWall(targetGameboard) &&
-          targetGameboard.getAvailableCells().includes(bottom)
-        ) {
+        if (targetGameboard.getAvailableCells().includes(bottom)) {
           potentialHits.push(bottom);
         }
-        if (
-          !onlyHit.isAgainstLeftWall() &&
-          targetGameboard.getAvailableCells().includes(left)
-        ) {
+        if (targetGameboard.getAvailableCells().includes(left)) {
           potentialHits.push(left);
         }
 
@@ -57,16 +45,10 @@ class Computer extends Player {
           const right = targetGameboard.offsetCell(lastHit, 1, 0);
 
           const potentialHits = [];
-          if (
-            !firstHit.isAgainstLeftWall() &&
-            targetGameboard.getAvailableCells().includes(left)
-          ) {
+          if (targetGameboard.getAvailableCells().includes(left)) {
             potentialHits.push(left);
           }
-          if (
-            !lastHit.isAgainstRightWall(targetGameboard) &&
-            targetGameboard.getAvailableCells().includes(right)
-          ) {
+          if (targetGameboard.getAvailableCells().includes(right)) {
             potentialHits.push(right);
           }
 
@@ -82,16 +64,10 @@ class Computer extends Player {
           const bottom = targetGameboard.offsetCell(lastHit, 0, 1);
 
           const potentialHits = [];
-          if (
-            !firstHit.isAgainstTopWall() &&
-            targetGameboard.getAvailableCells().includes(top)
-          ) {
+          if (targetGameboard.getAvailableCells().includes(top)) {
             potentialHits.push(top);
           }
-          if (
-            !lastHit.isAgainstBottomWall(targetGameboard) &&
-            targetGameboard.getAvailableCells().includes(bottom)
-          ) {
+          if (targetGameboard.getAvailableCells().includes(bottom)) {
             potentialHits.push(bottom);
           }
 
