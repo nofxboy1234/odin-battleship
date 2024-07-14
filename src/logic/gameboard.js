@@ -104,6 +104,26 @@ class Gameboard {
     return sunkShips.flatMap((ship) => this.getShipAdjacentCells(ship));
   }
 
+  getAvailableCells() {
+    return this.cells.filter((cell) => {
+      const allHits = this.getHits();
+      const allMisses = this.getMisses();
+      const allShots = allHits.concat(allMisses);
+      const allAdjacentCells = this.getAllSunkShipsAdjacentCells();
+
+      const foundInShots = allShots.find((shot) => {
+        return cell.x === shot.x && cell.y === shot.y;
+      });
+
+      const foundInAdjacentCells = allAdjacentCells.find((adjacentCell) => {
+        return cell.x === adjacentCell.x && cell.y === adjacentCell.y;
+      });
+
+      const found = foundInShots || foundInAdjacentCells;
+      return !found;
+    });
+  }
+
   #createCells() {
     for (let y = 0; y < this.size; y++) {
       for (let x = 0; x < this.size; x++) {

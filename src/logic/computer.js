@@ -114,32 +114,13 @@ class Computer extends Player {
         }
       }
     } else {
-      const availableCells = this.#getAvailableCells(
-        targetGameboard,
-        allShots,
-        allAdjacentCells,
-      );
+      const availableCells = targetGameboard.getAvailableCells();
 
       const randomIndex = getRandomInt(availableCells.length);
       nextShot = availableCells[randomIndex];
     }
 
     return nextShot;
-  }
-
-  #getAvailableCells(gameboard, shots, adjacentCells) {
-    return gameboard.cells.filter((cell) => {
-      const foundInShots = shots.find((shot) => {
-        return cell.x === shot.x && cell.y === shot.y;
-      });
-
-      const foundInAdjacentCells = adjacentCells.find((adjacentCell) => {
-        return cell.x === adjacentCell.x && cell.y === adjacentCell.y;
-      });
-
-      const found = foundInShots || foundInAdjacentCells;
-      return !found;
-    });
   }
 
   #isHitAgainstTopWall(hit) {
