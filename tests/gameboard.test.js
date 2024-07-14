@@ -564,5 +564,51 @@ describe('When there are 10 ships on the human gameboard', () => {
         );
       });
     });
+
+    describe('when there is a miss on the board', () => {
+      test('it returns an array of all Cells on the board excluding the miss', () => {
+        const miss = new Cell(4, 0);
+        humanGameboard.receiveAttack(miss.x, miss.y);
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(miss);
+      });
+
+      test('it returns an array of length 99', () => {
+        const miss = new Cell(4, 0);
+        humanGameboard.receiveAttack(miss.x, miss.y);
+        expect(humanGameboard.getAvailableCells().length).toBe(99);
+      });
+    });
+
+    describe('when there is a hit on the board', () => {
+      test('it returns an array of all Cells on the board excluding the hit', () => {
+        const hit = new Cell(1, 0);
+        humanGameboard.receiveAttack(hit.x, hit.y);
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(hit);
+      });
+
+      test('it returns an array of length 99', () => {
+        const miss = new Cell(4, 0);
+        humanGameboard.receiveAttack(miss.x, miss.y);
+        expect(humanGameboard.getAvailableCells().length).toBe(99);
+      });
+    });
+
+    describe('when there is a miss and a hit on the board', () => {
+      test('it returns an array of all Cells on the board excluding the miss', () => {
+        const miss = new Cell(4, 0);
+        const hit = new Cell(1, 0);
+        humanGameboard.receiveAttack(miss.x, miss.y);
+        humanGameboard.receiveAttack(hit.x, hit.y);
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(miss);
+      });
+
+      test('it returns an array of all Cells on the board excluding the hit', () => {
+        const miss = new Cell(4, 0);
+        const hit = new Cell(1, 0);
+        humanGameboard.receiveAttack(miss.x, miss.y);
+        humanGameboard.receiveAttack(hit.x, hit.y);
+        expect(humanGameboard.getAvailableCells()).not.toContainEqual(hit);
+      });
+    });
   });
 });
