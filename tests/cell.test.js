@@ -1,4 +1,5 @@
 import Cell from '../src/logic/cell';
+import Gameboard from '../src/logic/gameboard';
 
 test('offset() returns a new Cell at the specified positive x and y offset', () => {
   const cell = new Cell(3, 4);
@@ -12,4 +13,20 @@ test('offset() returns a new Cell at the specified negative x and y offset', () 
   const offsetCell = new Cell(6, 1);
 
   expect(cell.offset(-1, -8)).toEqual(offsetCell);
+});
+
+describe('isAgainstTopWall()', () => {
+  describe('when a cell is against the top wall of a gameboard', () => {
+    test('it returns true', () => {
+      const cell = new Cell(6, 0);
+      expect(cell.isAgainstTopWall()).toBe(true);
+    });
+  });
+
+  describe('when a cell is not against the top wall of a gameboard', () => {
+    test('it returns false', () => {
+      const cell = new Cell(6, 1);
+      expect(cell.isAgainstTopWall()).toBe(false);
+    });
+  });
 });
