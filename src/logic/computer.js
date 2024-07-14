@@ -21,25 +21,25 @@ class Computer extends Player {
 
         const potentialHits = [];
         if (
-          !this.#isHitAgainstTopWall(onlyHit) &&
+          !onlyHit.isAgainstTopWall() &&
           targetGameboard.getAvailableCells().includes(top)
         ) {
           potentialHits.push(top);
         }
         if (
-          !this.#isHitAgainstRightWall(onlyHit, targetGameboard) &&
+          !onlyHit.isAgainstRightWall(targetGameboard) &&
           targetGameboard.getAvailableCells().includes(right)
         ) {
           potentialHits.push(right);
         }
         if (
-          !this.#isHitAgainstBottomWall(onlyHit, targetGameboard) &&
+          !onlyHit.isAgainstBottomWall(targetGameboard) &&
           targetGameboard.getAvailableCells().includes(bottom)
         ) {
           potentialHits.push(bottom);
         }
         if (
-          !this.#isHitAgainstLeftWall(onlyHit) &&
+          !onlyHit.isAgainstLeftWall() &&
           targetGameboard.getAvailableCells().includes(left)
         ) {
           potentialHits.push(left);
@@ -58,13 +58,13 @@ class Computer extends Player {
 
           const potentialHits = [];
           if (
-            !this.#isHitAgainstLeftWall(firstHit) &&
+            !firstHit.isAgainstLeftWall() &&
             targetGameboard.getAvailableCells().includes(left)
           ) {
             potentialHits.push(left);
           }
           if (
-            !this.#isHitAgainstRightWall(lastHit, targetGameboard) &&
+            !lastHit.isAgainstRightWall(targetGameboard) &&
             targetGameboard.getAvailableCells().includes(right)
           ) {
             potentialHits.push(right);
@@ -83,13 +83,13 @@ class Computer extends Player {
 
           const potentialHits = [];
           if (
-            !this.#isHitAgainstTopWall(firstHit) &&
+            !firstHit.isAgainstTopWall() &&
             targetGameboard.getAvailableCells().includes(top)
           ) {
             potentialHits.push(top);
           }
           if (
-            !this.#isHitAgainstBottomWall(lastHit, targetGameboard) &&
+            !lastHit.isAgainstBottomWall(targetGameboard) &&
             targetGameboard.getAvailableCells().includes(bottom)
           ) {
             potentialHits.push(bottom);
