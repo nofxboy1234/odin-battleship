@@ -94,6 +94,8 @@ describe('When there are 10 ships on the human gameboard', () => {
   describe('getNextShot()', () => {
     describe('when the computer has no target', () => {
       test('it returns a random Cell for the next shot that is available', async () => {
+        computer.resetTarget();
+
         await expect(
           computer.getNextShot(humanGameboard),
         ).resolves.toBeInstanceOf(Cell);
