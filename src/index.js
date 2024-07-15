@@ -88,9 +88,9 @@ async function handleTurn(clickData) {
 function updatePlayerState(attackResult) {
   if (attackResult.hit) {
     if (attackResult.ship.isSunk()) {
-      currentPlayer.target.reset();
+      currentPlayer.resetTarget();
     } else {
-      currentPlayer.target.ship = attackResult.ship;
+      currentPlayer.target = attackResult.ship;
     }
   }
 }

@@ -5,12 +5,11 @@ class Player {
   constructor(gameboard, name) {
     this.gameboard = gameboard;
     this.name = name;
-    this.target = {
-      ship: undefined,
-      reset() {
-        this.ship = undefined;
-      },
-    };
+    this.target = undefined;
+  }
+
+  resetTarget() {
+    this.target = undefined;
   }
 
   placeShips(ships) {

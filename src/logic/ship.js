@@ -25,7 +25,55 @@ class Ship {
   }
 
   getHits() {
-    return [...this.#hits];
+    return this.#hits;
+  }
+
+  potentialHits(gameboard) {
+    if (this.#hits.length === 1) {
+      const onlyHit = this.#hits.at(0);
+
+      const topCell = gameboard.offsetCell(onlyHit, 0, -1);
+      const rightCell = gameboard.offsetCell(onlyHit, 1, 0);
+      const bottomCell = gameboard.offsetCell(onlyHit, 0, 1);
+      const leftCell = gameboard.offsetCell(onlyHit, -1, 0);
+
+      const potentialHits = [topCell, rightCell, bottomCell, leftCell].filter(
+        (cell) => gameboard.getAvailableCells().includes(cell),
+      );
+
+      return potentialHits;
+    }
+
+    if (this.#hits.length > 1) {
+      const sortedHits = this.getHits().toSorted(
+        (a, b) => Math.sign(a.x - b.x) || Math.sign(a.y - b.y),
+      );
+
+      const firstHit = sortedHits.at(0);
+      const lastHit = sortedHits.at(-1);
+
+      if (this.orientation === 'horizontal') {
+        const rightCell = gameboard.offsetCell(lastHit, 1, 0);
+        const leftCell = gameboard.offsetCell(firstHit, -1, 0);
+
+        const potentialHits = [rightCell, leftCell].filter((cell) =>
+          gameboard.getAvailableCells().includes(cell),
+        );
+
+        return potentialHits;
+      }
+
+      if (this.orientation === 'vertical') {
+        const topCell = gameboard.offsetCell(firstHit, 0, -1);
+        const bottomCell = gameboard.offsetCell(lastHit, 0, 1);
+
+        const potentialHits = [topCell, bottomCell].filter((cell) =>
+          gameboard.getAvailableCells().includes(cell),
+        );
+
+        return potentialHits;
+      }
+    }
   }
 
   setVertical() {

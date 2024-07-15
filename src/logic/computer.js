@@ -5,84 +5,16 @@ import { delay } from './helpers';
 class Computer extends Player {
   async getNextShot(targetGameboard) {
     await delay(500);
-    let nextShot;
 
-    if (this.target.ship) {
-      // ships with length >= 2
-      const ship = this.target.ship;
-      const hits = ship.getHits();
-
-      if (hits.length === 1) {
-        const onlyHit = hits.at(0);
-        const top = targetGameboard.offsetCell(onlyHit, 0, -1);
-        const right = targetGameboard.offsetCell(onlyHit, 1, 0);
-        const bottom = targetGameboard.offsetCell(onlyHit, 0, 1);
-        const left = targetGameboard.offsetCell(onlyHit, -1, 0);
-
-        const potentialHits = [];
-        if (targetGameboard.getAvailableCells().includes(top)) {
-          potentialHits.push(top);
-        }
-        if (targetGameboard.getAvailableCells().includes(right)) {
-          potentialHits.push(right);
-        }
-        if (targetGameboard.getAvailableCells().includes(bottom)) {
-          potentialHits.push(bottom);
-        }
-        if (targetGameboard.getAvailableCells().includes(left)) {
-          potentialHits.push(left);
-        }
-
-        const randomIndex = getRandomInt(potentialHits.length);
-        nextShot = potentialHits[randomIndex];
-      } else {
-        // --if hit array length is > 1
-        if (ship.orientation === 'horizontal') {
-          const xHits = hits.toSorted((a, b) => Math.sign(a.x - b.x));
-          const firstHit = xHits.at(0);
-          const lastHit = xHits.at(-1);
-          const left = targetGameboard.offsetCell(firstHit, -1, 0);
-          const right = targetGameboard.offsetCell(lastHit, 1, 0);
-
-          const potentialHits = [];
-          if (targetGameboard.getAvailableCells().includes(left)) {
-            potentialHits.push(left);
-          }
-          if (targetGameboard.getAvailableCells().includes(right)) {
-            potentialHits.push(right);
-          }
-
-          const randomIndex = getRandomInt(potentialHits.length);
-          nextShot = potentialHits[randomIndex];
-        }
-
-        if (ship.orientation === 'vertical') {
-          const yHits = hits.toSorted((a, b) => Math.sign(a.y - b.y));
-          const firstHit = yHits.at(0);
-          const lastHit = yHits.at(-1);
-          const top = targetGameboard.offsetCell(firstHit, 0, -1);
-          const bottom = targetGameboard.offsetCell(lastHit, 0, 1);
-
-          const potentialHits = [];
-          if (targetGameboard.getAvailableCells().includes(top)) {
-            potentialHits.push(top);
-          }
-          if (targetGameboard.getAvailableCells().includes(bottom)) {
-            potentialHits.push(bottom);
-          }
-
-          const randomIndex = getRandomInt(potentialHits.length);
-          nextShot = potentialHits[randomIndex];
-        }
-      }
-    } else {
-      const availableCells = targetGameboard.getAvailableCells();
-
-      const randomIndex = getRandomInt(availableCells.length);
-      nextShot = availableCells[randomIndex];
+    if (this.target) {
+      const potentialHits = this.target.potentialHits(targetGameboard);
+      const randomIndex = getRandomInt(potentialHits.length);
+      return potentialHits.at(randomIndex);
     }
 
-    return nextShot;
+    const availableCells = targetGameboard.getAvailableCells();
+    const randomIndex = getRandomInt(availableCells.length);
+    return availableCells.at(randomIndex);
   }
 }
 
