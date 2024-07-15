@@ -88,7 +88,7 @@ describe('When there are 10 ships on the human gameboard', () => {
 
   describe('getNextShot()', () => {
     describe('when the computer has no target', () => {
-      test('it returns a random Cell for the next shot', async () => {
+      test('it returns a random Cell for the next shot that is available', async () => {
         await expect(
           computer.getNextShot(humanGameboard),
         ).resolves.toBeInstanceOf(Cell);
@@ -96,21 +96,27 @@ describe('When there are 10 ships on the human gameboard', () => {
     });
 
     describe('when the computer has a target', () => {
-      test.skip('it returns a random Cell for the next shot that is available', async () => {
-        const misses = [];
-        const miss1 = new Cell(0, 0);
-        misses.push(miss1);
-        const miss2 = new Cell(5, 5);
-        misses.push(miss2);
-        const miss3 = new Cell(9, 9);
-        misses.push(miss3);
+      test('it returns a random Cell for the next shot that is available', async () => {
+        const { ship } = humanGameboard.receiveAttack(3, 4);
+        computer.target = ship;
 
-        humanGameboard.receiveAttack(4, 0);
-        humanGameboard.receiveAttack(8, 5);
+        const nextShot = await computer.getNextShot(humanGameboard);
 
-        const result = await computer.getNextShot(humanGameboard);
+        const cell1 = new Cell(3, 3);
+        const cell2 = new Cell(4, 4);
+        const cell3 = new Cell(3, 5);
+        const cell4 = new Cell(2, 4);
 
-        expect(misses).toContainEqual(result);
+        expect([cell1, cell2, cell3, cell4]).toContainEqual(nextShot);
+      });
+
+      test('it calls ship.potentialHits() once', async () => {
+        const { ship } = humanGameboard.receiveAttack(3, 4);
+        computer.target = ship;
+        const spy = jest.spyOn(ship, 'potentialHits');
+
+        await computer.getNextShot(humanGameboard);
+        expect(spy).toHaveBeenCalledTimes(1);
       });
     });
   });
