@@ -4,6 +4,7 @@ import Battleship from '../src/logic/battleship';
 import Destroyer from '../src/logic/destroyer';
 import Submarine from '../src/logic/submarine';
 import PatrolBoat from '../src/logic/patrolBoat';
+import Ship from '../src/logic/ship';
 
 afterEach(() => {
   jest.restoreAllMocks();
@@ -123,5 +124,18 @@ describe('When there are 10 ships', () => {
       player.placeShips(ships);
       expect(spy).not.toHaveBeenCalled();
     });
+  });
+});
+
+describe('resetTarget()', () => {
+  test('it sets the target to undefined', () => {
+    const gameboard = new Gameboard();
+    const player = new Player(gameboard, 'player');
+    const target = new Ship();
+    player.target = target;
+
+    expect(player.target).toBe(target);
+    player.resetTarget();
+    expect(player.target).toBe(undefined);
   });
 });

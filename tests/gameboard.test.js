@@ -558,7 +558,7 @@ describe('When there are 10 ships on the human gameboard', () => {
 
   describe('getAvailableCells()', () => {
     describe('when there are no shots on the board', () => {
-      test('it returns an array of all Cells on the board', async () => {
+      test('it returns an array of all Cells on the board', () => {
         expect(humanGameboard.getAvailableCells()).toEqual(
           humanGameboard.cells,
         );
