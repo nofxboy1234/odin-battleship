@@ -218,5 +218,27 @@ describe('potentialHits()', () => {
         expect(ship1.potentialHits(gameboard)).toEqual([cell2, cell1]);
       });
     });
+
+    describe('when a ship is vertical', () => {
+      test('it returns an array of potential hit Cells that are available', () => {
+        const gameboard = new Gameboard();
+
+        const ship1 = new Ship(4);
+        ship1.setHorizontal();
+        gameboard.placeShip(ship1, 0, 0);
+
+        const ship2 = new Ship(3);
+        ship2.setVertical();
+        gameboard.placeShip(ship2, 3, 2);
+
+        gameboard.receiveAttack(3, 1);
+        gameboard.receiveAttack(3, 2);
+        gameboard.receiveAttack(3, 3);
+
+        const cell1 = new Cell(3, 4);
+
+        expect(ship2.potentialHits(gameboard)).toEqual([cell1]);
+      });
+    });
   });
 });
