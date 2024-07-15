@@ -11,6 +11,7 @@
     "dev": "webpack --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "deploy": "git subtree push --prefix dist origin gh-pages",
+    "delete-ghpages": "git push origin --delete gh-pages",
     "eslint-check": "npx eslint .",
     "prettier-check": "npx prettier --check .",
     "eslint-fix": "npx eslint . --fix",
