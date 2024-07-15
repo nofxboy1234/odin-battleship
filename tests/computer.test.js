@@ -7,6 +7,11 @@ import Submarine from '../src/logic/submarine';
 import PatrolBoat from '../src/logic/patrolBoat';
 import Player from '../src/logic/player';
 import Cell from '../src/logic/cell';
+import Ship from '../src/logic/ship';
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
 
 describe('When there are 10 ships on the human gameboard', () => {
   let computerGameboard;
@@ -92,6 +97,13 @@ describe('When there are 10 ships on the human gameboard', () => {
         await expect(
           computer.getNextShot(humanGameboard),
         ).resolves.toBeInstanceOf(Cell);
+      });
+
+      test('it does not call ship.potentialHits()', async () => {
+        const spy = jest.spyOn(Ship.prototype, 'potentialHits');
+
+        await computer.getNextShot(humanGameboard);
+        expect(spy).not.toHaveBeenCalled();
       });
     });
 
