@@ -1,7 +1,7 @@
 import Player from './player';
 
 class Human extends Player {
-  play() {}
+  async getNextShot(targetGameboard) {}
 }
 
 export default Human;

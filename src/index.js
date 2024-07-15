@@ -7,7 +7,7 @@ import message from './dom/message';
 import Shot from './logic/shot';
 import { delay } from './logic/helpers';
 
-function nextTurn() {
+async function nextTurn() {
   currentGameboardElement.disable();
   setNextPlayer();
 
@@ -18,7 +18,7 @@ function nextTurn() {
     currentGameboardElement.enableClick();
     currentGameboardElement.disableHoverOnAllCells();
 
-    const nextShot = currentPlayer.getNextShot(
+    const nextShot = await currentPlayer.getNextShot(
       currentGameboardElement.controller,
     );
     clickCell(nextShot);
@@ -57,10 +57,13 @@ async function handleTurn(clickData) {
   }
 
   if (!shot.isValid()) {
-    const nextShot = currentPlayer.getNextShot(
+    const nextShot = await currentPlayer.getNextShot(
       currentGameboardElement.controller,
     );
-    clickCell(nextShot);
+    if (currentPlayer === enemy) {
+      clickCell(nextShot);
+    }
+
     return;
   }
 
@@ -75,10 +78,12 @@ async function handleTurn(clickData) {
   }
 
   if (attackResult.hit) {
-    const nextShot = currentPlayer.getNextShot(
+    const nextShot = await currentPlayer.getNextShot(
       currentGameboardElement.controller,
     );
-    clickCell(nextShot);
+    if (currentPlayer === enemy) {
+      clickCell(nextShot);
+    }
   } else {
     await delay(1000);
     nextTurn();
