@@ -171,3 +171,27 @@ test('back() returns the Cell at the back of a ship', () => {
 
   expect(ship.back()).toEqual(backCell);
 });
+
+describe('potentialHits()', () => {
+  describe('when a ship has 1 hit', () => {
+    test('it returns an array of potential hit Cells that are available', () => {
+      const gameboard = new Gameboard();
+
+      const ship1 = new Ship(4);
+      ship1.setHorizontal();
+      gameboard.placeShip(ship1, 0, 0);
+
+      const ship2 = new Ship(3);
+      ship2.setVertical();
+      gameboard.placeShip(ship2, 3, 2);
+
+      gameboard.receiveAttack(2, 1);
+      gameboard.receiveAttack(2, 0);
+
+      const cell1 = new Cell(1, 0);
+      const cell2 = new Cell(3, 0);
+
+      expect(ship1.potentialHits(gameboard)).toEqual([cell2, cell1]);
+    });
+  });
+});
